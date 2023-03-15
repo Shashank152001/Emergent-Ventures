@@ -1,0 +1,13 @@
+.input{
+    width: 40px;
+    background-color: rgb(130, 176, 236);
+    border-radius: 8px;
+    text-align: center;
+    margin: 5px 3px;
+}
+
+.inputcolon{
+    margin-top: 7px;
+    color: gray;
+}
+
