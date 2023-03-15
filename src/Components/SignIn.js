@@ -4,7 +4,7 @@ function SignIn() {
   return (
     <div id='SignIn'>
         <div className="container-fluid">
-            <div className="container d-flex justify-content-center align-items-center">
+            <div className="container d-flex justify-content-center align-items-center flex-column">
                 <div className="row bg-light mt-5 mb-sm-5 w-100 h-75">
                     <div className="col-md-6 mt-3 ps-5">
                     <img src="/Images/celebal.png" alt="" className='img-fluid' style={{ width: "30%", height: "125px" }}/>
