@@ -12,7 +12,7 @@
   height: 100%;
   /* width: 100vw; */
   padding-bottom: 40px;
-  /* overflow: hidden; */
+  /* overflow-y: hidden; */
 }
 /* body{
   background-color: #2563EB;
@@ -42,10 +42,10 @@
     padding-bottom: 40px;
   }
   #SignUp {
-    height: 100vh;
+    /* height: 100vh; */
     display: flex;
     align-items: center;
-    padding-bottom: 40px;
+    padding-bottom: 20px;
   }
   .table-fixed{
     max-height: 485px;
