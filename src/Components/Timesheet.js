@@ -6,7 +6,7 @@ function Timesheet() {
     <div id="timesheet">
         <div className="container">
             <div className="row">
-                <div className="col-md-12 bg-light">
+                <div className="col-lg-12 bg-light">
                     <h5>Timesheet</h5>
                     <div className="table-fixed">
                     <table className='table table-hover'>
