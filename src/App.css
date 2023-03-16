@@ -1,0 +1,35 @@
+.sidebar{
+    border-right: 2px solid lightgray;
+    
+}
+.row{
+    --bs-gutter-x:0px !important;
+}
+.icon{
+    margin-left: 10%;
+    
+}
+.icon:hover {
+    color: rgb(64, 64, 235);
+    transform: scale(1.025);
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 5px 10px
+}
+.search{
+    height:50%;
+    border-radius: 5px;
+    border: none;
+    background-color: lightgray;
+}
+.profile{
+    height: 10%;/*profilepicture  */
+    width:10%;
+    border-radius: 50%;
+}
+.bell{
+     height:2%;/*profilepicture div */
+    border-radius: 5px;
+    /* border: 2px solid black; */
+}
+.drop{
+    border: none;
+}
