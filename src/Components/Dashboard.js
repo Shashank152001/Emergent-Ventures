@@ -1,6 +1,8 @@
-import React from 'react'
-import Skills from './Skills'
-import Timesheet from './Timesheet'
+import React from 'react';
+import MyProject from './project';
+import Skill from './Skills';
+import Timesheet from './Timesheet';
+
 
 function Dashboard() {
   return (
@@ -21,26 +23,23 @@ function Dashboard() {
                     </div>
                     <hr />
                 <div className="row w-100 mt-3">
-                    <div className="col-md-6 ">
-                        <Skills/>
+                    {/* <div className="col-md-6 ">
+                        <Skill/>
                     </div>
                     <div className="col-md-6">
                         <Timesheet/>
                     </div>
-                </div>
-                <div className="row w-100 mt-3">
-                    <div className="col-md-6 col-sm-12 col-xs-12">
-                        <Skills/>
-                    </div>
-                    <div className="col-md-6 col-sm-12 col-xs-12">
+                    <div className="col-md-6">
+                        <MyProject/>
+                    </div> */}
                         <Timesheet/>
                     </div>
+
                 </div>
                 </div>
             </div>
             </div>
         </div>
-    </div>
     </>
   )
 }
