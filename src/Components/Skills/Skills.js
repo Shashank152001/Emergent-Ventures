@@ -3,11 +3,12 @@ import React from 'react'
 function Skills() {
   return (
     <>
-    <div id='skills'>
+    <div id='skills' className='m-2 p-2'>
         <div className="container">
-            <div className="row">
+            <div className="row shadow">
                 <div className="col-md-12 bg-light">
                     <h5>My Skills </h5>
+                    <div className="table-fixed">
                     <table className='table table-hover'>
                         <tbody>
                             <tr>
@@ -24,6 +25,7 @@ function Skills() {
                             </tr>
                         </tbody>
                     </table>
+                    </div>
                 </div>
             </div>
         </div>

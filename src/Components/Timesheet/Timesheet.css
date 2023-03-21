@@ -1,0 +1,27 @@
+.table-fixed{
+    overflow: auto;
+    max-height: 20vh;
+  }
+  .table-fixed::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .table-fixed tr{
+    display: block;
+  }
+
+/* #timesheet{
+    border-radius: 10px;
+} */
+  @media only screen and(min-width:750px) and (max-height:1143){
+    /* #skills{
+      max-height:209px
+    } */
+    .table-fixed{
+      max-height: 209px;
+      /* overflow-y: scroll; */
+    }
+    .table-fixed tr{
+      display: block;
+    }
+  } 
