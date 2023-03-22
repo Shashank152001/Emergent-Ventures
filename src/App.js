@@ -1,32 +1,21 @@
 
 import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-<<<<<<< HEAD
 import SignIn from './Components/SignIn';
 import Dashboard from './Components/Dashboard';
 import Skill from './Components/Skills';
 import Timesheet from './Components/Timesheet';
 import MyProject from './Components/project';
 
-=======
-import Login from './Components/Login/Login';
-import Dashboard from './Components/Dashboard/Dashboard';
-import SignUp from './Components/SignUp/SignUp';
->>>>>>> main
 function App() {
   return (
     <>
     <Router>
       <Routes>
-<<<<<<< HEAD
          <Route element={<SignIn/>} path='/'></Route>
          <Route element={<Timesheet/>} path='/timesheet'></Route>
          <Route element={<Skill/>} path='/skill'></Route>
          <Route element={<MyProject/>} path='/project'></Route>
-=======
-         <Route element={<Login/>} path='/'></Route>
-         <Route element={<SignUp/>} path='signup'></Route>
->>>>>>> main
           <Route element={<Dashboard/>} path='/dashboard'></Route>
       </Routes>
     </Router>
