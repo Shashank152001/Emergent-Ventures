@@ -1,127 +1,156 @@
-import React from "react";
-import './Timesheet.css'
-import { BsCheckCircleFill } from "react-icons/bs";
+import React from 'react'
+import { BsCheckCircleFill} from "react-icons/bs";
+import profile from './profile.jpg';
+import './timesheet.css';
+
 function Timesheet() {
   return (
-    <>
-      <div id="timesheet" className="m-2 p-2">
-        <div className="container">
-          <div className="shadow row bg-light">
-            <div className="col-md-12 bg-light" style={{borderRadius:25}}>
-              <h5>Timesheet</h5>
-              <div className="table-fixed">
-                <table className="table table-hover">
-                  <tbody style={{overflowY:"hide"}}>
-                  <tr className="d-flex" style={{justifyContent:"space-between",alignItems:"stretch",alignContent:"center"}}>
-                      <td className="d-flex" style={{justifyContent:"space-between",alignItems:"center",alignContent:"center"}}>
-                        <BsCheckCircleFill className="checked" />
-                      </td>
 
-                      <td className="d-flex" style={{gap:10,justifyContent:"space-between",alignItems:"center",alignContent:"center",minWidth:"fit-content",padding:10}}>
-                        
-                        <img
-                          src="/Images/profile.jpg"
-                          alt=""
-                          className="rounded-circle img-fluid"
-                          width={30}
-                          height={30}
-                        />
-                        
-                        <span style={{maxWidth:200}} >Timesheet 1</span>
-                      </td>
-                      
-                      <td className="d-flex" >
-                        <p style={{minWidth:100,maxHeight:50}}>
-                          01-03-2023 <span>to</span>
-                          <p>15-03-2023</p>
+    <section className='timesheet-container'>
+    <div id="timesheet" style={{padding:'0.6rem'}}>
+    <div className='skills-heading'>
+        <h1 style={{fontSize:'1.5rem'}}>My Timesheets</h1>
+    </div>
+
+    <div className='timesheet-content'>
+        <table className='timesheet-table border-0 '>
+            <tbody>
+
+                <tr className='border-0'>
+                    <td className='border-0'><BsCheckCircleFill className='checked'/></td>
+                    <td className='timesheet-name border-0'>
+                        <p className='image-container-timesheet'>
+                            <img src={profile} alt="employee" />
                         </p>
-                        
-                      </td>
-                      <td>
-                        <p>54:00</p>
+                        <span style={{paddingLeft:'0.7rem',fontWeight:'bold',color:'#41496A'}}>Timesheet1</span>
+                    </td>
+                    <td className='border-0'>
+                       <p>01-03-2023 <span>to</span></p>
+                        <p>15-03-2023</p>
+                    </td>
+                    <td className='border-0'>
+                         <p>54:00</p>
                         <p>Submitted Hours</p>
-                      </td>
-                      <td>
+                    </td>
+                    <td className='border-0'>
                         <p>54:00</p>
                         <p>Approved Hours</p>
-                      </td>
-                    </tr>
-                    <tr className="d-flex" style={{justifyContent:"space-between",alignItems:"stretch",alignContent:"center"}}>
-                      <td className="d-flex" style={{justifyContent:"space-between",alignItems:"center",alignContent:"center"}}>
-                        <BsCheckCircleFill className="checked" />
-                      </td>
-
-                      <td className="d-flex" style={{gap:10,justifyContent:"space-between",alignItems:"center",alignContent:"center",minWidth:"fit-content",padding:10}}>
-                        
-                        <img
-                          src="/Images/profile.jpg"
-                          alt=""
-                          className="rounded-circle img-fluid"
-                          width={30}
-                          height={30}
-                        />
-                        
-                        <span style={{maxWidth:200}} >Timesheet 1</span>
-                      </td>
-                      
-                      <td className="d-flex">
-                      <p style={{minWidth:100}}>
-                          01-03-2023 <span>to</span>
-                          <p>15-03-2023</p>
+                    </td>
+                </tr>
+                <tr className='border-0'>
+                    <td className='border-0'><BsCheckCircleFill className='checked'/></td>
+                    <td className='timesheet-name border-0'>
+                        <p className='image-container-timesheet'>
+                            <img src={profile} alt="employee" />
                         </p>
-                      </td>
-                      <td>
-                        <p>54:00</p>
+                        <span style={{paddingLeft:'0.7rem',fontWeight:'bold',color:'#41496A'}}>Timesheet1</span>
+                    </td>
+                    <td className='border-0'>
+                       <p>01-03-2023 <span>to</span></p>
+                        <p>15-03-2023</p>
+                    </td>
+                    <td className='border-0'>
+                         <p>54:00</p>
                         <p>Submitted Hours</p>
-                      </td>
-                      <td>
+                    </td>
+                    <td className='border-0'>
                         <p>54:00</p>
                         <p>Approved Hours</p>
-                      </td>
-                    </tr>
-                    
-                    <tr className="d-flex" style={{justifyContent:"space-between",alignItems:"stretch",alignContent:"center"}}>
-                      <td className="d-flex" style={{justifyContent:"space-between",alignItems:"center",alignContent:"center"}}>
-                        <BsCheckCircleFill className="checked" />
-                      </td>
-
-                      <td className="d-flex" style={{gap:10,justifyContent:"space-between",alignItems:"center",alignContent:"center",minWidth:"fit-content",padding:10}}>
-                        
-                        <img
-                          src="/Images/profile.jpg"
-                          alt=""
-                          className="rounded-circle img-fluid"
-                          width={30}
-                          height={30}
-                        />
-                        
-                        <span style={{maxWidth:200}} >Timesheet 1</span>
-                      </td>
-                      
-                      <td className="d-flex">
-                      <p style={{minWidth:100}}>
-                          01-03-2023 <span>to</span>
-                          <p>15-03-2023</p>
+                    </td>
+                </tr>
+                <tr className='border-0'>
+                    <td className='border-0'><BsCheckCircleFill className='checked'/></td>
+                    <td className='timesheet-name border-0'>
+                        <p className='image-container-timesheet'>
+                            <img src={profile} alt="employee" />
                         </p>
-                      </td>
-                      <td>
-                        <p>54:00</p>
+                        <span style={{paddingLeft:'0.7rem',fontWeight:'bold',color:'#41496A'}}>Timesheet1</span>
+                    </td>
+                    <td className='border-0'>
+                       <p>01-03-2023 <span>to</span></p>
+                        <p>15-03-2023</p>
+                    </td>
+                    <td className='border-0'>
+                         <p>54:00</p>
                         <p>Submitted Hours</p>
-                      </td>
-                      <td>
+                    </td>
+                    <td className='border-0'>
                         <p>54:00</p>
                         <p>Approved Hours</p>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </>
-  );
+                    </td>
+                </tr>
+                <tr className='border-0'>
+                    <td className='border-0'><BsCheckCircleFill className='checked'/></td>
+                    <td className='timesheet-name border-0'>
+                        <p className='image-container-timesheet'>
+                            <img src={profile} alt="employee" />
+                        </p>
+                        <span style={{paddingLeft:'0.7rem',fontWeight:'bold',color:'#41496A'}}>Timesheet1</span>
+                    </td>
+                    <td className='border-0'>
+                       <p>01-03-2023 <span>to</span></p>
+                        <p>15-03-2023</p>
+                    </td>
+                    <td className='border-0'>
+                         <p>54:00</p>
+                        <p>Submitted Hours</p>
+                    </td>
+                    <td className='border-0'>
+                        <p>54:00</p>
+                        <p>Approved Hours</p>
+                    </td>
+                </tr>
+                <tr className='border-0'>
+                    <td className='border-0'><BsCheckCircleFill className='checked'/></td>
+                    <td className='timesheet-name border-0'>
+                        <p className='image-container-timesheet'>
+                            <img src={profile} alt="employee" />
+                        </p>
+                        <span style={{paddingLeft:'0.7rem',fontWeight:'bold',color:'#41496A'}}>Timesheet1</span>
+                    </td>
+                    <td className='border-0'>
+                       <p>01-03-2023 <span>to</span></p>
+                        <p>15-03-2023</p>
+                    </td>
+                    <td className='border-0'>
+                         <p>54:00</p>
+                        <p>Submitted Hours</p>
+                    </td>
+                    <td className='border-0'>
+                        <p>54:00</p>
+                        <p>Approved Hours</p>
+                    </td>
+                </tr>
+                <tr className='border-0'>
+                    <td className='border-0'><BsCheckCircleFill className='checked'/></td>
+                    <td className='timesheet-name border-0'>
+                        <p className='image-container-timesheet'>
+                            <img src={profile} alt="employee" />
+                        </p>
+                        <span style={{paddingLeft:'0.7rem',fontWeight:'bold',color:'#41496A'}}>Timesheet1</span>
+                    </td>
+                    <td className='border-0'>
+                       <p>01-03-2023 <span>to</span></p>
+                        <p>15-03-2023</p>
+                    </td>
+                    <td className='border-0'>
+                         <p>54:00</p>
+                        <p>Submitted Hours</p>
+                    </td>
+                    <td className='border-0'>
+                        <p>54:00</p>
+                        <p>Approved Hours</p>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        
+    </div>
+    
+ </div>
+</section>
+  )
 }
 
 export default Timesheet;
