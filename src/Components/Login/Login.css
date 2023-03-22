@@ -1,0 +1,27 @@
+#SignIn{
+    /* background-color: #2563EB; */
+    background-color: #2563EB;
+    height: 100vh;
+    padding-bottom: 40px;
+   
+  }
+  @media only screen and (min-width: 740px ) and (max-height:1440px) {
+    #SignIn {
+      /* height: 100%; */
+      display: flex;
+      align-items: center;
+      padding-bottom: 2px;
+      padding-top: 2px;
+      
+    }
+  }
+  @media screen and (min-width: 200px ) and (max-width:710px){
+    #SignIn {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      padding-bottom: 10px;
+      padding-top: 10px
+    }
+    
+  }

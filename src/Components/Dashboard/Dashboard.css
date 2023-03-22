@@ -1,0 +1,40 @@
+.sidebar ul{
+    list-style-type: none;
+    /* border-right: 2px solid lightgray; */
+  }
+  .sidebar ul li{
+    text-decoration: none;
+    padding: 2px;
+    font-size: 1.0rem;
+    
+  }
+  .sidebar ul li a:hover{
+    cursor: pointer;
+    border: 1px solid white;
+    padding: 0px 2px;
+    background: linear-gradient(to right,rgb(60, 60, 205),white);
+  }
+  .sidebar ul li a{
+    text-decoration: none;
+      color: black;
+      
+  }
+.search{
+    height:50%;
+    border-radius: 5px;
+    border: none;
+    background-color: lightgray;
+}
+.profile{
+    height: 10%;/*profilepicture  */
+    width:10%;
+    border-radius: 50%;
+}
+.bell{
+     height:2%;/*profilepicture div */
+    border-radius: 5px;
+    /* border: 2px solid black; */
+}
+.drop{
+    border: none;
+}

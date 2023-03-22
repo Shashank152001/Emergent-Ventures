@@ -1,11 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import './SignUp.css'
 function SignUp() {
   return (
     <div id='SignUp'>
         <div className="container-fluid">
             <div className="container d-flex justify-content-center align-items-center">
-                <div className="row bg-light mt-5 mb-sm-5 w-100 h-75">
+                <div className="row bg-light mt-sm-5 mb-sm-5 w-100 h-75">
                     <div className="col-md-6 mt-3 ps-5">
                     <img src="/Images/celebal.png" alt="" className='img-fluid' style={{ width: "30%", height: "125px" }}/>
                         <h1 className='text-dark fw-normal'>Welcome</h1>
