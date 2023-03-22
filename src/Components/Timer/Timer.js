@@ -30,30 +30,27 @@ const Timer = () => {
   };
   return (
     <>
-      <div id='timer' className='m-2 p-2'>
-        <div className="container">
-          <div className="row shadow">
-            <div className=" col-md-12 bg-light">
-              <h2 className> Welcome Back! </h2>
+      <div id='timer' className=''>
+        <div className="timer-container">
+          <div className="row ">
+            <div className=" col-md-12 ">
+              <h2 className="" style={{paddingTop:'0.8rem',paddingBottom:'1rem'}}> Welcome Back! </h2>
               <p className='text-secondary' style={{fontWeight:'bold'}}> Your today's timer</p>
               <div className='timer d-flex '>
-                <span  className='input' value='00'>{hours.toString().padStart(2, "0")}</span>
+                <span  className='input' >{hours.toString().padStart(2, "0")}</span>
                 <p className='inputcolon'> : </p>
-                <span className='input' value='00'>{minutes.toString().padStart(2, "0")}</span>
+                <span className='input'>{minutes.toString().padStart(2, "0")}</span>
                 <p className='inputcolon'> : </p>
-                <span className='input'  value='00'>{seconds.toString().padStart(2, "0")}</span>
+                <span className='input' >{seconds.toString().padStart(2, "0")}</span>
 
               </div>
               <div className='my-3 stopwatch-buttons'>
-            <button className="btn m-2 text-light" onClick={startAndStop} style={{ backgroundColor: isRunning ? "red" : "green" }}>{isRunning ? "Checkout" : "CheckIn"}</button>
+            <button className="btn  text-light" onClick={startAndStop} style={{ backgroundColor: isRunning ? "red" : "green" }}>{isRunning ? "Checkout" : "CheckIn"}</button>
             <button className='btn btn-primary m-2' onClick={reset}>Break</button>
           </div>
             </div>
 
           </div>
-
-          
-
         </div>
       </div>
     </>
