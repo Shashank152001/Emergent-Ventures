@@ -1,0 +1,161 @@
+
+section.project-container{
+    width: 90%;
+    background-color: #F7F9FB;
+    padding: 0.4rem 0.9rem;
+    margin: 2rem auto;
+    border-radius: 0.4rem;
+}
+
+div.project-heading{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom:2rem;
+    padding-top:1.2rem;
+}
+
+.rotate-90{
+    transform:rotate(90deg);
+    font-size:1.3rem;
+    height:100%;
+    vertical-align: bottom;;
+    fill:#41496A;
+    margin-right: 0.4rem;
+  }
+
+.sort-button{
+    background:none !important;
+    font-weight: 500;
+    font-size: 1rem;
+    padding: 0 .4rem !important;
+    border: none;
+    color:#41496A;
+  }
+
+  .arrow-down{
+    font-size: .8rem;
+    margin-left:0.5rem
+  }
+
+  .project-content{
+    overflow-x:scroll;
+    overflow-y: scroll;
+    max-height: 140px;
+    height: 135px;
+  }
+  
+  .project-content table{
+      width: 980px;
+      border: none !important;
+      text-align: left;
+      border-collapse: collapse;
+  }
+
+#table-heading{
+    border-bottom: 1px solid #1f1d1d !important;
+}
+
+.project-content tr{
+    border: none !important;
+}
+.project-content tr td{
+    border: none !important;
+}
+
+.project-content tr th{
+    padding:.4rem 0;
+    font-weight: 500;
+     
+}
+
+.project-content table tr td{
+    text-align: left;
+    padding: 0.4rem 0;
+    font-size: .9rem;
+    font-weight: 500;
+}
+
+
+.project-date{
+   color: #000;
+   font-size:.9rem;
+   font-weight:500;
+ }
+ 
+ .calender{
+   vertical-align: text-top;
+   margin-right: 0.3rem;
+ }
+ 
+ .dot{
+    background-color: #0a5ae3;
+    width: 7px;
+    height: 7px;
+    display: inline-block;
+    border-radius: 50%;
+    margin: .1rem .4rem;
+ }
+ .status{
+    color: #0963da;
+    font-size: .9rem;
+    font-weight: 500;
+ }
+ 
+   .team-members{
+     display:flex;
+   }
+ 
+ 
+   .image-container{
+     width: 30px;
+     height:30px;
+     position: relative;
+   }
+ 
+   .image-container img{
+     width: 100%;
+     height:100%;
+     object-fit: cover;
+     border-radius: 50%;
+   }
+ 
+    .img-2{
+     z-index:9;
+     right: .9rem;
+   } 
+ 
+   .img-3{
+     z-index:10;
+     right: 1.5rem;
+   } 
+ 
+   .count-member{
+     background-color: #f7f3f3;
+     width: 30px;
+     height:30px;
+     display: inline-block;
+     border-radius: 50%;
+     color: #000;
+     padding:33% 33%;
+     font-size: 0.7rem;
+   }
+ 
+   .lead{
+     display: flex;
+   }
+ 
+   .lead span{
+     padding-left:.4rem;
+     align-self: center;
+     color: #41496A;
+     font-weight: 700;
+   }
+
+@media  screen and (min-width:1024px) {
+  section.project-container{
+    width: 1024px;
+  }
+  .project-content{
+    overflow-x:none;
+  }
+}
