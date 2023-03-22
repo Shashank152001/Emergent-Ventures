@@ -29,17 +29,10 @@ function Dashboard() {
                     </div>
                 </div>
                 <div className="row w-100 mt-3">
-<<<<<<< HEAD
                     <div className="col-md-6 ">
                         <Skills/>
                     </div>
                     <div className="col-md-6">
-=======
-                    <div className="col-md-6 col-sm-12 col-xs-12">
-                        <Skills/>
-                    </div>
-                    <div className="col-md-6 col-sm-12 col-xs-12">
->>>>>>> 8e45dd2f6f8e8ebfeff00dff9948d9ffe69b2dc9
                         <Timesheet/>
                     </div>
                 </div>

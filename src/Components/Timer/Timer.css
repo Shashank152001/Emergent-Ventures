@@ -1,0 +1,37 @@
+.input{
+    width: 40px;
+    background-color: rgb(130, 176, 236);
+    border-radius: 5px;
+    text-align: center;
+    margin: 5px 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bolder;
+  }
+  .inputcolon{
+  margin-top: 7px;
+  color: gray;
+  font-weight: bolder;
+  }
+  @media only screen and (min-width: 740px ) and (max-height:1440px) {
+ 
+  
+    .input{
+      width: 40px;
+      background-color: rgb(130, 176, 236);
+      border-radius: 5px;
+      text-align: center;
+      margin: 5px 3px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bolder;
+  }
+  .inputcolon{
+    margin-top: 7px;
+    color: gray;
+    font-weight: bolder;
+  }
+  
+  }
