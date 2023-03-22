@@ -1,5 +1,5 @@
 import React from 'react';
-import './css/skill.css';
+import './skill.css';
 
 function Skill() {
   return (
@@ -7,7 +7,7 @@ function Skill() {
     <section className='skills-container'>
 
         <div className='skills-heading'>
-            <h1>My Skills</h1>
+            <h1 style={{fontSize:'1.5rem'}}>My Skills</h1>
         </div>
 
         <div className='skill-content'>

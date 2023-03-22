@@ -1,0 +1,27 @@
+.signup-container{
+    overflow: hidden;
+}
+
+.signup-wrapper{
+    background-color: #FFFFFF;
+    border-radius: 8px;
+    width: 1024px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.error-span{
+    position: absolute;
+    top: 0.4rem;
+    width: 43%;
+    right: 0;
+    color: rgb(222, 9, 9);
+    font-size: 0.89rem;
+}
+
+
+
+
+
+
+

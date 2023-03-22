@@ -1,0 +1,62 @@
+.main-container{
+    /* height: 100vh; */
+    width: 100%;
+    overflow: hidden;
+}
+.wrapper {
+    height: 100%;
+    flex-direction: row !important;
+    justify-content: normal !important;
+  }
+  .right-sidebar {
+    width: 100%;
+  }
+
+li{
+    list-style-type:none !important;  
+    /* padding:0.9rem 0;  */
+    width: 100%;
+    display: block;
+
+}
+
+.li-bg{
+    background: rgb(211,224,253);
+    background: linear-gradient(90deg, rgba(211,224,253,1) 0%, rgba(251,254,255,1) 100%); 
+}
+
+ul{
+    padding-left: 0 !important;
+    width: 90%;
+}
+
+.image-container-logo{
+    width:160px;
+    height:73px;
+} 
+
+.profile-container{
+    border-radius: 50%;
+}
+
+.image-container-logo img,.profile-container img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.left-sidebar{
+    width: 13%;
+}
+
+.right-top{
+    background: linear-gradient(109.6deg, rgb(245, 239, 249) 30.1%, rgb(207, 211, 236) 100.2%);
+}
+
+/* https://slopesoftware.com/wp-content/uploads/2022/07/Work-From-Home.svg */
+
+
+
+
+
+
