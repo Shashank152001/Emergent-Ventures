@@ -63,12 +63,12 @@ function SignIn() {
                         <div className='field position-relative'>
                             <label htmlFor='email' className='label'>Email address</label>
                             <input type="email" name='email' id='email' placeholder='example@celebaltech.com' onChange={handleChange} value={formData.email} />
-                            {formErrors.email && <span className='error-span' style={{top:'0.8rem'}}>{formErrors.email}</span>}
+                            {formErrors.email && <span className='error-span' >{formErrors.email}</span>}
                         </div>
                         <div className='field position-relative'>
                             <label htmlFor='password' className='label'>Password</label>
                             <input type="password" name='password' id='password' placeholder='enter password' onChange={handleChange} value={formData.password}/>
-                            {formErrors.password && <span className='error-span' style={{top:'0.8rem'}}>{formErrors.password}</span>}
+                            {formErrors.password && <span className='error-span' >{formErrors.password}</span>}
                         </div>
                         <div className='last'>
                             <div>
