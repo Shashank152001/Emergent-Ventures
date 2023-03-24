@@ -12,11 +12,33 @@
 
 .error-span{
     position: absolute;
-    top: 0.4rem;
-    width: 43%;
-    right: 0;
-    color: rgb(222, 9, 9);
+    width: max-content;
     font-size: 0.89rem;
+    background: #db1212;
+    color: #fff;
+    padding: .4rem;
+    text-align: center;
+    border-radius: 0.4rem;
+    position: absolute;
+    right: 0;
+}
+
+.error-span::after{
+    content: '';
+    width: 20px;
+    height: 20px;
+    background: #db1212;
+    padding: 0.4rem;
+    position: absolute;
+    bottom: -12px;
+    left: 50%;
+    top: 100%;
+    transform: translate(-50%,-50%) rotate(45deg);
+
+}
+
+.agreement-error::after{
+    display: none;
 }
 
 

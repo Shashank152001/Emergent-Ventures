@@ -131,7 +131,7 @@ function SignUp() {
                             <div>
                                 <input type='checkbox' name="agreement" id="agreement" onChange={handleChange} checked={formData.agreement}></input>
                                 <span style={{paddingLeft:'0.5rem'}}>Agree terms & conditions</span>
-                                {formErrors.agreement && <span className='error-span'>{formErrors.agreement}</span>}
+                                {formErrors.agreement && <span className='error-span agreement-error'>{formErrors.agreement}</span>}
                             </div>
                         </div>
                         <div>
