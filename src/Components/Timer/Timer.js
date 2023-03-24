@@ -3,14 +3,21 @@ import {useState,useEffect} from 'react'
 import './Timer.css'
 
 const Timer = () => {
-  const [time, setTime] = useState(0);
-  const [isRunning, setIsRunning] = useState(false);
+  const [time, setTime] = useState(JSON.parse(localStorage.getItem('time')===0?0:localStorage.getItem('time')));
+   const [isRunning, setIsRunning] = useState(JSON.parse(localStorage.getItem('Running')?localStorage.getItem('Running'):false));
   useEffect(() => {
     let intervalId;
     if (isRunning) {
       // setting time from 0 to 1 every 10 milisecond using javascript setInterval method
       intervalId = setInterval(() => setTime(time + 1), 10);
+      localStorage.setItem('time',JSON.stringify(time))
+      localStorage.setItem('Running',JSON.stringify(isRunning))
     }
+    else{
+      localStorage.removeItem('time')
+      localStorage.removeItem('Running')
+    }
+    
     return () => clearInterval(intervalId);
   }, [isRunning, time]);
   const hours = Math.floor(time / 360000);
@@ -27,6 +34,8 @@ const Timer = () => {
   // Method to reset timer back to 0
   const reset = () => {
     setTime(0);
+    localStorage.removeItem('time')
+    localStorage.removeItem('Running')
   };
   return (
     <>
