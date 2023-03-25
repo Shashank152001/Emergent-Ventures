@@ -1,7 +1,7 @@
 import React from 'react'
 import { BsCheckCircleFill} from "react-icons/bs";
 import profile from './profile.jpg';
-import './timesheet.css';
+import './Timesheet.css';
 
 function Timesheet() {
   return (

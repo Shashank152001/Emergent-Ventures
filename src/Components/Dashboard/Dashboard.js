@@ -1,7 +1,7 @@
 import React from 'react'
 import { BiBell,BiChevronDown,BiSearch,
 BiGridAlt,BiWallet,BiUser,BiCog,BiAbacus} from "react-icons/bi";
-import './dashboard.css';
+import './Dashboard.css';
 import MyProject from '../Project/project';
 import Skill from '../Skills/Skills';
 import Timesheet from '../Timesheet/Timesheet';

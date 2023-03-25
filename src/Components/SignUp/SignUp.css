@@ -10,7 +10,7 @@
     justify-content: space-between;
 }
 
-.error-span{
+ .error-span{
     position: absolute;
     width: max-content;
     font-size: 0.89rem;
@@ -21,7 +21,8 @@
     border-radius: 0.4rem;
     position: absolute;
     right: 0;
-}
+    z-index: 1;
+} 
 
 .error-span::after{
     content: '';
@@ -30,16 +31,16 @@
     background: #db1212;
     padding: 0.4rem;
     position: absolute;
-    bottom: -12px;
     left: 50%;
     top: 100%;
+    z-index: -1;
     transform: translate(-50%,-50%) rotate(45deg);
 
 }
 
 .agreement-error::after{
     display: none;
-}
+} 
 
 
 
