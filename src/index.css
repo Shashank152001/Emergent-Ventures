@@ -1,22 +1,21 @@
+/* #SignIn{
+  background-color: #2563EB;
+  background-color: #2563EB;
+  height: 100%;
+  width: 100vw;
+  padding-bottom: 40px;
+<<<<<<< HEAD
+  overflow: hidden;
+}  */
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Montserrat", sans-serif;
-  }
-  
-  body {
+
+
+
+@media only screen and (min-width: 768px ) and (max-width:1023px) {
+  #SignIn {
     height: 100vh;
-    background: linear-gradient(109.6deg, rgb(245, 239, 249) 30.1%, rgb(207, 211, 236) 100.2%);
-    position: relative;
-    /* overflow: hidden; */
+    display: flex;
+    align-items: center;
+    padding-bottom: 40px;
   }
-  
-  #root{
-    height: 100%;
-  }
-  
-  html {
-    scroll-behavior: smooth;
-  }
+}

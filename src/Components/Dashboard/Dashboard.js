@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React,{useState} from "react";
 import { BiBell, BiChevronDown, BiSearch } from "react-icons/bi";
 import "./Dashboard.css";
@@ -10,6 +11,19 @@ import WFH from "../WFH/Wfh";
 import Sidebar from "./sidebar";
 import FileUpload from "./fileupload";
 
+=======
+import React from 'react'
+import { BiBell,BiChevronDown,BiSearch,
+BiGridAlt,BiWallet,BiUser,BiCog,BiAbacus} from "react-icons/bi";
+import './Dashboard.css';
+import MyProject from '../Project/project';
+import Skill from '../Skills/Skills';
+import Timesheet from '../Timesheet/Timesheet';
+import Timer from '../Timer/Timer';
+import Leaves from '../Leaves/Leaves';
+import WFH from '../WFH/Wfh';
+import celebalLogo from './celebal.png';
+>>>>>>> main
 
 function MyDashBoard() {
     const [showModal, setShowModal] = useState(false);
