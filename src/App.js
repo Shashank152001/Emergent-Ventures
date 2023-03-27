@@ -6,6 +6,7 @@ import SignUp from './Components/SignUp/SignUp'
 import Dashboard from './Components/Dashboard/Dashboard';
 
 
+
 function App() {
   return (
     <>
@@ -13,7 +14,7 @@ function App() {
       <Routes>
          <Route element={<SignIn/>} path='/'></Route>
          <Route element={<SignUp/>} path='/signup'></Route>
-          <Route element={<Dashboard/>} path='/dashboard'></Route>
+         <Route element={<Dashboard/>} path='/dashboard'></Route>
       </Routes>
     </Router>
     </>
