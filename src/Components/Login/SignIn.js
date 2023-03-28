@@ -1,5 +1,5 @@
 import React,{useState} from 'react'
-import {Link} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 import './sign.css';
 
 
@@ -10,6 +10,7 @@ function SignIn() {
         password: ''
       });
       const [formErrors, setFormErrors] = useState({});
+      const navigate = useNavigate()
 
       const handleSubmit = (event) => {
         event.preventDefault();
@@ -25,11 +26,35 @@ function SignIn() {
       
         if (!formData.password) {
           errors.password = 'Please enter a password';
-        } else if (formData.password.length < 8) {
+        } else if (formData.password.length < 2) {
           errors.password = 'Password must be at least 8 characters';
         }
       
         setFormErrors(errors);
+
+        const bodydata=formData;
+        console.log(bodydata)
+        fetch('https://4def-2401-4900-1c31-277a-c49c-2be0-4acc-b9e6.in.ngrok.io/',{
+            method:"POST",
+            mode:'cors',
+            headers:{ "Content-Type": "application/x-www-form-urlencoded" },
+            credentials:'include',
+            body:new URLSearchParams(bodydata)
+        }).then((res)=>{return res.json()}).then((data)=>{
+            console.log(data)
+            console.log(data.data.email)
+            if(data.data.email){
+                navigate('/dashboard')
+            }
+            // }else{
+            //     navigate('/signup')
+            // }
+        }).catch((error)=>{
+            // console.log('Error')
+            navigate('/')
+            alert('Wrong credentials')
+        })
+        // signIn(formData)
       
       };
       const handleChange = (event) => {
