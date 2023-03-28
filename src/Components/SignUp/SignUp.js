@@ -53,6 +53,9 @@ function SignUp() {
         if (formData.confirmpassword !== formData.password) {
           errors.confirmpassword = 'Passwords do not match';
         }
+        else if(!formData.confirmpassword){
+            errors.confirmpassword = 'Please enter password again';
+        }
 
         if(!formData.agreement){
             errors.agreement='You must agree to  terms & conditions'
@@ -131,7 +134,7 @@ function SignUp() {
                             <div>
                                 <input type='checkbox' name="agreement" id="agreement" onChange={handleChange} checked={formData.agreement}></input>
                                 <span style={{paddingLeft:'0.5rem'}}>Agree terms & conditions</span>
-                                {formErrors.agreement && <span className='error-span agreement-error'>{formErrors.agreement}</span>}
+                                {formErrors.agreement && <p className='error-span agreement-error'>{formErrors.agreement}</p>}
                             </div>
                         </div>
                         <div>
