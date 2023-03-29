@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React,{useState,useEffect,useContext} from "react";
 import { BiBell, BiChevronDown, BiSearch } from "react-icons/bi";
 import "./Dashboard.css";
 import MyProject from "../Project/project";
@@ -9,11 +9,13 @@ import Leaves from "../Leaves/Leaves";
 import WFH from "../WFH/Wfh";
 import Sidebar from "./sidebar";
 import FileUpload from "./fileupload";
-
+import {LoginContext} from '../../Context/LoginContext'
 
 function MyDashBoard() {
     const [showModal, setShowModal] = useState(false);
-
+    const [userData,setUserData]=useState(JSON.parse(localStorage.getItem('userSkills')?localStorage.getItem('userSkills'):{}))
+    const {userSkills,setUserSkills} =useContext(LoginContext)
+    
     const handleCloseModal = () => {
       setShowModal(false);
     };
@@ -21,7 +23,39 @@ function MyDashBoard() {
     const handleShowModal = () => {
       setShowModal(true);
     };
+
+    const fetchData=async()=>{
+      const response=await fetch('https://561b-117-242-153-226.in.ngrok.io/user/dashboard/',{
+        mode:'cors',
+        headers:{ "Content-Type": "application/x-www-form-urlencoded" },
+        credentials:'include'
+      })
+      if(!response.ok){
+        throw new Error('Data could not be fetched')
+      }else{
+        return response.json()
+      }
+    }
+    useEffect(()=>{
     
+         fetchData().then((res)=>{
+          console.log(res)
+          setUserData(res)
+
+          localStorage.setItem('userSkills',JSON.stringify(res));
+          setUserSkills(localStorage.getItem('userSkills'))
+          console.log(userData.userSkillsList.primarySkills)
+
+          // let newVar=userSkills;
+          // console.log(newVar['primarySkills'])
+          // console.log(userData)
+          // console.log(userData);
+         }).catch((e)=>{
+          console.log(e.message);
+         })
+         
+    },[])
+   
   return (
     <section className=" main-container">
       <div className="wrapper d-flex">
@@ -149,7 +183,7 @@ function MyDashBoard() {
 
               <div class="row gx-3" style={{ padding: "0 1rem" }}>
                 <div class="col-6">
-                  <Skill />
+                  <Skill data={userData.userSkillsList}/>
                 </div>
 
                 <div class="col-6">

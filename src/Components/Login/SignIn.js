@@ -1,14 +1,16 @@
-import React,{useState} from 'react'
+import React,{useState,useContext} from 'react'
 import {Link, useNavigate} from 'react-router-dom'
 import './sign.css';
-
+import {LoginContext} from '../../Context/LoginContext'
 
 function SignIn() {
+
 
     const [formData, setFormData] = useState({
         email: '',
         password: ''
       });
+      const {setuserLoginEmail,setuserLoginStatus,setUserSkills} =useContext(LoginContext)
       const [formErrors, setFormErrors] = useState({});
       const navigate = useNavigate()
 
@@ -34,7 +36,7 @@ function SignIn() {
 
         const bodydata=formData;
         console.log(bodydata)
-        fetch('https://4def-2401-4900-1c31-277a-c49c-2be0-4acc-b9e6.in.ngrok.io/',{
+        fetch('https://561b-117-242-153-226.in.ngrok.io/',{
             method:"POST",
             mode:'cors',
             headers:{ "Content-Type": "application/x-www-form-urlencoded" },
@@ -45,6 +47,11 @@ function SignIn() {
             console.log(data.data.email)
             if(data.data.email){
                 navigate('/dashboard')
+                localStorage.setItem('userLoginEmail', data.data.email)
+                setuserLoginEmail(localStorage.getItem('userLoginEmail'))
+                localStorage.setItem('userLoginStatus', '1')
+                setuserLoginStatus(localStorage.getItem('userLoginStatus'))
+                document.cookie = "employeeManagementCookie=" + data.cookie.employeeManagementCookie.currentUserToken;
             }
             // }else{
             //     navigate('/signup')
