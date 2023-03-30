@@ -1,18 +1,48 @@
-import React,{useState,useContext} from 'react'
-import {Link, useNavigate} from 'react-router-dom'
+import React, { useState, useEffect } from "react";
+import {Link,useNavigate} from 'react-router-dom'
 import './sign.css';
-import {LoginContext} from '../../Context/LoginContext'
+
+const url ='https://cd37-117-242-153-226.in.ngrok.io';
 
 function SignIn() {
 
+  const [formData, setFormData] = useState({
+    email: '',
+    password: ''
+  });
+  const [formErrors, setFormErrors] = useState({});
+  const [isFilled, setFilled] = useState(false);
+  const FormData = new URLSearchParams(formData);
+  const navigate = useNavigate();
 
-    const [formData, setFormData] = useState({
-        email: '',
-        password: ''
-      });
-      const {setuserLoginEmail,setuserLoginStatus,setUserSkills} =useContext(LoginContext)
-      const [formErrors, setFormErrors] = useState({});
-      const navigate = useNavigate()
+
+
+  useEffect(()=>{
+    if(isFilled ){
+    fetch(url,{
+      method:'POST',
+      mode:'cors',
+      credentials: 'include',
+      headers:{
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      body:FormData
+
+    }).then((response)=>{
+          return response.json()
+    }).then((data)=>{
+
+      console.log(data);
+      navigate('/dashboard');
+      setFilled(false);
+    })
+  }
+
+  },[isFilled])
+
+
+
+    
 
       const handleSubmit = (event) => {
         event.preventDefault();
@@ -28,46 +58,22 @@ function SignIn() {
       
         if (!formData.password) {
           errors.password = 'Please enter a password';
-        } else if (formData.password.length < 2) {
+        } else if (formData.password.length < 1) {
           errors.password = 'Password must be at least 8 characters';
         }
-      
-        setFormErrors(errors);
-
-        const bodydata=formData;
-        console.log(bodydata)
-        fetch('https://561b-117-242-153-226.in.ngrok.io/',{
-            method:"POST",
-            mode:'cors',
-            headers:{ "Content-Type": "application/x-www-form-urlencoded" },
-            credentials:'include',
-            body:new URLSearchParams(bodydata)
-        }).then((res)=>{return res.json()}).then((data)=>{
-            console.log(data)
-            console.log(data.data.email)
-            if(data.data.email){
-                navigate('/dashboard')
-                localStorage.setItem('userLoginEmail', data.data.email)
-                setuserLoginEmail(localStorage.getItem('userLoginEmail'))
-                localStorage.setItem('userLoginStatus', '1')
-                setuserLoginStatus(localStorage.getItem('userLoginStatus'))
-                document.cookie = "employeeManagementCookie=" + data.cookie.employeeManagementCookie.currentUserToken;
-            }
-            // }else{
-            //     navigate('/signup')
-            // }
-        }).catch((error)=>{
-            // console.log('Error')
-            navigate('/')
-            alert('Wrong credentials')
-        })
-        // signIn(formData)
-      
+        if (Object.keys(errors).length === 0) { 
+          setFilled(true);
+          
+        }
+        else{
+          setFormErrors(errors);
+        }
+        
       };
+
       const handleChange = (event) => {
-        const { name, value, type, checked } = event.target;
-        const newValue = type === 'checkbox' ? checked : value;
-        setFormData((prevState) => ({ ...prevState, [name]: newValue }));
+        const { name, value} = event.target;
+        setFormData((prevState) => ({ ...prevState, [name]: value }));
       };
 
   return (
@@ -128,4 +134,6 @@ function SignIn() {
   )
 }
 
-export default SignIn
+export default SignIn;
+
+
