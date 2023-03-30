@@ -40,6 +40,7 @@ function Skill() {
                         {userData.primarySkills}
                         
                     </p>
+
                     </div>
                     
                 </div>
