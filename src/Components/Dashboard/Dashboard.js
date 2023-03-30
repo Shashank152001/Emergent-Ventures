@@ -27,9 +27,10 @@ function MyDashBoard() {
     const fetchData=async()=>{
       const response=await fetch('https://b09e-2401-4900-1c68-600-5573-a0f7-410c-b6b8.in.ngrok.io/user/dashboard/',{
         mode:'cors',
-        headers:{ "Content-Type": "application/x-www-form-urlencoded" },
+        headers:{ "Content-Type": "application/json" },
         credentials:'include'
       })
+      console.log(response)
       if(!response.ok){
         throw new Error('Data could not be fetched')
       }else{
