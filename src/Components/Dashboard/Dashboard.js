@@ -9,12 +9,12 @@ import Leaves from "../Leaves/Leaves";
 import WFH from "../WFH/Wfh";
 import Sidebar from "./sidebar";
 import FileUpload from "./fileupload";
-import {LoginContext} from '../../Context/LoginContext'
+// import {LoginContext} from '../../Context/LoginContext'
 
 function MyDashBoard() {
     const [showModal, setShowModal] = useState(false);
-    const [userData,setUserData]=useState(JSON.parse(localStorage.getItem('userSkills')?localStorage.getItem('userSkills'):{}))
-    const {userSkills,setUserSkills} =useContext(LoginContext)
+    const [userData,setUserData]=useState({})
+    // const {userSkills,setUserSkills} =useContext(LoginContext)
     
     const handleCloseModal = () => {
       setShowModal(false);
@@ -25,7 +25,7 @@ function MyDashBoard() {
     };
 
     const fetchData=async()=>{
-      const response=await fetch('https://561b-117-242-153-226.in.ngrok.io/user/dashboard/',{
+      const response=await fetch('https://b09e-2401-4900-1c68-600-5573-a0f7-410c-b6b8.in.ngrok.io/user/dashboard/',{
         mode:'cors',
         headers:{ "Content-Type": "application/x-www-form-urlencoded" },
         credentials:'include'
@@ -42,8 +42,8 @@ function MyDashBoard() {
           console.log(res)
           setUserData(res)
 
-          localStorage.setItem('userSkills',JSON.stringify(res));
-          setUserSkills(localStorage.getItem('userSkills'))
+          // localStorage.setItem('userSkills',JSON.stringify(res));
+          // setUserSkills(localStorage.getItem('userSkills'))
           console.log(userData.userSkillsList.primarySkills)
 
           // let newVar=userSkills;
@@ -183,7 +183,8 @@ function MyDashBoard() {
 
               <div class="row gx-3" style={{ padding: "0 1rem" }}>
                 <div class="col-6">
-                  <Skill data={userData.userSkillsList}/>
+                  {/* <Skill data={userData.userSkillsList}/> */}
+                  <Skill/>
                 </div>
 
                 <div class="col-6">

@@ -17,7 +17,7 @@ function Skill({data}) {
                     <h6 className='skill-title'>Primary Skills</h6>
                     <div className='content-wrapper'>
                     <p className='skill-content'>
-                    {data.primarySkills}
+                    {/* {data.primarySkills} */}
                     </p>
 
                     </div>
@@ -27,7 +27,8 @@ function Skill({data}) {
             <div className='primary-skills'>
                     <h6 className='skill-title'>Secondary Skills</h6>
                     <div className='content-wrapper'>
-                    <p className='skill-content'>{data.secondarySkills}
+                    <p className='skill-content'>
+                        {/* {data.secondarySkills} */}
                     </p>
                     </div>
                     
