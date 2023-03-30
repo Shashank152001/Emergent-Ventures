@@ -1,15 +1,48 @@
-import React,{useState} from 'react'
-import {Link} from 'react-router-dom'
+import React, { useState, useEffect } from "react";
+import {Link,useNavigate} from 'react-router-dom'
 import './sign.css';
 
+const url ='https://cd37-117-242-153-226.in.ngrok.io';
 
 function SignIn() {
 
-    const [formData, setFormData] = useState({
-        email: '',
-        password: ''
-      });
-      const [formErrors, setFormErrors] = useState({});
+  const [formData, setFormData] = useState({
+    email: '',
+    password: ''
+  });
+  const [formErrors, setFormErrors] = useState({});
+  const [isFilled, setFilled] = useState(false);
+  const FormData = new URLSearchParams(formData);
+  const navigate = useNavigate();
+
+
+
+  useEffect(()=>{
+    if(isFilled ){
+    fetch(url,{
+      method:'POST',
+      mode:'cors',
+      credentials: 'include',
+      headers:{
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      body:FormData
+
+    }).then((response)=>{
+          return response.json()
+    }).then((data)=>{
+
+      console.log(data);
+      navigate('/dashboard');
+      setFilled(false);
+    })
+  }
+
+  },[isFilled])
+
+
+
+    
 
       const handleSubmit = (event) => {
         event.preventDefault();
@@ -25,17 +58,22 @@ function SignIn() {
       
         if (!formData.password) {
           errors.password = 'Please enter a password';
-        } else if (formData.password.length < 8) {
+        } else if (formData.password.length < 1) {
           errors.password = 'Password must be at least 8 characters';
         }
-      
-        setFormErrors(errors);
-      
+        if (Object.keys(errors).length === 0) { 
+          setFilled(true);
+          
+        }
+        else{
+          setFormErrors(errors);
+        }
+        
       };
+
       const handleChange = (event) => {
-        const { name, value, type, checked } = event.target;
-        const newValue = type === 'checkbox' ? checked : value;
-        setFormData((prevState) => ({ ...prevState, [name]: newValue }));
+        const { name, value} = event.target;
+        setFormData((prevState) => ({ ...prevState, [name]: value }));
       };
 
   return (
@@ -96,4 +134,6 @@ function SignIn() {
   )
 }
 
-export default SignIn
+export default SignIn;
+
+

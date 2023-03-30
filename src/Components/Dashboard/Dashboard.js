@@ -11,8 +11,10 @@ import Sidebar from "./sidebar";
 import FileUpload from "./fileupload";
 
 
+
 function MyDashBoard() {
     const [showModal, setShowModal] = useState(false);
+   
 
     const handleCloseModal = () => {
       setShowModal(false);
@@ -21,6 +23,9 @@ function MyDashBoard() {
     const handleShowModal = () => {
       setShowModal(true);
     };
+
+
+
     
   return (
     <section className=" main-container">
@@ -131,34 +136,34 @@ function MyDashBoard() {
           >
             <div className="content-inner">
               <div
-                class="row gx-3"
+                className="row gx-3"
                 style={{ padding: "0 1rem", marginTop: "1rem" }}
               >
-                <div class="col-6">
+                <div className="col-6">
                   <Timer />
                 </div>
 
-                <div class="col-3">
+                <div className="col-3">
                   <Leaves />
                 </div>
 
-                <div class="col-3">
+                <div className="col-3">
                   <WFH />
                 </div>
               </div>
 
-              <div class="row gx-3" style={{ padding: "0 1rem" }}>
-                <div class="col-6">
-                  <Skill />
+              <div className="row gx-3" style={{ padding: "0 1rem" }}>
+                <div className="col-6">
+                  <Skill/>
                 </div>
 
-                <div class="col-6">
-                  <Timesheet />
+                <div className="col-6">
+                  <Timesheet/>
                 </div>
               </div>
 
-              <div class="row gx-1" style={{ padding: "0 1rem" }}>
-                <div class="col-12">
+              <div className="row gx-1" style={{ padding: "0 1rem" }}>
+                <div className="col-12">
                   <MyProject />
                 </div>
               </div>
