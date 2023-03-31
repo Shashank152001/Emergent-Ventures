@@ -1,35 +1,15 @@
-.sidebar{
-    border-right: 2px solid lightgray;
-    
+.modal-item{
+display: flex !important;
+justify-content: center;
+
+
 }
-.row{
-    --bs-gutter-x:0px !important;
-}
-.icon{
-    margin-left: 10%;
-    
-}
-.icon:hover {
-    color: rgb(64, 64, 235);
-    transform: scale(1.025);
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 5px 10px
-}
-.search{
-    height:50%;
-    border-radius: 5px;
-    border: none;
-    background-color: lightgray;
-}
-.profile{
-    height: 10%;/*profilepicture  */
-    width:10%;
-    border-radius: 50%;
-}
-.bell{
-     height:2%;/*profilepicture div */
-    border-radius: 5px;
-    /* border: 2px solid black; */
-}
-.drop{
-    border: none;
+
+.modal-content{
+    margin-top: 6rem;
+    width: 360px !important;
+    height: 150px  !important;
+    padding: 1.5rem;
+    background: rgb(211,224,253);
+    background: linear-gradient(90deg, rgba(211,224,253,1) 0%, rgba(251,254,255,1) 100%); 
 }
