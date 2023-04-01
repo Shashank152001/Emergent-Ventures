@@ -81,7 +81,7 @@ div.project-heading{
  }
  
  .calender{
-   vertical-align: text-top;
+   vertical-align: sub;
    margin-right: 0.3rem;
  }
  
@@ -152,7 +152,7 @@ div.project-heading{
      padding-left:.4rem;
      align-self: center;
      color: #000;
-     font-weight: 700;
+     font-weight: 500;
    }
 
   

@@ -1,11 +1,12 @@
 .modal-item{
 display: flex !important;
 justify-content: center;
-margin-top: 4rem;
+
 
 }
 
 .modal-content{
+    margin-top: 6rem;
     width: 360px !important;
     height: 150px  !important;
     padding: 1.5rem;

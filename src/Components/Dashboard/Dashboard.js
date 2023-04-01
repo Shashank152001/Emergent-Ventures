@@ -1,7 +1,7 @@
-import React,{useState,useEffect,useContext} from "react";
+import React,{useState} from "react";
 import { BiBell, BiChevronDown, BiSearch } from "react-icons/bi";
 import "./Dashboard.css";
-import MyProject from "../Project/project";
+import MyProject from "../Project/MyProject";
 import Skill from "../Skills/Skills";
 import Timesheet from "../Timesheet/Timesheet";
 import Timer from "../Timer/Timer";
@@ -9,13 +9,13 @@ import Leaves from "../Leaves/Leaves";
 import WFH from "../WFH/Wfh";
 import Sidebar from "./sidebar";
 import FileUpload from "./fileupload";
-// import {LoginContext} from '../../Context/LoginContext'
+
+
 
 function MyDashBoard() {
     const [showModal, setShowModal] = useState(false);
-    const [userData,setUserData]=useState({})
-    // const {userSkills,setUserSkills} =useContext(LoginContext)
-    
+   
+
     const handleCloseModal = () => {
       setShowModal(false);
     };
@@ -24,39 +24,9 @@ function MyDashBoard() {
       setShowModal(true);
     };
 
-    const fetchData=async()=>{
-      const response=await fetch('https://b09e-2401-4900-1c68-600-5573-a0f7-410c-b6b8.in.ngrok.io/user/dashboard/',{
-        mode:'cors',
-        headers:{ "Content-Type": "application/json" },
-        credentials:'include'
-      })
-      console.log(response)
-      if(!response.ok){
-        throw new Error('Data could not be fetched')
-      }else{
-        return response.json()
-      }
-    }
-    useEffect(()=>{
+
+
     
-         fetchData().then((res)=>{
-          console.log(res)
-          setUserData(res)
-
-          // localStorage.setItem('userSkills',JSON.stringify(res));
-          // setUserSkills(localStorage.getItem('userSkills'))
-          console.log(userData.userSkillsList.primarySkills)
-
-          // let newVar=userSkills;
-          // console.log(newVar['primarySkills'])
-          // console.log(userData)
-          // console.log(userData);
-         }).catch((e)=>{
-          console.log(e.message);
-         })
-         
-    },[])
-   
   return (
     <section className=" main-container">
       <div className="wrapper d-flex">
@@ -166,35 +136,34 @@ function MyDashBoard() {
           >
             <div className="content-inner">
               <div
-                class="row gx-3"
+                className="row gx-3"
                 style={{ padding: "0 1rem", marginTop: "1rem" }}
               >
-                <div class="col-6">
+                <div className="col-6">
                   <Timer />
                 </div>
 
-                <div class="col-3">
+                <div className="col-3">
                   <Leaves />
                 </div>
 
-                <div class="col-3">
+                <div className="col-3">
                   <WFH />
                 </div>
               </div>
 
-              <div class="row gx-3" style={{ padding: "0 1rem" }}>
-                <div class="col-6">
-                  {/* <Skill data={userData.userSkillsList}/> */}
+              <div className="row gx-3" style={{ padding: "0 1rem" }}>
+                <div className="col-6">
                   <Skill/>
                 </div>
 
-                <div class="col-6">
-                  <Timesheet />
+                <div className="col-6">
+                  <Timesheet/>
                 </div>
               </div>
 
-              <div class="row gx-1" style={{ padding: "0 1rem" }}>
-                <div class="col-12">
+              <div className="row gx-1" style={{ padding: "0 1rem" }}>
+                <div className="col-12">
                   <MyProject />
                 </div>
               </div>
