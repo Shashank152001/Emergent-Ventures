@@ -1,15 +1,18 @@
-import React,{useEffect} from "react";
+import React,{useState,useEffect} from "react";
 import { BsCheckCircleFill } from "react-icons/bs";
 import profile from "./profile.jpg";
 import "./Timesheet.css";
 import NoRecord from "../Project/norecord";
 
 
-const url ='https://cd37-117-242-153-226.in.ngrok.io/user/get-user-timesheet';
+const url ='https://ab8d-117-242-153-226.in.ngrok.io/user/get-user-timesheets';
 
 function Timesheet() {
     
+  const[timesheet,setTimesheet]  = useState(null);
+
     useEffect(()=>{
+
         fetch(url,{
           method:'GET',
           mode:'cors',
@@ -21,7 +24,6 @@ function Timesheet() {
         }).then((response)=>{
               return response.json();
         }).then((data)=>{
-        //   setUserData(data.data);
           console.log(data.data);
         })
       },[])

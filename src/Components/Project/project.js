@@ -1,4 +1,4 @@
-import React from 'react';
+import React ,{useState,useEffect}from 'react';
 import profile from './profile.jpg';
 import './project.css';
 import { AiOutlineDown,AiOutlineSwap } from "react-icons/ai";
@@ -6,8 +6,26 @@ import { IoCalendarNumberOutline } from "react-icons/io5";
 import NoRecord from './norecord';
 
 
+const url ='https://ab8d-117-242-153-226.in.ngrok.io/user/get-user-projects';
 
 function MyProject() {
+    const[projects,setProject]  = useState(null);
+
+    useEffect(()=>{
+      fetch(url,{
+        method:'GET',
+        mode:'cors',
+        credentials: 'include',
+        headers:{
+          'Content-Type': 'application/json'
+        },
+  
+      }).then((response)=>{
+            return response.json();
+      }).then((data)=>{
+        setProject(data.data);
+      })
+    },[])
 
 
   return (
@@ -34,13 +52,16 @@ function MyProject() {
                 </thead>
                 <tbody>
                     
-                 {/* <tr>
-                    <td>E-Commerce</td>
-                    <td><span className='project-date'><IoCalendarNumberOutline className='calender'/>01-03-2023</span></td>
-                    <td><span className='project-date'><IoCalendarNumberOutline className='calender'/>01-03-2023</span></td>
+                 {
+                    projects ?
+                    projects.map((ele,index)=>(
+                 <tr key={index}>
+                    <td>{ele.projectName}</td>
+                    <td><span className='project-date'><IoCalendarNumberOutline className='calender'/>{ele.assignedOn}</span></td>
+                    <td><span className='project-date'><IoCalendarNumberOutline className='calender'/>{ele.completeBy}</span></td>
                     <td>
                         <span className='dot'></span>
-                        <span className='status'>In Progress</span>
+                        <span className='status'>{ele.status}</span>
                     </td>
                     <td className='team-members' id="team">
                         <p className='image-container'>
@@ -58,17 +79,19 @@ function MyProject() {
                         <p className='image-container ' id="team-lead">
                             <img src={profile} alt="team-member"/>
                         </p>
-                         <span className='lead-name' style={{fontSize:'0.8rem'}}>xyz</span>
+                         <span className='lead-name' style={{fontSize:'0.8rem'}}>{ele.teamHead}</span>
                         </div>
                     </td>
-                </tr> */}
+                </tr> 
+                ))
+            :
 
                 <tr>
                     <td colSpan='6'>
                        <NoRecord/>
                     </td>
-                
                 </tr>
+             }
                 </tbody>
                 
                 

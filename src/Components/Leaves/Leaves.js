@@ -1,5 +1,6 @@
 import React from "react";
-import CircularProgress from "./circularprogress";
+import { CircularProgressbar } from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
 import "./Leaves.css";
 
 const Leaves = () => {
@@ -19,8 +20,10 @@ const Leaves = () => {
               >
                 My Leaves{" "}
               </h6>
-              <div className="d-flex">
-                <CircularProgress progress={0} stroke={"#ff6e6e"} />
+              <div className="d-flex" style={{gap:'12px'}}>
+                <div style={{ width: 40, height: 40 }}>
+                  <CircularProgressbar value={2} styles={{path:{stroke:'#ff6e6e'}}}  text={`${2}`} maxValue={3}/>
+                </div>
                 <div>
                   <span className="" style={{ fontSize: "10px" }}>
                     Casual Leave Intern
@@ -32,8 +35,10 @@ const Leaves = () => {
               </div>
             </div>
             <div className="col-md-12 ">
-              <div className="d-flex">
-                <CircularProgress progress={0} stroke={"#07c8de"} />
+              <div className="d-flex" style={{gap:'12px'}}>
+              <div style={{ width: 40, height: 40 }}>
+                  <CircularProgressbar value={1} styles={{path:{stroke:'#1FC3B7'}}}  text={`${1}`} maxValue={3}/>
+                </div>
                 <div>
                   <span className="" style={{ fontSize: "10px" }}>
                     Leave Without pay
@@ -45,8 +50,10 @@ const Leaves = () => {
               </div>
             </div>
             <div className="col-md-12 ">
-              <div className="d-flex">
-                <CircularProgress progress={0} stroke={"#13c24e"} />
+              <div className="d-flex" style={{gap:'12px'}}>
+              <div style={{ width: 40, height:40 }}>
+                  <CircularProgressbar value={2} styles={{path:{stroke:'#8584e8'}}}  text={`${2}`} maxValue={3}/>
+                </div>
 
                 <div>
                   <span className="" style={{ fontSize: "10px" }}>
