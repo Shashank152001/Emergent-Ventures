@@ -1,31 +1,27 @@
-import React,{useEffect,useState} from 'react';
+import React ,{useState,useEffect}from 'react';
 import profile from './profile.jpg';
 import './project.css';
 import { AiOutlineDown,AiOutlineSwap } from "react-icons/ai";
 import { IoCalendarNumberOutline } from "react-icons/io5";
 import NoRecord from './norecord';
+import {fetchProject} from '../../Service/ProjectService'
 
-const url ='https://6d2e-2409-4088-ae0a-9928-1d9-3b99-5cf5-2ad4.in.ngrok.io/user/get-user-projects';
+// const url ='https://8925-2401-4900-1c69-8e1e-3cd0-e1a6-ed6c-3b2a.in.ngrok.io/user/get-user-projects';
 
+// const url ='https://ab8d-117-242-153-226.in.ngrok.io/user/get-user-projects';
 
 function MyProject() {
-    const[userData,setUserData]  = useState(null);
+    const[projects,setProject]  = useState(null);
+
     useEffect(()=>{
-        fetch(url,{
-          method:'GET',
-          mode:'cors',
-          credentials: 'include',
-          headers:{
-            'Content-Type': 'application/json'
-          },
-    
-        }).then((response)=>{
-              return response.json();
-        }).then((data)=>{
-           console.log(data.data)
-          setUserData(data.data);
-        })
-      },[])
+      fetchProject().then((data)=>{
+        setProject(data.data);
+      }).catch((e)=>{
+        console.log(e.message)
+      })
+    },[])
+
+
   return (
     <section className='project-container'>
 
@@ -37,7 +33,7 @@ function MyProject() {
             </div>
         </div>
         <div className='project-content'>
-            {userData?
+          
             <table>
                 <thead>
                 <tr id='table-heading'>
@@ -50,14 +46,17 @@ function MyProject() {
                 </tr>
                 </thead>
                 <tbody>
-                 {userData.map((info,index)=>( 
-                  <tr key={index}>
-                    <td>{info.projectName}</td>
-                    <td><span className='project-date'><IoCalendarNumberOutline className='calender'/>{info.assignedOn}</span></td>
-                    <td><span className='project-date'><IoCalendarNumberOutline className='calender'/>{info.completeBy}</span></td>
+                    
+                 {
+                    projects ?
+                    projects.map((ele,index)=>(
+                 <tr key={index}>
+                    <td>{ele.projectName}</td>
+                    <td><span className='project-date'><IoCalendarNumberOutline className='calender'/>{ele.assignedOn}</span></td>
+                    <td><span className='project-date'><IoCalendarNumberOutline className='calender'/>{ele.completeBy}</span></td>
                     <td>
                         <span className='dot'></span>
-                        <span className='status'>{info.status}</span>
+                        <span className='status'>{ele.status}</span>
                     </td>
                     <td className='team-members' id="team">
                         <p className='image-container'>
@@ -75,25 +74,25 @@ function MyProject() {
                         <p className='image-container ' id="team-lead">
                             <img src={profile} alt="team-member"/>
                         </p>
-                         <span className='lead-name' style={{fontSize:'0.8rem'}}>{info.teamHead}</span>
+                         <span className='lead-name' style={{fontSize:'0.8rem'}}>{ele.teamHead}</span>
                         </div>
                     </td>
                 </tr> 
+                ))
+            :
 
-                // <tr>
-                //     <td colSpan='6'>
-                //        <NoRecord/>
-                //     </td>
-                
-                // </tr>
-                ))}  
+                <tr>
+                    <td colSpan='6'>
+                       <NoRecord/>
+                    </td>
+                </tr>
+             }
                 </tbody>
                 
                 
             </table>
-            :
-            <NoRecord/>
-                 }
+           
+                 
 
         </div>
 

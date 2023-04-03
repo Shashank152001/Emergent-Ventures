@@ -4,7 +4,9 @@ import './Timer.css'
 
 const Timer = () => {
   const [time, setTime] = useState(JSON.parse(localStorage.getItem('time')===0?0:localStorage.getItem('time')));
-   const [isRunning, setIsRunning] = useState(JSON.parse(localStorage.getItem('Running')?localStorage.getItem('Running'):false));
+  const [isRunning, setIsRunning] = useState(JSON.parse(localStorage.getItem('Running')?localStorage.getItem('Running'):false));
+  
+  console.log(`rendering${time}`);
   useEffect(() => {
     let intervalId;
     if (isRunning) {
@@ -20,6 +22,8 @@ const Timer = () => {
     
     return () => clearInterval(intervalId);
   }, [isRunning, time]);
+
+  // hours calculation
   const hours = Math.floor(time / 360000);
 
   // Minutes calculation

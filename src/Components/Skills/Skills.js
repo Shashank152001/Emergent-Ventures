@@ -1,26 +1,17 @@
 import React, { useState, useEffect } from "react";
 import "./skill.css";
 import NoRecord from "../Project/norecord";
-
-const url ='https://6d2e-2409-4088-ae0a-9928-1d9-3b99-5cf5-2ad4.in.ngrok.io/user/skills/get-user-skills';
+import {fetchSkills} from '../../Service/SkillService'
+// const url ='https://8925-2401-4900-1c69-8e1e-3cd0-e1a6-ed6c-3b2a.in.ngrok.io/user/skills/get-user-skills';
 
 function Skill() {
   const[userData,setUserData]  = useState(null);
 
   useEffect(()=>{
-    fetch(url,{
-      method:'GET',
-      mode:'cors',
-      credentials: 'include',
-      headers:{
-        'Content-Type': 'application/json'
-      },
-
-    }).then((response)=>{
-          return response.json();
-    }).then((data)=>{
-       console.log(data.data[0])
+    fetchSkills().then((data)=>{
       setUserData(data.data[0]);
+    }).catch((e)=>{
+      console.log(e.message)
     })
   },[])
   return (

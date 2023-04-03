@@ -9,9 +9,7 @@ import ProtectRoute from './Service/ProtectRoute';
 
 
 function App() {
-  // const [userLoginEmail, setuserLoginEmail] = useState(localStorage.getItem('userLoginEmail'))
-  // const [userLoginStatus, setuserLoginStatus] = useState(localStorage.getItem('userLoginStatus'))
-  // const[userSkills,setUserSkills]=useState(localStorage.getItem('userSkills'))
+  
   return (
     <>
     <Router>

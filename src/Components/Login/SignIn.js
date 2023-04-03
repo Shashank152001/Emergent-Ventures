@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import {Link,useNavigate} from 'react-router-dom'
 import './sign.css';
+import {userLogin} from '../../Service/LoginService'
+// import {url} from '../../Constant/Url'
 
-const url ='https://6d2e-2409-4088-ae0a-9928-1d9-3b99-5cf5-2ad4.in.ngrok.io/';
+// const url ='https://8925-2401-4900-1c69-8e1e-3cd0-e1a6-ed6c-3b2a.in.ngrok.io/';
 
 function SignIn() {
 
@@ -15,35 +17,6 @@ function SignIn() {
   const FormData = new URLSearchParams(formData);
   const navigate = useNavigate();
 
-
-
-  useEffect(()=>{
-    if(isFilled ){
-    fetch(url,{
-      method:'POST',
-      mode:'cors',
-      credentials: 'include',
-      headers:{
-        'Content-Type': 'application/x-www-form-urlencoded'
-      },
-      body:FormData
-
-    }).then((response)=>{
-          return response.json()
-    }).then((data)=>{
-
-      console.log(data);
-      navigate('/dashboard');
-      localStorage.setItem('loggedInUser','1')
-      setFilled(false);
-    })
-  }
-
-  },[isFilled])
-
-
-
-    
 
       const handleSubmit = (event) => {
         event.preventDefault();
@@ -68,6 +41,28 @@ function SignIn() {
         }
         else{
           setFormErrors(errors);
+        }
+        const bodydata=FormData;
+        if(isFilled ){
+          userLogin(bodydata).then((data)=>{
+      
+            // console.log(data.data.email);
+            if(!data.message){
+            navigate('/dashboard');
+            localStorage.setItem('loggedInUser','1')
+            setFilled(false);
+            }
+            else{
+              console.log(data.message)
+              navigate('/')
+              alert('Wrong Cred')
+              // navigate('/')
+            }
+          }).catch((e)=>{
+            console.log(e.message)
+            navigate('/')
+            alert('Server Error')
+          })
         }
         
       };
