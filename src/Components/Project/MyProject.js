@@ -4,26 +4,20 @@ import './project.css';
 import { AiOutlineDown,AiOutlineSwap } from "react-icons/ai";
 import { IoCalendarNumberOutline } from "react-icons/io5";
 import NoRecord from './norecord';
+import {fetchProject} from '../../Service/ProjectService'
 
+// const url ='https://8925-2401-4900-1c69-8e1e-3cd0-e1a6-ed6c-3b2a.in.ngrok.io/user/get-user-projects';
 
-const url ='https://b929-117-242-153-226.in.ngrok.io/user/get-user-projects';
+// const url ='https://ab8d-117-242-153-226.in.ngrok.io/user/get-user-projects';
 
 function MyProject() {
     const[projects,setProject]  = useState(null);
 
     useEffect(()=>{
-      fetch(url,{
-        method:'GET',
-        mode:'cors',
-        credentials: 'include',
-        headers:{
-          'Content-Type': 'application/json'
-        },
-  
-      }).then((response)=>{
-            return response.json();
-      }).then((data)=>{
+      fetchProject().then((data)=>{
         setProject(data.data);
+      }).catch((e)=>{
+        console.log(e.message)
       })
     },[])
 
@@ -39,6 +33,7 @@ function MyProject() {
             </div>
         </div>
         <div className='project-content'>
+          
             <table>
                 <thead>
                 <tr id='table-heading'>
@@ -96,6 +91,8 @@ function MyProject() {
                 
                 
             </table>
+           
+                 
 
         </div>
 
