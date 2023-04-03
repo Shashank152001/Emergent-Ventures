@@ -6,7 +6,7 @@ import { IoCalendarNumberOutline } from "react-icons/io5";
 import NoRecord from './norecord';
 
 
-const url ='https://ab8d-117-242-153-226.in.ngrok.io/user/get-user-projects';
+const url ='https://b929-117-242-153-226.in.ngrok.io/user/get-user-projects';
 
 function MyProject() {
     const[projects,setProject]  = useState(null);
