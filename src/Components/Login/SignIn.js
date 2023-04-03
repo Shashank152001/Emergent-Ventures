@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import {Link,useNavigate} from 'react-router-dom'
 import './sign.css';
 import {userLogin} from '../../Service/LoginService'
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 // import {url} from '../../Constant/Url'
 
 // const url ='https://8925-2401-4900-1c69-8e1e-3cd0-e1a6-ed6c-3b2a.in.ngrok.io/';
@@ -49,19 +51,49 @@ function SignIn() {
             // console.log(data.data.email);
             if(!data.message){
             navigate('/dashboard');
+            toast.success('Login Successfull', {
+              position: "top-left",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "colored",
+              });
             localStorage.setItem('loggedInUser','1')
             setFilled(false);
             }
             else{
               console.log(data.message)
               navigate('/')
-              alert('Wrong Cred')
+              toast.error('Wrong Credentials!', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+                });
+              // alert('Wrong Cred')
               // navigate('/')
             }
           }).catch((e)=>{
             console.log(e.message)
             navigate('/')
-            alert('Server Error')
+            toast.error('Could not Connect with Server', {
+              position: "top-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "colored",
+              });
+            // alert('Server Error')
           })
         }
         
