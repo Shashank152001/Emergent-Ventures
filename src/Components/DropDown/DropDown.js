@@ -2,6 +2,9 @@ import React from 'react'
 import './DropDown.css'
 import { useNavigate } from 'react-router-dom'
 import {logOut} from '../../Service/DashboardService'
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 export const DropDown = () => {
     const navigate=useNavigate()
     function handleLogOut(){
@@ -10,6 +13,16 @@ export const DropDown = () => {
             // sessionStorage.clear();
             localStorage.clear()
             navigate("/");
+            toast.success('Logout Successfull', {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+                });
           });
     }
   return (

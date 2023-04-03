@@ -11,6 +11,7 @@ import Sidebar from "./sidebar";
 import FileUpload from "./fileupload";
 import { DropDown } from "../DropDown/DropDown";
 import {userData} from '../../Service/DashboardService'
+import Loader from "../Spinner/Loader";
 
 
 function MyDashBoard() {
@@ -40,6 +41,7 @@ function MyDashBoard() {
     
   return (
     <section className=" main-container">
+      {userDatas?
       <div className="wrapper d-flex">
         {/* left */}
         <Sidebar />
@@ -191,6 +193,10 @@ function MyDashBoard() {
         </div>
         {/* right end */}
       </div>
+      :
+      <>
+      <Loader/>
+      </>}
     </section>
   );
 }

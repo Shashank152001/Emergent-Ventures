@@ -1,5 +1,7 @@
 import {useState} from 'react'
 import './App.css';
+import { ToastContainer, toast } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import SignIn from './Components/Login/SignIn';
 import SignUp from './Components/SignUp/SignUp'
@@ -23,6 +25,7 @@ function App() {
       </Routes>
       
     </Router>
+    <ToastContainer/>
     </>
   );
 }
