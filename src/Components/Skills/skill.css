@@ -30,6 +30,7 @@ div.primary-skills{
     justify-content: space-between;
     padding: 0 0.4rem;
     margin-top: 1.2rem;
+    align-items: center;
 }
 
 h6.skill-title{
@@ -37,6 +38,7 @@ h6.skill-title{
     font-size:0.9rem;
     color: #000;
     width: 100px;
+    padding-right:1rem;
 }
 
 .content-wrapper{
@@ -47,7 +49,7 @@ h6.skill-title{
 p.skill-content{
     width: 100%;
     color: #1a1b49;
-    padding-bottom: 1rem;
+    padding-bottom: 0  !important;
     border-bottom: 1px solid #000;
     word-wrap: break-word;
 }
