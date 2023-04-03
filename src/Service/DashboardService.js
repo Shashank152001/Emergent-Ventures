@@ -2,7 +2,7 @@ import {url} from '../Constant/Url'
 export const logOut=async()=>{
     const response=await fetch(url+'user/logout',{
         method: "GET",
-        // mode: "cors",
+        mode: "cors",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
     })

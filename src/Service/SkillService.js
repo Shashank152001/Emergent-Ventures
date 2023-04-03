@@ -1,7 +1,7 @@
 import {url} from '../Constant/Url'
 export const fetchSkills=async()=>{
       const response=await fetch(url+'user/skills/get-user-skills/',{
-        // mode:'cors',
+        mode:'cors',
         headers:{ "Content-Type": "application/json" },
         credentials:'include'
       })
