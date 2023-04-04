@@ -4,6 +4,7 @@ import './sign.css';
 import {userLogin} from '../../Service/LoginService'
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import bgSvg from '../Spheres.svg';
 // import {url} from '../../Constant/Url'
 
 // const url ='https://8925-2401-4900-1c69-8e1e-3cd0-e1a6-ed6c-3b2a.in.ngrok.io/';
@@ -105,7 +106,8 @@ function SignIn() {
       };
 
   return (
-     <section className='signIn-container'>
+    <>
+     <section className='signIn-container position-relative'>
         <div className='signin-wrapper'>
             <div className='left'>
                  <div className='logo-title'>
@@ -120,7 +122,7 @@ function SignIn() {
                     <img src='Images/singin.png' alt='signin' style={{width:'100%',height:'100%',objectFit:'cover'}}/>
                  </div>
             </div>
-            <div className='right'>
+            <div className='right d-flex flex-column justify-content-center'>
                 <form id="form" onSubmit={handleSubmit}>
                     <div>
                         <h1 className='signin-title'>Sign In</h1>
@@ -159,6 +161,16 @@ function SignIn() {
             </div>
         </div>
      </section>
+     <div
+     style={{
+      backgroundColor:'#2563EB',
+      zIndex:'-1'
+     }}
+     className="position-absolute w-100 h-100 top-0 "
+     >
+        <img src={bgSvg} alt="background"  className="w-100 h-100"/>
+     </div>
+     </>
   )
 }
 
