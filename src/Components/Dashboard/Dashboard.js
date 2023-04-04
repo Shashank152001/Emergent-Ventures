@@ -194,9 +194,10 @@ function MyDashBoard() {
         {/* right end */}
       </div>
       :
-      <>
+      <section style={{height:'100vh'}}>
       <Loader/>
-      </>}
+      </section>
+      }
     </section>
   );
 }

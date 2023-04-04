@@ -1,27 +1,28 @@
 import React,{useState} from 'react'
-import {Link} from 'react-router-dom'
+import {Link,useNavigate} from 'react-router-dom'
 import './SignUp.css'
+import { userSignUp } from '../../Service/SignUpServeice';
 // import './sign.css';
-
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 function SignUp() {
 
-
+    const navigate=useNavigate()
     const [formData, setFormData] = useState({
-        fullname: '',
+        name: '',
         email: '',
-        designation:'',
-        department:'',
         password: '',
-        confirmpassword: '',
         agreement:false
       });
 
     const [formErrors, setFormErrors] = useState({});
+    const [isFilled, setFilled] = useState(false);
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        console.log(event)
       
        
         const errors = {};
@@ -63,7 +64,54 @@ function SignUp() {
       
     
         setFormErrors(errors);
-      
+        const bodyData=formData
+        
+        userSignUp(bodyData).then((data)=>{
+            console.log(data)
+            
+            if(data.message==='User created successfully'){
+                navigate('/')
+                toast.success('SignUp Successfull', {
+                    position: "top-left",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "colored",
+                    });
+            }
+            else{
+                navigate('/signup')
+                setFilled(false);
+                toast.error('User Already Exit!', {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "colored",
+                    });
+            }
+        })
+        .catch((e)=>{
+            console.log(e.message)
+            navigate('/signup')
+            toast.error('Server Down!', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+                });
+        })
+    
       };
 
 
@@ -100,17 +148,17 @@ function SignUp() {
                     </div>
                     <div>
                         <div className='field position-relative'>
-                            <label htmlFor='fullname' className='label' style={{padding:'0.3rem 0'}}>Fullname</label>
-                            <input type="text" name='fullname' id='fullname' style={{padding:'0.3rem'}} onChange={handleChange} value={formData.fullname}/>
-                            {formErrors.fullname && <span className='error-span'>{formErrors.fullname}</span> }
+                            <label htmlFor='name' className='label'>Fullname</label>
+                            <input type="text" name='name' id='fullname' onChange={handleChange} value={formData.name}/>
+                            {formErrors.name && <span className='error-span'>{formErrors.name}</span> }
                             
                         </div>
                         <div className='field position-relative'>
-                            <label htmlFor='email' className='label' style={{padding:'0.3rem 0'}}>Email address</label>
-                            <input type="email" name='email' id='email' style={{padding:'0.3rem'}} onChange={handleChange} value={formData.email} />
+                            <label htmlFor='email' className='label'>Email address</label>
+                            <input type="email" name='email' id='email' onChange={handleChange} value={formData.email} />
                             {formErrors.email && <span className='error-span'>{formErrors.email}</span>}
                         </div>
-                        <div className='field position-relative'>
+                        {/* <div className='field position-relative'>
                             <label htmlFor='designation' className='label' style={{padding:'0.3rem 0'}}>Designation</label>
                             <input type="text" name='designation' id='designation' style={{padding:'0.3rem'}} onChange={handleChange} value={formData.designation} />
                             {formErrors.designation && <span className='error-span'>{formErrors.designation}</span>}
@@ -119,17 +167,17 @@ function SignUp() {
                             <label htmlFor='department' className='label' style={{padding:'0.3rem 0'}}>Department</label>
                             <input type="text" name='department' id='department' style={{padding:'0.3rem'}} onChange={handleChange} value={formData.department} />
                             {formErrors.department && <span className='error-span'>{formErrors.department}</span>}
-                        </div>
+                        </div> */}
                         <div className='field position-relative'>
-                            <label htmlFor='password' className='label' style={{padding:'0.3rem 0'}}>Password</label>
-                            <input type="password" name='password' id='password' style={{padding:'0.3rem'}} onChange={handleChange} value={formData.password} />
+                            <label htmlFor='password' className='label' >Password</label>
+                            <input type="password" name='password' id='password' onChange={handleChange} value={formData.password} />
                             {formErrors.password && <span className='error-span'>{formErrors.password}</span>}
                         </div>
-                        <div className='field position-relative'>
+                        {/* <div className='field position-relative'>
                             <label htmlFor='confirmpassword' className='label' style={{padding:'0.3rem 0'}}>Confirm Password</label>
                             <input type="password" name='confirmpassword' id='confirmpassword' style={{padding:'0.3rem'}} onChange={handleChange} value={formData.confirmpassword}/>
                             {formErrors.confirmpassword && <span className='error-span'>{formErrors.confirmpassword}</span>}
-                        </div>
+                        </div> */}
                         <div className='last position-relative'>
                             <div>
                                 <input type='checkbox' name="agreement" id="agreement" onChange={handleChange} checked={formData.agreement}></input>

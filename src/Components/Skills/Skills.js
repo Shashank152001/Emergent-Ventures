@@ -50,7 +50,7 @@ function Skill() {
         <div className='primary-skills'>
                     <h6 className='skill-title'>Certifications</h6>
                     <div className='content-wrapper'>
-                    <p className='border-none skill-content'>
+                    <p className='skill-content'>
                     {userData.certifications}
                     </p>
           </div>
