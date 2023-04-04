@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./skill.css";
 import NoRecord from "../Project/norecord";
 
-const url ="https://ab8d-117-242-153-226.in.ngrok.io/user/skills/get-user-skills";
+const url ="https://cfca-2409-4088-9e37-4758-805-92a6-4b37-a49.ap.ngrok.io/user/skills/get-user-skills";
 
 function Skill() {
   const[userData,setUserData]  = useState(null);

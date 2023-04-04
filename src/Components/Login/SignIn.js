@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import {Link,useNavigate} from 'react-router-dom'
 import './sign.css';
 
-const url ="https://ab8d-117-242-153-226.in.ngrok.io";
+const url ="https://cfca-2409-4088-9e37-4758-805-92a6-4b37-a49.ap.ngrok.io";
 
 function SignIn() {
 

@@ -7,48 +7,78 @@ const Timer = () => {
   const [ischecked, setchecked] = useState(false);
   const [formData, setFormData] = useState(null);
 
-  const URL = "https://ab8d-117-242-153-226.in.ngrok.io/user/check-in";
+  const URL = "https://cfca-2409-4088-9e37-4758-805-92a6-4b37-a49.ap.ngrok.io/user/check-in";
   let currentcheckin = 0;
-
+ 
   useEffect(() => {
-    console.log("checked");
+    console.log("1");
 
     if (ischecked && formData) {
       console.log(formData);
-      fetch(URL, {
-        method: 'POST',
-        mode: 'cors',
-        credentials: 'include',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        body: new URLSearchParams(formData)
-
-      }).then((response) => {
-        return response.json();
-      }).then((data) => {
-        console.log(data);
-        setchecked(false);
-      }).catch((error) => {
-        console.error(error);
-        setchecked(false);
-      });
+      if(isRunning)
+      { console.log('post')
+        fetch(URL, {
+          method: 'POST',
+          mode: 'cors',
+          credentials: 'include',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          },
+          body: new URLSearchParams(formData)
+       
+        }).then((response) => {
+          return response.json();
+        }).then((data) => {
+          console.log(data);
+          console.log('post');
+          setchecked(false);
+        }).catch((error) => {
+          console.error(error);
+          setchecked(false);
+        });
+      }
+      else if(!isRunning)
+      { 
+        console.log('put')
+        console.log(formData);
+        fetch(URL, {
+          method: 'PUT',
+          mode: 'cors',
+          credentials: 'include',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          },
+          body: new URLSearchParams(formData)
+  
+        }).then((response) => {
+          return response.json();
+        }).then((data) => {
+          console.log(data);
+          console.log('put');
+          setchecked(false);
+        }).catch((error) => {
+          console.error(error);
+          setchecked(false);
+        }); 
+      }
+     
     }
 
   }, [ischecked, formData]);
-
+ 
   useEffect(() => {
     let intervalId;
-
+  
     if (isRunning) {
       intervalId = setInterval(() => {
-        setTime((prevTime) => {
-          const newTime = prevTime + 1;
+        setTime((Time) => {
+          const newTime = Time + 1;
           localStorage.setItem("time", JSON.stringify(newTime));
+          localStorage.setItem('Running',JSON.stringify(isRunning));
           return newTime;
         });
       }, 10);
-
+  
       fetch("https://ipapi.co/json/")
         .then((response) => response.json())
         .then((data) => {
@@ -57,34 +87,49 @@ const Timer = () => {
           const fetchedTime = new Date().toLocaleTimeString(undefined, {
             timeZone: timezone,
           });
-
+  
           setFormData({
             checkInTime: fetchedTime,
             checkInDate: fetchedDate,
-            location: fetchedCity
+            location: fetchedCity,
           });
-
+  
           if (currentcheckin === 0) {
-            localStorage.setItem('checkInTime', fetchedTime);
-            localStorage.setItem('checkInDate', fetchedDate);
-            localStorage.setItem('location', fetchedCity);
+            localStorage.setItem("checkInTime", fetchedTime);
+            localStorage.setItem("checkInDate", fetchedDate);
+            localStorage.setItem("location", fetchedCity);
             currentcheckin = 1;
           } else {
-            localStorage.setItem('checkInTime', fetchedTime);
-            localStorage.setItem('checkInDate', fetchedDate);
-            localStorage.setItem('location', fetchedCity);
+            
+            localStorage.setItem("checkInDate", fetchedDate);
+            localStorage.setItem("location", fetchedCity);
           }
-
-        }).catch((error) => {
+  
+        
+        })
+        .catch((error) => {
           console.error(error);
         });
     } else {
-      localStorage.removeItem("time");
-      localStorage.removeItem("Running");
+      clearInterval(intervalId);
+        console.log('2');
+     
+      const checkoutDate = new Date().toLocaleDateString();
+      const checkoutTime = new Date().toLocaleTimeString();
+      localStorage.setItem("checkOutTime", checkoutTime);
+      localStorage.setItem("checkOutDate", checkoutDate);
+  
+      setFormData({
+       
+        checkOutTime: checkoutTime,
+        checkOutDate: checkoutDate,
+    
+      });
     }
-
+  
     return () => clearInterval(intervalId);
   }, [isRunning]);
+  
 
   const hours = Math.floor(time / 360000);
   const minutes = Math.floor((time % 360000) / 6000);
@@ -92,7 +137,9 @@ const Timer = () => {
 
   const startAndStop = () => {
     setIsRunning(!isRunning);
+    console.log("clicked");
     setchecked(true);
+    
   };
 
   const reset = () => {
