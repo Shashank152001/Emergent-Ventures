@@ -9,7 +9,7 @@ import {fetchTimeSheet} from '../../Service/TimesheetService'
 //     "https://8925-2401-4900-1c69-8e1e-3cd0-e1a6-ed6c-3b2a.in.ngrok.io/user/get-user-latest-timesheets";
 
 function Timesheet() {
-    const [timesheet, setTimesheet] = useState([]);
+    const [timesheet, setTimesheet] = useState(null);
 
     useEffect(() => {
         fetchTimeSheet()

@@ -1,13 +1,14 @@
 
 section.skills-container{
-    /* background-color: #F7F9FB; */
+
     background: rgb(211,224,253);
-    background: linear-gradient(90deg, rgba(211,224,253,1) 0%, rgba(251,254,255,1) 100%); 
+
     /* width: 720px; */
     width:100%;
     margin: 2rem auto;
     border-radius: .4rem;
     padding: 1rem;
+    
 }
 
 div.skills-heading{
