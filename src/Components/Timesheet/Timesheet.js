@@ -34,7 +34,7 @@ function Timesheet() {
                         style={{ width: "100%", height: "100%" }}
                     >
                         <tbody>
-                            {timesheet ? (
+                            {timesheet ? 
                                 timesheet.map((ele, index) => (
                                     <tr key={index} className="border-0">
                                         <td className="border-0">
@@ -68,13 +68,13 @@ function Timesheet() {
                                         </td>
                                     </tr>
                                 ))
-                            ) : (
+                            : 
                                 <tr>
                                     <td>
                                         <NoRecord />
                                     </td>
                                 </tr>
-                            )}
+                            }
                         </tbody>
                     </table>
                 </div>
