@@ -7,7 +7,8 @@ const Timer = () => {
   const [ischecked, setchecked] = useState(false);
   const [formData, setFormData] = useState(null);
 
-  const URL = "https://cfca-2409-4088-9e37-4758-805-92a6-4b37-a49.ap.ngrok.io/user/check-in";
+  const URL = "https://married-widely-grants-ambien.trycloudflare.com/user/check-in";
+  const url = "https://married-widely-grants-ambien.trycloudflare.com/user/check-out";
   let currentcheckin = 0;
  
   useEffect(() => {
@@ -37,30 +38,30 @@ const Timer = () => {
           setchecked(false);
         });
       }
-      else if(!isRunning)
-      { 
-        console.log('put')
-        console.log(formData);
-        fetch(URL, {
-          method: 'PUT',
-          mode: 'cors',
-          credentials: 'include',
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-          },
-          body: new URLSearchParams(formData)
+      // else if(!isRunning)
+      // { 
+      //   console.log('put')
+      //   console.log(formData);
+      //   fetch(url, {
+      //     method: 'PUT',
+      //     mode: 'cors',
+      //     credentials: 'include',
+      //     headers: {
+      //       'Content-Type': 'application/x-www-form-urlencoded'
+      //     },
+      //     body: new URLSearchParams(formData)
   
-        }).then((response) => {
-          return response.json();
-        }).then((data) => {
-          console.log(data);
-          console.log('put');
-          setchecked(false);
-        }).catch((error) => {
-          console.error(error);
-          setchecked(false);
-        }); 
-      }
+      //   }).then((response) => {
+      //     return response.json();
+      //   }).then((data) => {
+      //     console.log(data);
+      //     console.log('put');
+      //     setchecked(false);
+      //   }).catch((error) => {
+      //     console.error(error);
+      //     setchecked(false);
+      //   }); 
+      // }
      
     }
 
@@ -98,6 +99,7 @@ const Timer = () => {
             localStorage.setItem("checkInTime", fetchedTime);
             localStorage.setItem("checkInDate", fetchedDate);
             localStorage.setItem("location", fetchedCity);
+            // console.log(fetchedTime.key);
             currentcheckin = 1;
           } else {
             
@@ -144,6 +146,9 @@ const Timer = () => {
 
   const reset = () => {
     setTime(0);
+    localStorage.removeItem('time')
+    localStorage.removeItem('Running')
+    
   };
 
   return (

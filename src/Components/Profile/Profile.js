@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from 'react-router-dom';
 import "./Profile.css";
 
 
 function Profile() {
-
+ 
     return (
         <>
             <div className="main">

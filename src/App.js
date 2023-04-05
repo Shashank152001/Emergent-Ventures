@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import SignIn from './Components/Login/SignIn';
 import SignUp from './Components/SignUp/SignUp';
 import Profile from './Components/Profile/Profile';
+import EmployeeTable from './Components/EmployeeTable/EmployeeTable';
 import Dashboard from './Components/Dashboard/Dashboard';
 import {LoginContext} from './Context/LoginContext';
 
@@ -22,6 +23,7 @@ function App() {
          <Route element={<SignUp/>} path='/signup'></Route>
          <Route element={<Dashboard/>} path='/dashboard'></Route>
          <Route element={<Profile/>} path='/profile'></Route>
+         <Route element={<EmployeeTable/>} path='/table'></Route>
       </Routes>
       </LoginContext.Provider>
     </Router>

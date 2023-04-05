@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import {Link,useNavigate} from 'react-router-dom'
 import './sign.css';
 
-const url ="https://cfca-2409-4088-9e37-4758-805-92a6-4b37-a49.ap.ngrok.io";
+const url = "https://married-widely-grants-ambien.trycloudflare.com";
+
 
 function SignIn() {
 
@@ -95,7 +96,7 @@ function SignIn() {
             <div className='right'>
                 <form id="form" onSubmit={handleSubmit}>
                     <div>
-                        <h1 className='signin-title'>Sign In</h1>
+                         <h1 className='signin-title'>Sign In</h1>
                     </div>
                     <div>
                         <div className='field position-relative'>

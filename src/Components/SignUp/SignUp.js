@@ -110,7 +110,7 @@ function SignUp() {
                             <input type="email" name='email' id='email' style={{padding:'0.3rem'}} onChange={handleChange} value={formData.email} />
                             {formErrors.email && <span className='error-span'>{formErrors.email}</span>}
                         </div>
-                        <div className='field position-relative'>
+                         <div className='field position-relative'>
                             <label htmlFor='designation' className='label' style={{padding:'0.3rem 0'}}>Designation</label>
                             <input type="text" name='designation' id='designation' style={{padding:'0.3rem'}} onChange={handleChange} value={formData.designation} />
                             {formErrors.designation && <span className='error-span'>{formErrors.designation}</span>}
