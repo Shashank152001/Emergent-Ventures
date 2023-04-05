@@ -2,159 +2,135 @@ import React from "react";
 import { useState, useEffect } from "react";
 import "./Timer.css";
 import svg from "./Vector.svg";
+import { url } from "../../Constant/Url";
 
 
 const Timer = () => {
-
-  const [time, setTime] = useState(JSON.parse(localStorage.getItem("time")) === 0 ? 0 : JSON.parse(localStorage.getItem("time")));
-  const [isRunning, setIsRunning] = useState(JSON.parse(localStorage.getItem("Running")) || false);
-  const [ischecked, setchecked] = useState(false);
+  const [time, setTime] = useState(
+    JSON.parse(localStorage.getItem("time")) === 0
+      ? 0
+      : JSON.parse(localStorage.getItem("time"))
+  );
+  const [isRunning, setIsRunning] = useState(
+    JSON.parse(localStorage.getItem("Running")) || false
+  );
+  const [checkedIn, setcheckedIn] = useState(false);
+  const [checkedOut, setcheckedOut] = useState(false);
   const [formData, setFormData] = useState(null);
+  const [formDataOut, setFormDataOut] = useState(null);
 
-  const URL = "https://cfca-2409-4088-9e37-4758-805-92a6-4b37-a49.ap.ngrok.io/user/check-in";
-  let currentcheckin = 0;
- 
+
+  const FetchData = async () => {
+    const data = await (await fetch("https://ipapi.co/json/")).json();
+    const { city, timezone } = data;
+    const fetchedDate = new Date().toLocaleDateString();
+    const fetchedTime = new Date().toLocaleTimeString(undefined, {
+      timeZone: timezone,
+    });
+
+    await setFormData({
+      checkInTime: fetchedTime,
+      checkInDate: fetchedDate,
+      location: city,
+    });
+    setcheckedIn(true);
+  };
+
+  const FetchOutData = async () => {
+    const data = await (await fetch("https://ipapi.co/json/")).json();
+    const {timezone} = data;
+    const fetchedDate = new Date().toLocaleDateString();
+    const fetchedTime = new Date().toLocaleTimeString(undefined, {
+      timeZone: timezone,
+    });
+
+    await setFormDataOut({
+      checkOutTime: fetchedTime,
+      checkOutDate: fetchedDate
+    });
+    setcheckedOut(true);
+  };
+
+
+  // for checkin
   useEffect(() => {
-    console.log("1");
-
-    if (ischecked && formData) {
-      console.log(formData);
-      if(isRunning)
-      { console.log('post')
-        fetch(URL, {
-          method: 'POST',
-          mode: 'cors',
-          credentials: 'include',
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-          },
-          body: new URLSearchParams(formData)
-       
-        }).then((response) => {
-          return response.json();
-        }).then((data) => {
-          console.log(data);
-          console.log('post');
-          setchecked(false);
-        }).catch((error) => {
-          console.error(error);
-          setchecked(false);
-        });
-      }
-      else if(!isRunning)
-      { 
-        console.log('put')
-        console.log(formData);
-        fetch(URL, {
-          method: 'PUT',
-          mode: 'cors',
-          credentials: 'include',
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-          },
-          body: new URLSearchParams(formData)
-  
-        }).then((response) => {
-          return response.json();
-        }).then((data) => {
-          console.log(data);
-          console.log('put');
-          setchecked(false);
-        }).catch((error) => {
-          console.error(error);
-          setchecked(false);
-        }); 
-      }
      
+    if (formData && checkedIn) {
+      fetch(url + "user/check-in", {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: new URLSearchParams(formData),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
+    
+  }, [formData, checkedIn]);
 
-  }, [ischecked, formData]);
- 
+  // for checkout
+  useEffect(() => {
+    
+    if (formDataOut && checkedOut) {
+      fetch(url + "user/check-out", {
+        method: "PUT",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: new URLSearchParams(formDataOut),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+    return () => {
+      setcheckedIn(false)
 
+    };
+  }, [formDataOut, checkedOut]);
+
+
+
+  // for timer
   useEffect(() => {
     let intervalId;
-  
+
     if (isRunning) {
       // setting time from 0 to 1 every 10 milisecond using javascript setInterval method
       intervalId = setInterval(() => setTime(time + 1), 10);
       localStorage.setItem("time", JSON.stringify(time));
       localStorage.setItem("Running", JSON.stringify(isRunning));
     } else {
-      localStorage.removeItem("time");
-      localStorage.removeItem("Running");
+      localStorage.removeItem('time');
+      localStorage.removeItem('Running');
     }
 
-  //     intervalId = setInterval(() => {
-  //       setTime((Time) => {
-  //         const newTime = Time + 1;
-  //         localStorage.setItem("time", JSON.stringify(newTime));
-  //         localStorage.setItem('Running',JSON.stringify(isRunning));
-  //         return newTime;
-  //       });
-  //     }, 10);
-  
-      fetch("https://ipapi.co/json/")
-        .then((response) => response.json())
-        .then((data) => {
-          const { city: fetchedCity, timezone } = data;
-          const fetchedDate = new Date().toLocaleDateString();
-          const fetchedTime = new Date().toLocaleTimeString(undefined, {
-            timeZone: timezone,
-          });
-  
-          setFormData({
-            checkInTime: fetchedTime,
-            checkInDate: fetchedDate,
-            location: fetchedCity,
-          });
-  
-          if (currentcheckin === 0) {
-            localStorage.setItem("checkInTime", fetchedTime);
-            localStorage.setItem("checkInDate", fetchedDate);
-            localStorage.setItem("location", fetchedCity);
-            currentcheckin = 1;
-          } else {
-            
-            localStorage.setItem("checkInDate", fetchedDate);
-            localStorage.setItem("location", fetchedCity);
-          }
-  
-        
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    // } else {
-    //   clearInterval(intervalId);
-    //     console.log('2');
-     
-    //   const checkoutDate = new Date().toLocaleDateString();
-    //   const checkoutTime = new Date().toLocaleTimeString();
-    //   localStorage.setItem("checkOutTime", checkoutTime);
-    //   localStorage.setItem("checkOutDate", checkoutDate);
-  
-    //   setFormData({
-       
-    //     checkOutTime: checkoutTime,
-    //     checkOutDate: checkoutDate,
-    
-    //   });
-    // }
-  
     return () => clearInterval(intervalId);
-
   }, [isRunning, time]);
-
 
   const hours = Math.floor(time / 360000);
   const minutes = Math.floor((time % 360000) / 6000);
   const seconds = Math.floor((time % 6000) / 100);
 
-  const startAndStop = () => {
+  const startClock = () => {
     setIsRunning(!isRunning);
-    console.log("clicked");
-    setchecked(true);
-    
+    FetchData();
+  };
+  const stopClock = () => {
+    setIsRunning(!isRunning);
+    FetchOutData();
   };
 
   const reset = () => {
@@ -173,11 +149,9 @@ const Timer = () => {
                 className=""
                 style={{ paddingTop: "0.8rem", paddingBottom: "1rem" }}
               >
-                
                 Welcome Back!
               </h2>
               <p className="text-secondary" style={{ fontWeight: "bold" }}>
-               
                 Your today's timer
               </p>
               <div className="timer d-flex ">
@@ -194,23 +168,43 @@ const Timer = () => {
                 </span>
               </div>
               <div className="my-3 stopwatch-buttons">
-                <button
-                  className="btn  text-light"
-                  onClick={startAndStop}
-                  style={{ backgroundColor: isRunning ? "red" : "green",
-                  width:'140px',height:'36px',padding:'0' }}
-                >
-                  {isRunning ? "Checkout" : "CheckIn"}
-                </button>
-                <button
-                 className="btn btn-primary m-2"
-                  onClick={reset}
-                  style={{width:'140px',height:'36px',padding:'0' }}
+                {isRunning ? (
+                  <button
+                    className="btn  text-light"
+                    onClick={stopClock}
+                    style={{
+                      backgroundColor:"red",
+                      width: "140px",
+                      height: "36px",
+                      padding: "0",
+                    }}
                   >
+                  Checkout
+                  </button>
+                ) : (
+                  <button
+                    className="btn  text-light"
+                    onClick={startClock}
+                    style={{
+                      backgroundColor:"green",
+                      width: "140px",
+                      height: "36px",
+                      padding: "0",
+                    }}
+                  >
+                   CheckIn
+                  </button>
+                )}
+
+                <button
+                  className="btn btn-primary m-2"
+                  onClick={reset}
+                  style={{ width: "140px", height: "36px", padding: "0" }}
+                >
                   Break
                 </button>
               </div>
-              </div>
+            </div>
             <div
               className="col-md-4"
               style={{
@@ -227,8 +221,8 @@ const Timer = () => {
                 }}
               />
             </div>
+          </div>
         </div>
-      </div>
       </div>
     </>
   );

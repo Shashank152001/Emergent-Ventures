@@ -6,7 +6,7 @@ export async function userSignUp(data) {
         credentials:'include',
         body:new URLSearchParams(data)
     })
-    console.log(response)
+    // console.log(response)
     // if(!response.ok){
     //   throw new Error('Data could not be fetched')
     // }else{

@@ -16,7 +16,7 @@ function Timesheet() {
     useEffect(() => {
         fetchTimeSheet()
             .then((data) => {
-                console.log("timesheet", data.data);
+                // console.log("timesheet", data.data);
                 setTimesheet(data.data);
             }).catch((e)=>{
                 console.log(e.message);
@@ -63,7 +63,12 @@ function Timesheet() {
                                             </span>
                                         </td>
                                         <td className="border-0">
-                                            <p style={{height:'40px'}}>{ele.week}</p>
+                                            <p style={{
+                                            height:'40px',
+                                            width:'112px',
+                                            margin:'auto'
+                                        }}
+                                            >{ele.week}</p>
                                             </td>
                                         <td className="border-0">
                                             <p>{ele.submittedHours}</p>
