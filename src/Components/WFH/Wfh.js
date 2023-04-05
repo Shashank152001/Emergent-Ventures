@@ -26,7 +26,7 @@ const Wfh = () => {
                     padding:'0.2rem 2.1rem',
                     marginTop:'0.6rem'
                   }}>Apply for WFH</button>
-                 <button onClick={navigate('/WFHform')} className='btn btn-primary mb-2'>Apply for WFH</button>
+                 {/* <button onClick={navigate('/WFHform')} className='btn btn-primary mb-2'>Apply for WFH</button> */}
              </div>
              
          </div>

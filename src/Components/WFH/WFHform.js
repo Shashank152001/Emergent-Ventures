@@ -169,7 +169,7 @@ const WFHform = () => {
               </div>
             </div>
 
-            <div className='container foot p-3   mx-3  rounded'>
+            <div className='container foot p-3   mx-3  rounded d-none'>
               <button className='mx-2 px-3 bg-success text-white border-0 rounded'>Submit</button>
               <button className='mx-2  px-3 text-black border-0 rounded'>Cancel</button>
             </div>
