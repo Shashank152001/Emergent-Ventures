@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./Timer.css";
 
 const Timer = () => {
+
   const [time, setTime] = useState(JSON.parse(localStorage.getItem("time")) === 0 ? 0 : JSON.parse(localStorage.getItem("time")));
   const [isRunning, setIsRunning] = useState(JSON.parse(localStorage.getItem("Running")) || false);
   const [ischecked, setchecked] = useState(false);
@@ -66,6 +67,7 @@ const Timer = () => {
 
   }, [ischecked, formData]);
  
+
   useEffect(() => {
     let intervalId;
   
@@ -128,8 +130,8 @@ const Timer = () => {
     }
   
     return () => clearInterval(intervalId);
-  }, [isRunning]);
-  
+  }, [isRunning, time]);
+
 
   const hours = Math.floor(time / 360000);
   const minutes = Math.floor((time % 360000) / 6000);

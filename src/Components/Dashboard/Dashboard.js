@@ -1,7 +1,7 @@
-import React,{useState} from "react";
+import React,{useState,useEffect} from "react";
 import { BiBell, BiChevronDown, BiSearch } from "react-icons/bi";
 import "./Dashboard.css";
-import MyProject from "../Project/project";
+import MyProject from "../Project/MyProject";
 import Skill from "../Skills/Skills";
 import Timesheet from "../Timesheet/Timesheet";
 import Timer from "../Timer/Timer";
@@ -9,12 +9,15 @@ import Leaves from "../Leaves/Leaves";
 import WFH from "../WFH/Wfh";
 import Sidebar from "./sidebar";
 import FileUpload from "./fileupload";
-
+import { DropDown } from "../DropDown/DropDown";
+import {userData} from '../../Service/DashboardService'
+import Loader from "../Spinner/Loader";
 
 
 function MyDashBoard() {
     const [showModal, setShowModal] = useState(false);
-   
+    const[openProfile,setOpenProfile]=useState(false);
+    const[userDatas,setUserDatas]=useState(null)
 
     const handleCloseModal = () => {
       setShowModal(false);
@@ -24,11 +27,21 @@ function MyDashBoard() {
       setShowModal(true);
     };
 
+    useEffect(()=>{
+      userData().then((data)=>{
+        console.log(data.name)
+        setUserDatas(data);
+      }).catch((e)=>{
+        console.log(e.message)
+      })
+    },[])
+
 
 
     
   return (
     <section className=" main-container">
+      {/* {userDatas? */}
       <div className="wrapper d-flex">
         {/* left */}
         <Sidebar />
@@ -112,12 +125,20 @@ function MyDashBoard() {
                       style={{ width: "30px", height: "30px" }}
                     />
                   </p>
+                  {userDatas?
+                  <>
                   <p className="" style={{ marginBottom: "0" }}>
                     <span style={{ paddingLeft: "0.5rem", color: "#000" }}>
-                      Andy Lane
+                      {userDatas.name}
                     </span>
-                    <BiChevronDown style={{ marginLeft: "0.4rem" }} />
+                    <BiChevronDown style={{ marginLeft: "0.4rem" }} onClick={()=>{setOpenProfile((prev)=>!prev)}}/>
                   </p>
+                  {openProfile && <DropDown/>}
+                  </>
+                  :
+                  <p>No Name</p>
+
+}
                 </div>
               </div>
             </div>
@@ -172,6 +193,11 @@ function MyDashBoard() {
         </div>
         {/* right end */}
       </div>
+      {/* // :
+      // <section style={{height:'100vh'}}>
+      // <Loader/>
+      // </section> */}
+      {/* // } */}
     </section>
   );
 }
