@@ -10,11 +10,6 @@ import bgSvg from '../Spheres.svg';
 
 // const url ='https://8925-2401-4900-1c69-8e1e-3cd0-e1a6-ed6c-3b2a.in.ngrok.io/';
 
-<<<<<<< HEAD
-const url = "https://married-widely-grants-ambien.trycloudflare.com";
-
-=======
->>>>>>> main
 
 function SignIn() {
 
