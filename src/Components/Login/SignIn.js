@@ -1,9 +1,20 @@
 import React, { useState, useEffect } from "react";
 import {Link,useNavigate} from 'react-router-dom'
 import './sign.css';
+import {userLogin} from '../../Service/LoginService'
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import bgSvg from '../Spheres.svg';
+// import {url} from '../../Constant/Url'
 
+
+// const url ='https://8925-2401-4900-1c69-8e1e-3cd0-e1a6-ed6c-3b2a.in.ngrok.io/';
+
+<<<<<<< HEAD
 const url = "https://married-widely-grants-ambien.trycloudflare.com";
 
+=======
+>>>>>>> main
 
 function SignIn() {
 
@@ -16,34 +27,6 @@ function SignIn() {
   const FormData = new URLSearchParams(formData);
   const navigate = useNavigate();
 
-
-
-  useEffect(()=>{
-    if(isFilled ){
-    fetch(url,{
-      method:'POST',
-      mode:'cors',
-      credentials: 'include',
-      headers:{
-        'Content-Type': 'application/x-www-form-urlencoded'
-      },
-      body:FormData
-
-    }).then((response)=>{
-          return response.json()
-    }).then((data)=>{
-
-      console.log(data);
-      navigate('/dashboard');
-      setFilled(false);
-    })
-  }
-
-  },[isFilled])
-
-
-
-    
 
       const handleSubmit = (event) => {
         event.preventDefault();
@@ -69,6 +52,58 @@ function SignIn() {
         else{
           setFormErrors(errors);
         }
+        const bodydata=FormData;
+        if(isFilled ){
+          userLogin(bodydata).then((data)=>{
+      
+            // console.log(data.data.email);
+            if(!data.message){
+            navigate('/dashboard');
+            toast.success('Login Successfull', {
+              position: "top-left",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "colored",
+              });
+            localStorage.setItem('loggedInUser','1')
+            setFilled(false);
+            }
+            else{
+              console.log(data.message)
+              navigate('/')
+              toast.error('Wrong Credentials!', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+                });
+              // alert('Wrong Cred')
+              // navigate('/')
+            }
+          }).catch((e)=>{
+            console.log(e.message)
+            navigate('/')
+            toast.error('Could not Connect with Server', {
+              position: "top-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "colored",
+              });
+            // alert('Server Error')
+          })
+        }
         
       };
 
@@ -78,7 +113,8 @@ function SignIn() {
       };
 
   return (
-     <section className='signIn-container'>
+    <>
+     <section className='signIn-container position-relative'>
         <div className='signin-wrapper'>
             <div className='left'>
                  <div className='logo-title'>
@@ -93,7 +129,7 @@ function SignIn() {
                     <img src='Images/singin.png' alt='signin' style={{width:'100%',height:'100%',objectFit:'cover'}}/>
                  </div>
             </div>
-            <div className='right'>
+            <div className='right d-flex flex-column justify-content-center'>
                 <form id="form" onSubmit={handleSubmit}>
                     <div>
                          <h1 className='signin-title'>Sign In</h1>
@@ -132,6 +168,16 @@ function SignIn() {
             </div>
         </div>
      </section>
+     <div
+     style={{
+      backgroundColor:'#2563EB',
+      zIndex:'-1'
+     }}
+     className="position-absolute w-100 h-100 top-0 "
+     >
+        <img src={bgSvg} alt="background"  className="w-100 h-100"/>
+     </div>
+     </>
   )
 }
 

@@ -2,24 +2,19 @@ import React, { useState, useEffect } from "react";
 import "./skill.css";
 import NoRecord from "../Project/norecord";
 
-const url ="https://married-widely-grants-ambien.trycloudflare.com/user/skills/get-user-skills";
+
+import {fetchSkills} from '../../Service/SkillService'
+
+
 
 function Skill() {
   const[userData,setUserData]  = useState(null);
 
   useEffect(()=>{
-    fetch(url,{ 
-      method:'GET',
-      mode:'cors',
-      credentials: 'include',
-      headers:{
-        'Content-Type': 'application/json'
-      },
-
-    }).then((response)=>{
-          return response.json();
-    }).then((data)=>{
-      setUserData(data.data);
+    fetchSkills().then((data)=>{
+      setUserData(data.data[0]);
+    }).catch((e)=>{
+      console.log(e.message)
     })
   },[])
   return (
@@ -58,7 +53,7 @@ function Skill() {
         <div className='primary-skills'>
                     <h6 className='skill-title'>Certifications</h6>
                     <div className='content-wrapper'>
-                    <p className='border-none skill-content'>
+                    <p className='skill-content border-none'>
                     {userData.certifications}
                     </p>
           </div>
