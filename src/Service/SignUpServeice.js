@@ -1,8 +1,7 @@
 import {url} from '../Constant/Url'
-export async function userLogin(data) {
-    const response=await fetch(url,{
-        method:"POST",
-        mode:'cors',
+export async function userSignUp(data) {
+    const response=await fetch(url+'signup/',{
+        method:"PUT",
         headers:{"Content-Type": "application/x-www-form-urlencoded" },
         credentials:'include',
         body:new URLSearchParams(data)

@@ -7,7 +7,7 @@
 .wfh-container{
     /* background-color: hsl(0, 0%, 100%); */
     background: rgb(211,224,253);
-    background: linear-gradient(90deg, rgba(211,224,253,1) 0%, rgba(251,254,255,1) 100%); 
+    /* background: linear-gradient(90deg, rgba(211,224,253,1) 0%, rgba(251,254,255,1) 100%);  */
     height: 100%;
     border-radius: 6px;
     padding: 0.8rem;

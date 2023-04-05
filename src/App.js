@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import React from 'react'
 import './App.css';
 import { ToastContainer, toast } from 'react-toastify';
   import 'react-toastify/dist/ReactToastify.css';
@@ -9,6 +9,7 @@ import Profile from './Components/Profile/Profile';
 import Dashboard from './Components/Dashboard/Dashboard';
 
 import ProtectRoute from './Service/ProtectRoute';
+
 import WFHform from './Components/WFH/WFHform';
 import TimesheetForm from './Components/Timesheet/TimesheetForm';
 // import Timesheet from './Components/Timesheet/Timesheet';
@@ -29,14 +30,17 @@ function App() {
          <Route element={<SignIn/>} path='/'></Route>
          <Route element={<SignUp/>} path='/signup'></Route>
          <Route element={<Profile/>} path='/profile'></Route>
-         <Route element={<WFHform/>} path='/WFHform'></Route>
+         {/* <Route element={<WFHform/>} path='/WFHform'></Route> */}
          <Route element={<TimesheetForm/>} path='/Timesheetform'></Route>
+         <Route element={<ProtectRoute/>} path='/dashboard'>
+            <Route element={<Dashboard/>} path='/dashboard'></Route>
+         </Route>
+         {/* <Route element={<TimesheetForm/>} path='/Timesheetform'></Route> */}
           <Route element={<ProtectRoute/>} path='/dashboard'> 
             <Route element={<Dashboard/>} path='/dashboard'></Route>
          </Route> 
       </Routes>
         
-      
     </Router>
     <ToastContainer/>
     </>

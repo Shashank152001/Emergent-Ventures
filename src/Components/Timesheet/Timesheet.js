@@ -11,12 +11,12 @@ import {fetchTimeSheet} from '../../Service/TimesheetService'
 
 
 function Timesheet() {
-    const [timesheet, setTimesheet] = useState([]);
+    const [timesheet, setTimesheet] = useState(null);
 
     useEffect(() => {
         fetchTimeSheet()
             .then((data) => {
-                console.log("timesheet", data.data);
+                // console.log("timesheet", data.data);
                 setTimesheet(data.data);
             }).catch((e)=>{
                 console.log(e.message);
@@ -36,11 +36,14 @@ function Timesheet() {
                         style={{ width: "100%", height: "100%" }}
                     >
                         <tbody>
-                            {timesheet ? (
+                            {timesheet ? 
                                 timesheet.map((ele, index) => (
                                     <tr key={index} className="border-0">
                                         <td className="border-0">
+                                            <p style={{height:'42px'}}>
                                             <BsCheckCircleFill className="checked" />
+                                            </p>
+                                           
                                         </td>
                                         <td className="timesheet-name border-0">
                                             <p className="image-container-timesheet">
@@ -59,7 +62,14 @@ function Timesheet() {
                                                 {ele.timesheetName}
                                             </span>
                                         </td>
-                                        <td className="border-0">{ele.week}</td>
+                                        <td className="border-0">
+                                            <p style={{
+                                            height:'40px',
+                                            width:'112px',
+                                            margin:'auto'
+                                        }}
+                                            >{ele.week}</p>
+                                            </td>
                                         <td className="border-0">
                                             <p>{ele.submittedHours}</p>
                                             <p>Submitted Hours</p>
@@ -70,13 +80,13 @@ function Timesheet() {
                                         </td>
                                     </tr>
                                 ))
-                            ) : (
+                            : 
                                 <tr>
                                     <td>
                                         <NoRecord />
                                     </td>
                                 </tr>
-                            )}
+                            }
                         </tbody>
                     </table>
                 </div>

@@ -1,15 +1,19 @@
 .signIn-container{
-    background-color: #2563EB;
+    /* background-color: #2563EB; */
+    /* background-image: url('../Spheres.svg'); */
     height: 100vh;
     padding: 4rem 0;
     display: flex;
    align-items: center;
    justify-content: center;
+   overflow: hidden;
+   width: 100%;
 }
 .signin-wrapper{
     background-color: #FFFFFF;
     width:90%;
     border-radius: 8px;
+    height: 692px;
 }
 
 .right{

@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from "react";
-import { BiBell, BiChevronDown, BiSearch } from "react-icons/bi";
+import { BiBell, BiChevronDown, BiSearch ,BiPlusCircle} from "react-icons/bi";
 import "./Dashboard.css";
 import MyProject from "../Project/MyProject";
 import Skill from "../Skills/Skills";
@@ -18,6 +18,7 @@ function MyDashBoard() {
     const [showModal, setShowModal] = useState(false);
     const[openProfile,setOpenProfile]=useState(false);
     const[userDatas,setUserDatas]=useState(null)
+    // const[userDatas,setUserDatas]=useState(true)
 
     const handleCloseModal = () => {
       setShowModal(false);
@@ -29,7 +30,7 @@ function MyDashBoard() {
 
     useEffect(()=>{
       userData().then((data)=>{
-        console.log(data.name)
+        // console.log(data.name)
         setUserDatas(data);
       }).catch((e)=>{
         console.log(e.message)
@@ -41,7 +42,7 @@ function MyDashBoard() {
     
   return (
     <section className=" main-container">
-      {/* {userDatas? */}
+      { userDatas? 
       <div className="wrapper d-flex">
         {/* left */}
         <Sidebar />
@@ -96,16 +97,15 @@ function MyDashBoard() {
               <div style={{ marginRight: "3.4rem" }}>
                 <button
                   style={{
-                    padding: "0.4rem 1rem",
-                    color: "#fff",
                     border: "none",
                     outline: "none",
                     borderRadius: "6px",
+                    backgroundColor:'transparent'
                   }}
-                  className="bg-primary"
+                  className=""
                   onClick={handleShowModal}
                 >
-                  Upload
+                  <BiPlusCircle style={{ fontSize: "1.6rem", marginRight: "0.8rem" }}/>
                 </button>
 
                 <FileUpload isOpen={showModal} onClose={handleCloseModal}/>
@@ -138,7 +138,7 @@ function MyDashBoard() {
                   :
                   <p>No Name</p>
 
-}
+                 }
                 </div>
               </div>
             </div>
@@ -193,11 +193,11 @@ function MyDashBoard() {
         </div>
         {/* right end */}
       </div>
-      {/* // :
-      // <section style={{height:'100vh'}}>
-      // <Loader/>
-      // </section> */}
-      {/* // } */}
+      :
+       <section style={{height:'100vh'}}>
+      <Loader/>
+      </section>
+      }
     </section>
   );
 }

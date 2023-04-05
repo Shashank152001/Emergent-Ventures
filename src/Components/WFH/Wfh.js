@@ -1,8 +1,10 @@
 import React from 'react'
 import './WFH.css'
-import wfh from './workHome.png';
+import wfh from './wfh.svg';
+// import wfh from './workHome.png';
 import { useNavigate } from 'react-router-dom';
 // import WFHform from './WFHform';
+
 
 const Wfh = () => {
     const navigate= useNavigate();
@@ -19,7 +21,12 @@ const Wfh = () => {
                         <img src={wfh} alt="" className='img-fluid' style={{ height: "100%", width: "100%",objectFit:'cover' }}/>
                     </div>
                  </div>
-                 <button onClick={navigate('/WFHform')} className='btn btn-primary mb-2'>Apply for WFH</button>
+                 <button className='btn btn-primary mb-2'
+                 style={{
+                    padding:'0.2rem 2.1rem',
+                    marginTop:'0.6rem'
+                  }}>Apply for WFH</button>
+                 {/* <button onClick={navigate('/WFHform')} className='btn btn-primary mb-2'>Apply for WFH</button> */}
              </div>
              
          </div>

@@ -9,17 +9,17 @@ const Leaves = () => {
       <div id="leaves" className="">
         <div className="leaves-container">
           <div className="row h-100" style={{ borderRadius: "25px" }}>
-            <div className="col-md-12 ">
+            <div className="col-md-12 " style={{padding:'0.4rem'}}>
               <h6
-                className="my-1"
+                className=""
                 style={{
-                  padding: "0.5rem",
                   paddingLeft: "0",
                   fontWeight: "bold",
                 }}
               >
                 My Leaves{" "}
               </h6>
+              </div>
               <div className="d-flex" style={{gap:'12px'}}>
                 <div style={{ width: 40, height: 40 }}>
                   <CircularProgressbar value={2} styles={{path:{stroke:'#ff6e6e'}}}  text={`${2}`} maxValue={3}/>
@@ -33,7 +33,7 @@ const Leaves = () => {
                   </span>
                 </div>
               </div>
-            </div>
+            
             <div className="col-md-12 ">
               <div className="d-flex" style={{gap:'12px'}}>
               <div style={{ width: 40, height: 40 }}>
@@ -64,7 +64,10 @@ const Leaves = () => {
                   </span>
                 </div>
               </div>
-              <button className="btn btn-primary mb-2 mt-2">Apply Leave</button>
+              <button className="btn btn-primary mb-2 mt-2"
+              style={{
+                padding:'0.2rem 2.1rem'
+              }}>Apply Leave</button>
             </div>
           </div>
         </div>
