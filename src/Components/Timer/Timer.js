@@ -4,6 +4,7 @@ import "./Timer.css";
 import svg from "./Vector.svg";
 
 const Timer = () => {
+  
   const [time, setTime] = useState(
     JSON.parse(
       localStorage.getItem("time") === 0 ? 0 : localStorage.getItem("time")
