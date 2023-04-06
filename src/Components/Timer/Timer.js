@@ -6,7 +6,7 @@ import { url } from "../../Constant/Url";
 
 
 const Timer = () => {
- 
+
   const [time, setTime] = useState(
     JSON.parse(localStorage.getItem("time")) === 0
       ? 0
@@ -39,7 +39,7 @@ const Timer = () => {
 
   const FetchOutData = async () => {
     const data = await (await fetch("https://ipapi.co/json/")).json();
-    const {timezone} = data;
+    const { timezone } = data;
     const fetchedDate = new Date().toLocaleDateString();
     const fetchedTime = new Date().toLocaleTimeString(undefined, {
       timeZone: timezone,
@@ -55,7 +55,7 @@ const Timer = () => {
 
   // for checkin
   useEffect(() => {
-     
+
     if (formData && checkedIn) {
       fetch(url + "user/check-in", {
         method: "POST",
@@ -73,12 +73,12 @@ const Timer = () => {
           console.log(err);
         });
     }
-    
+
   }, [formData, checkedIn]);
 
   // for checkout
   useEffect(() => {
-    
+
     if (formDataOut && checkedOut) {
       fetch(url + "user/check-out", {
         method: "PUT",
@@ -174,26 +174,26 @@ const Timer = () => {
                     className="btn  text-light"
                     onClick={stopClock}
                     style={{
-                      backgroundColor:"red",
+                      backgroundColor: "red",
                       width: "140px",
                       height: "36px",
                       padding: "0",
                     }}
                   >
-                  Checkout
+                    Checkout
                   </button>
                 ) : (
                   <button
                     className="btn  text-light"
                     onClick={startClock}
                     style={{
-                      backgroundColor:"green",
+                      backgroundColor: "green",
                       width: "140px",
                       height: "36px",
                       padding: "0",
                     }}
                   >
-                   CheckIn
+                    CheckIn
                   </button>
                 )}
 
