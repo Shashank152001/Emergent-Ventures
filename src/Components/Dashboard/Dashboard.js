@@ -31,7 +31,7 @@ function MyDashBoard() {
 
     useEffect(()=>{
       userData().then((data)=>{
-        console.log(data.name)
+        // console.log(data.name)
         setUserDatas(data);
       }).catch((e)=>{
         console.log(e.message)
@@ -43,7 +43,7 @@ function MyDashBoard() {
     
   return (
     <section className=" main-container">
-      {userDatas?
+      { userDatas? 
       <div className="wrapper d-flex">
         {/* left */}
         <Sidebar />
@@ -61,6 +61,7 @@ function MyDashBoard() {
         >
           {/* right top start */}
           <Header/>
+          
           {/* right top end*/}
 
           <div
@@ -112,7 +113,7 @@ function MyDashBoard() {
         {/* right end */}
       </div>
       :
-      <section style={{height:'100vh'}}>
+       <section style={{height:'100vh'}}>
       <Loader/>
       </section>
       }

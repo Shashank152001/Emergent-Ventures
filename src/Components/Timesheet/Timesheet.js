@@ -5,8 +5,10 @@ import "./Timesheet.css";
 import NoRecord from "../Project/norecord";
 import {fetchTimeSheet} from '../../Service/TimesheetService'
 
+
 // const url =
 //     "https://8925-2401-4900-1c69-8e1e-3cd0-e1a6-ed6c-3b2a.in.ngrok.io/user/get-user-latest-timesheets";
+
 
 function Timesheet() {
     const [timesheet, setTimesheet] = useState(null);
@@ -14,7 +16,7 @@ function Timesheet() {
     useEffect(() => {
         fetchTimeSheet()
             .then((data) => {
-                console.log("timesheet", data.data);
+                // console.log("timesheet", data.data);
                 setTimesheet(data.data);
             }).catch((e)=>{
                 console.log(e.message);
@@ -38,7 +40,10 @@ function Timesheet() {
                                 timesheet.map((ele, index) => (
                                     <tr key={index} className="border-0">
                                         <td className="border-0">
+                                            <p style={{height:'42px'}}>
                                             <BsCheckCircleFill className="checked" />
+                                            </p>
+                                           
                                         </td>
                                         <td className="timesheet-name border-0">
                                             <p className="image-container-timesheet">
@@ -57,7 +62,14 @@ function Timesheet() {
                                                 {ele.timesheetName}
                                             </span>
                                         </td>
-                                        <td className="border-0">{ele.week}</td>
+                                        <td className="border-0">
+                                            <p style={{
+                                            height:'40px',
+                                            width:'112px',
+                                            margin:'auto'
+                                        }}
+                                            >{ele.week}</p>
+                                            </td>
                                         <td className="border-0">
                                             <p>{ele.submittedHours}</p>
                                             <p>Submitted Hours</p>

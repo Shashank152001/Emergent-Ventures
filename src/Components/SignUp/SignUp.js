@@ -28,8 +28,8 @@ function SignUp() {
        
         const errors = {};
       
-        if (!formData.fullname) {
-            errors.fullname = 'Please enter your name';
+        if (!formData.name) {
+            errors.name = 'Please enter your name';
         }
 
     
@@ -138,8 +138,8 @@ function SignUp() {
                         <div className='field position-relative'>
 
                             <label htmlFor='fullname' className='label' style={{padding:'0.3rem 0'}}>Fullname</label>
-                            <input type="text" name='name' id='fullname'  onChange={handleChange} value={formData.fullname}/>
-                            {formErrors.fullname && <span className='error-span'>{formErrors.fullname}</span> }
+                            <input type="text" name='name' id='fullname'  onChange={handleChange} value={formData.name}/>
+                            {formErrors.name && <span className='error-span'>{formErrors.name}</span> }
                             
                         </div>
                         <div className='field position-relative'>

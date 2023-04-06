@@ -1,9 +1,13 @@
 import React from 'react'
 import './WFH.css'
 import wfh from './wfh.svg';
+// import wfh from './workHome.png';
+import { useNavigate } from 'react-router-dom';
+// import WFHform from './WFHform';
 
 
 const Wfh = () => {
+    const navigate= useNavigate();
   return (
     <>
     <div id='wfh' className=''>
@@ -22,6 +26,7 @@ const Wfh = () => {
                     padding:'0.2rem 2.1rem',
                     marginTop:'0.6rem'
                   }}>Apply for WFH</button>
+                 {/* <button onClick={navigate('/WFHform')} className='btn btn-primary mb-2'>Apply for WFH</button> */}
              </div>
              
          </div>

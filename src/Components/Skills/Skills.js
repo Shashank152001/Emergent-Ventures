@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
 import "./skill.css";
 import NoRecord from "../Project/norecord";
+
+
 import {fetchSkills} from '../../Service/SkillService'
-// const url ='https://8925-2401-4900-1c69-8e1e-3cd0-e1a6-ed6c-3b2a.in.ngrok.io/user/skills/get-user-skills';
+
+
 
 function Skill() {
   const[userData,setUserData]  = useState(null);
@@ -50,7 +53,7 @@ function Skill() {
         <div className='primary-skills'>
                     <h6 className='skill-title'>Certifications</h6>
                     <div className='content-wrapper'>
-                    <p className='skill-content'>
+                    <p className='skill-content border-none'>
                     {userData.certifications}
                     </p>
           </div>
