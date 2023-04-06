@@ -1,0 +1,87 @@
+.main-div {
+  width: 100%;
+  height: 100%;
+  background: #F5F5F5;
+  position: fixed;
+}
+
+.theading {
+  color: #ffffff;
+  border: 2px solid #2563EB;
+  background-color: #2563EB;
+  width: 134px;
+  height: 24px;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0.005em;
+}
+.tabledata {
+  border: 1px solid lightgray;
+  text-align: center;
+}
+.tables {
+  width: 80%;
+  background: #ffffff;
+  margin: auto;
+  margin-top: 10vh;
+  border-top-right-radius: 10px;
+}
+
+.pag {
+  width: 90%;
+  height: 8vh;
+  --bs-gutter-x: 0rem !important;
+  margin: auto;
+}
+.pagination a {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+
+}
+
+.a1 {
+  width: 30%;
+  padding-left: 20% !important;
+  font-family: 'Inter';
+  font-style: normal;
+  color: #595569 !important;
+}
+
+.a2 {
+  width: 30%;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  color: black !important;
+  padding-left: 12% !important;
+}
+
+.a3 {
+  width: 10%;
+  padding-left: 0% !important;
+  font-family: 'Inter';
+  font-style: normal;
+  color: #595569 !important;
+}
+
+.Next {
+  padding-left: 80% !important;
+  width: 10%;
+}
+.a1:hover{
+  color: red !important;
+}
+.a3:hover{
+  color: green !important;
+}
+.pagenumber{
+  
+  color: red !important;
+  font-size:20px;
+
+}

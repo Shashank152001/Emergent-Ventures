@@ -2,10 +2,12 @@ import React from "react";
 import { useState, useEffect } from "react";
 import "./Timer.css";
 import svg from "./Vector.svg";
-import { url } from "../../Constant/Url";
+import { fetchLocation } from "../../Service/locationService";
+import {UserCheckIn,UserCheckOut} from '../../Service/TimerService';
 
 
 const Timer = () => {
+
   const [time, setTime] = useState(
     JSON.parse(localStorage.getItem("time")) === 0
       ? 0
@@ -21,83 +23,69 @@ const Timer = () => {
 
 
   const FetchData = async () => {
-    const data = await (await fetch("https://ipapi.co/json/")).json();
-    const { city, timezone } = data;
     const fetchedDate = new Date().toLocaleDateString();
-    const fetchedTime = new Date().toLocaleTimeString(undefined, {
-      timeZone: timezone,
-    });
-
+    const fetchedTime = new Date().toLocaleTimeString();
+    const city = await fetchLocation();
     await setFormData({
       checkInTime: fetchedTime,
       checkInDate: fetchedDate,
-      location: city,
+      checkInLocation: city,
     });
     setcheckedIn(true);
   };
 
-  const FetchOutData = async () => {
-    const data = await (await fetch("https://ipapi.co/json/")).json();
-    const {timezone} = data;
-    const fetchedDate = new Date().toLocaleDateString();
-    const fetchedTime = new Date().toLocaleTimeString(undefined, {
-      timeZone: timezone,
-    });
 
+  const FetchOutData = async () => {
+
+    // const city = await fetchLocation();
+    const fetchedDate = new Date().toLocaleDateString();
+    const fetchedTime = new Date().toLocaleTimeString();
+    const city = await fetchLocation();
     await setFormDataOut({
       checkOutTime: fetchedTime,
-      checkOutDate: fetchedDate
+      checkOutDate: fetchedDate,
+      checkOutLocation: city,
     });
+
     setcheckedOut(true);
   };
 
 
+  
+
   // for checkin
   useEffect(() => {
-     
+
     if (formData && checkedIn) {
-      fetch(url + "user/check-in", {
-        method: "POST",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-        body: new URLSearchParams(formData),
+      UserCheckIn(formData)
+      .then((data)=>{
+        console.log(data);
+        setIsRunning(!isRunning);
       })
-        .then((res) => res.json())
-        .then((data) => {
-          console.log(data);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      .catch((err)=>{
+        console.log(err);
+      });
     }
-    
+
   }, [formData, checkedIn]);
 
   // for checkout
   useEffect(() => {
-    
+
     if (formDataOut && checkedOut) {
-      fetch(url + "user/check-out", {
-        method: "PUT",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-        body: new URLSearchParams(formDataOut),
-      })
-        .then((res) => res.json())
+
+        UserCheckOut(formDataOut)
         .then((data) => {
           console.log(data);
+          setIsRunning(!isRunning);
         })
         .catch((err) => {
           console.log(err);
         });
+
     }
     return () => {
       setcheckedIn(false)
-
     };
   }, [formDataOut, checkedOut]);
 
@@ -118,6 +106,7 @@ const Timer = () => {
     }
 
     return () => clearInterval(intervalId);
+
   }, [isRunning, time]);
 
   const hours = Math.floor(time / 360000);
@@ -125,12 +114,14 @@ const Timer = () => {
   const seconds = Math.floor((time % 6000) / 100);
 
   const startClock = () => {
-    setIsRunning(!isRunning);
+    // setIsRunning(!isRunning);
     FetchData();
   };
+
   const stopClock = () => {
-    setIsRunning(!isRunning);
+    // setIsRunning(!isRunning);
     FetchOutData();
+    
   };
 
   const reset = () => {
@@ -168,33 +159,33 @@ const Timer = () => {
                 </span>
               </div>
               <div className="my-3 stopwatch-buttons">
-                {isRunning ? (
+                {isRunning ? 
                   <button
                     className="btn  text-light"
                     onClick={stopClock}
                     style={{
-                      backgroundColor:"red",
+                      backgroundColor: "red",
                       width: "140px",
                       height: "36px",
                       padding: "0",
                     }}
                   >
-                  Checkout
+                    Checkout
                   </button>
-                ) : (
+                 : 
                   <button
                     className="btn  text-light"
                     onClick={startClock}
                     style={{
-                      backgroundColor:"green",
+                      backgroundColor: "green",
                       width: "140px",
                       height: "36px",
                       padding: "0",
                     }}
                   >
-                   CheckIn
+                    CheckIn
                   </button>
-                )}
+                }
 
                 <button
                   className="btn btn-primary m-2"

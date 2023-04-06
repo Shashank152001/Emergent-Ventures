@@ -127,7 +127,7 @@ function SignIn() {
             <div className='right d-flex flex-column justify-content-center'>
                 <form id="form" onSubmit={handleSubmit}>
                     <div>
-                        <h1 className='signin-title'>Sign In</h1>
+                         <h1 className='signin-title'>Sign In</h1>
                     </div>
                     <div>
                         <div className='field position-relative'>
