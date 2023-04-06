@@ -58,6 +58,7 @@ const Timer = () => {
       UserCheckIn(formData)
       .then((data)=>{
         console.log(data);
+        setIsRunning(!isRunning);
       })
       .catch((err)=>{
         console.log(err);
@@ -74,6 +75,7 @@ const Timer = () => {
         UserCheckOut(formDataOut)
         .then((data) => {
           console.log(data);
+          setIsRunning(!isRunning);
         })
         .catch((err) => {
           console.log(err);
@@ -110,12 +112,12 @@ const Timer = () => {
   const seconds = Math.floor((time % 6000) / 100);
 
   const startClock = () => {
-    setIsRunning(!isRunning);
+    // setIsRunning(!isRunning);
     FetchData();
   };
 
   const stopClock = () => {
-    setIsRunning(!isRunning);
+    // setIsRunning(!isRunning);
     FetchOutData();
   };
 
