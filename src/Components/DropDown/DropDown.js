@@ -11,6 +11,7 @@ export const DropDown = () => {
         logOut().then((data) => {
             console.log(data);
             // sessionStorage.clear();
+            
             localStorage.clear()
             navigate("/");
             toast.success('Logout Successfull', {

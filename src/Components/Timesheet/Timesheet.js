@@ -6,8 +6,6 @@ import NoRecord from "../Project/norecord";
 import {fetchTimeSheet} from '../../Service/TimesheetService'
 
 
-// const url =
-//     "https://8925-2401-4900-1c69-8e1e-3cd0-e1a6-ed6c-3b2a.in.ngrok.io/user/get-user-latest-timesheets";
 
 
 function Timesheet() {
@@ -16,7 +14,6 @@ function Timesheet() {
     useEffect(() => {
         fetchTimeSheet()
             .then((data) => {
-                // console.log("timesheet", data.data);
                 setTimesheet(data.data);
             }).catch((e)=>{
                 console.log(e.message);
@@ -40,7 +37,7 @@ function Timesheet() {
                                 timesheet.map((ele, index) => (
                                     <tr key={index} className="border-0">
                                         <td className="border-0">
-                                            <p style={{height:'42px'}}>
+                                            <p style={{height:'17px'}}>
                                             <BsCheckCircleFill className="checked" />
                                             </p>
                                            
