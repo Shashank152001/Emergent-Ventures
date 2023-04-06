@@ -28,7 +28,7 @@ const Timer = () => {
     await setFormData({
       checkInTime: fetchedTime,
       checkInDate: fetchedDate,
-      location: city,
+      checkInLocation: city,
     });
     setcheckedIn(true);
   };

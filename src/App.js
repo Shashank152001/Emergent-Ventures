@@ -30,15 +30,10 @@ function App() {
          <Route element={<SignIn/>} path='/'></Route>
          <Route element={<SignUp/>} path='/signup'></Route>
          <Route element={<Profile/>} path='/profile'></Route>
-         {/* <Route element={<WFHform/>} path='/WFHform'></Route> */}
          <Route element={<TimesheetForm/>} path='/Timesheetform'></Route>
          <Route element={<ProtectRoute/>} path='/dashboard'>
             <Route element={<Dashboard/>} path='/dashboard'></Route>
          </Route>
-         {/* <Route element={<TimesheetForm/>} path='/Timesheetform'></Route> */}
-          <Route element={<ProtectRoute/>} path='/dashboard'> 
-            <Route element={<Dashboard/>} path='/dashboard'></Route>
-         </Route> 
       </Routes>
         
     </Router>
