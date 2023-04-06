@@ -1,10 +1,11 @@
-.main{
-  background: #2563EB;
-  width:100%;
-  height:100vh;
-  position: fixed;
+.main {
+    background: #2563EB;
+    width: 100%;
+    height: 100vh;
+    position: fixed;
 }
-.container{
+
+.container {
     height: 90vh;
     width: 70%;
     border-radius: 12px;
@@ -12,20 +13,17 @@
     background: #FFFFFF;
     margin-top: 5vh;
 }
-.form-wrapper{
 
-
-width: 100%;
-height: 95%;
-
+.form-wrapper {
+    width: 100%;
+    height: 95%;
 }
-.formDetail-container{
-height: 90%;
-gap: 10%;
 
-
+.formDetail-container {
+    height: 90%;
 }
-.personal-text{
+
+.personal-text {
     width: 188px;
     height: 35px;
     font-family: 'Poppins';
@@ -37,23 +35,21 @@ gap: 10%;
     flex: none;
 
 }
-.name-form{
-    width:100%;
-    /* height:30%; */
-   
+
+.name-form {
+    width: 100%;
+    --bs-gutter-x: 1.5rem !important;
     margin-top: 10px;
- 
+
+
 }
-.labels{
+
+.labels {
     font-family: 'Poppins';
-font-style: normal;
-font-weight: 400;
-font-size: 15px;
-line-height: 18px;
-
-
-letter-spacing: 0.0025em;
-
-
-color: #595569;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 18px;
+    letter-spacing: 0.0025em;
+    color: #595569;
 }

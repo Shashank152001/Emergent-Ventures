@@ -7,6 +7,7 @@ import {UserCheckIn,UserCheckOut} from '../../Service/TimerService';
 
 
 const Timer = () => {
+
   const [time, setTime] = useState(
     JSON.parse(localStorage.getItem("time")) === 0
       ? 0
@@ -53,7 +54,7 @@ const Timer = () => {
 
   // for checkin
   useEffect(() => {
-     
+
     if (formData && checkedIn) {
       UserCheckIn(formData)
       .then((data)=>{
@@ -69,7 +70,7 @@ const Timer = () => {
 
   // for checkout
   useEffect(() => {
-    
+
     if (formDataOut && checkedOut) {
 
         UserCheckOut(formDataOut)
@@ -161,26 +162,26 @@ const Timer = () => {
                     className="btn  text-light"
                     onClick={stopClock}
                     style={{
-                      backgroundColor:"red",
+                      backgroundColor: "red",
                       width: "140px",
                       height: "36px",
                       padding: "0",
                     }}
                   >
-                  Checkout
+                    Checkout
                   </button>
                 ) : (
                   <button
                     className="btn  text-light"
                     onClick={startClock}
                     style={{
-                      backgroundColor:"green",
+                      backgroundColor: "green",
                       width: "140px",
                       height: "36px",
                       padding: "0",
                     }}
                   >
-                   CheckIn
+                    CheckIn
                   </button>
                 )}
 

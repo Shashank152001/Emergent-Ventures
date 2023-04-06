@@ -149,6 +149,7 @@ function SignUp() {
                         </div>
                         
                         
+
                         <div className='field position-relative'>
                             <label htmlFor='password' className='label' style={{padding:'0.3rem 0'}}>Password</label>
                             <input type="password" name='password' id='password' onChange={handleChange} value={formData.password} />
