@@ -40,10 +40,11 @@ const Timer = () => {
     // const city = await fetchLocation();
     const fetchedDate = new Date().toLocaleDateString();
     const fetchedTime = new Date().toLocaleTimeString();
-
+    const city = await fetchLocation();
     await setFormDataOut({
       checkOutTime: fetchedTime,
-      checkOutDate: fetchedDate
+      checkOutDate: fetchedDate,
+      checkOutLocation: city,
     });
 
     setcheckedOut(true);
@@ -120,6 +121,7 @@ const Timer = () => {
   const stopClock = () => {
     // setIsRunning(!isRunning);
     FetchOutData();
+    
   };
 
   const reset = () => {
@@ -157,7 +159,7 @@ const Timer = () => {
                 </span>
               </div>
               <div className="my-3 stopwatch-buttons">
-                {isRunning ? (
+                {isRunning ? 
                   <button
                     className="btn  text-light"
                     onClick={stopClock}
@@ -170,7 +172,7 @@ const Timer = () => {
                   >
                     Checkout
                   </button>
-                ) : (
+                 : 
                   <button
                     className="btn  text-light"
                     onClick={startClock}
@@ -183,7 +185,7 @@ const Timer = () => {
                   >
                     CheckIn
                   </button>
-                )}
+                }
 
                 <button
                   className="btn btn-primary m-2"

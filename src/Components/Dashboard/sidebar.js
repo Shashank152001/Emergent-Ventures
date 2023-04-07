@@ -1,4 +1,4 @@
-import { BiGridAlt, BiWallet, BiUser, BiCog} from "react-icons/bi";
+import { BiGridAlt, BiWallet, BiUser, BiCog,BiAbacus} from "react-icons/bi";
 import celebalLogo from "./celebal.png";
 import SkillIcon from "./skillIcon";
 
