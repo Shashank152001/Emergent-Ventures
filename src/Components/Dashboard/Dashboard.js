@@ -116,7 +116,7 @@ function MyDashBoard() {
        <section style={{height:'100vh'}}>
       <Loader/>
       </section>
-      }
+      } 
     </section>
   );
 }
