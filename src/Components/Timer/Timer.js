@@ -23,7 +23,7 @@ const Timer = () => {
 
 
   const FetchData = async () => {
-    const fetchedDate = new Date().toLocaleDateString();
+    const fetchedDate = new Date().toISOString().split('T')[0];
     const fetchedTime = new Date().toLocaleTimeString();
     const city = await fetchLocation();
     await setFormData({
@@ -38,7 +38,7 @@ const Timer = () => {
   const FetchOutData = async () => {
 
     // const city = await fetchLocation();
-    const fetchedDate = new Date().toLocaleDateString();
+    const fetchedDate = new Date().toISOString().split('T')[0];
     const fetchedTime = new Date().toLocaleTimeString();
     const city = await fetchLocation();
     await setFormDataOut({
