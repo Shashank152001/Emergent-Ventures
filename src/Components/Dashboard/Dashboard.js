@@ -42,7 +42,7 @@ function MyDashBoard() {
     
   return (
     <section className=" main-container">
-      { userDatas? 
+      {/* { userDatas?  */}
       <div className="wrapper d-flex">
         {/* left */}
         <Sidebar />
@@ -195,9 +195,9 @@ function MyDashBoard() {
       </div>
       :
        <section style={{height:'100vh'}}>
-      <Loader/>
+      {/* <Loader/> */}
       </section>
-      }
+      {/* } */}
     </section>
   );
 }
