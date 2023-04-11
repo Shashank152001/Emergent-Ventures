@@ -1,5 +1,7 @@
 import React,{useState} from "react";
 import {bulkData} from '../../Service/FileUploadService'
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 function FileUpload({ isOpen, onClose }) {
   const [file, setFile] = useState();
   const fileReader = new FileReader();
@@ -18,6 +20,18 @@ const handleOnSubmit = (e) => {
       // console.log(fileReader);
         bulkData(formData).then((data)=>{
           console.log(data)
+          toast.info('File Uploaded Successfully', {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+            });
+        }).catch((e)=>{
+          console.log(e.message);
         })
 
   };
