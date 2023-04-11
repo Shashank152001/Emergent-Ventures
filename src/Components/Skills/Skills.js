@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./skill.css";
 import NoRecord from "../Project/norecord";
-
-
 import {fetchSkills} from '../../Service/SkillService'
 
 
@@ -11,12 +9,17 @@ function Skill() {
   const[userData,setUserData]  = useState(null);
 
   useEffect(()=>{
+    
     fetchSkills().then((data)=>{
       setUserData(data.data[0]);
     }).catch((e)=>{
       console.log(e.message)
     })
   },[])
+
+ 
+
+
   return (
     <section className="skills-container">
       <div className="skills-heading">
