@@ -8,9 +8,7 @@ import SignUp from './Components/SignUp/SignUp';
 import Profile from './Components/Profile/Profile';
 import EmployeeTable from './Components/EmployeeTable/EmployeeTable';
 import Dashboard from './Components/Dashboard/Dashboard';
-
 import ProtectRoute from './Service/ProtectRoute';
-
 import WFHform from './Components/WFH/WFHform';
 import TimesheetForm from './Components/Timesheet/TimesheetForm';
 import Timesheet from './Components/Timesheet/Timesheet';
@@ -28,6 +26,7 @@ function App() {
     <Router>
       
       <Routes>
+      
          <Route element={<SignIn/>} path='/'></Route>
          <Route element={<SignUp/>} path='/signup'></Route>
          <Route element={<Profile/>} path='/profile'></Route>

@@ -1,4 +1,5 @@
 import {url} from '../Constant/Url'
+
 export const logOut=async()=>{
     const response=await fetch(url+'user/logout',{
         method: "GET",

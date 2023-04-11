@@ -5,5 +5,6 @@ const ProtectRoute=()=>{
     const auth = localStorage.getItem('loggedInUser')
     // console.log(authenticationData)
     return auth? <Outlet/>:<Navigate to={'/'}/>
+
 }
-export default ProtectRoute
+export default ProtectRoute;
