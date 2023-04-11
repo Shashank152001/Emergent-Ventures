@@ -4,6 +4,6 @@ const RedirectRoute=()=>{
     // const authenticationData = JSON.parse(localStorage.getItem('loggedInUser'))
     const auth = localStorage.getItem('loggedInUser')
     // console.log(authenticationData)
-    return auth? <Outlet/>:<Navigate to={'/'}/>
+    return !auth? <Outlet/>:<Navigate to={'/dashboard'}/>
 }
 export default RedirectRoute
