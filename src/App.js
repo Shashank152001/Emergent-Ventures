@@ -32,8 +32,8 @@ function App() {
          <Route element={<SignUp/>} path='/signup'></Route>
          <Route element={<Profile/>} path='/profile'></Route>
          <Route element={<WFHform/>} path='/WFHform'></Route>
+         <Route element={<EmployeeTable/>} path='/table'></Route>
          <Route element={<TimesheetForm/>} path='/Timesheetform'></Route>
-        
          <Route element={<ProtectRoute/>} path='/dashboard'>
             <Route element={<Dashboard/>} path='/dashboard'></Route>
          </Route>
