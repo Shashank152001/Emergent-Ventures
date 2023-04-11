@@ -12,7 +12,7 @@ export const DropDown = () => {
             console.log(data);
             // sessionStorage.clear();
             
-            localStorage.clear()
+            localStorage.removeItem('loggedInUser');
             navigate("/");
             toast.success('Logout Successfull', {
                 position: "top-center",
