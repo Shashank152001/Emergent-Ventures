@@ -9,40 +9,41 @@ import { UserCheckIn, UserCheckOut, fetchCurrentCheckinTime } from '../../Servic
 
 function Timer() {
 	const [time, setTime] = useState(0);
+	const [timer,setTimer]=useState('00:00:00')
 	// Error: do not get this on tab switch
-	const [getCheckIn, setGetCheckIn] = useState('00:00:00');
-
-	const [isRunning, setIsRunning] = useState(
-		JSON.parse(localStorage.getItem('Running')) || false
-	);
+	const [isRunning, setIsRunning] = useState(false);
+	useEffect(()=>{
+		fetchCurrentCheckinTime().then((data)=>{
+			console.log(data.data[0].status)
+			if(data.data[0].status==='checked-in'){
+				setIsRunning(true);
+			}else{
+				setIsRunning(false)
+			}
+		})
+	},[])
+	
 
 	useEffect(() => {
+		// if(isRunning){
+			
+		// }
 		socket.on('message',(data)=>{
-        console.log(data);
-    })
+			console.log(data);
+			setTimer(data);
+			 
+			return function cleanup() { socket.disconnect(); }
+		})
+		
 	}, []);
-	const checkInTime = getCheckIn;
-	// console.log(checkInTime);
-	const checkInDate = new Date().toISOString().split('T')[0];
-	const getTimeDifference = (time, date) => {
-		const date1 = new Date(`${date} ${time}`);
-		const date2 = new Date();
-		console.log(time);
-		// console.log(date2);
-		// console.log(`${date} ${time}`);
-		let diff = Math.abs((date2.getTime() - date1.getTime()) / 1000);
-		let seconds = Math.floor(diff) % 60;
-		diff /= 60;
-		let minutes = Math.floor(diff) % 60;
-		diff /= 60;
-		let hours = Math.floor(diff) % 24;
-		return hours + ':' + minutes + ':' + seconds;
-	};
+	// console.log(timer);
+	
+	
 	// console.log(getTimeDifference(checkInTime, checkInDate));
 
-	const [h, m, s] = isRunning
-		? getTimeDifference(checkInTime, checkInDate).split(':')
-		: [0, 0, 0];
+	// const [h, m, s] = isRunning
+	// 	? getTimeDifference(checkInTime, checkInDate).split(':')
+	// 	: [0, 0, 0];
 	// console.log(h, m, s);
 
 	const [checkedIn, setcheckedIn] = useState(false);
@@ -92,7 +93,7 @@ function Timer() {
 					// 		// console.log(currentState);
 					// 	});
 					// });
-					localStorage.setItem('Running', JSON.stringify(true));
+					// localStorage.setItem('Running', JSON.stringify(true));
 				})
 				.catch((err) => {
 					console.log(err);
@@ -107,7 +108,7 @@ function Timer() {
 				.then((data) => {
 					console.log(data);
 					setIsRunning(false);
-					localStorage.removeItem('Running', JSON.stringify(false));
+					// localStorage.removeItem('Running', JSON.stringify(false));
 				})
 				.catch((err) => {
 					console.log(err);
@@ -119,35 +120,25 @@ function Timer() {
 	}, [formDataOut, checkedOut]);
 
 	// for timer
-	useEffect(() => {
-		let intervalId;
-
-		if (isRunning) {
-			intervalId = setInterval(() => setTime(time + 1), 1000);
-		} else {
-			localStorage.removeItem('Running');
-		}
-
-		return () => clearInterval(intervalId);
-	}, [isRunning, time]);
+	// console.log(isRunning)
+	
 
 	const startClock = () => {
 		FetchData();
         socket.emit('checkin')
 
+
 	};
 
 	const stopClock = () => {
-		FetchOutData();
+	FetchOutData();
     socket.emit('checkout')
 	};
 
 	const reset = () => {
 		setTime(0);
-		localStorage.removeItem('time');
-		localStorage.removeItem('Running');
 	};
-
+	const [h,m,s] = timer.split(":");
 	return (
 		<>
 			<div id='timer' className=''>
@@ -162,18 +153,19 @@ function Timer() {
 							</h2>
 							<p className='text-secondary' style={{ fontWeight: 'bold' }}>
 								Your today's timer
+								{/* {timer.split(":")[2]} */}
 							</p>
 							<div className='timer d-flex '>
 								<span className='input'>
-									{isRunning ? Math.abs(h).toString().padStart(2, '0') : '00'}
+									{ h}
 								</span>
 								<p className='inputcolon'> : </p>
 								<span className='input'>
-									{isRunning ? Math.abs(m).toString().padStart(2, '0') : '00'}
+									{m }
 								</span>
 								<p className='inputcolon'> : </p>
 								<span className='input'>
-									{isRunning ? Math.abs(s).toString().padStart(2, '0') : '00'}
+									{s}
 								</span>
 							</div>
 							<div className='my-3 stopwatch-buttons'>

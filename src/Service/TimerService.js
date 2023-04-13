@@ -14,9 +14,9 @@ export const UserCheckIn = async (formData)=>{
         throw new Error('not checked in')
     }
     else{
-        localStorage.setItem('checkInTime',JSON.stringify((
-            formData.checkInTime).substr(0,8)
-            ));
+        // localStorage.setItem('checkInTime',JSON.stringify((
+        //     formData.checkInTime).substr(0,8)
+        //     ));
         return response.json();
     }
 
@@ -36,7 +36,7 @@ export const UserCheckOut = async (formDataOut)=>{
         throw new Error('not checked out')
     }
     else{
-        localStorage.removeItem('checkInTime');
+        // localStorage.removeItem('checkInTime');
         return response.json();
     }
 
