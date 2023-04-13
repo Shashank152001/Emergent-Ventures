@@ -41,4 +41,16 @@ export const UserCheckOut = async (formDataOut)=>{
     }
 
 }
-
+export const fetchCurrentCheckinTime = async () => {
+	const response = await fetch(url + 'user/get-user-current-attendance', {
+		mode: 'cors',
+		headers: { 'Content-Type': 'application/json' },
+		credentials: 'include'
+	});
+	// console.log(response)
+	if (!response.ok) {
+		throw new Error('Data could not be fetched');
+	} else {
+		return await response.json();
+	}
+};

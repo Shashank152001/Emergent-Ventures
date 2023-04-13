@@ -1,6 +1,6 @@
 import {url} from '../Constant/Url'
 export const fetchTimeSheet=async()=>{
-      const response=await fetch(url+'user/get-user-latest-timesheets/',{
+      const response=await fetch(url+'user/get-user-latest-timesheets',{
         mode:'cors',
         headers:{ "Content-Type": "application/json" },
         credentials:'include'
