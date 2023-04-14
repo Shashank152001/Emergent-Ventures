@@ -7,15 +7,16 @@ import {UserCheckIn,UserCheckOut} from '../../Service/TimerService';
 
 
 
-
 function Timer() {
 
   const [time, setTime] = useState(0);
+  const [hour ,setHour] = useState(0);
+  const [minute ,setMinute] = useState(0);
+  const [seconds ,setSeconds] = useState(0);
 
   const [isRunning, setIsRunning] = useState(
     JSON.parse(localStorage.getItem("Running")) || false
   );
-
 
   const [h,m,s] = isRunning ? JSON.parse(localStorage.getItem('checkInTime')).split(':'):[0,0,0];
 
@@ -24,11 +25,9 @@ function Timer() {
   const [formData, setFormData] = useState(null);
   const [formDataOut, setFormDataOut] = useState(null);
 
-
-
   const FetchData = async () => {
     const fetchedDate = new Date().toISOString().split('T')[0];
-    const fetchedTime = new Date().toLocaleTimeString();
+    const fetchedTime = new Date().toTimeString();
     const city = await fetchLocation();
 
     await setFormData({
@@ -45,7 +44,7 @@ function Timer() {
 
     // const city = await fetchLocation();
     const fetchedDate = new Date().toISOString().split('T')[0];
-    const fetchedTime = new Date().toLocaleTimeString();
+    const fetchedTime = new Date().toTimeString();
     const city = await fetchLocation();
 
     await setFormDataOut({
@@ -86,7 +85,6 @@ function Timer() {
 
       UserCheckOut(formDataOut)
         .then((data) => {
-          console.log(data);
           setIsRunning(false);
           localStorage.removeItem("Running", JSON.stringify(false));
         })
@@ -101,22 +99,38 @@ function Timer() {
   }, [formDataOut, checkedOut]);
 
 
+  
+
 
   // for timer
   useEffect(() => {
     let intervalId;
 
+    
+
     if (isRunning) {
-      intervalId = setInterval(() => setTime(time + 1), 10);
+
+      intervalId = setInterval(() => setTime(time + 1), 1000);
+
+    
+    
+
+
     } else {
       localStorage.removeItem('Running');
     }
 
-    return () => clearInterval(intervalId);
+    return () => {
+      
+      clearInterval(intervalId);
+    };
 
   }, [isRunning, time]);
 
 
+
+
+  
 
   const startClock = () => {
     FetchData();
@@ -153,17 +167,23 @@ function Timer() {
               <div className="timer d-flex ">
                 <span className="input">
 
-                  {isRunning ? Math.abs(new Date().getHours() - h).toString().padStart(2, "0") : '00'}
+                  {/* {isRunning ? Math.abs(new Date().getHours() - h).toString().padStart(2, "0") : '00'} */}
+                  {isRunning ? Math.abs(hour).toString().padStart(2, "0") : '00'}
+                  
                 </span>
                 <p className="inputcolon"> : </p>
                 <span className="input">
 
-                  {isRunning ? Math.abs(new Date().getMinutes() - m).toString().padStart(2, "0") : '00'}
-                </span>
+                  {/* {isRunning ? Math.abs(new Date().getMinutes() - m).toString().padStart(2, "0") : '00'} */}
+                  {isRunning ? Math.abs(minute).toString().padStart(2, "0") : '00'}
+                 
+                </span> 
                 <p className="inputcolon"> : </p>
                 <span className="input">
 
-                  {isRunning ? Math.abs(new Date().getSeconds()).toString().padStart(2, "0") : '00'}
+                  {/* {isRunning ? Math.abs(new Date().getSeconds()).toString().padStart(2, "0") : '00'} */}
+                  {isRunning ? Math.abs(seconds).toString().padStart(2, "0") : '00'}
+           
                 </span>
               </div>
               <div className="my-3 stopwatch-buttons">
