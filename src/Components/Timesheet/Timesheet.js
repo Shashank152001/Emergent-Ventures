@@ -5,9 +5,6 @@ import "./Timesheet.css";
 import NoRecord from "../Project/norecord";
 import {fetchTimeSheet} from '../../Service/TimesheetService'
 
-
-
-
 function Timesheet() {
     const [timesheet, setTimesheet] = useState(null);
 
