@@ -21,6 +21,7 @@
     "socket.io": "^4.6.1",
     "socket.io-client": "^4.6.1",
     "web-vitals": "^2.1.4",
+    "workerize-loader": "^2.0.2",
     "xlsx": "^0.18.5"
   },
   "scripts": {
