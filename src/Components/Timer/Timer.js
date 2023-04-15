@@ -8,43 +8,38 @@ import { fetchLocation } from '../../Service/locationService';
 import { UserCheckIn, UserCheckOut, fetchCurrentCheckinTime } from '../../Service/TimerService';
 
 function Timer() {
-	const [time, setTime] = useState(0);
-	const [timer,setTimer]=useState('00:00:00')
-	// Error: do not get this on tab switch
+	const [timer, setTimer] = useState('00:00:00');
 	const [isRunning, setIsRunning] = useState(false);
-	useEffect(()=>{
-		fetchCurrentCheckinTime().then((data)=>{
-			console.log(data.data[0].status)
-			if(data.data[0].status==='checked-in'){
-				setIsRunning(true);
-			}else{
-				setIsRunning(false)
-			}
-		})
-	},[])
-	
 
 	useEffect(() => {
-		// if(isRunning){
-			
-		// }
-		socket.on('message',(data)=>{
-			console.log(data);
-			setTimer(data);
-			 
-			return function cleanup() { socket.disconnect(); }
-		})
-		
+		fetchCurrentCheckinTime().then((data) => {
+			// console.log(data.data[0].status);
+			if (data.data[0].status === 'checked-in') {
+				setIsRunning(() => {
+					return true;
+				});
+			} else {
+				setIsRunning(() => {
+					return false;
+				});
+			}
+		});
 	}, []);
-	// console.log(timer);
-	
-	
-	// console.log(getTimeDifference(checkInTime, checkInDate));
 
-	// const [h, m, s] = isRunning
-	// 	? getTimeDifference(checkInTime, checkInDate).split(':')
-	// 	: [0, 0, 0];
-	// console.log(h, m, s);
+	useEffect(() => {
+		socket.on('message', (data) => {
+			console.log(data);
+			if (data === '00:00:00') {
+				console.log('clock stopped');
+			}
+			setTimer(() => {
+				return data;
+			});
+			setIsRunning(() => {
+				return true;
+			});
+		});
+	}, []);
 
 	const [checkedIn, setcheckedIn] = useState(false);
 	const [checkedOut, setcheckedOut] = useState(false);
@@ -56,7 +51,7 @@ function Timer() {
 		const fetchedTime = new Date().toLocaleTimeString('en-US', { hour12: false });
 		const city = await fetchLocation();
 
-		await setFormData({
+		setFormData({
 			checkInTime: fetchedTime,
 			checkInDate: fetchedDate,
 			checkInLocation: city
@@ -65,12 +60,11 @@ function Timer() {
 	};
 
 	const FetchOutData = async () => {
-		// const city = await fetchLocation();
 		const fetchedDate = new Date().toISOString().split('T')[0];
 		const fetchedTime = new Date().toLocaleTimeString('en-US', { hour12: false });
 		const city = await fetchLocation();
 
-		await setFormDataOut({
+		setFormDataOut({
 			checkOutTime: fetchedTime,
 			checkOutDate: fetchedDate,
 			checkOutLocation: city
@@ -84,16 +78,10 @@ function Timer() {
 		if (formData && checkedIn) {
 			UserCheckIn(formData)
 				.then((data) => {
-					console.log(data);
-					setIsRunning(!isRunning);
-					// fetchCurrentCheckinTime().then((data) => {
-					// 	// console.log(data.data[0].checkInTime.substr(0, 8));
-					// 	setGetCheckIn((currentState) => {
-					// 		return data.data[0].checkInTime.substr(0, 8);
-					// 		// console.log(currentState);
-					// 	});
-					// });
-					// localStorage.setItem('Running', JSON.stringify(true));
+					// console.log(data);
+					setIsRunning(() => {
+						return true;
+					});
 				})
 				.catch((err) => {
 					console.log(err);
@@ -106,9 +94,10 @@ function Timer() {
 		if (formDataOut && checkedOut) {
 			UserCheckOut(formDataOut)
 				.then((data) => {
-					console.log(data);
-					setIsRunning(false);
-					// localStorage.removeItem('Running', JSON.stringify(false));
+					// console.log(data);
+					setIsRunning(() => {
+						return false;
+					});
 				})
 				.catch((err) => {
 					console.log(err);
@@ -119,26 +108,24 @@ function Timer() {
 		};
 	}, [formDataOut, checkedOut]);
 
-	// for timer
-	// console.log(isRunning)
-	
-
 	const startClock = () => {
 		FetchData();
-        socket.emit('checkin')
-
-
+		if (socket.connected) {
+			socket.emit('checkin');
+		} else {
+			socket.connect();
+		}
 	};
 
 	const stopClock = () => {
-	FetchOutData();
-    socket.emit('checkout')
+		FetchOutData();
+		socket.emit('checkout');
 	};
 
 	const reset = () => {
-		setTime(0);
+		console.log('reset');
 	};
-	const [h,m,s] = timer.split(":");
+	const [h, m, s] = timer.split(':');
 	return (
 		<>
 			<div id='timer' className=''>
@@ -153,20 +140,13 @@ function Timer() {
 							</h2>
 							<p className='text-secondary' style={{ fontWeight: 'bold' }}>
 								Your today's timer
-								{/* {timer.split(":")[2]} */}
 							</p>
 							<div className='timer d-flex '>
-								<span className='input'>
-									{ h}
-								</span>
+								<span className='input'>{h}</span>
 								<p className='inputcolon'> : </p>
-								<span className='input'>
-									{m }
-								</span>
+								<span className='input'>{m}</span>
 								<p className='inputcolon'> : </p>
-								<span className='input'>
-									{s}
-								</span>
+								<span className='input'>{s}</span>
 							</div>
 							<div className='my-3 stopwatch-buttons'>
 								{isRunning ? (
