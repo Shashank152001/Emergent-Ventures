@@ -18,7 +18,7 @@ function Header() {
       };
       useEffect(()=>{
         userData().then((data)=>{
-          console.log(data.name)
+          // console.log(data.name)
           setUserDatas(data);
         }).catch((e)=>{
           console.log(e.message)

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState} from "react";
 import {Link,useNavigate} from 'react-router-dom'
 import './sign.css';
 import {userLogin} from '../../Service/LoginService'
@@ -8,7 +8,7 @@ import bgSvg from '../Spheres.svg';
 // import {url} from '../../Constant/Url'
 
 
-// const url ='https://8925-2401-4900-1c69-8e1e-3cd0-e1a6-ed6c-3b2a.in.ngrok.io/';
+
 
 
 function SignIn() {
@@ -17,6 +17,7 @@ function SignIn() {
     email: '',
     password: ''
   });
+  // const [formData, setFormData] = useState(null);
   const [formErrors, setFormErrors] = useState({});
   const [isFilled, setFilled] = useState(false);
   const FormData = new URLSearchParams(formData);

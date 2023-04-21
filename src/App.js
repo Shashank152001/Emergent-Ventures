@@ -13,6 +13,7 @@ import WFHform from './Components/WFH/WFHform';
 import TimesheetForm from './Components/Timesheet/TimesheetForm';
 import Timesheet from './Components/Timesheet/Timesheet';
 import RedirectRoute from './Service/RedirectRoute';
+import LeaveForm from '../src/Components/Leaves/leaveform';
 
 
 // import {LoginContext} from './Context/LoginContext'
@@ -28,17 +29,17 @@ function App() {
       
       <Routes>
         
-         
          <Route element={<RedirectRoute/>} path='/'>
          <Route element={<SignIn/>} path='/'></Route>
          </Route>
          <Route element={<SignUp/>} path='/signup'></Route>
          <Route element={<Profile/>} path='/profile'></Route>
          <Route element={<WFHform/>} path='/WFHform'></Route>
+         <Route element={<LeaveForm/>} path='/leaveform'></Route>
          <Route element={<EmployeeTable/>} path='/table'></Route>
          <Route element={<TimesheetForm/>} path='/Timesheetform'></Route>
          <Route element={<ProtectRoute/>} path='/dashboard'>
-            <Route element={<Dashboard/>} path='/dashboard'></Route>
+          <Route element={<Dashboard/>} path='/dashboard'></Route>
          </Route>
         
       </Routes>
