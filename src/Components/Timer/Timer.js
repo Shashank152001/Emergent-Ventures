@@ -2,24 +2,16 @@ import React from "react";
 import { socket } from "../../socket";
 import { useState, useEffect } from "react";
 import "./Timer.css";
-<<<<<<< HEAD
-import svg from "./Vector.svg";
-=======
 import svg from '../../Assest/Vector.svg'
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
->>>>>>> main
 import { fetchLocation } from "../../Service/locationService";
 import {
   UserCheckIn,
   UserCheckOut,
-<<<<<<< HEAD
-  fetchCurrentTime
-=======
   fetchCurrentTime,
   fetchCurrentCheckinTime,
   getTimeDifference,
->>>>>>> main
 } from "../../Service/TimerService";
 
 // import { cleanup } from '@testing-library/react';
