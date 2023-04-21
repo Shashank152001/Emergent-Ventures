@@ -13,11 +13,10 @@ export async function leaveRequest(data){
 export const leaveUser=async()=>{
     const response=await fetch(url+'user/get-user',{
         method: "GET",
-        // mode: "cors",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
     })
-    // console.log(response);
+   
     if(!response.ok){
         throw new Error('Data could not be fetched')
     }else{

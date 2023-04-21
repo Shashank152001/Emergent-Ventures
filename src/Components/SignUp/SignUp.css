@@ -76,9 +76,9 @@
 }
 
 
-input:invalid{
+/* input:invalid{
     background-color: #ff6363;
-}
+} */
 
 .nameError{
     color: #ff0000;

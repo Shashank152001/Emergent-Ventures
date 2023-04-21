@@ -1,6 +1,7 @@
-import { BiGridAlt, BiWallet, BiUser, BiCog,BiAbacus} from "react-icons/bi";
+import { BiGridAlt, BiWallet, BiUser, BiCog} from "react-icons/bi";
 import celebalLogo from "../../Assest/celebal.png";
 import SkillIcon from "./skillIcon";
+import {Link} from 'react-router-dom';
 
 function Sidebar() {
   return (
@@ -26,24 +27,38 @@ function Sidebar() {
               }}
             >
               <BiGridAlt style={{ marginRight: "10px" }} />
+              <Link to='/dashboard' style={{textDecoration:'none'}}>
               DashBoard
+              </Link>
+              
             </li>
             <li style={{ padding: "1rem 0.9rem" }}>
               <BiWallet style={{ marginRight: "10px" }} />
+              <Link to='leave' style={{textDecoration:'none'}}>
               Myleaves
+              </Link>
+              
             </li>
             <li style={{ padding: "1rem 0.9rem" }}>
               <BiUser style={{ marginRight: "10px" }} />
+              <Link to='getProfile' style={{textDecoration:'none'}}>
               Account
+              </Link>
             </li>
             <li style={{ padding: "1rem 0.9rem" }}>
-              {/* <BiAbacus style={{ marginRight: "10px" }} /> */}
+              
               <SkillIcon/>
-              Skills
+              <Link to='skill' style={{textDecoration:'none'}}>
+                Skills
+              </Link>
+              
             </li>
             <li style={{ padding: "1rem 0.9rem" }}>
               <BiCog style={{ marginRight: "10px" }} />
-              Settings
+               
+               <Link to='settings' style={{textDecoration:'none'}}>
+               Settings
+              </Link>
             </li>
           </ul>
         </div>

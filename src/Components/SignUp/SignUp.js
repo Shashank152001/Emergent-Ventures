@@ -5,7 +5,6 @@ import celebal from '../../Assest/celebal.png'
 import signin from '../../Assest/singin.png'
 import bgSvg from '../Spheres.svg';
 import { userSignUp } from '../../Service/SignUpServeice';
-// import './sign.css';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -21,7 +20,7 @@ function SignUp() {
       });
 
     const [formErrors, setFormErrors] = useState({});
-    const [isFilled, setFilled] = useState(false);
+    
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -57,13 +56,13 @@ function SignUp() {
         const bodyData=formData
         
         userSignUp(bodyData).then((data)=>{
-            console.log(data)
+            
             
             if(data.message==='User created successfully'){
                 navigate('/')
                 toast.success('SignUp Successfull', {
                     position: "top-left",
-                    autoClose: 5000,
+                    autoClose: 3000,
                     hideProgressBar: false,
                     closeOnClick: true,
                     pauseOnHover: true,
@@ -74,10 +73,10 @@ function SignUp() {
             }
             else{
                 navigate('/signup')
-                setFilled(false);
+                
                 toast.error('User Already Exit!', {
                     position: "top-right",
-                    autoClose: 5000,
+                    autoClose: 3000,
                     hideProgressBar: false,
                     closeOnClick: true,
                     pauseOnHover: true,
@@ -92,7 +91,7 @@ function SignUp() {
             navigate('/signup')
             toast.error('Server Down!', {
                 position: "top-right",
-                autoClose: 5000,
+                autoClose: 3000,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,

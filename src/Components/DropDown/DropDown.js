@@ -9,12 +9,11 @@ export const DropDown = () => {
     const navigate=useNavigate()
     function handleLogOut(){
         logOut().then((data) => {
-            console.log(data);
-            // sessionStorage.clear();
-            
+       
             localStorage.removeItem('loggedInUser');
             navigate("/");
-            toast.success('Logout Successfull', {
+            toast.success(`${data.message}`, {
+
                 position: "top-center",
                 autoClose: 5000,
                 hideProgressBar: false,
@@ -23,6 +22,7 @@ export const DropDown = () => {
                 draggable: true,
                 progress: undefined,
                 theme: "colored",
+
                 });
           });
     }

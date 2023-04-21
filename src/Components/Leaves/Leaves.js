@@ -1,5 +1,6 @@
 import React from "react";
 import { CircularProgressbar } from 'react-circular-progressbar';
+import {Link} from 'react-router-dom'
 import 'react-circular-progressbar/dist/styles.css';
 import "./Leaves.css";
 
@@ -67,7 +68,10 @@ const Leaves = () => {
               <button className="btn btn-primary mb-2 mt-2"
               style={{
                 padding:'0.2rem 2.1rem'
-              }}>Apply Leave</button>
+              }}>
+                <Link to='leave' style={{textDecoration:'none',color:'#fff'}}>Apply Leave</Link>
+                
+                </button>
             </div>
           </div>
         </div>

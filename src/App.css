@@ -14,4 +14,11 @@ justify-content: center;
     background: linear-gradient(90deg, rgba(211,224,253,1) 0%, rgba(251,254,255,1) 100%); 
 }
 
+.p-dialog-header-icon{
+border: none;
+padding: 0.3rem 0.6rem;
+position: absolute;
+right: 0;
+}
+
 

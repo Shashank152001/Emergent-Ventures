@@ -1,7 +1,6 @@
 import React ,{useState,useEffect}from "react";
 import { BiBell, BiChevronDown, BiSearch ,BiPlusCircle} from "react-icons/bi";
 import "./Dashboard.css";
-import {userData} from '../../Service/DashboardService'
 import FileUpload from "./fileupload";
 import { DropDown } from "../DropDown/DropDown";
 import img from '../../Assest/profile.jpg'
@@ -9,8 +8,6 @@ import {ProfileFormData} from '../../Service/ProfileService'
 function Header() {
     const [showModal, setShowModal] = useState(false);
     const[openProfile,setOpenProfile]=useState(false);
-    const[userDatas,setUserDatas]=useState(null)
-    const[src,setSrc]=useState(img)
     const[profileformdata,setProfileFormdata]=useState([])
     const handleCloseModal = () => {
         setShowModal(false);
@@ -19,20 +16,14 @@ function Header() {
       const handleShowModal = () => {
         setShowModal(true);
       };
-      useEffect(()=>{
-        userData().then((data)=>{
-          console.log(data.name)
-          setUserDatas(data);
-        }).catch((e)=>{
-          console.log(e.message)
-        })
-      },[])
+     
       useEffect(()=>{
         ProfileFormData().then((data)=>{
-          console.log(data.data[0]);
+          
           setProfileFormdata(data.data[0])
         })
       },[])
+      
   return (
     <div
             className="right-top"
@@ -97,7 +88,7 @@ function Header() {
                     <img
                       src={ profileformdata.profileImage
                         ? profileformdata.profileImage
-                        : src}
+                        : img}
                       alt="profile"
                       style={{ width: "30px", height: "30px" }}
                     />

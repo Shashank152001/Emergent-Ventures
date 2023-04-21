@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState} from "react";
 import {Link,useNavigate} from 'react-router-dom'
 import './sign.css';
 import celebal from '../../Assest/celebal.png'
@@ -10,7 +10,7 @@ import bgSvg from '../Spheres.svg';
 // import {url} from '../../Constant/Url'
 
 
-// const url ='https://8925-2401-4900-1c69-8e1e-3cd0-e1a6-ed6c-3b2a.in.ngrok.io/';
+
 
 
 function SignIn() {
@@ -19,6 +19,7 @@ function SignIn() {
     email: '',
     password: ''
   });
+  // const [formData, setFormData] = useState(null);
   const [formErrors, setFormErrors] = useState({});
   const [isFilled, setFilled] = useState(false);
   const FormData = new URLSearchParams(formData);
@@ -53,7 +54,6 @@ function SignIn() {
         if(isFilled ){
           userLogin(bodydata).then((data)=>{
       
-            // console.log(data.data.email);
             if(!data.message){
             navigate('/dashboard');
             toast.success('Login Successfull', {
@@ -70,9 +70,9 @@ function SignIn() {
             setFilled(false);
             }
             else{
-              console.log(data.message)
+              
               navigate('/')
-              toast.error('Wrong Credentials!', {
+              toast.error(`${data.message}`, {
                 position: "top-right",
                 autoClose: 5000,
                 hideProgressBar: false,
@@ -82,11 +82,10 @@ function SignIn() {
                 progress: undefined,
                 theme: "colored",
                 });
-              // alert('Wrong Cred')
-              // navigate('/')
+             
             }
           }).catch((e)=>{
-            console.log(e.message)
+            
             navigate('/')
             toast.error('Could not Connect with Server', {
               position: "top-right",
@@ -98,7 +97,7 @@ function SignIn() {
               progress: undefined,
               theme: "colored",
               });
-            // alert('Server Error')
+           
           })
         }
         

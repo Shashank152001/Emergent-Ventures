@@ -35,7 +35,7 @@ function Skill() {
                     <h6 className='skill-title'>Primary Skills</h6>
                     <div className='content-wrapper'>
                     <p className='skill-content'>
-                        {userData.primarySkills}
+                        {userData?.primarySkills || ''}
                         
                     </p>
 
@@ -47,7 +47,7 @@ function Skill() {
                     <h6 className='skill-title'>Secondary Skills</h6>
                     <div className='content-wrapper'>
                     <p className='skill-content'>
-                    {userData.secondarySkills}
+                    {userData?.secondarySkills || ''}
                     </p>
                     </div>
                     
@@ -57,7 +57,7 @@ function Skill() {
                     <h6 className='skill-title'>Certifications</h6>
                     <div className='content-wrapper'>
                     <p className='skill-content border-none'>
-                    {userData.certifications}
+                    {userData?.certifications || ''}
                     </p>
           </div>
                     

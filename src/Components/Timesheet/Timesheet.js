@@ -60,17 +60,18 @@ function Timesheet() {
                                             <p style={{
                                             height:'40px',
                                             width:'112px',
-                                            margin:'auto'
+                                            margin:'auto',
+                                            fontWeight:'200'
                                         }}
                                             >{ele.week}</p>
                                             </td>
                                         <td className="border-0">
-                                            <p>{ele.submittedHours}</p>
-                                            <p>Submitted Hours</p>
+                                            <p style={{fontWeight:'200'}}>{ele.submittedHours}</p>
+                                            <p style={{fontWeight:'200'}}>Submitted Hours</p>
                                         </td>
                                         <td className="border-0">
-                                            <p>{ele.approvedHours}</p>
-                                            <p>Approved Hours</p>
+                                            <p style={{fontWeight:'200'}}>{ele.approvedHours}</p>
+                                            <p style={{fontWeight:'200'}}>Approved Hours</p>
                                         </td>
                                     </tr>
                                 ))

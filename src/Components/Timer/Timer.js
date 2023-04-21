@@ -9,12 +9,10 @@ import { fetchLocation } from "../../Service/locationService";
 import {
   UserCheckIn,
   UserCheckOut,
-  fetchCurrentTime,
-  fetchCurrentCheckinTime,
-  getTimeDifference,
+  fetchCurrentTime
 } from "../../Service/TimerService";
 
-// import { cleanup } from '@testing-library/react';
+
 
 function Timer() {
   const [timer, setTimer] = useState("00:00:00");
@@ -23,27 +21,26 @@ function Timer() {
   const [checkOutData, setcheckOutData] = useState(null);
 
   useEffect(() => {
-    socket.connect();
 
-	
+    socket.connect();
 
     return () => {
       socket.disconnect();
     };
-  }, [isRunning,socket]);
+
+  }, []);
 
 
 
 
   useEffect(() => {
-    // console.log(socket);
+
    
    
-    // console.log(socket.id);
     socket.on("status", (data) => {
-      console.log(data);
+     
       if (data.status === "not-checked-in" || data.status === "checked-out") {
-        // console.log(data.status);
+        
         setIsRunning(() => {
           return false;
         });
@@ -51,7 +48,7 @@ function Timer() {
           return "00:00:00";
         });
       } else if (data.status === "checked-in") {
-        // console.log(data);
+       
         setIsRunning(() => {
           return true;
         });
@@ -67,7 +64,7 @@ function Timer() {
       socket.off("checkout");
     };
 
-  }, [socket, timer]);
+  }, []);
 
   const FetchData = async () => {
     const fetchedDate = new Date().toISOString().split("T")[0];
@@ -79,10 +76,11 @@ function Timer() {
       checkInDate: fetchedDate,
       checkInLocation: city,
     });
-    // setcheckedIn(true);
+    
   };
 
   const FetchOutData = async () => {
+    
     const fetchedDate = new Date().toISOString().split("T")[0];
     const fetchedTime = fetchCurrentTime();
     const city = await fetchLocation();
@@ -95,23 +93,23 @@ function Timer() {
       timeDifference: timeDifference,
     });
 
-    // setcheckedOut(true);
+    
   };
 
   // for checkin
   useEffect(() => {
     if (checkInData) {
-      // console.log('Formdata');
+     
       UserCheckIn(checkInData)
         .then((data) => {
-          // console.log(data);
+         
           setIsRunning(() => {
             return true;
           });
           socket.emit("checkin");
           toast.info('Checkin Successfull', {
             position: "top-left",
-            autoClose: 5000,
+            autoClose: 3000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,
@@ -124,9 +122,7 @@ function Timer() {
           console.log(err);
         });
     }
-    // return () => {
-    // 	setcheckedOut(false);
-    // };
+    
   }, [checkInData]);
 
 
@@ -135,7 +131,7 @@ function Timer() {
     if (checkOutData) {
       UserCheckOut(checkOutData)
         .then((data) => {
-          // console.log(data);
+          
           setIsRunning(() => {
             return false;
           });
@@ -162,35 +158,30 @@ function Timer() {
   }, [checkOutData]);
 
   const startClock = () => {
-    // FetchData();
+    
     if (socket.connected) {
-      // socket.emit('checkin');
+      
       FetchData();
     } else {
       socket.connect();
-      // socket.emit('checkin');
+     
       FetchData();
     }
 
-    // setIsRunning(true);
-    // setTimer(() => {
-    // 	return data.timeDifference;
-    // });
+   
   };
 
   const stopClock = () => {
     if (socket.connected) {
       FetchOutData();
-      // socket.emit('checkout');
-      // // setIsRunning(false);
-      // setTimer('00:00:00');
+  
     }
   };
 
   const reset = () => {
     console.log("reset");
   };
-  // console.log(timer);
+  
   let [h, m, s] = timer.split(":");
 
   return (

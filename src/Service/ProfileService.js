@@ -7,7 +7,7 @@ export const ProfileFormData=async()=>{
         headers: { "Content-Type": "application/json" },
         credentials: "include",
     })
-    // console.log(response);
+    
     if(!response.ok){
         throw new Error('Data could not be fetched')
     }else{
@@ -24,7 +24,7 @@ export async function userDetail(data) {
     return response.json()
 }
 export async function userUpdate(data) {
-    console.log(data);
+    
     const response=await fetch(url+'user/account/update-user-profile',{
         method:"PUT",
         credentials:'include',
