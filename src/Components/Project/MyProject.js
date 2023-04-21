@@ -1,5 +1,5 @@
 import React ,{useState,useEffect}from 'react';
-import profile from './profile.jpg';
+import myprofile from '../../Assest/myprofile.jpg';
 import './project.css';
 import { AiOutlineDown,AiOutlineSwap } from "react-icons/ai";
 import { IoCalendarNumberOutline } from "react-icons/io5";
@@ -60,10 +60,10 @@ function MyProject() {
                     </td>
                     <td className='team-members' id="team">
                         <p className='image-container'>
-                            <img src={profile} alt="team-member"/>
+                            <img src={myprofile} alt="team-member"/>
                         </p>
                         <p className='image-container img-2'>
-                            <img src={profile} alt="team-member"/>
+                            <img src={myprofile} alt="team-member"/>
                         </p>
                         <p className='image-container img-3'>
                             <span className='count-member'>2+</span>
@@ -72,7 +72,7 @@ function MyProject() {
                     <td>
                         <div className='lead'>
                         <p className='image-container ' id="team-lead">
-                            <img src={profile} alt="team-member"/>
+                            <img src={myprofile} alt="team-member"/>
                         </p>
                          <span className='lead-name' style={{fontSize:'0.8rem'}}>{ele.teamHead}</span>
                         </div>

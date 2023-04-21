@@ -1,6 +1,7 @@
 import React,{useState,useEffect} from "react";
-import { BiBell, BiChevronDown, BiSearch ,BiPlusCircle} from "react-icons/bi";
+// import { BiBell, BiChevronDown, BiSearch ,BiPlusCircle} from "react-icons/bi";
 import "./Dashboard.css";
+
 import MyProject from "../Project/MyProject";
 import Skill from "../Skills/Skills";
 import Timesheet from "../Timesheet/Timesheet";
@@ -8,8 +9,8 @@ import Timer from "../Timer/Timer";
 import Leaves from "../Leaves/Leaves";
 import WFH from "../WFH/Wfh";
 import Sidebar from "./sidebar";
-import FileUpload from "./fileupload";
-import { DropDown } from "../DropDown/DropDown";
+// import FileUpload from "./fileupload";
+// import { DropDown } from "../DropDown/DropDown";
 import {userData} from '../../Service/DashboardService'
 import Loader from "../Spinner/Loader";
 import Header from "./Header";
@@ -17,8 +18,9 @@ import Header from "./Header";
 
 function MyDashBoard() {
     const [showModal, setShowModal] = useState(false);
-    const[openProfile,setOpenProfile]=useState(false);
+    // const[openProfile,setOpenProfile]=useState(false);
     const[userDatas,setUserDatas]=useState(null)
+    
     // const[userDatas,setUserDatas]=useState(true)
 
     const handleCloseModal = () => {
@@ -37,6 +39,8 @@ function MyDashBoard() {
         console.log(e.message)
       })
     },[])
+
+    
 
 
 

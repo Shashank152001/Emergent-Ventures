@@ -4,11 +4,14 @@ import "./Dashboard.css";
 import {userData} from '../../Service/DashboardService'
 import FileUpload from "./fileupload";
 import { DropDown } from "../DropDown/DropDown";
-
+import img from '../../Assest/profile.jpg'
+import {ProfileFormData} from '../../Service/ProfileService'
 function Header() {
     const [showModal, setShowModal] = useState(false);
     const[openProfile,setOpenProfile]=useState(false);
     const[userDatas,setUserDatas]=useState(null)
+    const[src,setSrc]=useState(img)
+    const[profileformdata,setProfileFormdata]=useState([])
     const handleCloseModal = () => {
         setShowModal(false);
       };
@@ -22,6 +25,12 @@ function Header() {
           setUserDatas(data);
         }).catch((e)=>{
           console.log(e.message)
+        })
+      },[])
+      useEffect(()=>{
+        ProfileFormData().then((data)=>{
+          console.log(data.data[0]);
+          setProfileFormdata(data.data[0])
         })
       },[])
   return (
@@ -86,25 +95,22 @@ function Header() {
                     style={{ marginBottom: "0" }}
                   >
                     <img
-                      src="/images/singin.png"
+                      src={ profileformdata.profileImage
+                        ? profileformdata.profileImage
+                        : src}
                       alt="profile"
                       style={{ width: "30px", height: "30px" }}
                     />
                   </p>
-                  {userDatas?
-                  <>
+                  
+                 
                   <p className="" style={{ marginBottom: "0" }}>
                     <span style={{ paddingLeft: "0.5rem", color: "#000" }}>
-                      {userDatas.name}
+                      {profileformdata.name}
                     </span>
                     <BiChevronDown style={{ marginLeft: "0.4rem" }} onClick={()=>{setOpenProfile((prev)=>!prev)}}/>
                   </p>
                   {openProfile && <DropDown/>}
-                  </>
-                  :
-                  <p>No Name</p>
-
-}
                 </div>
               </div>
             </div>

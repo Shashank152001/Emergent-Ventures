@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import {Link,useNavigate} from 'react-router-dom'
 import './sign.css';
+import celebal from '../../Assest/celebal.png'
+import signin from '../../Assest/singin.png'
 import {userLogin} from '../../Service/LoginService'
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -114,14 +116,14 @@ function SignIn() {
             <div className='left'>
                  <div className='logo-title'>
                         <div style={{width:'250px',height:'100px'}}>
-                            <img src='Images/celebal.png' alt="celebal" style={{width:'100%',height:'100%',objectFit:'cover'}}/>
+                            <img src={celebal} alt="celebal" style={{width:'100%',height:'100%',objectFit:'cover'}}/>
                         </div>
                         <div style={{width:'80%',margin:'auto'}}>
                             <p style={{fontSize:'2rem',color:'#545A78'}}>Welcome Interns!</p>
                         </div>
                  </div>
                  <div style={{height:'370px',width:'460px'}} className='left-image'>
-                    <img src='Images/singin.png' alt='signin' style={{width:'100%',height:'100%',objectFit:'cover'}}/>
+                    <img src={signin} alt='signin' style={{width:'100%',height:'100%',objectFit:'cover'}}/>
                  </div>
             </div>
             <div className='right d-flex flex-column justify-content-center'>
