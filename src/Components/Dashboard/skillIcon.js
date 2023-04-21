@@ -1,5 +1,4 @@
-import React from "react";
-// import SkillIcon from './skillIcon.svg';
+
 
 function SkillIcon() {
   return (

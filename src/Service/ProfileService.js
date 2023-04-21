@@ -7,7 +7,7 @@ export const ProfileFormData=async()=>{
         headers: { "Content-Type": "application/json" },
         credentials: "include",
     })
-    // console.log(response);
+    
     if(!response.ok){
         throw new Error('Data could not be fetched')
     }else{

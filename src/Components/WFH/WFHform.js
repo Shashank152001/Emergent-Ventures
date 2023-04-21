@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { leaveRequest, leaveUser } from "../../Service/LeavesService";
-// fullday and halfday in request
+
 const WFHform = () => {
   const [formData, setFormData] = useState({
     email: "",
@@ -25,6 +25,7 @@ const WFHform = () => {
         console.log(e.message);
       });
   }, []);
+  
   const handleSubmit = (event) => {
     event.preventDefault();
     const errors = {};
@@ -65,21 +66,17 @@ const WFHform = () => {
   };
 
   return (
-    <div
-      className="container "
-      style={{
-        height: "fit-content",
-        width: "90%",
-        backgroundColor: "#f7f7f7"
-      }}
-    >
+   
+    <div style={{backgroundColor:'#f7f7f7',width:'80%',position:'absolute', 
+    top:'40%',left:'50%',transform:'translate(-50%,-45%)',
+    padding:'1rem'}}>
       <h5 className="text-center px-2"> Enter Details </h5>
 
       <form onSubmit={handleSubmit}>
         {userDatas ? (
           <div className="row gx-0 ">
             <div className="col-4 p-1">
-              <label className=""> Employee ID : </label>
+              <label className="" style={{fontWeight:'200'}}> Employee ID : </label>
             </div>
             <div className="col-8 p-1">
               <input
@@ -89,7 +86,7 @@ const WFHform = () => {
                   padding: "0.6rem",
                   outline: "none",
                   borderBottom: "1px solid #3b5998",
-                  width: "52%",
+                  width: "80%",
                 }}
                 className="bg-whitesmoke rounded col-12"
                 type="text"
@@ -106,7 +103,7 @@ const WFHform = () => {
                 style={{
                   backgroundColor: "#eee",
                   borderColor: "transparent",
-                  width: "52%",
+                  width: "80%",
                 }}
                 className="bg-whitesmoke rounded col-12"
                 type="text"
@@ -119,7 +116,7 @@ const WFHform = () => {
         )}
         <div className="row gx-0 ">
           <div className="col-4  p-1">
-            <label className=""> Team Email ID : </label>
+            <label className="" style={{fontWeight:'200'}}> Email: </label>
           </div>
           <div className="col-8 p-1">
             {formErrors.email && (
@@ -132,7 +129,7 @@ const WFHform = () => {
                 padding: "0.6rem",
                 outline: "none",
                 borderBottom: "1px solid #3b5998",
-                width: "52%",
+                width: "80%",
               }}
               className="bg-whitesmoke rounded col-12"
               type="email"
@@ -145,11 +142,11 @@ const WFHform = () => {
 
         <div className="row gx-0 ">
           <div className="col-4 ">
-            <label className=""> Date : </label>
+            <label className="" style={{fontWeight:'200'}}> Date : </label>
           </div>
           <div className="col-8  d-flex ">
             <div>
-            <label className="text-muted"> From : </label>
+            <label className="text-muted" style={{fontWeight:'200'}}> From : </label>
             {formErrors.startDate && (
               <span className="error-span">{formErrors.startDate}</span>
             )}
@@ -169,7 +166,7 @@ const WFHform = () => {
             ></input>
             </div>
             <div className="">
-              <label className="text-muted"> To : </label>
+              <label className="" style={{fontWeight:'200'}}> To : </label>
               {formErrors.endDate && (
                 <span className="error-span">{formErrors.endDate}</span>
               )}
@@ -193,15 +190,15 @@ const WFHform = () => {
 
         <div className="row gx-0 py-1">
           <div className="col-4  d-flex ">
-            <label className=""> leaveType: </label>
+            <label className="" style={{fontWeight:'200'}}> leaveType: </label>
           </div>
           <div className="col-8  ">
             <select
               className="bg-whitesmoke rounded col-6"
               style={{
                 backgroundColor: "#fff",
-                borderColor: "transparent",
-                width: "52%",
+                border: "none",
+                width: "80%",
                 padding: "0.6rem",
                 outline: "none",
                 borderBottom: "1px solid #3b5998",
@@ -219,7 +216,7 @@ const WFHform = () => {
 
         <div className="row gx-0 py-1 ">
           <div className="col-4 ">
-            <label className=""> Request : </label>
+            <label className="" style={{fontWeight:'200'}}> Request : </label>
           </div>
           <div className="col-8 ">
             {formErrors.request && (
@@ -230,7 +227,7 @@ const WFHform = () => {
               style={{
                 backgroundColor: "#fff",
                 borderColor: "transparent",
-                width: "52%",
+                width: "80%",
                 padding: "0.6rem",
                 outline: "none",
                 borderBottom: "1px solid #3b5998",
@@ -252,7 +249,7 @@ const WFHform = () => {
 
         <div className="row gx-0">
           <div className="col-4  ">
-            <label className=""> Reason: </label>
+            <label className="" style={{fontWeight:'200'}}> Reason: </label>
           </div>
           <div className="col-8 ">
             {formErrors.reason && (
@@ -265,7 +262,7 @@ const WFHform = () => {
                 padding: "0.6rem",
                 outline: "none",
                 borderBottom: "1px solid #3b5998",
-                width: "52%",
+                width: "80%",
               }}
               className="bg-whitesmoke rounded col-8 "
               rows={7}

@@ -54,7 +54,6 @@ function SignIn() {
         if(isFilled ){
           userLogin(bodydata).then((data)=>{
       
-            // console.log(data.data.email);
             if(!data.message){
             navigate('/dashboard');
             toast.success('Login Successfull', {
@@ -71,9 +70,9 @@ function SignIn() {
             setFilled(false);
             }
             else{
-              console.log(data.message)
+              
               navigate('/')
-              toast.error('Wrong Credentials!', {
+              toast.error(`${data.message}`, {
                 position: "top-right",
                 autoClose: 5000,
                 hideProgressBar: false,
@@ -83,11 +82,10 @@ function SignIn() {
                 progress: undefined,
                 theme: "colored",
                 });
-              // alert('Wrong Cred')
-              // navigate('/')
+             
             }
           }).catch((e)=>{
-            console.log(e.message)
+            
             navigate('/')
             toast.error('Could not Connect with Server', {
               position: "top-right",
@@ -99,7 +97,7 @@ function SignIn() {
               progress: undefined,
               theme: "colored",
               });
-            // alert('Server Error')
+           
           })
         }
         

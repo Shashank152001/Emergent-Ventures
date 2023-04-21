@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./Profile.css";
-import Sidebar from "../Dashboard/sidebar";
-import Header from "../Dashboard/Header";
 import {useNavigate} from 'react-router-dom'
-// import { InputText } from "primereact/inputtext";
 import { Dialog } from "primereact/dialog";
 import { Button } from "primereact/button";
 import Avatar from "react-avatar-edit";
@@ -21,24 +18,18 @@ import {
   postSkills,
   updateSkills,
 } from "../../Service/SkillService";
-// import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-// import { Form } from "react-router-dom";
+
 
 function Profile() {
-  // const [image, setimage] = useState("");
   const navigate = useNavigate();
   const [imagecrop, setimagecrop] = useState(false);
   const [src, setsrc] = useState(img);
-  const [profile, setprofile] = useState([]);
   const [pview, setpview] = useState(false);
   const [poststate, setPostState] = useState(false);
   const [skillstate, setSkillState] = useState(false);
-  // const FormData = new URLSearchParams(formDatapost);
   const [profileformdata, setProfileFormData] = useState([]);
-  const [skillsdata, setskillsData] = useState([]);
-
-  //Post Profile Data
+ 
 
   const [formData, setFormData] = useState({
     profileImage: "",
@@ -48,35 +39,27 @@ function Profile() {
     country: "",
     emergencyPhone: "",
   });
+
   const [skillData, setSkillData] = useState({
     primarySkills: "",
     secondarySkills: "",
     certifications: "",
   });
 
-  // console.log(formData);
+
 
   useEffect(() => {
     if (poststate) {
-      // const userForm = new FormData();
-      // for (const key in formData) {
-
-      //   if (formData.hasOwnProperty(key)) {
-      //     userForm.append(key, formData[key]);
-      //   }
-      // }
-
-      // console.log(userForm);
-
+     
       ProfileFormData().then((data) => {
         if (data.data[0].userId !== null) {
-          // console.log(userForm);
+          
           userUpdate(formData)
             .then((data) => {
-              navigate("/getProfile");
+              navigate("/dashboard/getProfile");
               toast.success("Profile Updated Successfull", {
                 position: "top-left",
-                autoClose: 5000,
+                autoClose: 3000,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,
@@ -86,10 +69,10 @@ function Profile() {
               });
             })
             .catch((e) => {
-              console.log(e.message);
+             
               toast.error("Could not Connect with Server", {
                 position: "top-right",
-                autoClose: 5000,
+                autoClose: 3000,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,
@@ -101,12 +84,12 @@ function Profile() {
         } else {
           userDetail(formData)
             .then((data) => {
-              // console.log(data);
+              
               if (data.message === "User profile created successfully") {
-                navigate("/getProfile");
+                navigate("/dashboard/getProfile");
                 toast.success("Profile Submitted Successfully", {
                   position: "top-left",
-                  autoClose: 5000,
+                  autoClose: 3000,
                   hideProgressBar: false,
                   closeOnClick: true,
                   pauseOnHover: true,
@@ -118,10 +101,10 @@ function Profile() {
               }
             })
             .catch((e) => {
-              console.log(e.message);
+              
               toast.error("Could not Connect with Server", {
                 position: "top-right",
-                autoClose: 5000,
+                autoClose: 3000,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,
@@ -133,21 +116,21 @@ function Profile() {
         }
       });
     }
-  }, [poststate]);
+  }, [poststate,navigate,formData]);
 
   useEffect(() => {
     if (skillstate) {
       fetchSkills()
         .then((data) => {
-          console.log(data.data[0]);
+          
           if (data.data[0].userId !== null) {
             updateSkills(skillData)
               .then((data) => {
-                console.log(data);
-                navigate("/getProfile");
+                
+                navigate("/dashboard/getProfile");
                 toast.success("Skills Updated Successfully", {
                   position: "top-left",
-                  autoClose: 5000,
+                  autoClose: 3000,
                   hideProgressBar: false,
                   closeOnClick: true,
                   pauseOnHover: true,
@@ -157,10 +140,10 @@ function Profile() {
                 });
               })
               .catch((e) => {
-                console.log(e.message);
+                
                 toast.error("Could not Connect with Server", {
                   position: "top-right",
-                  autoClose: 5000,
+                  autoClose: 3000,
                   hideProgressBar: false,
                   closeOnClick: true,
                   pauseOnHover: true,
@@ -171,11 +154,11 @@ function Profile() {
               });
           } else {
             postSkills(skillData).then((data) => {
-              console.log(data);
-              navigate("/getProfile");
+              
+              navigate("/dashboard/getProfile");
               toast.success("Skills Submitted Successfully", {
                 position: "top-left",
-                autoClose: 5000,
+                autoClose: 3000,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,
@@ -187,10 +170,10 @@ function Profile() {
           }
         })
         .catch((e) => {
-          console.log(e.message);
+          
           toast.error("Could not Connect with Server", {
             position: "top-right",
-            autoClose: 5000,
+            autoClose: 3000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,
@@ -200,7 +183,7 @@ function Profile() {
           });
         });
     }
-  }, [skillstate]);
+  }, [skillstate,navigate,skillData]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -210,15 +193,7 @@ function Profile() {
     event.preventDefault();
     setSkillState(true);
   };
-  // useEffect(()=>{
-  //   userDetail(userForm).then((data)=>{
-  //     console.log(data);
-  //   })
-  // },[])
 
-  // };
-
-  // console.log(profilefinal);
 
   const onClose = () => {
     setpview(null);
@@ -227,20 +202,16 @@ function Profile() {
     setpview(view);
   };
   const savecropimage = () => {
-    // setprofile([...profile, { pview }]);
-    // console.log(pview);
+   
     setFormData((prevState) => ({ ...prevState, profileImage: pview }));
-    // setsrc(pview);
-    // setpview(true)
-    // console.log(pview);
+  
 
     setsrc(pview);
-    // console.log(pview);
+ 
     setimagecrop(false);
   };
   const profileclick = () => {
-    // alert("clicked");
-    // console.log("clicked");
+   
     setimagecrop(true);
   };
 
@@ -248,7 +219,7 @@ function Profile() {
   useEffect(() => {
     ProfileFormData()
       .then((profiledata) => {
-        console.log(profiledata.data[0].profileImage);
+      
 
         setProfileFormData(profiledata.data[0]);
         setFormData({
@@ -259,7 +230,7 @@ function Profile() {
           country: profiledata.data[0].country,
           emergencyPhone: profiledata.data[0].emergencyPhone,
         });
-        // console.log(profiledata.data[0]);
+      
       })
       .catch((e) => {
         console.log(e.message);
@@ -268,8 +239,8 @@ function Profile() {
 
   useEffect(() => {
     fetchSkills().then((data) => {
-      console.log(data.data[0]);
-      setskillsData(data.data[0]);
+     
+      
       setSkillData({
         primarySkills: data.data[0].primarySkills,
         secondarySkills: data.data[0].secondarySkills,
@@ -280,14 +251,11 @@ function Profile() {
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    // console.log(value);
-
     setFormData((prevState) => ({ ...prevState, [name]: value }));
   };
+
   const handleSkillChange = (event) => {
     const { name, value } = event.target;
-    // console.log(value);
-
     setSkillData((prevState) => ({ ...prevState, [name]: value }));
   };
 
@@ -295,17 +263,17 @@ function Profile() {
     <>
       <div className="main-container ">
         <div className="wrapper d-flex">
-          <Sidebar />
+          
           <div
             className="right-sidebar"
             style={{
               position: "absolute",
-              width: "87%",
+              width: "100%",
               height: "100%",
               right: "0",
             }}
           >
-            <Header />
+            
             <div className="container">
               <div className="formDetail-container">
                 <div className="Profile-upload">
@@ -329,7 +297,7 @@ function Profile() {
                             formData.profileImage ? formData.profileImage : src
                           }
                           alt=""
-                          // value={formData.profileImage}
+                          
                         />
                       </>
                     ) : (
@@ -341,10 +309,11 @@ function Profile() {
                     </label>
                     <Dialog
                       className=""
+                      style={{position:'absolute',zIndex:'1000',top:'0' ,right:'25%'}}
                       visible={imagecrop}
                       onHide={() => setimagecrop(false)}
                     >
-                      <div className=" z-2 position-absolute p-5 card">
+                      <div className=" z-2 position-absolute p-5 card" style={{top:'0',right:"25%"}}>
                         <p className="">Update Profile</p>
                         <Avatar
                           width={200}

@@ -1,5 +1,5 @@
-import React from 'react'
-import loader from '../../Assest/Loader.gif'
+import React from 'react';
+import loader from '../../Assest/Loader.gif';
 function Loader() {
   return (
     <>
@@ -9,9 +9,7 @@ function Loader() {
           mixBlendMode:'multiply'}}/>
             <p className='text-dark fs-1'>Loading</p>
         </div>
-        {/* <div className="text-center">
-            <p className='fs-2 text-primary'>Loading</p>
-        </div> */}
+        
     </>
   )
 }
