@@ -1,7 +1,6 @@
 
-
-export const url='https://wed-unity-native-sarah.trycloudflare.com/';
-// export const url='http://localhost:5000/';
+export const url='https://championships-completed-anticipated-preliminary.trycloudflare.com/';
+// export const url='https://pipe-fallen-six-thumb.trycloudflare.com/';
 
 
 
