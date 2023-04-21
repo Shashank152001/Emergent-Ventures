@@ -1,6 +1,6 @@
 import React from 'react'
 import './WFH.css'
-import wfh from './wfh.svg';
+import wfh from '../../Assest/wfh.svg';
 // import wfh from './workHome.png';
 import { useNavigate } from 'react-router-dom';
 // import WFHform from './WFHform';
@@ -22,6 +22,7 @@ const Wfh = () => {
                     </div>
                  </div>
                  <button className='btn btn-primary mb-2'
+                 type='submit'
                  style={{
                     padding:'0.2rem 2.1rem',
                     marginTop:'0.6rem'

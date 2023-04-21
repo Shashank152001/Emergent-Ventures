@@ -1,5 +1,3 @@
-
-
 import {url} from '../Constant/Url';
 
 export const ProfileFormData=async()=>{
@@ -26,7 +24,7 @@ export async function userDetail(data) {
     return response.json()
 }
 export async function userUpdate(data) {
-    // console.log(data);
+    
     const response=await fetch(url+'user/account/update-user-profile',{
         method:"PUT",
         credentials:'include',

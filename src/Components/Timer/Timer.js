@@ -2,12 +2,24 @@ import React from "react";
 import { socket } from "../../socket";
 import { useState, useEffect } from "react";
 import "./Timer.css";
+<<<<<<< HEAD
 import svg from "./Vector.svg";
+=======
+import svg from '../../Assest/Vector.svg'
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+>>>>>>> main
 import { fetchLocation } from "../../Service/locationService";
 import {
   UserCheckIn,
   UserCheckOut,
+<<<<<<< HEAD
   fetchCurrentTime
+=======
+  fetchCurrentTime,
+  fetchCurrentCheckinTime,
+  getTimeDifference,
+>>>>>>> main
 } from "../../Service/TimerService";
 
 // import { cleanup } from '@testing-library/react';
@@ -56,7 +68,6 @@ function Timer() {
       }
     });
 
-
     return () => {
       socket.off("status");
       socket.off("checkin");
@@ -79,6 +90,7 @@ function Timer() {
   };
 
   const FetchOutData = async () => {
+    
     const fetchedDate = new Date().toISOString().split("T")[0];
     const fetchedTime = fetchCurrentTime();
     const city = await fetchLocation();
@@ -97,24 +109,32 @@ function Timer() {
   // for checkin
   useEffect(() => {
     if (checkInData) {
-     
+      // console.log('Formdata');
       UserCheckIn(checkInData)
         .then((data) => {
-         
+          // console.log(data);
           setIsRunning(() => {
             return true;
           });
           socket.emit("checkin");
+          toast.info('Checkin Successfull', {
+            position: "top-left",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+            });
         })
         .catch((err) => {
           console.log(err);
         });
     }
-
-    return () => {
-      setcheckOutData(null);
-    };
-   
+    // return () => {
+    // 	setcheckedOut(false);
+    // };
   }, [checkInData]);
 
 
@@ -123,11 +143,21 @@ function Timer() {
     if (checkOutData) {
       UserCheckOut(checkOutData)
         .then((data) => {
-         
+          // console.log(data);
           setIsRunning(() => {
             return false;
           });
           socket.emit("checkout");
+          toast.info('CheckOut Successfull', {
+            position: "top-left",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+            });
           setTimer("00:00:00");
         })
         .catch((err) => {
@@ -140,21 +170,29 @@ function Timer() {
   }, [checkOutData]);
 
   const startClock = () => {
-    
+    // FetchData();
     if (socket.connected) {
+      // socket.emit('checkin');
       FetchData();
     } else {
       socket.connect();
+      // socket.emit('checkin');
       FetchData();
     }
 
+    // setIsRunning(true);
+    // setTimer(() => {
+    // 	return data.timeDifference;
+    // });
   };
 
   const stopClock = () => {
     if (socket.connected) {
       FetchOutData();
+      // socket.emit('checkout');
+      // // setIsRunning(false);
+      // setTimer('00:00:00');
     }
-
   };
 
   const reset = () => {
