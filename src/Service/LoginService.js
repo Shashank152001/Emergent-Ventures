@@ -8,7 +8,8 @@ export async function userLogin(data) {
         body:new URLSearchParams(data)
     })
    
-    return response.json()
+    // return response.json()
+    return response;
 
     
 }

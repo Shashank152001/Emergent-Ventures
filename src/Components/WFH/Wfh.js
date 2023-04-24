@@ -2,7 +2,7 @@ import React from 'react'
 import './WFH.css'
 import wfh from '../../Assest/wfh.svg';
 // import wfh from './workHome.png';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,Link } from 'react-router-dom';
 // import WFHform from './WFHform';
 
 
@@ -26,7 +26,9 @@ const Wfh = () => {
                  style={{
                     padding:'0.2rem 2.1rem',
                     marginTop:'0.6rem'
-                  }}>Apply for WFH</button>
+                  }}>
+                  <Link to='leave' style={{textDecoration:'none',color:'#fff'}}>Apply for WFH</Link>
+                  </button>
                  {/* <button onClick={navigate('/WFHform')} className='btn btn-primary mb-2'>Apply for WFH</button> */}
              </div>
              

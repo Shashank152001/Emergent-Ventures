@@ -4,7 +4,7 @@ import {url} from './Constant/Url'
 
 
 
-  export   const socket = io(url + 'dashboard', {
+  export   const socket = io('https://will-tunisia-slope-marina.trycloudflare.com' + '/dashboard', {
         withCredentials: true,
         reconnection: true,
         reconnectionDelay: 1000,
