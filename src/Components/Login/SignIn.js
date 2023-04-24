@@ -1,4 +1,4 @@
-import React, { useState} from "react";
+import React, { useEffect, useState} from "react";
 import {Link,useNavigate} from 'react-router-dom'
 import './sign.css';
 import celebal from '../../Assest/celebal.png'
@@ -23,6 +23,58 @@ function SignIn() {
   const [formErrors, setFormErrors] = useState({});
   const [isFilled, setFilled] = useState(false);
   const FormData = new URLSearchParams(formData);
+
+  useEffect(()=>{
+    if(isFilled ){
+      userLogin(formData).then((data)=>{
+  
+        if(!data.message){
+        navigate('/dashboard');
+        toast.success('Login Successfull', {
+          position: "top-left",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+          });
+        localStorage.setItem('loggedInUser','1')
+        setFilled(false);
+        }
+        else{
+          
+          navigate('/')
+          toast.error(`${data.message}`, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+            });
+         
+        }
+      }).catch((e)=>{
+        
+        navigate('/')
+        toast.error('Could not Connect with Server', {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+          });
+       
+      })
+    }
+  },[isFilled])
   const navigate = useNavigate();
 
 
@@ -50,56 +102,8 @@ function SignIn() {
         else{
           setFormErrors(errors);
         }
-        const bodydata=FormData;
-        if(isFilled ){
-          userLogin(bodydata).then((data)=>{
-      
-            if(!data.message){
-            navigate('/dashboard');
-            toast.success('Login Successfull', {
-              position: "top-left",
-              autoClose: 5000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-              theme: "colored",
-              });
-            localStorage.setItem('loggedInUser','1')
-            setFilled(false);
-            }
-            else{
-              
-              navigate('/')
-              toast.error(`${data.message}`, {
-                position: "top-right",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "colored",
-                });
-             
-            }
-          }).catch((e)=>{
-            
-            navigate('/')
-            toast.error('Could not Connect with Server', {
-              position: "top-right",
-              autoClose: 5000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-              theme: "colored",
-              });
-           
-          })
-        }
+        
+        
         
       };
 

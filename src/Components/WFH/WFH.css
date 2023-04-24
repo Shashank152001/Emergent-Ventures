@@ -1,5 +1,5 @@
 #wfh{
-    height: 290px;
+    height: 100%;
     /* width: 80%; */
     width: 100%;
     
@@ -36,8 +36,7 @@
     /* margin-top: 28rem; */
     margin-top: 5px;
 }
-.error-span{
-  position: absolute;
+/* .error-span{
   width: max-content;
   font-size: 0.89rem;
   background: #db1212;
@@ -45,23 +44,23 @@
   padding: .4rem;
   text-align: center;
   border-radius: 0.4rem;
-  position: relative;
+  position: absolute;
   right: 0;
   top: 5;
   z-index: 1;
-} 
+}  */
 
-.error-span::after{
+/* .error-span::after{
   content: '';
   width: 20px;
   height: 20px;
   background: #db1212;
   padding: 0.4rem;
   position: absolute;
-  /* left: 10%; */
+  left: 10%;
   top: 100%;
   z-index: -1;
   transform: translate(-50%,-50%) rotate(45deg);
 
-}
+} */
 
