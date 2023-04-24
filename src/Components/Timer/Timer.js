@@ -23,6 +23,9 @@ function Timer() {
   useEffect(() => {
 
     socket.connect();
+    socket.on('startClock', () => {
+			socket.emit('checkin');
+		});
 
     return () => {
       socket.disconnect();
@@ -33,38 +36,64 @@ function Timer() {
 
 
 
-  useEffect(() => {
+  // useEffect(() => {
 
    
    
-    socket.on("status", (data) => {
+  //   socket.on("status", (data) => {
      
-      if (data.status === "not-checked-in" || data.status === "checked-out") {
+  //     if (data.status === "not-checked-in" || data.status === "checked-out") {
         
-        setIsRunning(() => {
-          return false;
-        });
-        setTimer(() => {
-          return "00:00:00";
-        });
-      } else if (data.status === "checked-in") {
+  //       setIsRunning(() => {
+  //         return false;
+  //       });
+  //       setTimer(() => {
+  //         return "00:00:00";
+  //       });
+  //     } else if (data.status === "checked-in") {
        
-        setIsRunning(() => {
-          return true;
-        });
-        setTimer(() => {
-          return data.timeDifference;
-        });
-      }
-    });
+  //       setIsRunning(() => {
+  //         return true;
+  //       });
+  //       setTimer(() => {
+  //         return data.timeDifference;
+  //       });
+  //     }
+  //   });
 
-    return () => {
-      socket.off("status");
-      socket.off("checkin");
-      socket.off("checkout");
-    };
+  //   return () => {
+  //     socket.off("status");
+  //     socket.off("checkin");
+  //     socket.off("checkout");
+  //   };
 
-  }, []);
+  // }, []);
+
+  useEffect(() => {
+		socket.on('status', (data) => {
+			if (data.status === 'checked-in') {
+				setIsRunning(() => {
+					return true;
+				});
+				setTimer(() => {
+					return data.timeDifference;
+				});
+			} else {
+				setIsRunning(() => {
+					return false;
+				});
+				setTimer(() => {
+					return '00:00:00';
+				});
+			}
+		});
+
+		return () => {
+			socket.off('status');
+			socket.off('checkin');
+			socket.off('checkout');
+		};
+	}, []);
 
   const FetchData = async () => {
     const fetchedDate = new Date().toISOString().split("T")[0];
