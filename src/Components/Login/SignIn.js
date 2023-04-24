@@ -19,20 +19,29 @@ function SignIn() {
     email: '',
     password: ''
   });
-  // const [formData, setFormData] = useState(null);
   const [formErrors, setFormErrors] = useState({});
   const [isFilled, setFilled] = useState(false);
-  const FormData = new URLSearchParams(formData);
+  const navigate = useNavigate();
 
   useEffect(()=>{
-    if(isFilled ){
-      userLogin(formData).then((data)=>{
+
+    if(isFilled){
+
+      userLogin(formData).then(async (response)=>{
+
+    
+        const msg = await  response.json().then((data)=>{
+          return data.message;
+        })
+
+
   
-        if(!data.message){
+        if(response.status === 201 ){
+          
         navigate('/dashboard');
-        toast.success('Login Successfull', {
+        toast.success(`${msg}`, {
           position: "top-left",
-          autoClose: 5000,
+          autoClose: 3000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
@@ -46,9 +55,9 @@ function SignIn() {
         else{
           
           navigate('/')
-          toast.error(`${data.message}`, {
+          toast.error(`${msg}`, {
             position: "top-right",
-            autoClose: 5000,
+            autoClose: 3000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,
@@ -63,7 +72,7 @@ function SignIn() {
         navigate('/')
         toast.error('Could not Connect with Server', {
           position: "top-right",
-          autoClose: 5000,
+          autoClose: 3000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
@@ -74,8 +83,18 @@ function SignIn() {
        
       })
     }
-  },[isFilled])
-  const navigate = useNavigate();
+
+    return ()=>{
+        setFormData({
+          email: '',
+          password: ''
+        })
+        setFilled(false);
+    }
+    
+  },[isFilled,navigate])
+
+  
 
 
       const handleSubmit = (event) => {
