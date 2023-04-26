@@ -6,7 +6,7 @@ import svg from '../../Assest/Vector.svg';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { fetchLocation } from '../../Service/locationService';
-import { UserCheckIn, UserCheckOut, fetchCurrentTime } from '../../Service/TimerService';
+import { UserCheckIn, UserCheckOut } from '../../Service/TimerService';
 
 function Timer() {
 	const [timer, setTimer] = useState('00:00:00');
@@ -27,19 +27,11 @@ function Timer() {
 	useEffect(() => {
 		socket.on('status', (data) => {
 			if (data.status === 'checked-in') {
-				setIsRunning(() => {
-					return true;
-				});
-				setTimer(() => {
-					return data.timeDifference;
-				});
+				setIsRunning(true);
+				setTimer(data.timeDifference);
 			} else {
-				setIsRunning(() => {
-					return false;
-				});
-				setTimer(() => {
-					return '00:00:00';
-				});
+				setIsRunning(false);
+				setTimer('00:00:00');
 			}
 		});
 
@@ -52,39 +44,17 @@ function Timer() {
 
 	const FetchLocation = async () => {
 		fetchLocation().then((data) => {
-			FetchData(data);
+			setcheckInData({
+				checkInLocation: data
+			});
 		});
 	};
 
 	const FetchOutLocation = async () => {
 		fetchLocation().then((data) => {
-			FetchOutData(data);
-		});
-	};
-
-	const FetchData = (city) => {
-		const fetchedDate = new Date().toISOString().split('T')[0];
-		const fetchedTime = fetchCurrentTime();
-		const fetchedCity = city;
-
-		setcheckInData({
-			checkInTime: fetchedTime,
-			checkInDate: fetchedDate,
-			checkInLocation: fetchedCity
-		});
-	};
-
-	const FetchOutData = (city) => {
-		const fetchedDate = new Date().toISOString().split('T')[0];
-		const fetchedTime = fetchCurrentTime();
-		const fetchedCity = city;
-		const timeDifference = timer;
-
-		setcheckOutData({
-			checkOutTime: fetchedTime,
-			checkOutDate: fetchedDate,
-			checkOutLocation: fetchedCity,
-			timeDifference: timeDifference
+			setcheckOutData({
+				checkOutLocation: data
+			});
 		});
 	};
 
@@ -93,12 +63,10 @@ function Timer() {
 		if (checkInData) {
 			UserCheckIn(checkInData)
 				.then((data) => {
-					setIsRunning(() => {
-						return true;
-					});
+					setIsRunning(true);
 					socket.emit('checkedIn');
 					socket.emit('checkin');
-					toast.info('Checkin Successfull', {
+					toast.info('Checked In Successfully', {
 						position: 'top-left',
 						autoClose: 3000,
 						hideProgressBar: false,
@@ -120,11 +88,9 @@ function Timer() {
 		if (checkOutData) {
 			UserCheckOut(checkOutData)
 				.then((data) => {
-					setIsRunning(() => {
-						return false;
-					});
+					setIsRunning(false);
 					socket.emit('checkout');
-					toast.info('CheckOut Successfull', {
+					toast.info('Checked Out Successfully', {
 						position: 'top-left',
 						autoClose: 5000,
 						hideProgressBar: false,

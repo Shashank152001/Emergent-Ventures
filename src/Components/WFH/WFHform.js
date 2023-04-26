@@ -357,6 +357,7 @@ const WFHform = () => {
 						Submit
 					</button>
 					<button
+					type='reset'
 						style={{
 							padding: '0.4rem 0.8rem',
 							margin: '0.4rem',
