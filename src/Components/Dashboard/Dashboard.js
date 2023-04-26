@@ -7,12 +7,12 @@ import Header from "./Header";
 import {Outlet} from 'react-router-dom';
 
 
-
 function MyDashBoard() {
    
     const[userDatas,setUserDatas]=useState(null)
   
     useEffect(()=>{
+      
       userData().then((data)=>{
         setUserDatas(data);
       }).catch((e)=>{

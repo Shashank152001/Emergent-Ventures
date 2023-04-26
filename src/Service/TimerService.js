@@ -31,12 +31,12 @@ export const UserCheckOut = async (formDataOut) => {
 	}
 };
 
-
 export const fetchCurrentTime = () => {
 	let date = new Date();
 	let hours = date.getHours();
 	let minutes = date.getMinutes();
 	let seconds = date.getSeconds();
+	
 	if (hours === 24) {
 		hours = 0;
 	}
@@ -49,6 +49,8 @@ export const fetchCurrentTime = () => {
 	if (seconds < 10) {
 		seconds = '0' + seconds;
 	}
+
+	
 	return hours + ':' + minutes + ':' + seconds;
 };
 

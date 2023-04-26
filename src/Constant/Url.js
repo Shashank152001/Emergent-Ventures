@@ -1,6 +1,7 @@
 
-// export const url='https://same-economic-moisture-latina.trycloudflare.com/';
-export const url='https://will-tunisia-slope-marina.trycloudflare.com/';
+// export const url = 'https://safari-craig-calls-ns.trycloudflare.com/'
+export const url = 'https://nerve-calculation-mario-excluded.trycloudflare.com/'
+// export const url = "http://localhost:5000/"
 
 
 

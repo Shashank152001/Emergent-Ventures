@@ -1,5 +1,8 @@
-import {url} from '../Constant/Url'
+import {url} from '../Constant/Url';
+
+
 export async function bulkData(data) {
+
     const response=await fetch(url+'admin/upload-user-details',{
         method:"POST",
         mode:'cors',
@@ -7,7 +10,5 @@ export async function bulkData(data) {
         body:data
     })
    
-    return response.json()
-
-    
+    return response.json();  
 }
