@@ -15,7 +15,7 @@ const WFHform = () => {
 	const [formErrors, setFormErrors] = useState({});
 	const [isFilled, setFilled] = useState(false);
 	const [userDatas, setUserDatas] = useState(null);
-	const FormData = new URLSearchParams(formData);
+	// const FormData = new URLSearchParams(formData);
 
 	useEffect(() => {
 		leaveUser()
@@ -26,12 +26,14 @@ const WFHform = () => {
 				console.log(e.message);
 			});
 	}, []);
+
+
   useEffect(()=>{
     if(isFilled){
       leaveRequest(formData).then((data)=>{
         toast.success('Request Submitted Successfull', {
           position: "top-left",
-          autoClose: 5000,
+          autoClose: 2000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
@@ -42,7 +44,7 @@ const WFHform = () => {
       }).catch((e)=>{
         toast.error('COnnection to Server Lost', {
           position: "top-left",
-          autoClose: 5000,
+          autoClose: 2000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
@@ -52,6 +54,19 @@ const WFHform = () => {
           });
       })
     }
+
+	return ()=>{
+
+		// setFilled(false);
+		 setFormData({
+			email: '',
+			startDate: '',
+			endDate: '',
+			request: '',
+			leaveType: '',
+			reason: ''
+		});
+	}
   },[isFilled])
 
 	const handleSubmit = (event) => {
@@ -83,8 +98,8 @@ const WFHform = () => {
 			setFormErrors(errors);
 		}
 		// const bodydata = FormData;
-    console.log(isFilled);
-		console.log(formData);
+    // console.log(isFilled);
+	// 	console.log(formData);
 		
 	};
 	const handleChange = (event) => {
@@ -357,6 +372,20 @@ const WFHform = () => {
 						Submit
 					</button>
 					<button
+					    onClick={(e)=>{ 
+							e.preventDefault();
+							setFormData({
+							email: '',
+							startDate: '',
+							endDate: '',
+							request: '',
+							leaveType: '',
+							reason: ''
+						})
+					}}
+
+						
+
 						style={{
 							padding: '0.4rem 0.8rem',
 							margin: '0.4rem',

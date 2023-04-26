@@ -3,9 +3,9 @@ import error from '../../Assest/error.png'
 function ErrorPage() {
   return (
     <div
-      className="text-center fs-1 mt-4 d-flex flex-column 
+      className="text-center fs-1  d-flex flex-column 
     justify-content-center align-items-center"
-    style={{height:"100%"}}>
+    style={{height:"100vh"}}>
       <img
         src={error}
         alt="error"

@@ -62,7 +62,7 @@ function SignUp() {
                 navigate('/')
                 toast.success('SignUp Successfull', {
                     position: "top-left",
-                    autoClose: 3000,
+                    autoClose: 2000,
                     hideProgressBar: false,
                     closeOnClick: true,
                     pauseOnHover: true,
@@ -76,7 +76,7 @@ function SignUp() {
                 
                 toast.error('User Already Exit!', {
                     position: "top-right",
-                    autoClose: 3000,
+                    autoClose: 2000,
                     hideProgressBar: false,
                     closeOnClick: true,
                     pauseOnHover: true,
@@ -91,7 +91,7 @@ function SignUp() {
             navigate('/signup')
             toast.error('Server Down!', {
                 position: "top-right",
-                autoClose: 3000,
+                autoClose: 2000,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,

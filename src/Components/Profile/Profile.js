@@ -59,7 +59,7 @@ function Profile() {
               navigate("/dashboard/getProfile");
               toast.success("Profile Updated Successfull", {
                 position: "top-left",
-                autoClose: 3000,
+                autoClose: 2000,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,
@@ -72,7 +72,7 @@ function Profile() {
              
               toast.error("Could not Connect with Server", {
                 position: "top-right",
-                autoClose: 3000,
+                autoClose: 2000,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,
@@ -89,7 +89,7 @@ function Profile() {
                 navigate("/dashboard/getProfile");
                 toast.success("Profile Submitted Successfully", {
                   position: "top-left",
-                  autoClose: 3000,
+                  autoClose: 2000,
                   hideProgressBar: false,
                   closeOnClick: true,
                   pauseOnHover: true,
@@ -104,7 +104,7 @@ function Profile() {
               
               toast.error("Could not Connect with Server", {
                 position: "top-right",
-                autoClose: 3000,
+                autoClose: 2000,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,
@@ -130,7 +130,7 @@ function Profile() {
                 navigate("/dashboard/getProfile");
                 toast.success("Skills Updated Successfully", {
                   position: "top-left",
-                  autoClose: 3000,
+                  autoClose: 2000,
                   hideProgressBar: false,
                   closeOnClick: true,
                   pauseOnHover: true,
@@ -143,7 +143,7 @@ function Profile() {
                 
                 toast.error("Could not Connect with Server", {
                   position: "top-right",
-                  autoClose: 3000,
+                  autoClose: 2000,
                   hideProgressBar: false,
                   closeOnClick: true,
                   pauseOnHover: true,
@@ -158,7 +158,7 @@ function Profile() {
               navigate("/dashboard/getProfile");
               toast.success("Skills Submitted Successfully", {
                 position: "top-left",
-                autoClose: 3000,
+                autoClose: 2000,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,
@@ -173,7 +173,7 @@ function Profile() {
           
           toast.error("Could not Connect with Server", {
             position: "top-right",
-            autoClose: 3000,
+            autoClose: 2000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,
