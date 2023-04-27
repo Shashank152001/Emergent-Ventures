@@ -32,3 +32,17 @@ export async function userUpdate(data) {
     })
     return response.json() 
 }
+
+export const getRequest=async()=>{
+    const response=await fetch(url+'user/get-user-hierarchy',{
+        method:"GET",
+        headers:{"Content-Type": "application/json" },
+        credentials:"include"
+    })
+
+    if(!response.ok){
+        throw new Error('Data could not be fetched')
+    }else{
+        return await response.json();
+    }
+}

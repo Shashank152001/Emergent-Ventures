@@ -21,6 +21,7 @@ function Header() {
         ProfileFormData().then((data)=>{
           
           setProfileFormdata(data.data[0])
+          // console.log(data.data);
         })
       },[])
       

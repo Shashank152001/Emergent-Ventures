@@ -1,3 +1,4 @@
+import { async } from 'q';
 import {url} from '../Constant/Url';
 
 export async function leaveRequest(data){
@@ -23,3 +24,4 @@ export const leaveUser=async()=>{
         return await response.json()
     }
 }
+

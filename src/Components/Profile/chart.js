@@ -1,50 +1,34 @@
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect,useState } from "react";
 import OrgChart from "@balkangraph/orgchart.js";
-
-const url = 'https://nerve-calculation-mario-excluded.trycloudflare.com/user/get-user-hierarchy';
-
-
-const Chart = () => {
-
+import {getRequest} from '../../Service/ProfileService'
+const Chart = (props) => {
   const currentRef = useRef();
-
-  const[data,setData] = useState(null);
-
+  
+  const[hire,setHire]=useState(null)
 
   useEffect(()=>{
-
-    fetch(url,{
-      method:'GET',
-      headers: { "Content-Type": "application/json" },
-      credentials: "include",
-    }).then((res)=>res.json()).then((data)=>{
-      // console.log(data);
-      setData(data);
-    }).catch((err)=>{
-      console.log(err);
-    })
-
+      getRequest().then((data)=>{
+        console.log(data);
+        setHire(data)
+      })
   },[])
-
   useEffect(() => {
-
     OrgChart.templates.ana.plus = "";
     OrgChart.templates.ana.minus = "";
 
+    if(hire){
 
-    if(data){
-
-   const chart =  new OrgChart(currentRef.current, {
-     
-      nodes: data,
+    new OrgChart(currentRef.current, {
+      nodes: hire,
       enableSearch: false,
       mouseScrool: OrgChart.action.none,
       nodeMouseClick: OrgChart.action.none,
+
       toolbar: {
         zoom: true,
+
         fit: true,
       },
-
       tags: {
         "node-with-subtrees": {
           template: "group",
@@ -58,20 +42,17 @@ const Chart = () => {
       nodeBinding: {
         field_0: "name",
         field_1: "role",
-        img_0: "profileImage",
+        img_0:"profileImage"
       },
     });
-
-   
   }
-
-  }, [data]);
+  }, [hire]);
 
   return (
     <div
       id="tree"
       ref={currentRef}
-      style={{ height: "100vh"}}
+      style={{ height: "100%" }}
     ></div>
   );
 };

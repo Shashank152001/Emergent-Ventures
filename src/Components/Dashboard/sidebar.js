@@ -34,7 +34,7 @@ function Sidebar() {
             </li>
             <li style={{ padding: "1rem 0.9rem" }}>
               <BiWallet style={{ marginRight: "10px" }} />
-              <Link to='leave' style={{textDecoration:'none'}}>
+              <Link to='getRequest' style={{textDecoration:'none'}}>
               Myleaves
               </Link>
               

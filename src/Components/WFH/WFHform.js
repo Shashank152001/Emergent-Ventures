@@ -3,6 +3,7 @@ import { leaveRequest, leaveUser } from '../../Service/LeavesService';
 import './WFH.css';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Tab from './Tab';
 const WFHform = () => {
 	const [formData, setFormData] = useState({
 		email: '',
@@ -117,6 +118,7 @@ const WFHform = () => {
 				flexDirection: 'column'
 			}}
 		>
+			<Tab/>
 			<h4
 				style={{
 					fontWeight: '800',
