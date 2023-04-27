@@ -1,5 +1,6 @@
 import {url} from '../Constant/Url'
 export async function userLogin(data) {
+    
     const response=await fetch(url,{
         method:"POST",
         mode:'cors',

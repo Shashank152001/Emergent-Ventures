@@ -1,24 +1,27 @@
 import React from 'react'
 import './WFH.css';
 import Tab from './Tab';
-function GetRequest() {
+function ViewRequest() {
   return (
     <>
     <div className="container">
         <div className="row">
             <div className="col-md-12">
-                <Tab/>
+              <Tab/>
                 <table className='table table-hover'>
                     <thead>
                         <tr>
                           <td>Sr.No</td>
+                          <td>HRMID</td>
                           <td>Name</td>
+                          <td>Role</td>
                           <td>Request Type</td>
                           <td>Leave Type</td>
                           <td>Start Date</td>
                           <td>End Date</td>
                           <td>Reason</td>
                           <td>Status</td>
+                          <td>Action</td>
                         </tr>
                     </thead>
                     <tbody>
@@ -32,4 +35,4 @@ function GetRequest() {
   )
 }
 
-export default GetRequest
+export default ViewRequest
