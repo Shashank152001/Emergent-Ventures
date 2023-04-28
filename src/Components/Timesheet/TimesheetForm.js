@@ -192,11 +192,11 @@ const Timesheetform = () => {
 
                 </table>
                 <div className="row d-flex ">
-                    <div className="col-3 d-flex">
+                    <div className="col-6 d-flex">
                         <button onClick={addRow} className='border-0 bg-white'> <AiOutlinePlus color='blue' />
                             <span className='text-primary mx-1 my-1'>Add Row</span></button>
                     </div>
-                    <div className="col-4">
+                    <div className="col-6">
                         <h6>Total</h6>
                     </div>
                
