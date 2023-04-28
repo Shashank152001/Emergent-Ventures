@@ -25,3 +25,29 @@ export const leaveUser=async()=>{
     }
 }
 
+export const getLeaveRequest=async()=>{
+    const response=await fetch(url+'user/requests/get-user-requests',{
+        method:"GET",
+        headers:{"Content-Type": "application/json"},
+        credentials:'include',
+    })
+
+    if(!response.ok){
+        throw new Error('Data could not be fetched')
+    }else{
+        return await response.json();
+    }
+}
+
+export const getReportingLeaves=async()=>{
+    const response=await fetch(url+'user/requests/get-subordinates-requests',{
+        method:"GET",
+        headers:{"Content-Type": "application/json"},
+        credentials:'include'
+    })
+    if(!response.ok){
+        throw new Error('Data could not be fetched')
+    }else{
+        return await response.json()
+    }
+}

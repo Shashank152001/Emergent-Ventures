@@ -1,7 +1,17 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react'
 import './WFH.css';
 import Tab from './Tab';
+import {getLeaveRequest} from '../../Service/LeavesService'
 function GetRequest() {
+  const[userRequest,setUserRequest]=useState(null);
+
+
+  useEffect(()=>{
+    getLeaveRequest().then((data)=>{
+      console.log(data.data);
+      setUserRequest(data.data)
+    })
+  },[])
   return (
     <>
     <div className="container">
