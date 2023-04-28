@@ -19,6 +19,7 @@ import Chart from "./Components/Profile/chart";
 import GetRequest from "./Components/WFH/GetRequest";
 import ViewRequest from "./Components/WFH/ViewRequest";
 import WFHform from './Components/WFH/WFHform'
+import EditRequest from "./Components/WFH/EditRequest";
 function App() {
   return (
     <>
@@ -37,6 +38,7 @@ function App() {
               <Route element={<Home />} path="" />
               <Route element={<LeaveForm />} path="leave" />
               <Route element={<GetRequest />} path="getRequest" />
+              <Route element={<EditRequest/>} path="editrequest/:id" />
               <Route element={<ViewRequest />} path="viewRequest" />
               <Route element={<GetProfile />} path="getProfile" />
               <Route element={<Profile />} path="profile" />

@@ -1,4 +1,4 @@
-import { async } from 'q';
+
 import {url} from '../Constant/Url';
 
 export async function leaveRequest(data){
@@ -25,28 +25,36 @@ export const leaveUser=async()=>{
     }
 }
 
-export const getLeaveRequest=async()=>{
+export const YourRequestGetdata=async()=>{
     const response=await fetch(url+'user/requests/get-user-requests',{
-        method:"GET",
-        headers:{"Content-Type": "application/json"},
-        credentials:'include',
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
     })
-
+    
     if(!response.ok){
-        throw new Error('Data could not be fetched')
+        throw new Error('your Get Request Data not be fetched')
     }else{
-        return await response.json();
+        return await response.json()
     }
 }
-
-export const getReportingLeaves=async()=>{
+export async function EditUpdate(data) {
+    
+    const response=await fetch(url+'user/requests/update-subordinate-request',{
+        method:"PUT",
+        credentials:'include',
+        body:new URLSearchParams(data)
+    })
+    return response.json() 
+}
+export const ReportingGetdata=async()=>{
     const response=await fetch(url+'user/requests/get-subordinates-requests',{
-        method:"GET",
-        headers:{"Content-Type": "application/json"},
-        credentials:'include'
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
     })
     if(!response.ok){
-        throw new Error('Data could not be fetched')
+        throw new Error(' Data not be fetched')
     }else{
         return await response.json()
     }

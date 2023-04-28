@@ -23,7 +23,7 @@ export async function userDetail(data) {
     }) 
     return response.json()
 }
-export async function userUpdate(data) {
+export async function userUpdate(data) { 
     
     const response=await fetch(url+'user/account/update-user-profile',{
         method:"PUT",

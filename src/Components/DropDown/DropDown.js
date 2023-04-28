@@ -10,7 +10,7 @@ export const DropDown = () => {
     function handleLogOut(){
         logOut().then((data) => {
        
-            localStorage.removeItem('loggedInUser');
+            localStorage.clear();
             navigate("/");
             toast.success(`${data.message}`, {
 
