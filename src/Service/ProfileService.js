@@ -14,16 +14,7 @@ export const ProfileFormData=async()=>{
         return await response.json()
     }
 }
-export async function userDetail(data) {
-    const response=await fetch(url+'user/account/add-user-profile',{
-        method:"POST",
-        mode:'cors',
-        credentials:'include',
-        body:new URLSearchParams(data)
-    }) 
-    return response.json()
-}
-export async function userUpdate(data) {
+export async function userUpdate(data) { 
     
     const response=await fetch(url+'user/account/update-user-profile',{
         method:"PUT",

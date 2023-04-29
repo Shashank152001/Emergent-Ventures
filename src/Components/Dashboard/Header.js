@@ -87,9 +87,7 @@ function Header() {
                     style={{ marginBottom: "0" }}
                   >
                     <img
-                      src={ profileformdata.profileImage
-                        ? profileformdata.profileImage
-                        : img}
+                      src={ profileformdata.profileImage}
                       alt="profile"
                       style={{ width: "30px", height: "30px" }}
                     />
