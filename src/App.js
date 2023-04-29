@@ -15,7 +15,7 @@ import RedirectRoute from "./Service/RedirectRoute";
 import ErrorPage from "./Components/ErrorComponet/ErrorPage";
 import LeaveForm from "./Components/Leaves/leaveform";
 import Home from "./Components/Dashboard/home";
-import Chart from "./Components/Profile/chart";
+import Gethierarchy from './Components/Profile/Gethierarchy'
 import GetRequest from "./Components/WFH/GetRequest";
 import ViewRequest from "./Components/WFH/ViewRequest";
 import WFHform from './Components/WFH/WFHform'
@@ -42,7 +42,7 @@ function App() {
               <Route element={<ViewRequest />} path="viewRequest" />
               <Route element={<GetProfile />} path="getProfile" />
               <Route element={<Profile />} path="profile" />
-              <Route element={<Chart />} path="chart" />
+              <Route element={<Gethierarchy/>} path="chart" />
             </Route>
           </Route>
             

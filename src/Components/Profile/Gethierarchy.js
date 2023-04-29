@@ -1,7 +1,8 @@
 import { useRef, useEffect,useState } from "react";
 import OrgChart from "@balkangraph/orgchart.js";
+import "./Profile.css";
 import {getRequest} from '../../Service/ProfileService'
-const Chart = (props) => {
+const Gethierarchy = (props) => {
   const currentRef = useRef();
   
   const[hire,setHire]=useState(null)
@@ -26,7 +27,6 @@ const Chart = (props) => {
 
       toolbar: {
         zoom: true,
-
         fit: true,
       },
       tags: {
@@ -49,12 +49,17 @@ const Chart = (props) => {
   }, [hire]);
 
   return (
+    <>
+    
     <div
       id="tree"
       ref={currentRef}
-      style={{ height: "100%" }}
+      style={{height:"100%"}}
     ></div>
+   
+    
+    </>
   );
 };
 
-export default Chart;
+export default Gethierarchy;

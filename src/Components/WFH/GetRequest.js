@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { YourRequestGetdata } from '../../Service/LeavesService';
 import './WFH.css';
 import Tab from './Tab';
+import NoRecord from '../Project/norecord';
 
 function GetRequest() {
 
-  const [GetRequestData, SetGetRequestData] = useState([]);
+  const [GetRequestData, SetGetRequestData] = useState(null);
 
   useEffect(() => {
     YourRequestGetdata()
@@ -42,7 +43,8 @@ function GetRequest() {
                 </tr>
               </thead>
               <tbody>
-                {GetRequestData.map((item, index) => (
+                {GetRequestData?
+                GetRequestData.map((item, index) => (
                   <tr key={index}>
                     <td>{index + 1}</td>
                     <td>{item.email}</td>
@@ -59,7 +61,14 @@ function GetRequest() {
                     <td><i className="bi bi-check-circle-fill text-secondary ms-2"></i></td>
                 }
                   </tr>
-                ))}
+                ))
+                :
+                <>
+                <tr>
+                  <td colSpan='8'><NoRecord/></td>
+                </tr>
+                </>
+              }
 
               </tbody>
             </table>

@@ -42,8 +42,8 @@ function SignUp() {
       
         if (!formData.password) {
           errors.password = 'Please enter a password';
-        } else if (formData.password.length < 8) {
-          errors.password = 'Password must be at least 8 characters';
+        } else if (formData.password.length < 3) {
+          errors.password = 'Password must be at least 3 characters';
         }
       
 

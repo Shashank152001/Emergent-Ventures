@@ -1,25 +1,16 @@
 import React, { useState, useEffect } from "react";
 import "./Profile.css";
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
 import { Dialog } from "primereact/dialog";
 import { Button } from "primereact/button";
 import Avatar from "react-avatar-edit";
 import "primeicons/primeicons.css";
-import img from '../../Assest/profile.jpg'
+import img from "../../Assest/profile.jpg";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import {
-  ProfileFormData,
-  userDetail,
-  userUpdate,
-} from "../../Service/ProfileService";
-import {
-  fetchSkills,
-  postSkills,
-  updateSkills,
-} from "../../Service/SkillService";
+import { ProfileFormData, userUpdate } from "../../Service/ProfileService";
+import { fetchSkills, updateSkills } from "../../Service/SkillService";
 import "react-toastify/dist/ReactToastify.css";
-
 
 function Profile() {
   const navigate = useNavigate();
@@ -29,7 +20,6 @@ function Profile() {
   const [poststate, setPostState] = useState(false);
   const [skillstate, setSkillState] = useState(false);
   const [profileformdata, setProfileFormData] = useState([]);
- 
 
   const [formData, setFormData] = useState({
     profileImage: "",
@@ -46,144 +36,71 @@ function Profile() {
     certifications: "",
   });
 
-
-
   useEffect(() => {
     if (poststate) {
-     
       ProfileFormData().then((data) => {
-        if (data.data[0].userId !== null) {
-          
-          userUpdate(formData)
-            .then((data) => {
-              navigate("/dashboard/getProfile");
-              toast.success("Profile Updated Successfull", {
-                position: "top-left",
-                autoClose: 2000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "colored",
-              });
-            })
-            .catch((e) => {
-             
-              toast.error("Could not Connect with Server", {
-                position: "top-right",
-                autoClose: 2000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "colored",
-              });
+        userUpdate(formData)
+          .then((data) => {
+            navigate("/dashboard/getProfile");
+            toast.success("Profile Updated Successfull", {
+              position: "top-left",
+              autoClose: 2000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "colored",
             });
-        } else {
-          userDetail(formData)
-            .then((data) => {
-              
-              if (data.message === "User profile created successfully") {
-                navigate("/dashboard/getProfile");
-                toast.success("Profile Submitted Successfully", {
-                  position: "top-left",
-                  autoClose: 2000,
-                  hideProgressBar: false,
-                  closeOnClick: true,
-                  pauseOnHover: true,
-                  draggable: true,
-                  progress: undefined,
-                  theme: "colored",
-                });
-                console.log("Navigate successfully");
-              }
-            })
-            .catch((e) => {
-              
-              toast.error("Could not Connect with Server", {
-                position: "top-right",
-                autoClose: 2000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "colored",
-              });
+          })
+          .catch((e) => {
+            toast.error("Could not Connect with Server", {
+              position: "top-right",
+              autoClose: 2000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "colored",
             });
-        }
+          });
       });
     }
-  }, [poststate,navigate,formData]);
+  }, [poststate, navigate, formData]);
 
   useEffect(() => {
     if (skillstate) {
-      fetchSkills()
-        .then((data) => {
-          
-          if (data.data[0].userId !== null) {
-            updateSkills(skillData)
-              .then((data) => {
-                
-                navigate("/dashboard/getProfile");
-                toast.success("Skills Updated Successfully", {
-                  position: "top-left",
-                  autoClose: 2000,
-                  hideProgressBar: false,
-                  closeOnClick: true,
-                  pauseOnHover: true,
-                  draggable: true,
-                  progress: undefined,
-                  theme: "colored",
-                });
-              })
-              .catch((e) => {
-                
-                toast.error("Could not Connect with Server", {
-                  position: "top-right",
-                  autoClose: 2000,
-                  hideProgressBar: false,
-                  closeOnClick: true,
-                  pauseOnHover: true,
-                  draggable: true,
-                  progress: undefined,
-                  theme: "colored",
-                });
-              });
-          } else {
-            postSkills(skillData).then((data) => {
-              
-              navigate("/dashboard/getProfile");
-              toast.success("Skills Submitted Successfully", {
-                position: "top-left",
-                autoClose: 2000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "colored",
-              });
+      fetchSkills().then((data) => {
+        updateSkills(skillData)
+          .then((data) => {
+            navigate("/dashboard/getProfile");
+            toast.success("Skills Updated Successfully", {
+              position: "top-left",
+              autoClose: 2000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "colored",
             });
-          }
-        })
-        .catch((e) => {
-          
-          toast.error("Could not Connect with Server", {
-            position: "top-right",
-            autoClose: 2000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "colored",
+          })
+          .catch((e) => {
+            toast.error("Could not Connect with Server", {
+              position: "top-right",
+              autoClose: 2000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "colored",
+            });
           });
-        });
+      });
     }
-  }, [skillstate,navigate,skillData]);
+  }, [skillstate, navigate, skillData]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -194,7 +111,6 @@ function Profile() {
     setSkillState(true);
   };
 
-
   const onClose = () => {
     setpview(null);
   };
@@ -202,16 +118,13 @@ function Profile() {
     setpview(view);
   };
   const savecropimage = () => {
-   
     setFormData((prevState) => ({ ...prevState, profileImage: pview }));
-  
 
     setsrc(pview);
- 
+
     setimagecrop(false);
   };
   const profileclick = () => {
-   
     setimagecrop(true);
   };
 
@@ -219,8 +132,6 @@ function Profile() {
   useEffect(() => {
     ProfileFormData()
       .then((profiledata) => {
-      
-
         setProfileFormData(profiledata.data[0]);
         setFormData({
           profileImage: profiledata.data[0].profileImage,
@@ -230,7 +141,6 @@ function Profile() {
           country: profiledata.data[0].country,
           emergencyPhone: profiledata.data[0].emergencyPhone,
         });
-      
       })
       .catch((e) => {
         console.log(e.message);
@@ -239,8 +149,6 @@ function Profile() {
 
   useEffect(() => {
     fetchSkills().then((data) => {
-     
-      
       setSkillData({
         primarySkills: data.data[0].primarySkills,
         secondarySkills: data.data[0].secondarySkills,
@@ -263,7 +171,6 @@ function Profile() {
     <>
       <div className="main-container ">
         <div className="wrapper d-flex">
-          
           <div
             className="right-sidebar"
             style={{
@@ -273,7 +180,6 @@ function Profile() {
               right: "0",
             }}
           >
-            
             <div className="container">
               <div className="formDetail-container">
                 <div className="Profile-upload">
@@ -293,11 +199,8 @@ function Profile() {
                             objectFit: "cover",
                           }}
                           onClick={profileclick}
-                          src={
-                            formData.profileImage ? formData.profileImage : src
-                          }
+                          src={formData.profileImage}
                           alt=""
-                          
                         />
                       </>
                     ) : (
@@ -309,11 +212,19 @@ function Profile() {
                     </label>
                     <Dialog
                       className=""
-                      style={{position:'absolute',zIndex:'1000',top:'0' ,right:'25%'}}
+                      style={{
+                        position: "absolute",
+                        zIndex: "1000",
+                        top: "0",
+                        right: "25%",
+                      }}
                       visible={imagecrop}
                       onHide={() => setimagecrop(false)}
                     >
-                      <div className=" z-2 position-absolute p-5 card" style={{top:'0',right:"25%"}}>
+                      <div
+                        className=" z-2 position-absolute p-5 card"
+                        style={{ top: "0", right: "25%" }}
+                      >
                         <p className="">Update Profile</p>
                         <Avatar
                           width={200}
