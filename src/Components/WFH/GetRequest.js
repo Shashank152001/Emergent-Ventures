@@ -58,7 +58,7 @@ function GetRequest() {
                     :
                     item.status==='Rejected'?
                     <td><i className="bi bi-x-circle-fill text-danger ms-2"></i></td>:
-                    <td><i className="bi bi-check-circle-fill text-secondary ms-2"></i></td>
+                    <td><i className="bi bi-hourglass text-warning ms-2"></i></td>
                 }
                   </tr>
                 ))
