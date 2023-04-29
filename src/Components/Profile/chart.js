@@ -8,13 +8,14 @@ const Chart = (props) => {
 
   useEffect(()=>{
       getRequest().then((data)=>{
-        console.log(data);
+        // console.log(data);
         setHire(data)
       })
   },[])
   useEffect(() => {
     OrgChart.templates.ana.plus = "";
     OrgChart.templates.ana.minus = "";
+    
 
     if(hire){
 
@@ -23,6 +24,7 @@ const Chart = (props) => {
       enableSearch: false,
       mouseScrool: OrgChart.action.none,
       nodeMouseClick: OrgChart.action.none,
+      template: "ula",
 
       toolbar: {
         zoom: true,
@@ -52,7 +54,7 @@ const Chart = (props) => {
     <div
       id="tree"
       ref={currentRef}
-      style={{ height: "100%" }}
+      // style={{position: 'absolute', }}
     ></div>
   );
 };

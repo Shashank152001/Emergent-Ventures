@@ -19,9 +19,7 @@ function Header() {
      
       useEffect(()=>{
         ProfileFormData().then((data)=>{
-          
-          setProfileFormdata(data.data[0])
-          // console.log(data.data);
+          setProfileFormdata(data.data[0]);
         })
       },[])
       
@@ -31,7 +29,9 @@ function Header() {
             style={{
               padding: "0.9rem 0",
               borderBottom: "1px solid #000",
-              position: "sticky",
+              position: "fixed",
+              // position: "sticky",
+              width:'87%',
               top: "0",
               zIndex: "9",
             }}

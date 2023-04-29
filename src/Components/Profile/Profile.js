@@ -267,7 +267,7 @@ function Profile() {
           <div
             className="right-sidebar"
             style={{
-              position: "absolute",
+              // position: "absolute",
               width: "100%",
               height: "100%",
               right: "0",
