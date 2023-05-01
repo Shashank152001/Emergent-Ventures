@@ -56,7 +56,7 @@ const Gethierarchy = (props) => {
     <div
       id="tree"
       ref={currentRef}
-      // style={{position: 'absolute', }}
+      style={{marginBottom:'0.9rem'}}
     ></div>
    
     

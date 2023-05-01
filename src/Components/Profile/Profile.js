@@ -13,6 +13,7 @@ import { fetchSkills, updateSkills } from "../../Service/SkillService";
 import "react-toastify/dist/ReactToastify.css";
 
 function Profile() {
+  
   const navigate = useNavigate();
   const [imagecrop, setimagecrop] = useState(false);
   const [src, setsrc] = useState(img);

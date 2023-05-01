@@ -5,10 +5,13 @@ import FileUpload from "./fileupload";
 import { DropDown } from "../DropDown/DropDown";
 import img from '../../Assest/profile.jpg'
 import {ProfileFormData} from '../../Service/ProfileService'
+
 function Header() {
+    
     const [showModal, setShowModal] = useState(false);
     const[openProfile,setOpenProfile]=useState(false);
     const[profileformdata,setProfileFormdata]=useState([])
+     
     const handleCloseModal = () => {
         setShowModal(false);
       };

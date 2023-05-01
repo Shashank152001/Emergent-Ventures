@@ -13,7 +13,7 @@
   width: 100%;
 }
 
-li {
+.li-style {
   list-style-type: none !important;
   width: 100%;
   display: block;

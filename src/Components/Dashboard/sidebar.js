@@ -20,7 +20,7 @@ function Sidebar() {
         <div className="menu-item" style={{ marginTop: "2rem" }}>
           <ul>
             <li
-              className="li-bg"
+              className="li-bg li-style"
               style={{
                 padding: "1rem 0.9rem",
                 borderLeft: "10px solid #088dda",
@@ -32,20 +32,20 @@ function Sidebar() {
               </Link>
               
             </li>
-            <li style={{ padding: "1rem 0.9rem" }}>
+            <li style={{ padding: "1rem 0.9rem" }} className="li-style">
               <BiWallet style={{ marginRight: "10px" }} />
               <Link to='getRequest' style={{textDecoration:'none'}}>
               Myleaves
               </Link>
               
             </li>
-            <li style={{ padding: "1rem 0.9rem" }}>
+            <li style={{ padding: "1rem 0.9rem" }} className="li-style">
               <BiUser style={{ marginRight: "10px" }} />
               <Link to='getProfile' style={{textDecoration:'none'}}>
               Account
               </Link>
             </li>
-            <li style={{ padding: "1rem 0.9rem" }}>
+            <li style={{ padding: "1rem 0.9rem" }} className="li-style">
               
               <SkillIcon/>
               <Link to='skill' style={{textDecoration:'none'}}>
@@ -53,7 +53,7 @@ function Sidebar() {
               </Link>
               
             </li>
-            <li style={{ padding: "1rem 0.9rem" }}>
+            <li style={{ padding: "1rem 0.9rem" }} className="li-style">
               <BiCog style={{ marginRight: "10px" }} />
                
                <Link to='settings' style={{textDecoration:'none'}}>
