@@ -9,13 +9,14 @@ const Gethierarchy = (props) => {
 
   useEffect(()=>{
       getRequest().then((data)=>{
-        console.log(data);
+        // console.log(data);
         setHire(data)
       })
   },[])
   useEffect(() => {
     OrgChart.templates.ana.plus = "";
     OrgChart.templates.ana.minus = "";
+    
 
     if(hire){
 
@@ -24,6 +25,7 @@ const Gethierarchy = (props) => {
       enableSearch: false,
       mouseScrool: OrgChart.action.none,
       nodeMouseClick: OrgChart.action.none,
+      template: "ula",
 
       toolbar: {
         zoom: true,
@@ -54,6 +56,7 @@ const Gethierarchy = (props) => {
     <div
       id="tree"
       ref={currentRef}
+      style={{marginBottom:'0.9rem'}}
     ></div>
    
     

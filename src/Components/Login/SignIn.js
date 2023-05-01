@@ -20,16 +20,13 @@ function SignIn() {
 
   useEffect(() => {
     if (isFilled) {
-      
-
       userLogin(formData)
         .then(async (response) => {
-
           const msg = await response.json().then((data) => {
             console.log(data);
             return data.message;
           });
-            // console.log(msg);
+          
           if (response.status === 201) {
             navigate("/dashboard");
             toast.success(`${msg}`, {
@@ -141,13 +138,18 @@ function SignIn() {
             </div>
           </div>
           <div className="right d-flex flex-column justify-content-center">
-            <form id="form" onSubmit={handleSubmit}>
+            <form
+              id="form"
+              onSubmit={handleSubmit}
+              className="needs-validation"
+              novalidate
+            >
               <div>
                 <h1 className="signin-title">Sign In</h1>
               </div>
               <div>
                 <div className="field position-relative">
-                  <label htmlFor="email" className="label">
+                  <label htmlFor="email" className="label form-label">
                     Email address
                   </label>
                   <input
@@ -157,10 +159,15 @@ function SignIn() {
                     placeholder="example@celebaltech.com"
                     onChange={handleChange}
                     value={formData.email}
+                    className="form-control is-invalid"
+                    required
                   />
-                  {formErrors.email && (
+
+                  {/* is-valid,is=invalid  */}
+                  <div class="invalid-feedback">enter valid email</div>
+                  {/* {formErrors.email && (
                     <span className="error-span">{formErrors.email}</span>
-                  )}
+                  )} */}
                 </div>
                 <div className="field position-relative">
                   <label htmlFor="password" className="label">
@@ -174,9 +181,11 @@ function SignIn() {
                     onChange={handleChange}
                     value={formData.password}
                   />
-                  {formErrors.password && (
+                  
+
+                  {/* {formErrors.password && (
                     <span className="error-span">{formErrors.password}</span>
-                  )}
+                  )} */}
                 </div>
                 <div className="last">
                   <div>

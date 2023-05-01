@@ -21,6 +21,7 @@ function Timer() {
     });
     return () => {
       socket.disconnect();
+      socket.off('startClock');
     };
   }, []);
 
@@ -47,6 +48,7 @@ function Timer() {
       socket.off("status");
       socket.off("checkin");
       socket.off("checkout");
+      socket.off("checkedIn");
     };
   }, []);
 

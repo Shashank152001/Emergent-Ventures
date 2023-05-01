@@ -5,6 +5,7 @@ import {LoginContext } from '../../Context/LoginContext'
 import FileUpload from "./fileupload";
 import { DropDown } from "../DropDown/DropDown";
 import {ProfileFormData} from '../../Service/ProfileService'
+
 function Header() {
     
     const [showModal, setShowModal] = useState(false);
@@ -35,7 +36,9 @@ function Header() {
             style={{
               padding: "0.9rem 0",
               borderBottom: "1px solid #000",
-              position: "sticky",
+              position: "fixed",
+              // position: "sticky",
+              width:'87%',
               top: "0",
               zIndex: "9",
             }}

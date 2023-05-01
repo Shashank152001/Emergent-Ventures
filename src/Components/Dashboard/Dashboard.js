@@ -53,9 +53,11 @@ function MyDashBoard() {
             style={{
               overflowY: "auto",
               overflowX: "hidden",
-              position: "absolute",
+              // position: "absolute",
+              position: "relative",
               width: "100%",
-              height: "100vh",
+              // height: "100vh",
+              top:'5rem'
             }}
           >
             <Outlet/>

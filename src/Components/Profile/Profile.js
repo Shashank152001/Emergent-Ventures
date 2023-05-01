@@ -12,6 +12,7 @@ import { fetchSkills, updateSkills } from "../../Service/SkillService";
 import "react-toastify/dist/ReactToastify.css";
 
 function Profile() {
+  
   const navigate = useNavigate();
   const [imagecrop, setimagecrop] = useState(false);
   const [pview, setpview] = useState(false);
@@ -173,7 +174,7 @@ function Profile() {
           <div
             className="right-sidebar"
             style={{
-              position: "absolute",
+              // position: "absolute",
               width: "100%",
               height: "100%",
               right: "0",

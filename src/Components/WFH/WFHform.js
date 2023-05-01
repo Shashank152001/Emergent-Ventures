@@ -115,7 +115,8 @@ const WFHform = () => {
 		<div
 			style={{
 				background: '#ffffff',
-				position: 'absolute',
+				// position: 'absolute',
+				// position: 'relative',
 				padding: '2rem',
 				display: 'flex',
 				flexDirection: 'column'
