@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect,useState } from "react";
 import "./App.css";
+import {LoginContext} from './Context/LoginContext'
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -20,9 +21,18 @@ import GetRequest from "./Components/WFH/GetRequest";
 import ViewRequest from "./Components/WFH/ViewRequest";
 import WFHform from './Components/WFH/WFHform'
 import EditRequest from "./Components/WFH/EditRequest";
+
 function App() {
+
+  const[profileformdata,setProfileFormdata]=useState({
+    name:'',
+    profileImage:''
+  })
+  
+   
   return (
     <>
+    <LoginContext.Provider value={{profileformdata,setProfileFormdata}}>
       <Router>
         <Routes>
           <Route element={<RedirectRoute />} path="/">
@@ -44,7 +54,10 @@ function App() {
               <Route element={<Profile />} path="profile" />
               <Route element={<Gethierarchy/>} path="chart" />
             </Route>
+            
+           
           </Route>
+            
             
           
           <Route element={<ProtectRoute />} path="/leaverequest">
@@ -54,6 +67,7 @@ function App() {
           <Route element={<ErrorPage />} path="*"></Route>
         </Routes>
       </Router>
+      </LoginContext.Provider>
       <ToastContainer />
     </>
   );

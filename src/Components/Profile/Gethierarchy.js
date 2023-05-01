@@ -54,7 +54,6 @@ const Gethierarchy = (props) => {
     <div
       id="tree"
       ref={currentRef}
-      style={{height:"100%"}}
     ></div>
    
     

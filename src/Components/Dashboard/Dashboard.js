@@ -1,15 +1,18 @@
-import React,{useState,useEffect} from "react";
+import React,{useState,useEffect, useContext} from "react";
 import "./Dashboard.css";
 import Sidebar from "./sidebar";
+import {LoginContext} from '../../Context/LoginContext'
 import {userData} from '../../Service/DashboardService'
 import Loader from "../Spinner/Loader";
 import Header from "./Header";
 import {Outlet} from 'react-router-dom';
-
+import {ProfileFormData} from '../../Service/ProfileService'
 
 function MyDashBoard() {
    
     const[userDatas,setUserDatas]=useState(null)
+    
+    const{profileformdata,setProfileFormdata}=useContext(LoginContext)
   
     useEffect(()=>{
       
@@ -19,6 +22,9 @@ function MyDashBoard() {
         console.log(e.message)
       })
     },[])
+    
+
+    
 
       
   return (
@@ -35,7 +41,12 @@ function MyDashBoard() {
             right: "0",
           }}
         >
+         
+          <LoginContext.Provider value={{profileformdata,setProfileFormdata}}>
           <Header/>
+          </LoginContext.Provider>
+          
+           
           
           <div
             className="right-middle-content"
