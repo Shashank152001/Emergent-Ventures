@@ -2,9 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { leaveRequest, leaveUser } from '../../Service/LeavesService';
 import './WFH.css';
 import { toast } from 'react-toastify';
+import {useNavigate} from 'react-router-dom'
 import 'react-toastify/dist/ReactToastify.css';
 import Tab from './Tab';
 const WFHform = () => {
+	const navigate=useNavigate()
 	const [formData, setFormData] = useState({
 		email: '',
 		startDate: '',
@@ -32,6 +34,7 @@ const WFHform = () => {
   useEffect(()=>{
     if(isFilled){
       leaveRequest(formData).then((data)=>{
+		navigate('/dashboard/getRequest')
         toast.success('Request Submitted Successfull', {
           position: "top-left",
           autoClose: 2000,

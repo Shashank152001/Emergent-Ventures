@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useContext } from "react";
 import "./Profile.css";
 import { useNavigate } from "react-router-dom";
 import { Dialog } from "primereact/dialog";
 import { Button } from "primereact/button";
 import Avatar from "react-avatar-edit";
 import "primeicons/primeicons.css";
-import img from "../../Assest/profile.jpg";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { ProfileFormData, userUpdate } from "../../Service/ProfileService";
@@ -16,11 +15,11 @@ function Profile() {
   
   const navigate = useNavigate();
   const [imagecrop, setimagecrop] = useState(false);
-  const [src, setsrc] = useState(img);
   const [pview, setpview] = useState(false);
   const [poststate, setPostState] = useState(false);
   const [skillstate, setSkillState] = useState(false);
-  const [profileformdata, setProfileFormData] = useState([]);
+  const [profileformData, setProfileFormData] = useState([]);
+  
 
   const [formData, setFormData] = useState({
     profileImage: "",
@@ -42,7 +41,9 @@ function Profile() {
       ProfileFormData().then((data) => {
         userUpdate(formData)
           .then((data) => {
+            
             navigate("/dashboard/getProfile");
+            
             toast.success("Profile Updated Successfull", {
               position: "top-left",
               autoClose: 2000,
@@ -120,9 +121,6 @@ function Profile() {
   };
   const savecropimage = () => {
     setFormData((prevState) => ({ ...prevState, profileImage: pview }));
-
-    setsrc(pview);
-
     setimagecrop(false);
   };
   const profileclick = () => {
@@ -133,6 +131,7 @@ function Profile() {
   useEffect(() => {
     ProfileFormData()
       .then((profiledata) => {
+
         setProfileFormData(profiledata.data[0]);
         setFormData({
           profileImage: profiledata.data[0].profileImage,
@@ -188,7 +187,7 @@ function Profile() {
                 </div>
                 <form onSubmit={handleSubmit}>
                   <div className="d-flex flex-column ">
-                    {profileformdata ? (
+                    {profileformData ? (
                       <>
                         <img
                           className="profile-img"
@@ -201,7 +200,7 @@ function Profile() {
                           }}
                           onClick={profileclick}
                           src={formData.profileImage}
-                          alt=""
+                          alt="error_image"
                         />
                       </>
                     ) : (
@@ -209,7 +208,7 @@ function Profile() {
                     )}
 
                     <label htmlFor="" className="d-flex justify-content-center">
-                      {profileformdata ? profileformdata.name : ""}
+                      {profileformData ? profileformData.name : ""}
                     </label>
                     <Dialog
                       className=""
@@ -232,7 +231,7 @@ function Profile() {
                           height={200}
                           onCrop={onCrop}
                           onClose={onClose}
-                          src={src}
+                          src={profileformData.profileImage}
                           sheadingColor={"#474649"}
                           backgroundColor={"#00FFFF"}
                           // onFileLoad ={(file)=>{
@@ -259,7 +258,7 @@ function Profile() {
                       <input
                         type="text"
                         className="form-control"
-                        value={profileformdata?.hrmid || "HRM ID"}
+                        value={profileformData?.hrmid || "HRM ID"}
                         style={{ backgroundColor: "#EAEAEA" }}
                         onChange={handleChange}
                       />
@@ -269,7 +268,7 @@ function Profile() {
                       <input
                         type="text"
                         className="form-control"
-                        value={profileformdata?.name || "Name"}
+                        value={profileformData?.name || "Name"}
                         style={{ backgroundColor: "#EAEAEA" }}
                         onChange={handleChange}
                         disabled
@@ -282,7 +281,7 @@ function Profile() {
                       <input
                         type="text"
                         className="form-control"
-                        value={profileformdata?.role || "Job Role"}
+                        value={profileformData?.role || "Job Role"}
                         style={{ backgroundColor: "#EAEAEA" }}
                         onChange={handleChange}
                       />
@@ -293,7 +292,7 @@ function Profile() {
                         type="text"
                         className="form-control"
                         value={
-                          profileformdata?.reportingManager ||
+                          profileformData?.reportingManager ||
                           "Reproting Manager"
                         }
                         style={{ backgroundColor: "#EAEAEA" }}
@@ -307,7 +306,7 @@ function Profile() {
                       <input
                         type="text"
                         className="form-control"
-                        value={profileformdata?.email || "Email Id"}
+                        value={profileformData?.email || "Email Id"}
                         style={{ backgroundColor: "#EAEAEA" }}
                         onChange={handleChange}
                       />
@@ -317,7 +316,7 @@ function Profile() {
                       <input
                         type="password"
                         className="form-control"
-                        value={profileformdata?.password || "Password"}
+                        value={profileformData?.password || "Password"}
                         style={{ backgroundColor: "#EAEAEA" }}
                         onChange={handleChange}
                       />
@@ -329,7 +328,7 @@ function Profile() {
                       <input
                         type="date"
                         className="form-control"
-                        value={profileformdata?.joiningDate || "Joining Date"}
+                        value={profileformData?.joiningDate || "Joining Date"}
                         style={{ backgroundColor: "#EAEAEA" }}
                         onChange={handleChange}
                       />
@@ -339,7 +338,7 @@ function Profile() {
                       <input
                         type="text"
                         className="form-control"
-                        value={profileformdata?.location || "Location"}
+                        value={profileformData?.location || "Location"}
                         style={{ backgroundColor: "#EAEAEA" }}
                         onChange={handleChange}
                       />
@@ -351,7 +350,7 @@ function Profile() {
                       <input
                         type="text"
                         className="form-control"
-                        value={profileformdata?.phone || "Phone"}
+                        value={profileformData?.phone || "Phone"}
                         style={{ backgroundColor: "#EAEAEA" }}
                         onChange={handleChange}
                       />
