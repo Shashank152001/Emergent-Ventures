@@ -48,13 +48,13 @@
     vertical-align: baseline !important;
   }
 
-/* td p{
+.p{
     margin-bottom:0 !important;
 }
 
-td span{
+.span{
     color: #000  ;
     padding: 0.4rem ;
     padding-bottom:0;
-} */
+}
 

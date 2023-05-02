@@ -213,10 +213,11 @@ function Profile() {
                     <Dialog
                       className=""
                       style={{
-                        position: "absolute",
+                        // position: "absolute",
+                        position: "relative",
                         zIndex: "1000",
                         top: "0",
-                        right: "25%",
+                        right: "6%",
                       }}
                       visible={imagecrop}
                       onHide={() => setimagecrop(false)}
