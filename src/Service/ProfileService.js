@@ -15,7 +15,7 @@ export const ProfileFormData=async()=>{
     }
 }
 export async function userDetail(data) {
-    const response=await fetch(url+'user/account/add-user-profile',{
+    const response=await fetch(url+'user/account/add-user-profile',{    
         method:"POST",
         mode:'cors',
         credentials:'include',
