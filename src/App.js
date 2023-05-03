@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect,useState } from "react";
 import "./App.css";
+import {LoginContext} from './Context/LoginContext'
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -15,22 +16,36 @@ import RedirectRoute from "./Service/RedirectRoute";
 import ErrorPage from "./Components/ErrorComponet/ErrorPage";
 import LeaveForm from "./Components/Leaves/leaveform";
 import Home from "./Components/Dashboard/home";
-import Chart from "./Components/Profile/chart";
+import Gethierarchy from './Components/Profile/Gethierarchy'
 import GetRequest from "./Components/WFH/GetRequest";
 import ViewRequest from "./Components/WFH/ViewRequest";
 import WFHform from './Components/WFH/WFHform'
 import EditRequest from "./Components/WFH/EditRequest";
+import GetUserTimesheet from "./Components/Timesheet/GetUserTimesheet";
+import GetRmTimesheet from "./Components/Timesheet/GetRmTimesheet";
+
 function App() {
+
+  const[profileformdata,setProfileFormdata]=useState({
+    name:'',
+    profileImage:''
+  })
+  
+   
   return (
     <>
+    <LoginContext.Provider value={{profileformdata,setProfileFormdata}}>
       <Router>
         <Routes>
           <Route element={<RedirectRoute />} path="/">
             <Route element={<SignIn />} path="/"></Route>
+            
           </Route>
           <Route element={<SignUp />} path="/signup"></Route>
           <Route element={<EmployeeTable />} path="/table"></Route>
           <Route element={<TimesheetForm />} path="/Timesheetform"></Route>
+          <Route element={<GetUserTimesheet/>} path="/GetUserTimesheet"></Route>
+          <Route element={<GetRmTimesheet/>} path="/GetRmTimesheet"></Route>
           {/* for hierarchy testing */}
 
           <Route element={<ProtectRoute />} path="/dashboard">
@@ -42,9 +57,13 @@ function App() {
               <Route element={<ViewRequest />} path="viewRequest" />
               <Route element={<GetProfile />} path="getProfile" />
               <Route element={<Profile />} path="profile" />
-              <Route element={<Chart />} path="chart" />
+              <Route element={<Gethierarchy/>} path="chart" />
+              
             </Route>
+            
+           
           </Route>
+            
             
           
           <Route element={<ProtectRoute />} path="/leaverequest">
@@ -54,6 +73,7 @@ function App() {
           <Route element={<ErrorPage />} path="*"></Route>
         </Routes>
       </Router>
+      </LoginContext.Provider>
       <ToastContainer />
     </>
   );

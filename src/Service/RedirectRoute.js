@@ -2,7 +2,7 @@ import React from 'react'
 import {Outlet,Navigate} from 'react-router-dom'
 const RedirectRoute=()=>{
 
-    console.log("redirect..............")
+    
   
     const auth = localStorage.getItem('loggedInUser')
     

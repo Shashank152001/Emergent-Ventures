@@ -1,14 +1,17 @@
-import React ,{useState,useEffect}from "react";
+import React ,{useState,useEffect,useContext}from "react";
 import { BiBell, BiChevronDown, BiSearch ,BiPlusCircle} from "react-icons/bi";
 import "./Dashboard.css";
+import {LoginContext } from '../../Context/LoginContext'
 import FileUpload from "./fileupload";
 import { DropDown } from "../DropDown/DropDown";
-import img from '../../Assest/profile.jpg'
 import {ProfileFormData} from '../../Service/ProfileService'
+
 function Header() {
+    
     const [showModal, setShowModal] = useState(false);
     const[openProfile,setOpenProfile]=useState(false);
-    const[profileformdata,setProfileFormdata]=useState([])
+    const{profileformdata,setProfileFormdata}=useContext(LoginContext)
+    
     const handleCloseModal = () => {
         setShowModal(false);
       };
@@ -16,22 +19,26 @@ function Header() {
       const handleShowModal = () => {
         setShowModal(true);
       };
-     
       useEffect(()=>{
         ProfileFormData().then((data)=>{
-          
-          setProfileFormdata(data.data[0])
-          // console.log(data.data);
+          setProfileFormdata({
+            name:data.data[0].name,
+            profileImage:data.data[0].profileImage
+          })
         })
       },[])
       
+      
   return (
+    
     <div
             className="right-top"
             style={{
               padding: "0.9rem 0",
               borderBottom: "1px solid #000",
-              position: "sticky",
+              position: "fixed",
+              // position: "sticky",
+              width:'87%',
               top: "0",
               zIndex: "9",
             }}
@@ -87,9 +94,8 @@ function Header() {
                     style={{ marginBottom: "0" }}
                   >
                     <img
-                      src={ profileformdata.profileImage
-                        ? profileformdata.profileImage
-                        : img}
+                      src={ 
+                        profileformdata?.profileImage || ''}
                       alt="profile"
                       style={{ width: "30px", height: "30px" }}
                     />
@@ -98,7 +104,7 @@ function Header() {
                  
                   <p className="" style={{ marginBottom: "0" }}>
                     <span style={{ paddingLeft: "0.5rem", color: "#000" }}>
-                      {profileformdata.name}
+                      {profileformdata?.name || ''}
                     </span>
                     <BiChevronDown style={{ marginLeft: "0.4rem" }} onClick={()=>{setOpenProfile((prev)=>!prev)}}/>
                   </p>

@@ -1,27 +1,26 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useContext } from "react";
 import "./Profile.css";
 import { Link} from "react-router-dom";
 import "primeicons/primeicons.css";
-import img from '../../Assest/profile.jpg'
 import { ProfileFormData } from "../../Service/ProfileService";
 import { fetchSkills } from "../../Service/SkillService";
 
 import "react-toastify/dist/ReactToastify.css";
+import { LoginContext } from "../../Context/LoginContext";
 
 function GetProfile() {
 
-  const [profileformdata, setProfileFormData] = useState([]);
+  const{profileformdata,setProfileFormdata}=useContext(LoginContext)
+  const[profileFormData,setProfileFormData]=useState(null)
   const [skilldata, setSkillData] = useState([]);
   
 
-  //Profile Get Data
+  // Profile Get Data
   useEffect(() => {
     ProfileFormData()
-      .then((profiledata) => {
-       
-
-        setProfileFormData(profiledata.data[0]);
-       
+      .then((data) => {
+        setProfileFormdata({name:data.data[0].name,profileImage:data.data[0].profileImage})
+        setProfileFormData(data.data[0]);   
       })
       .catch((e) => {
         console.log(e.message);
@@ -41,15 +40,17 @@ function GetProfile() {
           <div
             className="right-sidebar"
             style={{
-              position: "absolute",
+              // position: "absolute",
               width: "100%",
               height: "100%",
               right: "0",
             }}
           >
           
-
+         
             <div className="container">
+            
+           
               <div className="row">
                 <div className="col-md-12">
                   <img
@@ -63,8 +64,6 @@ function GetProfile() {
                     }}
                     src={
                       profileformdata.profileImage
-                        ? profileformdata.profileImage
-                        : img
                     }
                     alt=""
                     
@@ -107,7 +106,7 @@ function GetProfile() {
                       disabled
                       style={{ border: "none", backgroundColor: "white" }}
                       className="ms-4 fs-5"
-                      value={profileformdata?.hrmid || ''}
+                      value={profileFormData?.hrmid || ''}
                     />
                   </div>
                   <div className="p-2 d-flex ">
@@ -135,7 +134,7 @@ function GetProfile() {
                       disabled
                       style={{ border: "none", backgroundColor: "white" }}
                       className="ms-4 fs-5"
-                      value={profileformdata?.email || ''}
+                      value={profileFormData?.email || ''}
                     />
                   </div>
                   <div className="p-2 d-flex ">
@@ -149,7 +148,7 @@ function GetProfile() {
                       disabled
                       style={{ border: "none", backgroundColor: "white" }}
                       className="ms-4 fs-5"
-                      value={profileformdata?.phone || ''}
+                      value={profileFormData?.phone || ''}
                     />
                   </div>
                 </div>
@@ -166,7 +165,7 @@ function GetProfile() {
                       disabled
                       style={{ border: "none", backgroundColor: "white" }}
                       className="ms-4 fs-5"
-                      value={profileformdata?.reportingManager || ''}
+                      value={profileFormData?.reportingManager || ''}
                     />
                   </div>
                   <div className="p-2 d-flex ">
@@ -180,7 +179,7 @@ function GetProfile() {
                       disabled
                       style={{ border: "none", backgroundColor: "white" }}
                       className="ms-4 fs-5"
-                      value={profileformdata?.location || ''}
+                      value={profileFormData?.location || ''}
                     />
                   </div>
                   <div className="p-2 d-flex ">
@@ -194,7 +193,7 @@ function GetProfile() {
                       disabled
                       style={{ border: "none", backgroundColor: "white" }}
                       className="ms-4 fs-5"
-                      value={profileformdata?.joiningDate || ''}
+                      value={profileFormData?.joiningDate || ''}
                     />
                   </div>
                 </div>
@@ -213,7 +212,7 @@ function GetProfile() {
                       disabled
                       style={{ border: "none", backgroundColor: "white" }}
                       className="ms-2 fs-5"
-                      value={profileformdata?.emergencyPhone || ''}
+                      value={profileFormData?.emergencyPhone || ''}
                     />
                   </div>
                   <div className="p-2 d-flex ">
@@ -227,7 +226,7 @@ function GetProfile() {
                       disabled
                       style={{ border: "none", backgroundColor: "white" }}
                       className="ms-2 fs-5"
-                      value={profileformdata?.permanentAddress || ''}
+                      value={profileFormData?.permanentAddress || ''}
                     />
                   </div>
                   <div className="p-2 d-flex ">
@@ -241,7 +240,7 @@ function GetProfile() {
                       disabled
                       style={{ border: "none", backgroundColor: "white" }}
                       className="ms-2 fs-5"
-                      value={profileformdata?.city || ''}
+                      value={profileFormData?.city || ''}
                     />
                   </div>
                   <div className="p-2 d-flex ">
@@ -255,7 +254,7 @@ function GetProfile() {
                       disabled
                       style={{ border: "none", backgroundColor: "white" }}
                       className="ms-2 fs-5"
-                      value={profileformdata?.state || ''}
+                      value={profileFormData?.state || ''}
                     />
                   </div>
                   <div className="p-2 d-flex ">
@@ -269,7 +268,7 @@ function GetProfile() {
                       disabled
                       style={{ border: "none", backgroundColor: "white",width:'100%' }}
                       className="ms-2 fs-5"
-                      value={profileformdata?.country || ''}
+                      value={profileFormData?.country || ''}
                     />
                   </div>
                 </div>
@@ -319,10 +318,10 @@ function GetProfile() {
                   </div>
                 </div>
               </div>
+              
             </div>
             
-          </div>
-      
+          </div> 
     </>
   );
 }

@@ -1,35 +1,25 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useContext } from "react";
 import "./Profile.css";
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
 import { Dialog } from "primereact/dialog";
 import { Button } from "primereact/button";
 import Avatar from "react-avatar-edit";
 import "primeicons/primeicons.css";
-import img from '../../Assest/profile.jpg'
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import {
-  ProfileFormData,
-  userDetail,
-  userUpdate,
-} from "../../Service/ProfileService";
-import {
-  fetchSkills,
-  postSkills,
-  updateSkills,
-} from "../../Service/SkillService";
+import { ProfileFormData, userUpdate } from "../../Service/ProfileService";
+import { fetchSkills, updateSkills } from "../../Service/SkillService";
 import "react-toastify/dist/ReactToastify.css";
 
-
 function Profile() {
+  
   const navigate = useNavigate();
   const [imagecrop, setimagecrop] = useState(false);
-  const [src, setsrc] = useState(img);
   const [pview, setpview] = useState(false);
   const [poststate, setPostState] = useState(false);
   const [skillstate, setSkillState] = useState(false);
-  const [profileformdata, setProfileFormData] = useState([]);
- 
+  const [profileformData, setProfileFormData] = useState([]);
+  
 
   const [formData, setFormData] = useState({
     profileImage: "",
@@ -46,144 +36,73 @@ function Profile() {
     certifications: "",
   });
 
-
-
   useEffect(() => {
     if (poststate) {
-     
       ProfileFormData().then((data) => {
-        if (data.data[0].userId !== null) {
-          
-          userUpdate(formData)
-            .then((data) => {
-              navigate("/dashboard/getProfile");
-              toast.success("Profile Updated Successfull", {
-                position: "top-left",
-                autoClose: 2000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "colored",
-              });
-            })
-            .catch((e) => {
-             
-              toast.error("Could not Connect with Server", {
-                position: "top-right",
-                autoClose: 2000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "colored",
-              });
+        userUpdate(formData)
+          .then((data) => {
+            
+            navigate("/dashboard/getProfile");
+            
+            toast.success("Profile Updated Successfull", {
+              position: "top-left",
+              autoClose: 2000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "colored",
             });
-        } else {
-          userDetail(formData)
-            .then((data) => {
-              
-              if (data.message === "User profile created successfully") {
-                navigate("/dashboard/getProfile");
-                toast.success("Profile Submitted Successfully", {
-                  position: "top-left",
-                  autoClose: 2000,
-                  hideProgressBar: false,
-                  closeOnClick: true,
-                  pauseOnHover: true,
-                  draggable: true,
-                  progress: undefined,
-                  theme: "colored",
-                });
-                console.log("Navigate successfully");
-              }
-            })
-            .catch((e) => {
-              
-              toast.error("Could not Connect with Server", {
-                position: "top-right",
-                autoClose: 2000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "colored",
-              });
+          })
+          .catch((e) => {
+            toast.error("Could not Connect with Server", {
+              position: "top-right",
+              autoClose: 2000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "colored",
             });
-        }
+          });
       });
     }
-  }, [poststate,navigate,formData]);
+  }, [poststate, navigate, formData]);
 
   useEffect(() => {
     if (skillstate) {
-      fetchSkills()
-        .then((data) => {
-          
-          if (data.data[0].userId !== null) {
-            updateSkills(skillData)
-              .then((data) => {
-                
-                navigate("/dashboard/getProfile");
-                toast.success("Skills Updated Successfully", {
-                  position: "top-left",
-                  autoClose: 2000,
-                  hideProgressBar: false,
-                  closeOnClick: true,
-                  pauseOnHover: true,
-                  draggable: true,
-                  progress: undefined,
-                  theme: "colored",
-                });
-              })
-              .catch((e) => {
-                
-                toast.error("Could not Connect with Server", {
-                  position: "top-right",
-                  autoClose: 2000,
-                  hideProgressBar: false,
-                  closeOnClick: true,
-                  pauseOnHover: true,
-                  draggable: true,
-                  progress: undefined,
-                  theme: "colored",
-                });
-              });
-          } else {
-            postSkills(skillData).then((data) => {
-              
-              navigate("/dashboard/getProfile");
-              toast.success("Skills Submitted Successfully", {
-                position: "top-left",
-                autoClose: 2000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "colored",
-              });
+      fetchSkills().then((data) => {
+        updateSkills(skillData)
+          .then((data) => {
+            navigate("/dashboard/getProfile");
+            toast.success("Skills Updated Successfully", {
+              position: "top-left",
+              autoClose: 2000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "colored",
             });
-          }
-        })
-        .catch((e) => {
-          
-          toast.error("Could not Connect with Server", {
-            position: "top-right",
-            autoClose: 2000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "colored",
+          })
+          .catch((e) => {
+            toast.error("Could not Connect with Server", {
+              position: "top-right",
+              autoClose: 2000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "colored",
+            });
           });
-        });
+      });
     }
-  }, [skillstate,navigate,skillData]);
+  }, [skillstate, navigate, skillData]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -194,7 +113,6 @@ function Profile() {
     setSkillState(true);
   };
 
-
   const onClose = () => {
     setpview(null);
   };
@@ -202,16 +120,10 @@ function Profile() {
     setpview(view);
   };
   const savecropimage = () => {
-   
     setFormData((prevState) => ({ ...prevState, profileImage: pview }));
-  
-
-    setsrc(pview);
- 
     setimagecrop(false);
   };
   const profileclick = () => {
-   
     setimagecrop(true);
   };
 
@@ -219,7 +131,6 @@ function Profile() {
   useEffect(() => {
     ProfileFormData()
       .then((profiledata) => {
-      
 
         setProfileFormData(profiledata.data[0]);
         setFormData({
@@ -230,7 +141,6 @@ function Profile() {
           country: profiledata.data[0].country,
           emergencyPhone: profiledata.data[0].emergencyPhone,
         });
-      
       })
       .catch((e) => {
         console.log(e.message);
@@ -239,8 +149,6 @@ function Profile() {
 
   useEffect(() => {
     fetchSkills().then((data) => {
-     
-      
       setSkillData({
         primarySkills: data.data[0].primarySkills,
         secondarySkills: data.data[0].secondarySkills,
@@ -263,17 +171,15 @@ function Profile() {
     <>
       <div className="main-container ">
         <div className="wrapper d-flex">
-          
           <div
             className="right-sidebar"
             style={{
-              position: "absolute",
+              // position: "absolute",
               width: "100%",
               height: "100%",
               right: "0",
             }}
           >
-            
             <div className="container">
               <div className="formDetail-container">
                 <div className="Profile-upload">
@@ -281,7 +187,7 @@ function Profile() {
                 </div>
                 <form onSubmit={handleSubmit}>
                   <div className="d-flex flex-column ">
-                    {profileformdata ? (
+                    {profileformData ? (
                       <>
                         <img
                           className="profile-img"
@@ -293,11 +199,8 @@ function Profile() {
                             objectFit: "cover",
                           }}
                           onClick={profileclick}
-                          src={
-                            formData.profileImage ? formData.profileImage : src
-                          }
-                          alt=""
-                          
+                          src={formData.profileImage}
+                          alt="error_image"
                         />
                       </>
                     ) : (
@@ -305,22 +208,31 @@ function Profile() {
                     )}
 
                     <label htmlFor="" className="d-flex justify-content-center">
-                      {profileformdata ? profileformdata.name : ""}
+                      {profileformData ? profileformData.name : ""}
                     </label>
                     <Dialog
                       className=""
-                      style={{position:'absolute',zIndex:'1000',top:'0' ,right:'25%'}}
+                      style={{
+                        // position: "absolute",
+                        position: "relative",
+                        zIndex: "1000",
+                        top: "0",
+                        right: "6%",
+                      }}
                       visible={imagecrop}
                       onHide={() => setimagecrop(false)}
                     >
-                      <div className=" z-2 position-absolute p-5 card" style={{top:'0',right:"25%"}}>
+                      <div
+                        className=" z-2 position-absolute p-5 card"
+                        style={{ top: "0", right: "25%" }}
+                      >
                         <p className="">Update Profile</p>
                         <Avatar
                           width={200}
                           height={200}
                           onCrop={onCrop}
                           onClose={onClose}
-                          src={src}
+                          src={profileformData.profileImage}
                           sheadingColor={"#474649"}
                           backgroundColor={"#00FFFF"}
                           // onFileLoad ={(file)=>{
@@ -347,7 +259,7 @@ function Profile() {
                       <input
                         type="text"
                         className="form-control"
-                        value={profileformdata?.hrmid || "HRM ID"}
+                        value={profileformData?.hrmid || "HRM ID"}
                         style={{ backgroundColor: "#EAEAEA" }}
                         onChange={handleChange}
                       />
@@ -357,7 +269,7 @@ function Profile() {
                       <input
                         type="text"
                         className="form-control"
-                        value={profileformdata?.name || "Name"}
+                        value={profileformData?.name || "Name"}
                         style={{ backgroundColor: "#EAEAEA" }}
                         onChange={handleChange}
                         disabled
@@ -370,7 +282,7 @@ function Profile() {
                       <input
                         type="text"
                         className="form-control"
-                        value={profileformdata?.role || "Job Role"}
+                        value={profileformData?.role || "Job Role"}
                         style={{ backgroundColor: "#EAEAEA" }}
                         onChange={handleChange}
                       />
@@ -381,7 +293,7 @@ function Profile() {
                         type="text"
                         className="form-control"
                         value={
-                          profileformdata?.reportingManager ||
+                          profileformData?.reportingManager ||
                           "Reproting Manager"
                         }
                         style={{ backgroundColor: "#EAEAEA" }}
@@ -395,7 +307,7 @@ function Profile() {
                       <input
                         type="text"
                         className="form-control"
-                        value={profileformdata?.email || "Email Id"}
+                        value={profileformData?.email || "Email Id"}
                         style={{ backgroundColor: "#EAEAEA" }}
                         onChange={handleChange}
                       />
@@ -405,7 +317,7 @@ function Profile() {
                       <input
                         type="password"
                         className="form-control"
-                        value={profileformdata?.password || "Password"}
+                        value={profileformData?.password || "Password"}
                         style={{ backgroundColor: "#EAEAEA" }}
                         onChange={handleChange}
                       />
@@ -417,7 +329,7 @@ function Profile() {
                       <input
                         type="date"
                         className="form-control"
-                        value={profileformdata?.joiningDate || "Joining Date"}
+                        value={profileformData?.joiningDate || "Joining Date"}
                         style={{ backgroundColor: "#EAEAEA" }}
                         onChange={handleChange}
                       />
@@ -427,7 +339,7 @@ function Profile() {
                       <input
                         type="text"
                         className="form-control"
-                        value={profileformdata?.location || "Location"}
+                        value={profileformData?.location || "Location"}
                         style={{ backgroundColor: "#EAEAEA" }}
                         onChange={handleChange}
                       />
@@ -439,7 +351,7 @@ function Profile() {
                       <input
                         type="text"
                         className="form-control"
-                        value={profileformdata?.phone || "Phone"}
+                        value={profileformData?.phone || "Phone"}
                         style={{ backgroundColor: "#EAEAEA" }}
                         onChange={handleChange}
                       />

@@ -1,20 +1,22 @@
 import { useRef, useEffect,useState } from "react";
 import OrgChart from "@balkangraph/orgchart.js";
+import "./Profile.css";
 import {getRequest} from '../../Service/ProfileService'
-const Chart = (props) => {
+const Gethierarchy = (props) => {
   const currentRef = useRef();
   
   const[hire,setHire]=useState(null)
 
   useEffect(()=>{
       getRequest().then((data)=>{
-        console.log(data);
+        // console.log(data);
         setHire(data)
       })
   },[])
   useEffect(() => {
     OrgChart.templates.ana.plus = "";
     OrgChart.templates.ana.minus = "";
+    
 
     if(hire){
 
@@ -23,10 +25,10 @@ const Chart = (props) => {
       enableSearch: false,
       mouseScrool: OrgChart.action.none,
       nodeMouseClick: OrgChart.action.none,
+      template: "ula",
 
       toolbar: {
         zoom: true,
-
         fit: true,
       },
       tags: {
@@ -49,12 +51,17 @@ const Chart = (props) => {
   }, [hire]);
 
   return (
+    <>
+    
     <div
       id="tree"
       ref={currentRef}
-      style={{ height: "100%" }}
+      style={{marginBottom:'0.9rem'}}
     ></div>
+   
+    
+    </>
   );
 };
 
-export default Chart;
+export default Gethierarchy;

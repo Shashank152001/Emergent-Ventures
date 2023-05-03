@@ -42,11 +42,17 @@
     padding: 1rem;
 }
 
-td p{
+/* customize bootstrap css */
+
+.table > thead {
+    vertical-align: baseline !important;
+  }
+
+.p{
     margin-bottom:0 !important;
 }
 
-td span{
+.span{
     color: #000  ;
     padding: 0.4rem ;
     padding-bottom:0;
