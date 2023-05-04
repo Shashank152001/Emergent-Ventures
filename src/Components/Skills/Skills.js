@@ -43,7 +43,7 @@ function Skill() {
 
             <div className="primary-skills">
               <h6 className="skill-title">Certifications</h6>
-              <div className="content-wrapper" style={{marginLeft:'10px'}}>
+              <div className="content-wrapper">
                 <p className="skill-content border-none p" >
                   {userData?.certifications || ""}
                 </p>

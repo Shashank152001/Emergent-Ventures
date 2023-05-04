@@ -1,6 +1,7 @@
 import { BiGridAlt, BiWallet, BiUser, BiCog} from "react-icons/bi";
 import celebalLogo from "../../Assest/celebal.png";
 import SkillIcon from "./skillIcon";
+import DashBoardIcon from './dashboardIcon';
 import {Link} from 'react-router-dom';
 
 function Sidebar() {
@@ -26,7 +27,8 @@ function Sidebar() {
                 borderLeft: "10px solid #088dda",
               }}
             >
-              <BiGridAlt style={{ marginRight: "10px" }} />
+              {/* <BiGridAlt style={{ marginRight: "10px" }} /> */}
+              <DashBoardIcon/>
               <Link to='/dashboard' style={{textDecoration:'none'}}>
               DashBoard
               </Link>

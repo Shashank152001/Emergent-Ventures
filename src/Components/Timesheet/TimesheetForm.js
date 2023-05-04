@@ -81,7 +81,7 @@ const Timesheetform = () => {
         </div>
       </div>
 
-      <div className="container">
+      <div className="container" style={{overflow:'scroll'}}>
        
         <table className="table ">
           {/* thead start */}
