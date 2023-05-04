@@ -13,12 +13,15 @@ function Header() {
     const{profileformdata,setProfileFormdata}=useContext(LoginContext)
     
     const handleCloseModal = () => {
+      document.getElementById('scroll-hidden').style.overflow = 'visible';
         setShowModal(false);
       };
     
       const handleShowModal = () => {
+        document.getElementById('scroll-hidden').style.overflow = 'hidden';
         setShowModal(true);
       };
+
       useEffect(()=>{
         ProfileFormData().then((data)=>{
           setProfileFormdata({
@@ -75,12 +78,17 @@ function Header() {
                     border: "none",
                     outline: "none",
                     borderRadius: "6px",
-                    backgroundColor:'transparent'
+                    background: '#F7F9FB',
+                    padding:'0.4rem 0.9rem',
+                    color:'#6C63FF'
+                    
+
                   }}
                   className=""
                   onClick={handleShowModal}
                 >
-                  <BiPlusCircle style={{ fontSize: "1.6rem", marginRight: "0.8rem" }}/>
+                  {/* <BiPlusCircle style={{ fontSize: "1.6rem", marginRight: "0.8rem" }}/> */}
+                  Upload
                 </button>
 
                 <FileUpload isOpen={showModal} onClose={handleCloseModal}/>
