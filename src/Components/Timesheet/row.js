@@ -1,6 +1,14 @@
-import React from 'react'
+import React,{useState} from 'react'
 import { MdWork } from "react-icons/md";
 const Row = ({row}) => {
+  const[fillTImesheet,setFillTimesheet]=useState({
+    client:'',
+    project:'',
+    jobs:'',
+    status:'',
+    total:''
+  })
+
   return (
     <>
     

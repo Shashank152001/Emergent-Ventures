@@ -13,6 +13,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 // import $ from "jquery";
 import Row from './row';
+import Tabs from "./Tabs";
 
 
 
@@ -69,6 +70,7 @@ const Timesheetform = () => {
 
   return (
     <>
+     {/* <Tabs/> */}
       <div className="container d-flex justify-content-center ">
         <div className="d-flex">
           <FontAwesomeIcon onClick={prevWeek} icon={faArrowLeft} />
@@ -80,6 +82,7 @@ const Timesheetform = () => {
       </div>
 
       <div className="container">
+       
         <table className="table ">
           {/* thead start */}
           <thead className="">

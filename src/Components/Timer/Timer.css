@@ -17,11 +17,15 @@
 
   #timer{
     height: 290px;
+    /* background-image: url('../../Assest/Vector.svg');
+    background-position: bottom right;
+    background-repeat: no-repeat;
+    background-size: contain; */
     /* width: 80%; */
   }
 
   .timer-container{
-    background: rgb(211,224,253);
+    background: #F7F9FB;
     height: 100%;
     border-radius: 6px;
     padding: 1.3rem;

@@ -33,12 +33,10 @@ function GetRequest() {
               <thead>
                 <tr>
                   <td>Sr.No</td>
-                  <td>Email</td>
                   <td>Request Type</td>
                   <td>Leave Type</td>
                   <td>Start Date</td>
                   <td>End Date</td>
-                  <td>Reason</td>
                   <td>Status</td>
                 </tr>
               </thead>
@@ -47,12 +45,10 @@ function GetRequest() {
                 GetRequestData.map((item, index) => (
                   <tr key={index}>
                     <td>{index + 1}</td>
-                    <td>{item.email}</td>
                     <td>{item.request}</td>
                     <td>{item.leaveType}</td>
                     <td>{item.startDate}</td>
                     <td>{item.endDate}</td>
-                    <td>{item.reason}</td>
                     {item.status==='Approved'?
                     <td><i className="bi bi-check-circle-fill text-success ms-2"></i></td>
                     :
