@@ -12,7 +12,8 @@ function Timesheet() {
         fetchTimeSheet()
             .then((data) => {
                 setTimesheet(data.data);
-                console.log(data.data);
+                // console.log(data.data)
+                
             }).catch((e)=>{
                 console.log(e.message);
             });
@@ -35,13 +36,13 @@ function Timesheet() {
                                 timesheet.map((ele, index) => (
                                     <tr key={index} className="border-0">
                                         <td className="border-0">
-                                            <p style={{height:"50px"}}>
+                                            <p style={{height:'17px'}} className="p">
                                             <BsCheckCircleFill className="checked" />
                                             </p>
                                            
                                         </td>
                                         <td className="timesheet-name border-0">
-                                            <p className="image-container-timesheet">
+                                            <p className="image-container-timesheet p">
                                                 <img
                                                     src={profile}
                                                     alt="employee"
@@ -54,6 +55,7 @@ function Timesheet() {
                                                     fontWeight: "bold",
                                                     color: "#41496A",
                                                 }}
+                                                className="span"
                                             >
                                                 {ele.timesheetName}
                                             </span>
@@ -65,15 +67,16 @@ function Timesheet() {
                                             margin:'auto',
                                             fontWeight:'200'
                                         }}
+                                        className="p"
                                             >{ele.week}</p>
                                             </td>
                                         <td className="border-0">
-                                            <span style={{fontWeight:'200',display:"inline-block"}}>{ele.submittedHours}</span>
-                                            <span style={{fontWeight:'200',display:"inline-block"}}>Submitted Hours</span>
+                                            <p style={{fontWeight:'200'}} className="p">{ele?.submittedHours || '00'}</p>
+                                            <p style={{fontWeight:'200'}} className="p">Submitted Hours</p>
                                         </td>
                                         <td className="border-0">
-                                            {/* <p style={{fontWeight:'200'}}>Approved Hours</p> */}
-                                            <p style={{fontWeight:'200'}}>{ele.approvedHours}</p>
+                                            <p style={{fontWeight:'200'}} className="p">{ele?.approvedHours || '00'}</p>
+                                            <p style={{fontWeight:'200'}} className="p d-none">Approved Hours</p>
                                         </td>
                                     </tr>
                                 ))

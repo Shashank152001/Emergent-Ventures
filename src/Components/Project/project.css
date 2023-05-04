@@ -2,7 +2,7 @@
 
 section.project-container{
     width: 100%;
-    background: rgb(211,224,253);
+    background: #F7F9FB;
     /* background: linear-gradient(90deg, rgba(211,224,253,1) 0%, rgba(251,254,255,1) 100%);  */
     padding: 0.4rem 0.9rem;
     border-radius: 0.4rem;

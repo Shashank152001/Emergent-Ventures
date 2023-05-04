@@ -56,8 +56,8 @@ function Sidebar() {
             <li style={{ padding: "1rem 0.9rem" }} className="li-style">
               <BiCog style={{ marginRight: "10px" }} />
                
-               <Link to='settings' style={{textDecoration:'none'}}>
-               Settings
+               <Link to='getTimesheet' style={{textDecoration:'none'}}>
+               Timesheets
               </Link>
             </li>
           </ul>

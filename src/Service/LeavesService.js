@@ -40,7 +40,7 @@ export const YourRequestGetdata=async()=>{
 }
 export async function EditUpdate(data) {
     
-    const response=await fetch(url+'user/requests/update-subordinate-request',{
+    const response=await fetch(url+'user/requests/update-user-subordinate-request',{
         method:"PUT",
         credentials:'include',
         body:new URLSearchParams(data)
@@ -48,7 +48,7 @@ export async function EditUpdate(data) {
     return response.json() 
 }
 export const ReportingGetdata=async()=>{
-    const response=await fetch(url+'user/requests/get-subordinates-requests',{
+    const response=await fetch(url+'user/requests/get-user-subordinates-requests',{
         method: "GET",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
