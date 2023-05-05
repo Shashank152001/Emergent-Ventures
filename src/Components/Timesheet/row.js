@@ -1,14 +1,7 @@
 import React,{useState} from 'react'
 import { MdWork } from "react-icons/md";
 const Row = ({row}) => {
-  const[fillTImesheet,setFillTimesheet]=useState({
-    client:'',
-    project:'',
-    jobs:'',
-    status:'',
-    total:''
-  })
-
+  // console.log(row[0].props.formValue);
   return (
     <>
     
@@ -38,7 +31,7 @@ const Row = ({row}) => {
              
               <td>
                 <div className="d-flex" style={{width:'240px'}}>
-                  <input type="text" className="mx-1  border-1" style={{width:'100%',overflow:'scroll'}} />
+                  <input type="text" className="mx-1 border-1" style={{width:'100%',overflow:'scroll'}} name='workItem' />
                   <MdWork size={20}/>
                 </div>
               </td>

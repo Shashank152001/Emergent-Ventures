@@ -19,7 +19,13 @@ import Tabs from "./Tabs";
 
 const Timesheetform = () => {
 
-
+  const[formdata,setFormdata]=useState([{
+    clientName:'',
+    projectName:'',
+    jobName:'',
+    workItem:'',
+    description:'',
+  }])
   const [start, setStart] = useState(startOfWeek(new Date(), { weekStartsOn: 0 }));// start of the week
   const [end, setEnd] = useState(addDays(start, 6)); // end of the week
   const [slide, setSlide] = useState([]);
@@ -32,7 +38,8 @@ const Timesheetform = () => {
   const rows = []
  
   for(let i= 1;i<=row;i++){
-     rows.push(<Row row={i}  key={i}/>)
+     rows.push(<Row row={i}  key={i} formValue={formdata}/>)
+     console.log(rows)
     
   }
 
@@ -67,6 +74,11 @@ const Timesheetform = () => {
     setStart(subDays(start, 7));
     setEnd(subDays(end, 7));
   };
+
+  const submit=(e)=>{
+    e.preventDefault();
+
+  }
 
   return (
     <>
@@ -130,6 +142,10 @@ const Timesheetform = () => {
             <h6>Total</h6>
           </div>
         </div>
+      </div>
+
+      <div className="col-md-12">
+        <button className="btn btn-success" type="submit" onClick={submit}>Submit</button>
       </div>
     </>
   );
