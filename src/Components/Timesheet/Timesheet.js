@@ -11,7 +11,10 @@ function Timesheet() {
     useEffect(() => {
         fetchTimeSheet()
             .then((data) => {
+                const tmp = [];
+                tmp.push(data.data[0])
                 setTimesheet(data.data);
+                // setTimesheet(tmp);
                 // console.log(data.data)
                 
             }).catch((e)=>{
@@ -34,11 +37,11 @@ function Timesheet() {
                         <tbody>
                             {timesheet ? 
                                 timesheet.map((ele, index) => (
-                                    <tr key={index} className="border-0">
+                                    <tr key={index} className="border-0" style={{height:'65px'}}>
                                         <td className="border-0">
-                                            <p style={{height:'17px'}} className="p">
-                                            <BsCheckCircleFill className="checked" />
-                                            </p>
+                                            {/* <p style={{height:'17px'}} className="p"> */}
+                                            <BsCheckCircleFill className="checked" style={{verticalAlign:'baseline'}} />
+                                            {/* </p> */}
                                            
                                         </td>
                                         <td className="timesheet-name border-0">
@@ -50,7 +53,7 @@ function Timesheet() {
                                             </p>
                                             <span
                                                 style={{
-                                                    height:'35px',
+                                                    // height:'35px',
                                                     paddingLeft: "0.7rem",
                                                     fontWeight: "bold",
                                                     color: "#41496A",
@@ -63,7 +66,7 @@ function Timesheet() {
                                         <td className="border-0">
                                             <p style={{
                                             width:'112px',
-                                            height:'65px',
+                                            // height:'65px',
                                             margin:'auto',
                                             fontWeight:'200'
                                         }}
