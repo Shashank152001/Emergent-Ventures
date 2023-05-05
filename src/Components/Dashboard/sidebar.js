@@ -1,4 +1,4 @@
-import { BiGridAlt, BiWallet, BiUser, BiCog} from "react-icons/bi";
+import { BiGridAlt, BiWallet, BiUser,BiTime} from "react-icons/bi";
 import celebalLogo from "../../Assest/celebal.png";
 import SkillIcon from "./skillIcon";
 import DashBoardIcon from './dashboardIcon';
@@ -56,7 +56,7 @@ function Sidebar() {
               
             </li>
             <li style={{ padding: "1rem 0.9rem" }} className="li-style">
-              <BiCog style={{ marginRight: "10px" }} />
+              <BiTime style={{ marginRight: "10px" }} />
                
                <Link to='getTimesheet' style={{textDecoration:'none' ,color:'#283055'}}>
                Timesheets
