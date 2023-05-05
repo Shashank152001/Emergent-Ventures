@@ -1,69 +1,124 @@
 import React, { useEffect, useState } from "react";
-
 import {
   addDays,
   eachDayOfInterval,
   format,
   subDays,
-  startOfWeek
- 
+  startOfWeek,
 } from "date-fns";
 import { AiOutlinePlus } from "react-icons/ai";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
-// import $ from "jquery";
-import Row from './row';
-import Tabs from "./Tabs";
-
-
+import LeftRow from "./leftRow";
+import RightRow from "./rightRow";
 
 const Timesheetform = () => {
-
-  const[formdata,setFormdata]=useState([{
-    clientName:'',
-    projectName:'',
-    jobName:'',
-    workItem:'',
-    description:'',
-  }])
-  const [start, setStart] = useState(startOfWeek(new Date(), { weekStartsOn: 0 }));// start of the week
+  const [start, setStart] = useState(
+    startOfWeek(new Date(), { weekStartsOn: 0 })
+  ); // start of the week
   const [end, setEnd] = useState(addDays(start, 6)); // end of the week
   const [slide, setSlide] = useState([]);
-  const [row,setRow] = useState(1);
-  const options = { day: "2-digit", month: "2-digit", year: "numeric" };
-  let formattedStartDate = start.toLocaleDateString("en-US", options);
-  let formattedEndDate = end.toLocaleDateString("en-US", options);
-  
+  const [date, setdate] = useState([]);
+  const [row, setRow] = useState(1);
+  const startDate = start.toLocaleDateString("en-GB").split("/");
+  const endDate = end.toLocaleDateString("en-GB").split("/");
+  let formattedStartDate =
+    startDate[0] + "-" + startDate[1] + "-" + startDate[2];
+  let formattedEndDate = endDate[0] + "-" + endDate[1] + "-" + endDate[2];
 
-  const rows = []
- 
-  for(let i= 1;i<=row;i++){
-     rows.push(<Row row={i}  key={i} formValue={formdata}/>)
-     console.log(rows)
+  const [TimesheetData, setTimeSheetData] = useState({
+    timesheetName: `Timesheet (${formattedStartDate} - ${formattedEndDate})`,
+    date: "",
+    week: `${formattedStartDate} - ${formattedEndDate}`,
+	submittedHours:''
+  });
+
+  const [FinalData, setFinalData] = useState([]);
+  const [totalHours, settotalHours] = useState(0);
+
+  const handlechange = (event) => {
+    const { name, value, dataset } = event.target;
+
+    if (dataset.hasOwnProperty("date")) {
+      setTimeSheetData((prevData) => ({ ...prevData, date: dataset.date,submittedHours:value,[name]:value }));
+    } else {
+      setTimeSheetData((prevData) => ({ ...prevData, [name]: value }));
+    }
+  };
+
+
+  useEffect(()=>{
+	 
+	if(FinalData.length){
+		console.log(FinalData);
+	}
+
+  },[FinalData])
+
+
+  const handleSubmit = ()=>{
     
+	if(FinalData.length === 0 && TimesheetData?.clientName){
+		// settotalHours((prevHours)=> prevHours + TimesheetData.totalTime);
+		setFinalData((prevData) => [...prevData, TimesheetData]);
+     }
+	else if(FinalData.length && TimesheetData?.clientName){
+
+		setFinalData((prevData) => [...prevData, TimesheetData]);
+		// settotalHours((prevHours)=> prevHours + Number(TimesheetData.totalTime));
+	}
+
+	// else{
+	// 	console.log(FinalData);
+	// 	console.log('hit the server.....');
+	// }
+	
   }
 
-  const addRow = () => {
+  const leftRows = [];
+  const rightRows = [];
 
-    setRow((prevRow)=>prevRow+1); 
-    
+  for (let i = 1; i <= row; i++) {
+    leftRows.push(<LeftRow row={i} key={i} handlechange={handlechange} />);
+  }
+  for (let i = 1; i <= row; i++) {
+    rightRows.push(
+      <RightRow key={i} handlechange={handlechange} date={date} totalHours={totalHours}/>
+    );
+  }
+
+//   4:20
+// 5:55
+
+// 10:15
+  const addRow = () => {
+    setRow((prevRow) => prevRow + 1);
+	console.log(Number(TimesheetData.totalTime.split(':')[0]))
+	// settotalHours((prevHours)=> prevHours + Number(TimesheetData.totalTime));
+    setFinalData((prevData) => [...prevData, TimesheetData]);
   };
 
   useEffect(() => {
-    
     const daydate = eachDayOfInterval({ start: start, end: end }).map(
       (date) => {
         const monthDate = format(date, "LLL dd");
         const weekDay = format(date, "EEE ");
-        return {monthDate:monthDate,weekDay:weekDay};
+        return { monthDate: monthDate, weekDay: weekDay };
       }
     );
-    
-    console.log(daydate);
-   
-    setSlide(daydate);
 
-  }, [start,end]);
+    const dd = eachDayOfInterval({ start: start, end: end }).map((date) => {
+      const [year, month, Date] = date
+        .toLocaleDateString("en-GB")
+        .split("/")
+        .reverse();
+
+      return `${year}-${month}-${Date}`;
+    });
+
+    setSlide(daydate);
+    setdate(dd);
+  }, [start, end]);
 
   const nextweek = () => {
     setStart(addDays(start, 7));
@@ -75,77 +130,121 @@ const Timesheetform = () => {
     setEnd(subDays(end, 7));
   };
 
-  const submit=(e)=>{
-    e.preventDefault();
-
-  }
+  
 
   return (
     <>
-     {/* <Tabs/> */}
       <div className="container d-flex justify-content-center ">
         <div className="d-flex">
-          <FontAwesomeIcon onClick={prevWeek} icon={faArrowLeft} />
+          <FontAwesomeIcon
+            onClick={prevWeek}
+            icon={faArrowLeft}
+            style={{ alignSelf: "center" }}
+          />
           <span style={{ marginRight: "5px", marginLeft: "5px" }}>
-            {formattedStartDate}-{formattedEndDate}
+            {formattedStartDate} - {formattedEndDate}
           </span>
-          <FontAwesomeIcon onClick={nextweek} icon={faArrowRight} />
+          <FontAwesomeIcon
+            onClick={nextweek}
+            icon={faArrowRight}
+            style={{ alignSelf: "center" }}
+          />
         </div>
       </div>
-
-      <div className="container" style={{overflow:'scroll'}}>
-       
-        <table className="table ">
-          {/* thead start */}
-          <thead className="">
-            <tr className="">
-              <th>S.No.</th>
-              <th>Client Name</th>
-              <th>Project Name</th>
-              <th>Job Name</th>
-              <th>Work Item</th>
-              <th>Billable Status</th>
-              <th>Description</th>
-              
-              {slide.map((day, index) => (
-                <th className="" key={index} >
-                   <span style={{display:'inline-block',width:'65px'}}> {day.monthDate}</span>
-                   <span>{day.weekDay}</span>
-                 
-                  {/* <p style={{width:'10px'}}>{day}</p> */}
-                </th>
-              ))}
-              
-              <th style={{ marginLeft: "60px" }} className=" fw-bold">
-                Total
-              </th>
-            </tr>
-          </thead>
-          {/* thead end */}
-
-          {/* tbody start */}
-          <tbody >
-              {rows}
-          </tbody>
-          {/* tbody end */}
-        </table>
-
-        <div className="row d-flex ">
-          <div className="col-6 d-flex">
-            <button onClick={addRow} className="border-0 bg-white">
-              {" "}
-              <AiOutlinePlus color="blue" />
-              <span className="text-primary mx-1 my-1">Add Row</span>
-            </button>
+      <div
+        className="timesheet-container"
+        style={{ display: "flex", flexDirection: "column" }}
+      >
+        <div className="outer-table-div">
+          <div className="left-table-div">
+            <table>
+              <thead>
+                <tr>
+                  <th className="sr-th">S.No</th>
+                  <th className="left-table-th">Client Name</th>
+                  <th className="left-table-th">Project Name</th>
+                  <th className="left-table-th">Job Name</th>
+                </tr>
+              </thead>
+              {leftRows}
+            </table>
           </div>
-          <div className="col-6">
-            <h6>Total</h6>
+          <div className="right-table-div">
+            <table className="date-table">
+              <thead>
+                <tr>
+                  <th className="right-table-th">Work Item</th>
+                  <th className="right-table-th">Description</th>
+                  <th className="right-table-th">Billable Status</th>
+                  {slide.map((day, index) => (
+                    <th className="date-th" key={index}>
+                      {day.monthDate}
+                      <br />
+                      {day.weekDay}
+                    </th>
+                  ))}
+                  <th className="date-th">Total</th>
+                </tr>
+              </thead>
+              {rightRows}
+              <tbody>
+                <tr>
+                  <td>
+                    <span className="right-table-td"></span>
+                  </td>
+                  <td>
+                    <span className="right-table-td"></span>
+                  </td>
+                  <td style={{ textAlign: "left", paddingLeft: "1.3rem" }}>
+                    <span>Total</span>
+                  </td>
+                  <td className="date-td-span">
+                    <span>00:00</span>
+                  </td>
+                  <td className="date-td-span">
+                    <span>00:00</span>
+                  </td>
+                  <td className="date-td-span">
+                    <span>00:00</span>
+                  </td>
+                  <td className="date-td-span">
+                    <span>00:00</span>
+                  </td>
+                  <td className="date-td-span">
+                    <span>00:00</span>
+                  </td>
+                  <td className="date-td-span">
+                    <span>00:00</span>
+                  </td>
+                  <td className="date-td-span">
+                    <span>00:00</span>
+                  </td>
+                  <td className="date-td-span">
+                    <span>00:00</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
-      </div>
-
-      <div className="col-md-12">
-        <button className="btn btn-success" type="submit" onClick={submit}>Submit</button>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            marginBottom: "3rem",
+          }}
+        >
+          <button
+            onClick={addRow}
+            className="border-0 bg-white"
+            style={{ marginLeft: "1rem" }}
+          >
+            {" "}
+            <AiOutlinePlus className="text-primary" />
+            <span className="text-primary">Add Row</span>
+          </button>
+        </div>
+		<button onClick={handleSubmit} className="bg-success">save</button>
       </div>
     </>
   );
