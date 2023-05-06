@@ -26,7 +26,8 @@ function Header() {
         ProfileFormData().then((data)=>{
           setProfileFormdata({
             name:data.data[0].name,
-            profileImage:data.data[0].profileImage
+            profileImage:data.data[0].profileImage,
+            userId:data.data[0].userId
           })
         })
       },[])

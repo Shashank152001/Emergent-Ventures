@@ -1,7 +1,7 @@
-import React,{useState} from 'react'
+import React from 'react'
 import { MdWork } from "react-icons/md";
 const Row = ({row}) => {
-  // console.log(row[0].props.formValue);
+ 
   return (
     <>
     

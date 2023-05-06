@@ -9,7 +9,6 @@ const Gethierarchy = (props) => {
 
   useEffect(()=>{
       getRequest().then((data)=>{
-        // console.log(data);
         setHire(data)
       })
   },[])
