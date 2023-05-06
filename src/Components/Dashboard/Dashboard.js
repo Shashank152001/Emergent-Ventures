@@ -52,7 +52,7 @@ function MyDashBoard() {
             className="right-middle-content"
             style={{
               overflowY: "auto",
-              overflowX: "hidden",
+              // overflowX: "hidden",
               // position: "absolute",
               position: "relative",
               width: "100%",

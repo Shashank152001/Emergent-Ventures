@@ -142,7 +142,7 @@ function EditRequest() {
                             </div><div className="form-group row">
                                 <label className="col-sm-2 col-form-label">Reason</label>
                                 <div className="col-sm-10">
-                                    <input type="text" className="form-control"
+                                    <textarea type="text" className="form-control"
                                         placeholder="Reason"
                                         value={ReportingData.reason} disabled/>
                                 </div>

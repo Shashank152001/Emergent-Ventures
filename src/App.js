@@ -1,4 +1,4 @@
-import React, { useEffect,useState } from "react";
+import React, {useState } from "react";
 import "./App.css";
 import {LoginContext} from './Context/LoginContext'
 import { ToastContainer } from "react-toastify";
@@ -23,6 +23,7 @@ import WFHform from './Components/WFH/WFHform'
 import EditRequest from "./Components/WFH/EditRequest";
 import GetUserTimesheet from "./Components/Timesheet/GetUserTimesheet";
 import GetRmTimesheet from "./Components/Timesheet/GetRmTimesheet";
+import EditReporingTimeSheet from "./Components/Timesheet/EditReporingTimeSheet";
 
 function App() {
 
@@ -43,9 +44,9 @@ function App() {
           </Route>
           <Route element={<SignUp />} path="/signup"></Route>
           <Route element={<EmployeeTable />} path="/table"></Route>
-          <Route element={<TimesheetForm />} path="/Timesheetform"></Route>
-          <Route element={<GetUserTimesheet/>} path="/GetUserTimesheet"></Route>
-          <Route element={<GetRmTimesheet/>} path="/GetRmTimesheet"></Route>
+          <Route element={<GetUserTimesheet/>} path="/getTimesheet"></Route>
+          <Route element={<GetRmTimesheet/>} path="/viewTime"></Route>
+          <Route element={<EditReporingTimeSheet/>} path="/editTime"></Route>
           {/* for hierarchy testing */}
 
           <Route element={<ProtectRoute />} path="/dashboard">
@@ -57,6 +58,10 @@ function App() {
               <Route element={<ViewRequest />} path="viewRequest" />
               <Route element={<GetProfile />} path="getProfile" />
               <Route element={<Profile />} path="profile" />
+              <Route element={<GetUserTimesheet/>} path="getTimesheet"/>
+              <Route element={<GetRmTimesheet/>} path="viewTime"/>
+              <Route element={<EditReporingTimeSheet/>} path="editTime/:id"/>
+              <Route element={<TimesheetForm />} path="timesheetform"></Route>
               <Route element={<Gethierarchy/>} path="chart" />
               
             </Route>

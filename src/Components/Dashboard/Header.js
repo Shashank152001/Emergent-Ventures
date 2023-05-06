@@ -61,6 +61,7 @@ function Header() {
                     width: "100%",
                     padding: "0.4rem 2.8rem",
                     border: "none",
+                    background:'#F7F9FB'
                   }}
                 />
                 <BiSearch

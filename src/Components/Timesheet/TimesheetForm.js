@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-
+import "./Timesheet.css";
 import {
   addDays,
   eachDayOfInterval,
@@ -13,6 +13,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 // import $ from "jquery";
 import Row from './row';
+import Tabs from "./Tabs";
 
 
 
@@ -69,7 +70,8 @@ const Timesheetform = () => {
 
   return (
     <>
-      <div className="container d-flex justify-content-center ">
+     {/* <Tabs/> */}
+      <div className="container d-flex justify-content-center time-form">
         <div className="d-flex">
           <FontAwesomeIcon onClick={prevWeek} icon={faArrowLeft} />
           <span style={{ marginRight: "5px", marginLeft: "5px" }}>
@@ -79,7 +81,8 @@ const Timesheetform = () => {
         </div>
       </div>
 
-      <div className="container">
+    
+       
         <table className="table ">
           {/* thead start */}
           <thead className="">
@@ -93,7 +96,7 @@ const Timesheetform = () => {
               <th>Description</th>
               
               {slide.map((day, index) => (
-                <th className="" key={index} >
+                <th className="d flex" key={index} >
                    <span style={{display:'inline-block',width:'65px'}}> {day.monthDate}</span>
                    <span>{day.weekDay}</span>
                  
@@ -127,7 +130,7 @@ const Timesheetform = () => {
             <h6>Total</h6>
           </div>
         </div>
-      </div>
+      
     </>
   );
 };

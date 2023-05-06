@@ -51,6 +51,6 @@ ul {
 }
 
 .right-top {
-  background: rgb(211,224,253);
-  background: linear-gradient(90deg, rgba(211,224,253,1) 0%, rgba(251,254,255,1) 100%); 
+  background: #FFFFFF;
+  /* background: linear-gradient(90deg, rgba(211,224,253,1) 0%, rgba(251,254,255,1) 100%);  */
 }

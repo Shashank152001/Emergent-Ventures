@@ -50,6 +50,7 @@ function Timesheet() {
                                             </p>
                                             <span
                                                 style={{
+                                                    height:'35px',
                                                     paddingLeft: "0.7rem",
                                                     fontWeight: "bold",
                                                     color: "#41496A",
@@ -61,8 +62,8 @@ function Timesheet() {
                                         </td>
                                         <td className="border-0">
                                             <p style={{
-                                            height:'40px',
                                             width:'112px',
+                                            height:'65px',
                                             margin:'auto',
                                             fontWeight:'200'
                                         }}

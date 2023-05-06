@@ -32,12 +32,10 @@ function ViewRequest() {
                   <td>Sr.No</td>
                   <td>HRMID</td>
                   <td>Name</td>
-                  <td>Email</td>
                   <td>Role</td>
                   <td>Leave Type</td>
                   <td>Start Date</td>
                   <td>End Date</td>
-                  <td>Reason</td>
                   <td>Status</td>
                   <td>Action</td>
                 </tr>
@@ -49,12 +47,10 @@ function ViewRequest() {
                       <td>{index+1}</td>
                       <td>{item.hrmid}</td>
                       <td>{item.name}</td>
-                      <td>{item.email}</td>
                       <td>{item.role}</td>
                       <td>{item.leaveType}</td>
                       <td>{item.startDate}</td>
                       <td>{item.endDate}</td>
-                      <td>{item.reason}</td>
                       <td>{item.status}</td>
                       {item.status==='Pending'?
                       <>

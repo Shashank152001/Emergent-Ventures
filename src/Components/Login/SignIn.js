@@ -159,15 +159,15 @@ function SignIn() {
                     placeholder="example@celebaltech.com"
                     onChange={handleChange}
                     value={formData.email}
-                    className="form-control is-invalid"
+                    className="form-control"
                     required
                   />
 
                   {/* is-valid,is=invalid  */}
-                  <div class="invalid-feedback">enter valid email</div>
-                  {/* {formErrors.email && (
+                  {/* <div class="invalid-feedback">enter valid email</div> */}
+                  {formErrors.email && (
                     <span className="error-span">{formErrors.email}</span>
-                  )} */}
+                  )}
                 </div>
                 <div className="field position-relative">
                   <label htmlFor="password" className="label">
@@ -183,9 +183,9 @@ function SignIn() {
                   />
                   
 
-                  {/* {formErrors.password && (
+                  {formErrors.password && (
                     <span className="error-span">{formErrors.password}</span>
-                  )} */}
+                  )}
                 </div>
                 <div className="last">
                   <div>
