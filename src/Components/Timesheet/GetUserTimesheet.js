@@ -8,7 +8,7 @@ function GetUserTimesheet() {
     fetchTimeSheet()
       .then((data) => {
         setUserTimesheet(data.data);
-        console.log(data.data);
+        // console.log(data.data);
       })
       .catch((e) => {
         console.log(e.message);

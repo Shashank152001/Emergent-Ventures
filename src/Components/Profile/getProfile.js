@@ -19,7 +19,8 @@ function GetProfile() {
   useEffect(() => {
     ProfileFormData()
       .then((data) => {
-        setProfileFormdata({name:data.data[0].name,profileImage:data.data[0].profileImage})
+        console.log(data);
+        setProfileFormdata({name:data.data[0].name,profileImage:data.data[0].profileImage,userId:data.data[0].userId})
         setProfileFormData(data.data[0]);   
       })
       .catch((e) => {
