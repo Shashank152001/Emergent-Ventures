@@ -23,7 +23,7 @@ function GetRequest() {
     YourRequestGetdata()
       .then((yourgetrequest) => {
         SetGetRequestData(yourgetrequest);
-        
+        console.log(yourgetrequest)
       })
       .catch((e) => {
         console.log(e.message);

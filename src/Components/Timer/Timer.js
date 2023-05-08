@@ -212,7 +212,7 @@ function Timer() {
               style={{
                 position: "relative",
                 top: "26.5px",
-                right: "7px",
+                right: "23px",
                 zIndex:'1'
               }}
             >

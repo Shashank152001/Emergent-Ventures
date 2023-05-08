@@ -20,7 +20,7 @@ function EditRequest() {
     useEffect(() => {
         ReportingGetdata()
             .then((ReportingRequestdata) => {
-                SetReportingData(ReportingRequestdata.data[id]);
+                SetReportingData(ReportingRequestdata[id]);
             })
             .catch((e) => {
                 console.log(e.message);
