@@ -11,8 +11,8 @@ function Timesheet() {
   useEffect(() => {
     fetchTimeSheet()
       .then((data) => {
-        console.log(data.data);
-        setTimesheet(data.data);
+        console.log(data);
+        setTimesheet(data);
       })
       .catch((e) => {
         console.log(e.message);

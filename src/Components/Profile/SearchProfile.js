@@ -10,7 +10,6 @@ import './Profile.css';
 function GetProfile() {
 	const { profileformdata, setProfileFormdata } = useContext(LoginContext);
 	const [profileFormData, setProfileFormData] = useState(null);
-	const [skilldata, setSkillData] = useState([]);
 
 	// Profile Get Data
 	useEffect(() => {
@@ -26,12 +25,6 @@ function GetProfile() {
 			.catch((e) => {
 				console.log(e.message);
 			});
-	}, []);
-
-	useEffect(() => {
-		fetchSkills().then((data) => {
-			setSkillData(data[0]);
-		});
 	}, []);
 
 	return (
@@ -109,76 +102,6 @@ function GetProfile() {
 											{profileFormData?.profile?.location || ''}
 										</span>
 									</div>
-								</div>
-							</div>
-						</div>
-						<div className='personal-div profile-details-div-common'>
-							<div className='inner-details-title-div'>
-								<div className='notch'></div>
-								<span className='inner-details-title'>Personal</span>
-							</div>
-							<div className='profile-details-content-div'>
-								<div className='profile-detail-field-div'>
-									<span className='inner-detail-field-title'>
-										Permanent Address
-									</span>
-									<span className='inner-detail-field-value'>
-										{profileFormData?.profile?.permanentAddress || ''}
-									</span>
-								</div>
-								<div className='profile-detail-field-div'>
-									<span className='inner-detail-field-title'>City</span>
-									<span className='inner-detail-field-value'>
-										{profileFormData?.profile?.city || ''}
-									</span>
-								</div>
-								<div className='profile-detail-field-div'>
-									<span className='inner-detail-field-title'>State</span>
-									<span className='inner-detail-field-value'>
-										{profileFormData?.profile?.state || ''}
-									</span>
-								</div>
-								<div className='profile-detail-field-div'>
-									<span className='inner-detail-field-title'>Country</span>
-									<span className='inner-detail-field-value'>
-										{profileFormData?.profile?.country || ''}
-									</span>
-								</div>
-								<div className='profile-detail-field-div'>
-									<span className='inner-detail-field-title'>
-										Emergency Phone
-									</span>
-									<span className='inner-detail-field-value'>
-										+91 {profileFormData?.profile?.emergencyPhone || ''}
-									</span>
-								</div>
-							</div>
-						</div>
-						<div className='skills-div profile-details-div-common'>
-							<div className='inner-details-title-div'>
-								<div className='notch'></div>
-								<span className='inner-details-title'>Skills</span>
-							</div>
-							<div className='profile-details-content-div'>
-								<div className='profile-detail-field-div'>
-									<span className='inner-detail-field-title'>Primary Skills</span>
-									<span className='inner-detail-field-value'>
-										{skilldata?.primarySkills || ''}
-									</span>
-								</div>
-								<div className='profile-detail-field-div'>
-									<span className='inner-detail-field-title'>
-										Secondary Skills
-									</span>
-									<span className='inner-detail-field-value'>
-										{skilldata?.secondarySkills || ''}
-									</span>
-								</div>
-								<div className='profile-detail-field-div'>
-									<span className='inner-detail-field-title'>Certifications</span>
-									<span className='inner-detail-field-value'>
-										{skilldata?.certifications || ''}
-									</span>
 								</div>
 							</div>
 						</div>
@@ -283,63 +206,6 @@ function GetProfile() {
 						) : (
 							<></>
 						)}
-
-						<div className='work-div profile-details-div-common'>
-							<div className='inner-details-title-div'>
-								<div className='notch'></div>
-								<span className='inner-details-title'>Work</span>
-							</div>
-							<div className='profile-details-content-div'>
-								<div className='profile-detail-field-div'>
-									<span className='inner-detail-field-title'>Employee ID</span>
-									<span className='inner-detail-field-value'>
-										{profileFormData?.profile?.hrmid || ''}
-									</span>
-								</div>
-								<div className='profile-detail-field-div'>
-									<span className='inner-detail-field-title'>Email</span>
-									<span className='inner-detail-field-value'>
-										{profileFormData?.profile?.email || ''}
-									</span>
-								</div>
-								<div className='profile-detail-field-div'>
-									<span className='inner-detail-field-title'>Role</span>
-									<span className='inner-detail-field-value'>
-										{profileFormData?.profile?.role || ''}
-									</span>
-								</div>
-								<div className='profile-detail-field-div'>
-									<span className='inner-detail-field-title'>Department</span>
-									<span className='inner-detail-field-value'>
-										{profileFormData?.profile?.department || ''}
-									</span>
-								</div>
-								<div className='profile-detail-field-div'>
-									<span className='inner-detail-field-title'>
-										Reporting Manager
-									</span>
-									<span className='inner-detail-field-value'>
-										{profileFormData?.profile?.reportingManager || ''}
-									</span>
-								</div>
-								<div className='profile-detail-field-div'>
-									<span className='inner-detail-field-title'>
-										Date Of Joining
-									</span>
-									<span className='inner-detail-field-value'>
-										{profileFormData?.profile?.joiningDate || ''}
-									</span>
-								</div>
-								<div className='profile-detail-field-div'>
-									<span className='inner-detail-field-title'>
-										Office Location
-									</span>
-									<span className='inner-detail-field-value'>
-										{profileFormData?.profile?.location || ''}
-									</span>
-								</div>
-							</div>
-						</div>
 					</div>
 				</div>
 			</div>

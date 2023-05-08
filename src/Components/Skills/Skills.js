@@ -9,7 +9,7 @@ function Skill() {
   useEffect(() => {
     fetchSkills()
       .then((data) => {
-        setUserData(data.data[0]);
+        setUserData(data[0]);
       })
       .catch((e) => {
         console.log(e.message);

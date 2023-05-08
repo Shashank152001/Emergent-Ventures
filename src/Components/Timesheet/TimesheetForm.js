@@ -70,8 +70,8 @@ const Timesheetform = () => {
     // console.log(week);
     getTimeSheet(week)
       .then((data) => {
-        setRow(data.data.length);
-        setUserTimeSheetData(data.data); 
+        setRow(data.length);
+        setUserTimeSheetData(data); 
       })
       .catch((e) => {
         console.log(e.message);

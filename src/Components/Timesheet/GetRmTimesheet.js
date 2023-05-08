@@ -7,8 +7,8 @@ function GetRmTimesheet() {
     const[rmTimesheet,setRmTimesheet]=useState(null);
     useEffect(()=>{
         fetchReportingTimesheet().then((data)=>{
-            console.log(data.data);
-            setRmTimesheet(data.data)
+            console.log(data);
+            setRmTimesheet(data)
         }).catch((e)=>{
             console.log(e.message);
         })

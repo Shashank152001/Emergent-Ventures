@@ -11,7 +11,7 @@ const RightRow = ({ row,handlechange,date,week,start,end}) => {
     getTimeSheet(week)
       .then((data) => {
         
-        setuserTimeSheetData(data.data);
+        setuserTimeSheetData(data);
       })
       .catch((e) => {
         // console.log(e.message);

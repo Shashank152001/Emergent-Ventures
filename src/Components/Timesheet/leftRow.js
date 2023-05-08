@@ -13,7 +13,7 @@ const LeftRow = ({ row,handlechange,week,start,end}) => {
     
     getTimeSheet(week)
       .then((data) => {
-        setuserTimeSheetData(data.data);
+        setuserTimeSheetData(data);
       })
       .catch((e) => {
         // console.log(e.message);

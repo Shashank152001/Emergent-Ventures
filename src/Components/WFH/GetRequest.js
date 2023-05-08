@@ -22,8 +22,8 @@ function GetRequest() {
   useEffect(() => {
     YourRequestGetdata()
       .then((yourgetrequest) => {
-        SetGetRequestData(yourgetrequest.data);
-        console.log(yourgetrequest.data)
+        SetGetRequestData(yourgetrequest);
+        console.log(yourgetrequest)
       })
       .catch((e) => {
         console.log(e.message);
