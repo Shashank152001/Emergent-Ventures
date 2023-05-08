@@ -131,15 +131,14 @@ function Profile() {
   useEffect(() => {
     ProfileFormData()
       .then((profiledata) => {
-
-        setProfileFormData(profiledata.data[0]);
+        setProfileFormData(profiledata[0].profile);
         setFormData({
-          profileImage: profiledata.data[0].profileImage,
-          permanentAddress: profiledata.data[0].permanentAddress,
-          city: profiledata.data[0].city,
-          state: profiledata.data[0].state,
-          country: profiledata.data[0].country,
-          emergencyPhone: profiledata.data[0].emergencyPhone,
+          profileImage: profiledata[0].profile.profileImage,
+          permanentAddress: profiledata[0].profile.permanentAddress,
+          city: profiledata[0].profile.city,
+          state: profiledata[0].profile.state,
+          country:profiledata[0].profile.country,
+          emergencyPhone: profiledata[0].profile.emergencyPhone,
         });
       })
       .catch((e) => {
@@ -150,9 +149,9 @@ function Profile() {
   useEffect(() => {
     fetchSkills().then((data) => {
       setSkillData({
-        primarySkills: data.data[0].primarySkills,
-        secondarySkills: data.data[0].secondarySkills,
-        certifications: data.data[0].certifications,
+        primarySkills: data[0].primarySkills,
+        secondarySkills: data[0].secondarySkills,
+        certifications: data[0].certifications,
       });
     });
   }, []);

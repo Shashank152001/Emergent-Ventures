@@ -25,9 +25,9 @@ function Header() {
       useEffect(()=>{
         ProfileFormData().then((data)=>{
           setProfileFormdata({
-            name:data.data[0].name,
-            profileImage:data.data[0].profileImage,
-            userId:data.data[0].userId
+            name:data[0].profile.name,
+            profileImage:data[0].profile.profileImage,
+            userId:data[0].profile.userId
           })
         })
       },[])

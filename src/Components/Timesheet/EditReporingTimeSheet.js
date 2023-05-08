@@ -15,7 +15,7 @@ function EditReporingTimeSheet() {
     });
     useEffect(()=>{
         fetchReportingTimesheet().then((data)=>{
-            console.log(data.data[id]);
+            // console.log(data.data[id]);
             SetReportingTimesheet(data.data[id])
         }).catch((e)=>{
             console.log(e.message);

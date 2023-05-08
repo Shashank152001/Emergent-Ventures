@@ -12,7 +12,7 @@ function Timesheet() {
     fetchTimeSheet()
       .then((data) => {
         console.log(data.data);
-        setTimesheet(data.data);
+        setTimesheet(data);
       })
       .catch((e) => {
         console.log(e.message);

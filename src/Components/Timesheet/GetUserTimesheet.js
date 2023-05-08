@@ -7,7 +7,7 @@ function GetUserTimesheet() {
   useEffect(() => {
     fetchTimeSheet()
       .then((data) => {
-        setUserTimesheet(data.data);
+        setUserTimesheet(data);
         // console.log(data.data);
       })
       .catch((e) => {

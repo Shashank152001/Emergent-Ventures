@@ -19,9 +19,8 @@ function GetProfile() {
   useEffect(() => {
     ProfileFormData()
       .then((data) => {
-        console.log(data);
-        setProfileFormdata({name:data.data[0].name,profileImage:data.data[0].profileImage,userId:data.data[0].userId})
-        setProfileFormData(data.data[0]);   
+        setProfileFormdata({name:data[0].profile.name,profileImage:data[0].profile.profileImage,userId:data[0].profile.userId})
+        setProfileFormData(data[0].profile);   
       })
       .catch((e) => {
         console.log(e.message);
@@ -30,7 +29,8 @@ function GetProfile() {
 
   useEffect(() => {
     fetchSkills().then((data) => {
-      setSkillData(data.data[0]);
+      
+      setSkillData(data[0]);
     });
   }, []);
 

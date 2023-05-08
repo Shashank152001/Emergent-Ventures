@@ -16,7 +16,7 @@ function EditRequest() {
         status: ''
     });
     const[putData,setPutData]=useState(false)
-    console.log(id);
+    
     useEffect(() => {
         ReportingGetdata()
             .then((ReportingRequestdata) => {
