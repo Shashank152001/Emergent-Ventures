@@ -1,6 +1,7 @@
  .input{
+    height: 42px;
     width: 40px;
-    background-color: rgb(130, 176, 236);
+    background-color: #DEE2F5;
     border-radius: 5px;
     text-align: center;
     margin: 5px 3px;
@@ -10,8 +11,8 @@
     font-weight: bolder;
   }
   .inputcolon{
-  margin-top: 7px;
-  color: gray;
+  margin-top: 14px;
+  color: #DEE2F5;
   font-weight: bolder;
   }
 

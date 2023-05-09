@@ -3,6 +3,7 @@
   height: 100%;
   width: 100%;
   overflow: hidden;
+  background-color: #F5F5F5;
 }
 .wrapper {
   height: 100%;
@@ -19,9 +20,10 @@
   display: block;
 }
 
-.li-bg {
+.active-bg {
   background: rgb(211, 224, 253);
   background: linear-gradient(89.88deg, #EDF3FF 1.76%, rgba(201, 217, 253, 0.901042) 1.76%, rgba(228, 236, 254, 0.231175) 89.28%, rgba(237, 243, 255, 0) 99.88%);
+  border-left: 10px solid #088dda;
 
 }
 
@@ -54,3 +56,15 @@ ul {
   background: #FFFFFF;
   /* background: linear-gradient(90deg, rgba(211,224,253,1) 0%, rgba(251,254,255,1) 100%);  */
 }
+
+.Search-Table-text{
+  border: 1px solid rgba(254, 254, 255, 0) !important;
+  font-weight: 400;
+  color: gray;
+}
+.Search-Table-text:hover{
+  border-left: 4px solid rgba(72, 72, 232, 0.645) !important;
+  font-weight: 500;
+  color: black;
+}
+

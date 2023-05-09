@@ -37,7 +37,12 @@ function GetRmTimesheet() {
                   rmTimesheet.map((item, index) => (
                     <tr key={index}>
                       <td>{index + 1}</td>
-                      <td>{item.hrmid}</td>
+                      <td>
+                      <p className="image-container-timesheet p" style={{marginRight:'0.4rem',width:'36px',height:'36px'}}>
+                          <img src={item.profileImage} alt="employee" />
+                      </p>
+                        {item.hrmid}
+                      </td>
                       <td>{item.name}</td>
                       <td>{item.timesheetName}</td>
                       <td>{item.submittedHours}</td>

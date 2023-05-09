@@ -209,8 +209,9 @@ function Timer() {
               className="col-md-4"
               style={{
                 position: "relative",
-                top: "28px",
-                right: "-11px",
+                top: "26.5px",
+                right: "25px",
+                zIndex:'1'
               }}
             >
               <img
@@ -218,6 +219,8 @@ function Timer() {
                 alt="vector"
                 style={{
                   mixBlendMode: "color-burn",
+                  fill:'#5774FF'
+    
                 }}
               />
             </div>

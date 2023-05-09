@@ -59,3 +59,22 @@ export const ReportingGetdata=async()=>{
         return await response.json()
     }
 }
+export async function ResendRequest(data){
+    const response=await fetch(url+'user/requests/resend-user-request',{
+        method:"POST",
+        mode:"cors",
+        headers:{"Content-Type": "application/x-www-form-urlencoded" },
+        credentials:'include',
+        body:new URLSearchParams(data)
+    })
+    return response;
+}
+export async function CancelRequest(data) {
+    
+    const response=await fetch(url+'user/requests/update-user-request',{
+        method:"PUT",
+        credentials:'include',
+        body:new URLSearchParams(data)
+    })
+    return response; 
+}

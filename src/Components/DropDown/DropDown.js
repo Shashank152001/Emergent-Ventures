@@ -35,7 +35,7 @@ export const DropDown = () => {
             <li>
                 Setting
             </li> */}
-            <li>
+            <li  style={{listStyle:'none'}}>
             <button className="btn btn-danger mt-1" onClick={handleLogOut}>
                   Logout
             </button>

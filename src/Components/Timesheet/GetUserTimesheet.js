@@ -25,6 +25,8 @@ function GetUserTimesheet() {
               <thead>
                 <tr>
                   <td>Sr.No</td>
+                  <td>HRMID</td>
+                  <td>Name</td>
                   <td>TimeSheet Name</td>
                   <td>Date</td>
                   <td>Submitted Hours</td>
@@ -37,6 +39,13 @@ function GetUserTimesheet() {
                   userTimesheet.map((item, index) => (
                     <tr key={index}>
                       <td>{index + 1}</td>
+                      <td className="d-flex">
+                      <p className="image-container-timesheet p" style={{marginRight:'0.4rem',width:'36px',height:'36px'}}>
+                          <img src={item.profileImage} alt="employee" />
+                      </p>
+                        {item.hrmid}
+                        </td>
+                      <td>{item.name}</td>  
                       <td>{item.timesheetName}</td>
                       <td>{item.date}</td>
                       <td>{item.submittedHours}</td>
