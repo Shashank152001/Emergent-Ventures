@@ -1,328 +1,349 @@
-import React, { useState, useEffect,useContext } from "react";
-import "./Profile.css";
-import { Link} from "react-router-dom";
-import "primeicons/primeicons.css";
-import { ProfileFormData } from "../../Service/ProfileService";
-import { fetchSkills } from "../../Service/SkillService";
-
-import "react-toastify/dist/ReactToastify.css";
-import { LoginContext } from "../../Context/LoginContext";
+import React, { useState, useEffect, useContext } from 'react';
+import { LoginContext } from '../../Context/LoginContext';
+import { ProfileFormData } from '../../Service/ProfileService';
+import { fetchSkills } from '../../Service/SkillService';
+import { Link } from 'react-router-dom';
+import 'react-toastify/dist/ReactToastify.css';
+import 'primeicons/primeicons.css';
+import './Profile.css';
 
 function GetProfile() {
+	const { profileformdata, setProfileFormdata } = useContext(LoginContext);
+	const [profileFormData, setProfileFormData] = useState(null);
+	const [skilldata, setSkillData] = useState([]);
 
-  const{profileformdata,setProfileFormdata}=useContext(LoginContext)
-  const[profileFormData,setProfileFormData]=useState(null)
-  const [skilldata, setSkillData] = useState([]);
-  
+	// Profile Get Data
+	useEffect(() => {
+		ProfileFormData()
+			.then((data) => {
+				setProfileFormdata({
+					name: data.profile.name,
+					profileImage: data.profile.profileImage,
+					userId: data.profile.userId
+				});
+				setProfileFormData(data);
+			})
+			.catch((e) => {
+				console.log(e.message);
+			});
+	}, []);
 
-  // Profile Get Data
-  useEffect(() => {
-    ProfileFormData()
-      .then((data) => {
-        setProfileFormdata({name:data.data[0].name,profileImage:data.data[0].profileImage})
-        setProfileFormData(data.data[0]);   
-      })
-      .catch((e) => {
-        console.log(e.message);
-      });
-  }, []);
+	useEffect(() => {
+		fetchSkills().then((data) => {
+			setSkillData(data);
+		});
+	}, []);
 
-  useEffect(() => {
-    fetchSkills().then((data) => {
-      setSkillData(data.data[0]);
-    });
-  }, []);
+	return (
+		<>
+			<div className='profile-container'>
+				<div className='wallpaper-div'>
+					<div className='wallpaper-profile-image-div'>
+						<img
+							className='profile-image'
+							name='image'
+							src={profileFormData?.profile?.profileImage}
+							alt=''
+						/>
+					</div>
+					<div className='wallpaper-profile-info-div'>
+						<ul className='wallpaper-profile-info'>
+							<li>
+								{profileFormData?.profile?.hrmid || ''} -{' '}
+								{profileFormData?.profile?.name || ''}
+							</li>
+							<li>{profileFormData?.profile?.role || ''}</li>
+							<li>{profileFormData?.profile?.department || ''}</li>
+							<li>{profileFormData?.profile?.email || ''}</li>
+						</ul>
+					</div>
+				</div>
 
-  
-  return (
-    <>
-    
-          <div
-            className="right-sidebar"
-            style={{
-              // position: "absolute",
-              width: "100%",
-              height: "100%",
-              right: "0",
-            }}
-          >
-          
-         
-            <div className="container">
-            
-           
-              <div className="row">
-                <div className="col-md-12">
-                  <img
-                    className="profile-img"
-                    name="image"
-                    style={{
-                      width: "100px",
-                      height: "100px",
-                      borderRadius: "50%",
-                      objectFit: "cover",
-                    }}
-                    src={
-                      profileformdata.profileImage
-                    }
-                    alt=""
-                    
-                  />
-                  <label
-                    htmlFor=""
-                    className="d-flex justify-content-center mt-3 fs-5"
-                  >
-                    {profileformdata ? profileformdata.name : ""}
-                  </label>
-                </div>
-              </div>
+				<div className='profile-options-div'>
+					<Link className='profile-options' to='/dashboard/profile'>
+						<h5 className='profile-options-h' style={{ margin: '0' }}>
+							Edit
+						</h5>
+					</Link>
+				</div>
+				<div className='profile-details-div'>
+					<div className='first-column'>
+						<div className='about-me-div profile-details-div-common'>
+							<div className='inner-details-title-div'>
+								<div className='notch'></div>
+								<span className='inner-details-title'>About Me</span>
+							</div>
+							<div className='profile-details-content-div'>
+								<div className='inner-details-div'>
+									<div className='profile-detail-field-div'>
+										<span style={{ padding: '1rem', fontSize: '1.4rem' }}>
+											<i className='bi bi-diagram-3'></i>
+										</span>
+										<span style={{ padding: '1rem' }}>
+											{profileFormData?.profile?.department || ''}
+										</span>
+									</div>
+									<div className='profile-detail-field-div'>
+										<span style={{ padding: '1rem', fontSize: '1.4rem' }}>
+											<i className='bi bi-people'></i>
+										</span>
+										<span style={{ padding: '1rem' }}>
+											{profileFormData?.profile?.role || ''}
+										</span>
+									</div>
+								</div>
+								<div className='inner-details-div'>
+									<div className='profile-detail-field-div'>
+										<span style={{ padding: '1rem', fontSize: '1.4rem' }}>
+											<i className='bi bi-phone'></i>
+										</span>
+										<span style={{ padding: '1rem' }}>
+											+91 {profileFormData?.profile?.phone || ''}
+										</span>
+									</div>
+									<div className='profile-detail-field-div'>
+										<span style={{ padding: '1rem', fontSize: '1.4rem' }}>
+											<i className='bi bi-geo-alt'></i>
+										</span>
+										<span style={{ padding: '1rem' }}>
+											{profileFormData?.profile?.location || ''}
+										</span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div className='personal-div profile-details-div-common'>
+							<div className='inner-details-title-div'>
+								<div className='notch'></div>
+								<span className='inner-details-title'>Personal</span>
+							</div>
+							<div className='profile-details-content-div'>
+								<div className='profile-detail-field-div'>
+									<span className='inner-detail-field-title'>
+										Permanent Address
+									</span>
+									<span className='inner-detail-field-value'>
+										{profileFormData?.profile?.permanentAddress || ''}
+									</span>
+								</div>
+								<div className='profile-detail-field-div'>
+									<span className='inner-detail-field-title'>City</span>
+									<span className='inner-detail-field-value'>
+										{profileFormData?.profile?.city || ''}
+									</span>
+								</div>
+								<div className='profile-detail-field-div'>
+									<span className='inner-detail-field-title'>State</span>
+									<span className='inner-detail-field-value'>
+										{profileFormData?.profile?.state || ''}
+									</span>
+								</div>
+								<div className='profile-detail-field-div'>
+									<span className='inner-detail-field-title'>Country</span>
+									<span className='inner-detail-field-value'>
+										{profileFormData?.profile?.country || ''}
+									</span>
+								</div>
+								<div className='profile-detail-field-div'>
+									<span className='inner-detail-field-title'>
+										Emergency Phone
+									</span>
+									<span className='inner-detail-field-value'>
+										+91 {profileFormData?.profile?.emergencyPhone || ''}
+									</span>
+								</div>
+							</div>
+						</div>
+						<div className='skills-div profile-details-div-common'>
+							<div className='inner-details-title-div'>
+								<div className='notch'></div>
+								<span className='inner-details-title'>Skills</span>
+							</div>
+							<div className='profile-details-content-div'>
+								<div className='profile-detail-field-div'>
+									<span className='inner-detail-field-title'>Primary Skills</span>
+									<span className='inner-detail-field-value'>
+										{skilldata?.primarySkills || ''}
+									</span>
+								</div>
+								<div className='profile-detail-field-div'>
+									<span className='inner-detail-field-title'>
+										Secondary Skills
+									</span>
+									<span className='inner-detail-field-value'>
+										{skilldata?.secondarySkills || ''}
+									</span>
+								</div>
+								<div className='profile-detail-field-div'>
+									<span className='inner-detail-field-title'>Certifications</span>
+									<span className='inner-detail-field-value'>
+										{skilldata?.certifications || ''}
+									</span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div className='second-column'>
+						{profileFormData?.reportingManager ? (
+							<div className='reporting-to-div  profile-details-div-common'>
+								<div className='inner-details-title-div'>
+									<div className='notch'></div>
+									<span className='inner-details-title'>Reporting To</span>
+								</div>
+								<div className='profile-details-content-div'>
+									<div className='profile-details-card-div'>
+										<div className='profile-details-card-image-div'>
+											<img
+												className='profile-image-mini'
+												name='image'
+												src={
+													profileFormData?.reportingManager?.profileImage
+												}
+												alt=''
+											/>
+										</div>
+										<div className='profile-details-card-content-div'>
+											<div>
+												<span style={{ fontSize: '0.9rem' }}>
+													{profileFormData?.reportingManager?.hrmid || ''}
+													<span> - </span>
+												</span>
+												<span
+													style={{
+														fontWeight: 'bold',
+														fontSize: '0.9rem'
+													}}
+												>
+													{profileFormData?.reportingManager?.name || ''}
+												</span>
+											</div>
+											<div>
+												<span>
+													{profileFormData?.reportingManager?.role || ''}
+													<span> - </span>
+												</span>
+												<span>
+													{profileFormData?.reportingManager
+														?.department || ''}
+												</span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						) : (
+							<></>
+						)}
+						{profileFormData?.subordinates ? (
+							<div className='direct-reports-div profile-details-div-common'>
+								<div className='inner-details-title-div'>
+									<div className='notch'></div>
+									<span className='inner-details-title'>Direct Reports</span>
+								</div>
+								<div className='profile-details-content-div'>
+									{profileFormData?.subordinates.map((subordinate) => {
+										return (
+											<div className='profile-details-card-div'>
+												<div className='profile-details-card-image-div'>
+													<img
+														className='profile-image-mini'
+														name='image'
+														src={subordinate?.profileImage}
+														alt=''
+													/>
+												</div>
+												<div className='profile-details-card-content-div'>
+													<div>
+														<span style={{ fontSize: '0.9rem' }}>
+															{subordinate?.hrmid || ''}
+															<span> - </span>
+														</span>
+														<span
+															style={{
+																fontWeight: 'bold',
+																fontSize: '0.9rem'
+															}}
+														>
+															{subordinate?.name || ''}
+														</span>
+													</div>
+													<div>
+														<span>
+															{subordinate?.role || ''}
+															<span> - </span>
+														</span>
+														<span>{subordinate?.department || ''}</span>
+													</div>
+												</div>
+											</div>
+										);
+									})}
+								</div>
+							</div>
+						) : (
+							<></>
+						)}
 
-              <div className="row">
-                <div className="col-md-12">
-                  <Link
-                    className="text-decoration-none text-dark"
-                    to="/dashboard/profile"
-                  >
-                    <p className="text-end me-4">Edit Profile</p>
-                  </Link>
-                  
-                </div>
-              </div>
-
-              <div className="row mt-4">
-                <div
-                  className="col-md-5 ms-4 me-5 p-3 rounded-2 shadow"
-                  style={{ height: "100%" }}
-                >
-                  <h4 className="text-dark">User Details</h4>
-                  <div className="d-flex p-2">
-                    <label htmlFor="" className="fw-bolder fs-5">
-                      HRMID:
-                    </label>
-                    <input
-                      type="text"
-                      name=""
-                      id=""
-                      disabled
-                      style={{ border: "none", backgroundColor: "white" }}
-                      className="ms-4 fs-5"
-                      value={profileFormData?.hrmid || ''}
-                    />
-                  </div>
-                  <div className="p-2 d-flex ">
-                    <label htmlFor="" className="fw-bolder fs-5">
-                      Name
-                    </label>
-                    <input
-                      type="text"
-                      name=""
-                      id=""
-                      disabled
-                      style={{ border: "none", backgroundColor: "white" }}
-                      className="ms-4 fs-5"
-                      value={profileformdata?.name || ''}
-                    />
-                  </div>
-                  <div className="p-2 d-flex ">
-                    <label htmlFor="" className="fw-bolder fs-5">
-                      Email
-                    </label>
-                    <input
-                      type="text"
-                      name=""
-                      id=""
-                      disabled
-                      style={{ border: "none", backgroundColor: "white" }}
-                      className="ms-4 fs-5"
-                      value={profileFormData?.email || ''}
-                    />
-                  </div>
-                  <div className="p-2 d-flex ">
-                    <label htmlFor="" className="fw-bolder fs-5">
-                      Phone
-                    </label>
-                    <input
-                      type="text"
-                      name=""
-                      id=""
-                      disabled
-                      style={{ border: "none", backgroundColor: "white" }}
-                      className="ms-4 fs-5"
-                      value={profileFormData?.phone || ''}
-                    />
-                  </div>
-                </div>
-                <div className="col-md-5 me-4 ms-5 p-3 rounded-2 shadow">
-                  <h4>Work Information</h4>
-                  <div className="p-2 d-flex ">
-                    <label htmlFor="" className="fw-bolder fs-5">
-                      Reporting Manager
-                    </label>
-                    <input
-                      type="text"
-                      name=""
-                      id=""
-                      disabled
-                      style={{ border: "none", backgroundColor: "white" }}
-                      className="ms-4 fs-5"
-                      value={profileFormData?.reportingManager || ''}
-                    />
-                  </div>
-                  <div className="p-2 d-flex ">
-                    <label htmlFor="" className="fw-bolder fs-5">
-                      Location
-                    </label>
-                    <input
-                      type="text"
-                      name=""
-                      id=""
-                      disabled
-                      style={{ border: "none", backgroundColor: "white" }}
-                      className="ms-4 fs-5"
-                      value={profileFormData?.location || ''}
-                    />
-                  </div>
-                  <div className="p-2 d-flex ">
-                    <label htmlFor="" className="fw-bolder fs-5">
-                      Joining date
-                    </label>
-                    <input
-                      type="text"
-                      name=""
-                      id=""
-                      disabled
-                      style={{ border: "none", backgroundColor: "white" }}
-                      className="ms-4 fs-5"
-                      value={profileFormData?.joiningDate || ''}
-                    />
-                  </div>
-                </div>
-              </div>
-              <div className="row mt-4">
-                <div className="col-md-5 ms-4 me-5 p-3 rounded-2 shadow">
-                  <h4 className="text-dark">Other Details</h4>
-                  <div className=" p-2 d-flex ">
-                    <label htmlFor="" className="fw-bolder fs-5">
-                      Emercency Number:
-                    </label>
-                    <input
-                      type="text"
-                      name=""
-                      id=""
-                      disabled
-                      style={{ border: "none", backgroundColor: "white" }}
-                      className="ms-2 fs-5"
-                      value={profileFormData?.emergencyPhone || ''}
-                    />
-                  </div>
-                  <div className="p-2 d-flex ">
-                    <label htmlFor="" className="fw-bolder fs-5">
-                      Pernament Address
-                    </label>
-                    <input
-                      type="text"
-                      name=""
-                      id=""
-                      disabled
-                      style={{ border: "none", backgroundColor: "white" }}
-                      className="ms-2 fs-5"
-                      value={profileFormData?.permanentAddress || ''}
-                    />
-                  </div>
-                  <div className="p-2 d-flex ">
-                    <label htmlFor="" className="fw-bolder fs-5">
-                      City
-                    </label>
-                    <input
-                      type="text"
-                      name=""
-                      id=""
-                      disabled
-                      style={{ border: "none", backgroundColor: "white" }}
-                      className="ms-2 fs-5"
-                      value={profileFormData?.city || ''}
-                    />
-                  </div>
-                  <div className="p-2 d-flex ">
-                    <label htmlFor="" className="fw-bolder fs-5">
-                      State
-                    </label>
-                    <input
-                      type="text"
-                      name=""
-                      id=""
-                      disabled
-                      style={{ border: "none", backgroundColor: "white" }}
-                      className="ms-2 fs-5"
-                      value={profileFormData?.state || ''}
-                    />
-                  </div>
-                  <div className="p-2 d-flex ">
-                    <label htmlFor="" className="fw-bolder fs-5">
-                      Country
-                    </label>
-                    <input
-                      type="text"
-                      name=""
-                      id=""
-                      disabled
-                      style={{ border: "none", backgroundColor: "white",width:'100%' }}
-                      className="ms-2 fs-5"
-                      value={profileFormData?.country || ''}
-                    />
-                  </div>
-                </div>
-                <div className="col-md-5 me-4 ms-5 p-3 rounded-2 shadow">
-                  <h4>Skills</h4>
-                  <div className=" p-2 d-flex ">
-                    <label htmlFor="" className="fw-bolder fs-5">
-                      PrimarySkills:
-                    </label>
-                    <input
-                      type="text"
-                      name=""
-                      id=""
-                      disabled
-                      style={{ border: "none", backgroundColor: "white",width:'100%' }}
-                      className=" fs-5 "
-                      value={skilldata?.primarySkills || ''}
-                    />
-                  </div>
-                  <div className="p-2 d-flex ">
-                    <label htmlFor="" className="fw-bolder fs-5">
-                      SecondarySkills:
-                    </label>
-                    <input
-                      type="text"
-                      name=""
-                      id=""
-                      disabled
-                      style={{ border: "none", backgroundColor: "white",width:'100%' }}
-                      className="fs-5 "
-                      value={skilldata?.secondarySkills || ''}
-                    />
-                  </div>
-                  <div className="p-2 d-flex ">
-                    <label htmlFor="" className="fw-bolder fs-5">
-                      Certification:
-                    </label>
-                    <input
-                      type="text"
-                      name=""
-                      id=""
-                      disabled
-                      style={{ border: "none", backgroundColor: "white" }}
-                      className=" fs-5"
-                      value={skilldata?.certifications || ''}
-                    />
-                  </div>
-                </div>
-              </div>
-              
-            </div>
-            
-          </div> 
-    </>
-  );
+						<div className='work-div profile-details-div-common'>
+							<div className='inner-details-title-div'>
+								<div className='notch'></div>
+								<span className='inner-details-title'>Work</span>
+							</div>
+							<div className='profile-details-content-div'>
+								<div className='profile-detail-field-div'>
+									<span className='inner-detail-field-title'>Employee ID</span>
+									<span className='inner-detail-field-value'>
+										{profileFormData?.profile?.hrmid || ''}
+									</span>
+								</div>
+								<div className='profile-detail-field-div'>
+									<span className='inner-detail-field-title'>Email</span>
+									<span className='inner-detail-field-value'>
+										{profileFormData?.profile?.email || ''}
+									</span>
+								</div>
+								<div className='profile-detail-field-div'>
+									<span className='inner-detail-field-title'>Role</span>
+									<span className='inner-detail-field-value'>
+										{profileFormData?.profile?.role || ''}
+									</span>
+								</div>
+								<div className='profile-detail-field-div'>
+									<span className='inner-detail-field-title'>Department</span>
+									<span className='inner-detail-field-value'>
+										{profileFormData?.profile?.department || ''}
+									</span>
+								</div>
+								<div className='profile-detail-field-div'>
+									<span className='inner-detail-field-title'>
+										Reporting Manager
+									</span>
+									<span className='inner-detail-field-value'>
+										{profileFormData?.profile?.reportingManager || ''}
+									</span>
+								</div>
+								<div className='profile-detail-field-div'>
+									<span className='inner-detail-field-title'>
+										Date Of Joining
+									</span>
+									<span className='inner-detail-field-value'>
+										{profileFormData?.profile?.joiningDate || ''}
+									</span>
+								</div>
+								<div className='profile-detail-field-div'>
+									<span className='inner-detail-field-title'>
+										Office Location
+									</span>
+									<span className='inner-detail-field-value'>
+										{profileFormData?.profile?.location || ''}
+									</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</>
+	);
 }
 export default GetProfile;

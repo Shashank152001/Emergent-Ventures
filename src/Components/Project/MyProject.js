@@ -12,7 +12,7 @@ function MyProject() {
 
     useEffect(()=>{
       fetchProject().then((data)=>{
-        setProject(data.data);
+        setProject(data);
       }).catch((e)=>{
         console.log(e.message)
       })

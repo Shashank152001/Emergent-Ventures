@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   addDays,
   eachDayOfInterval,
@@ -11,8 +12,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import LeftRow from "./leftRow";
 import RightRow from "./rightRow";
+import { LoginContext } from "../../Context/LoginContext";
+import { CreateTimeSheet, getTimeSheet } from "../../Service/TimesheetService";
+import { toast } from "react-toastify";
 
 const Timesheetform = () => {
+  const navigate = useNavigate();
   const [start, setStart] = useState(
     startOfWeek(new Date(), { weekStartsOn: 0 })
   ); // start of the week
@@ -25,76 +30,131 @@ const Timesheetform = () => {
   let formattedStartDate =
     startDate[0] + "-" + startDate[1] + "-" + startDate[2];
   let formattedEndDate = endDate[0] + "-" + endDate[1] + "-" + endDate[2];
-
+  let week = `${formattedStartDate} - ${formattedEndDate}`;
+  const { profileformdata } = useContext(LoginContext);
+  const [UserTimeSheetData, setUserTimeSheetData] = useState([]);
   const [TimesheetData, setTimeSheetData] = useState({
-    timesheetName: `Timesheet (${formattedStartDate} - ${formattedEndDate})`,
-    date: "",
-    week: `${formattedStartDate} - ${formattedEndDate}`,
-	submittedHours:''
+    totalTime:''
   });
+// clear all the rows and clear data from the first row in reset
 
   const [FinalData, setFinalData] = useState([]);
-  const [totalHours, settotalHours] = useState(0);
+  const [isFilled, setFilled] = useState(false);
 
   const handlechange = (event) => {
-    const { name, value, dataset } = event.target;
 
+    const { name, value, dataset } = event.target;
+    
     if (dataset.hasOwnProperty("date")) {
-      setTimeSheetData((prevData) => ({ ...prevData, date: dataset.date,submittedHours:value,[name]:value }));
+      setTimeSheetData((prevData) => ({
+        ...UserTimeSheetData[dataset.row - 1],
+        ...prevData,
+        date: dataset.date,
+        submittedHours: value,
+        userId: profileformdata.userId,
+        week: `${formattedStartDate} - ${formattedEndDate}`,
+        timesheetName: `Timesheet (${formattedStartDate} - ${formattedEndDate})`,
+        [name]: value,
+      }));
     } else {
-      setTimeSheetData((prevData) => ({ ...prevData, [name]: value }));
+      setTimeSheetData((prevData) => ({
+        ...UserTimeSheetData[dataset.row - 1],
+        ...prevData,
+        [name]: value,
+      }));
     }
   };
 
-
-  useEffect(()=>{
-	 
-	if(FinalData.length){
-		console.log(FinalData);
-	}
-
-  },[FinalData])
-
-
-  const handleSubmit = ()=>{
+  useEffect(() => {
     
-	if(FinalData.length === 0 && TimesheetData?.clientName){
-		// settotalHours((prevHours)=> prevHours + TimesheetData.totalTime);
-		setFinalData((prevData) => [...prevData, TimesheetData]);
-     }
-	else if(FinalData.length && TimesheetData?.clientName){
+    // console.log(week);
+    getTimeSheet(week)
+      .then((data) => {
+        setRow(data.length);
+        setUserTimeSheetData(data); 
+      })
+      .catch((e) => {
+        console.log(e.message);
+        setUserTimeSheetData([])
+        setRow(1);
+      });
 
-		setFinalData((prevData) => [...prevData, TimesheetData]);
-		// settotalHours((prevHours)=> prevHours + Number(TimesheetData.totalTime));
-	}
+    return () => {
+      setUserTimeSheetData([]);
+    };
 
-	// else{
-	// 	console.log(FinalData);
-	// 	console.log('hit the server.....');
-	// }
-	
-  }
+  }, [start,end]);
+
+  useEffect(() => {
+    if (isFilled) {
+    
+      CreateTimeSheet(FinalData)
+        .then((data) => {
+          navigate("/dashboard/getTimesheet");
+
+          toast.success(`${data.message}`, {
+            position: "top-left",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+
+    return () => {
+      setFilled(false);
+    };
+  }, [isFilled]);
+
+  const handleSubmit = () => {
+    
+    if (FinalData.length === 0 && TimesheetData?.clientName) {
+      setFinalData((prevData) => [...prevData, TimesheetData]);
+      setFilled(true);
+    } else if (FinalData.length && TimesheetData?.clientName) {
+      setFinalData((prevData) => [...prevData, TimesheetData]);
+      setFilled(true);
+    }
+  };
 
   const leftRows = [];
   const rightRows = [];
 
   for (let i = 1; i <= row; i++) {
-    leftRows.push(<LeftRow row={i} key={i} handlechange={handlechange} />);
+    leftRows.push(
+      <LeftRow
+        row={i}
+        key={i}
+        handlechange={handlechange}
+        week={week}
+        start={start}
+        end={end}
+      />
+    );
   }
   for (let i = 1; i <= row; i++) {
     rightRows.push(
-      <RightRow key={i} handlechange={handlechange} date={date} totalHours={totalHours}/>
+      <RightRow
+        key={i}
+        row={i}
+        handlechange={handlechange}
+        date={date}
+        week={week}
+        start={start}
+        end={end}
+      />
     );
   }
 
-//   4:20
-// 5:55
-
-// 10:15
   const addRow = () => {
     setRow((prevRow) => prevRow + 1);
-	console.log(Number(TimesheetData.totalTime.split(':')[0]))
-	// settotalHours((prevHours)=> prevHours + Number(TimesheetData.totalTime));
     setFinalData((prevData) => [...prevData, TimesheetData]);
   };
 
@@ -108,15 +168,12 @@ const Timesheetform = () => {
     );
 
     const dd = eachDayOfInterval({ start: start, end: end }).map((date) => {
-      const [year, month, Date] = date
-        .toLocaleDateString("en-GB")
-        .split("/")
-        .reverse();
+      const [Date, month, year] = date.toLocaleDateString("en-GB").split("/");
 
       return `${year}-${month}-${Date}`;
     });
-
     setSlide(daydate);
+
     setdate(dd);
   }, [start, end]);
 
@@ -130,7 +187,7 @@ const Timesheetform = () => {
     setEnd(subDays(end, 7));
   };
 
-  
+ 
 
   return (
     <>
@@ -244,7 +301,38 @@ const Timesheetform = () => {
             <span className="text-primary">Add Row</span>
           </button>
         </div>
-		<button onClick={handleSubmit} className="bg-success">save</button>
+        <div style={{ display: "flex", gap: "2rem" }}>
+          <button
+            onClick={handleSubmit}
+            className="bg-success btn"
+            style={{
+              textAlign: "center",
+              width: "200px",
+              height: "40px",
+              color: "#fff",
+              outline: "none",
+              border: "none",
+              marginLeft: "1rem",
+            }}
+          >
+            Save
+          </button>
+          <button
+            onClick={()=>setRow(1)}
+            className="btn"
+            style={{
+              textAlign: "center",
+              width: "200px",
+              height: "40px",
+              color: "#fff",
+              outline: "none",
+              border: "none",
+              backgroundColor: "#283055",
+            }}
+          >
+            Reset
+          </button>
+        </div>
       </div>
     </>
   );

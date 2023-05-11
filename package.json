@@ -24,11 +24,12 @@
     "react-circular-progressbar": "^2.1.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.8.0",
-    "react-router-dom": "^6.9.0",
+    "react-router-dom": "^6.11.1",
     "react-scripts": "5.0.1",
     "react-toastify": "^9.1.2",
     "socket.io": "^4.6.1",
     "socket.io-client": "^4.6.1",
+    "use-history": "^1.4.1",
     "web-vitals": "^2.1.4",
     "workerize-loader": "^2.0.2",
     "xlsx": "^0.18.5"

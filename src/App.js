@@ -24,13 +24,15 @@ import EditRequest from "./Components/WFH/EditRequest";
 import GetUserTimesheet from "./Components/Timesheet/GetUserTimesheet";
 import GetRmTimesheet from "./Components/Timesheet/GetRmTimesheet";
 import EditReporingTimeSheet from "./Components/Timesheet/EditReporingTimeSheet";
+import SearchProfile from "./Components/Profile/SearchProfile";
 
 
 function App() {
 
   const[profileformdata,setProfileFormdata]=useState({
     name:'',
-    profileImage:''
+    profileImage:'',
+    userId:''
   })
   
    
@@ -58,7 +60,8 @@ function App() {
               <Route element={<GetRequest />} path="getRequest" />
               <Route element={<EditRequest/>} path="editrequest/:id" />
               <Route element={<ViewRequest />} path="viewRequest" />
-              <Route element={<GetProfile />} path="getProfile" />
+              <Route element={<GetProfile />} path="getProfile/" />
+              <Route element={<SearchProfile />} path="searchprofile/:id" />
               <Route element={<Profile />} path="profile" />
               <Route element={<GetUserTimesheet/>} path="getTimesheet"/>
               <Route element={<GetRmTimesheet/>} path="viewTime"/>

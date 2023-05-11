@@ -1,8 +1,26 @@
-import React from "react";
+import React,{useEffect,useState,useRef} from "react";
 import "./Timesheet.css";
+import {getTimeSheet} from "../../Service/TimesheetService";
 
+const RightRow = ({ row,handlechange,date,week,start,end}) => {
+  
+  const[userTimeSheetData,setuserTimeSheetData] = useState([]);
+  const BillableRef = useRef('');
+ 
+  useEffect(() => {
+    getTimeSheet(week)
+      .then((data) => {
+        
+        setuserTimeSheetData(data);
+      })
+      .catch((e) => {
+        // console.log(e.message);
+        setuserTimeSheetData([]);
+        BillableRef.current.value  = '';
+      });
 
-const RightRow = ({ handlechange, date,totalHours }) => {
+  }, [start,end]);
+
   return (
     <tbody>
       <tr>
@@ -12,6 +30,9 @@ const RightRow = ({ handlechange, date,totalHours }) => {
             className="right-table-td"
             onChange={handlechange}
             name="workItem"
+            data-row = {row}
+            defaultValue={userTimeSheetData[row-1]?.workItem || ''}
+            
           />
         </td>
         <td>
@@ -20,6 +41,8 @@ const RightRow = ({ handlechange, date,totalHours }) => {
             className="right-table-td"
             onChange={handlechange}
             name="description"
+            data-row = {row}
+            defaultValue={userTimeSheetData[row-1]?.description || ''}
           />
         </td>
         <td>
@@ -27,6 +50,10 @@ const RightRow = ({ handlechange, date,totalHours }) => {
             className="right-table-td"
             onChange={handlechange}
             name="billableStatus"
+            data-row = {row}
+            defaultValue={userTimeSheetData[row-1]?.billableStatus }
+            value={userTimeSheetData[row-1]?.billableStatus  }
+            ref={BillableRef}
           >
             <option value="">Select status</option>
             <option value="Billable">Billable</option>
@@ -41,13 +68,14 @@ const RightRow = ({ handlechange, date,totalHours }) => {
               placeholder="00:00"
               onChange={handlechange}
               name="totalTime"
-			        data-date ={day}
+              defaultValue={userTimeSheetData[row-1]?.date === day ? userTimeSheetData[row-1]?.totalTime:'' }
+              // value={userTimeSheetData[row-1]?.date === day ? userTimeSheetData[row-1]?.totalTime:'' }
+			        data-date = {day}
+              data-row =  {row}
             />
           </td>
         ))}
         <td className="date-td-span" style={{ paddingBottom: "1.15rem" }}>
-          {/* totalTime */}
-          {/* <span>{totalHours}</span> */}
           <span>00:00</span>
         </td>
       </tr>

@@ -26,7 +26,9 @@ function Timer() {
   }, []);
 
   useEffect(() => {
+
     socket.on("status", (data) => {
+      // console.log(data);
       if (data.status === "checked-in") {
         setIsRunning(() => {
           return true;
@@ -44,12 +46,15 @@ function Timer() {
       }
     });
 
+
     return () => {
       socket.off("status");
       socket.off("checkin");
       socket.off("checkout");
       socket.off("checkedIn");
     };
+
+
   }, []);
 
 
@@ -69,9 +74,6 @@ function Timer() {
       });
     });
   };
-
-
-
 
 
   // for checkin
@@ -210,7 +212,7 @@ function Timer() {
               style={{
                 position: "relative",
                 top: "26.5px",
-                right: "25px",
+                right: "23px",
                 zIndex:'1'
               }}
             >

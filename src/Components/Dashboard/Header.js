@@ -1,25 +1,47 @@
 import React, { useState, useEffect, useContext } from "react";
+import {useRef} from 'react';
 import { BiBell, BiChevronDown, BiSearch, BiPlusCircle } from "react-icons/bi";
 import "./Dashboard.css";
 import { LoginContext } from '../../Context/LoginContext'
 import FileUpload from "./fileupload";
 import { DropDown } from "../DropDown/DropDown";
 import { ProfileFormData } from '../../Service/ProfileService'
-import { UserSearchBar } from "../../Service/UserSearchService";
-// import {url} from '../Constant/Url';
+import { UserSearchBar,GetUserId } from "../../Service/UserSearchService";
+import { useNavigate } from "react-router-dom";
+
 function Header() {
 
   const [showModal, setShowModal] = useState(false);
   const [openProfile, setOpenProfile] = useState(false);
   const { profileformdata, setProfileFormdata } = useContext(LoginContext)
-
+  
   // search Field
-  const [input, setInput] = useState("");
+  
+  const [input, setInput] = useState([]);
   const [searchResult, setSearchResult] = useState([]);
   const [showResults, setShowResults] = useState(false);
+  const navigate = useNavigate();
 
+
+  const searchBoxRef = useRef(null);//for close outside 
   useEffect(() => {
-    if (input.trim() !== "") {
+    const handleClickOutside = (event) => {
+      if (searchBoxRef.current && !searchBoxRef.current.contains(event.target)) {
+        setShowResults(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
+
+//for search name
+  useEffect(() => {
+    if (input!= "") {
       UserSearchBar(input)
         .then((UserSearch) => {
           const result = UserSearch.filter((Name) => {
@@ -30,6 +52,7 @@ function Header() {
             );
           });
           setSearchResult(result);
+          
         })
         .catch((e) => {
           console.log(e.message);
@@ -41,20 +64,22 @@ function Header() {
 
   const handleChange = (value) => {
     setInput(value);
-    setShowResults(true); // show results when the input changes
+    setShowResults(true); 
   };
 
   const handleSearchBoxClick = () => {
-    setShowResults(true); // show results when the search box is clicked
+   
+    setShowResults(true); 
   };
 
-  // useEffect(() => {
-  //   return () => {
-  //     setInput("");
-  //   };
-  // }, []);
+  const handleRowClick = (id) => {
+  
+   
+    navigate(`/dashboard/searchprofile/${id}`);
 
-
+  };
+ 
+ 
   const handleCloseModal = () => {
     document.getElementById('scroll-hidden').style.overflow = 'visible';
     setShowModal(false);
@@ -68,8 +93,9 @@ function Header() {
   useEffect(() => {
     ProfileFormData().then((data) => {
       setProfileFormdata({
-        name: data.data[0].name,
-        profileImage: data.data[0].profileImage
+        name: data.profile.name,
+        profileImage: data.profile.profileImage,
+        userId: data.profile.userId
       })
     })
   }, [])
@@ -101,6 +127,7 @@ function Header() {
             type="text"
             placeholder="search"
             className="position-relative"
+           
             style={{
               borderRadius: "10px",
               height: "34px",
@@ -115,13 +142,15 @@ function Header() {
           />
           {showResults && (
         <div
+        className="search-box"
+        ref={searchBoxRef}
           style={{
             position: "absolute",
             top: "100%",
             left: "0",
             zIndex: "999",
             borderRadius: "10px",
-            border: "1px solid #ccc",
+            border: "none",
             background: "rgba(211,224,253,1)",
             width: "100%",
             maxHeight: "200px",
@@ -137,7 +166,7 @@ function Header() {
             >
              
               <tbody>
-                <tr className="Search-Table-text">
+                <tr className="Search-Table-text"   onClick={() => handleRowClick(Name.id)}>
                   <td>{Name.hrmId}</td>
                   <td>{Name.name}</td>
                 </tr>
@@ -160,9 +189,7 @@ function Header() {
               background: '#F7F9FB',
               padding: '0.4rem 0.9rem',
               color: '#6C63FF'
-
-
-            }}
+ }}
             className=""
             onClick={handleShowModal}
           >
@@ -204,4 +231,4 @@ function Header() {
   )
 }
 
-export default Header
+export default Header;
