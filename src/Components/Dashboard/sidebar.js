@@ -1,79 +1,47 @@
-import { BiGridAlt, BiWallet, BiUser, BiTime } from 'react-icons/bi';
 import celebalLogo from '../../Assest/celebal.png';
-import SkillIcon from './skillIcon';
-import DashBoardIcon from './dashboardIcon';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 function Sidebar() {
 	return (
-		<>
-			<div
-				className='nav-top left-sidebar'
-				style={{
-					borderRight: '1px solid #000',
-					height: '100%',
-					position: 'fixed'
-				}}
-			>
-				<div className='image-container-logo'>
-					<img className='image-container-logo-img' src={celebalLogo} alt='celebal' />
-				</div>
-				<div className='menu-item' style={{ marginTop: '2rem' }}>
-					<ul>
-						<li
-							className='active-bg li-style'
-							style={{
-								padding: '1rem 0.9rem'
-								// borderLeft: "10px solid #088dda",
-							}}
-						>
-							{/* <BiGridAlt style={{ marginRight: "10px" }} /> */}
-							<DashBoardIcon />
-							<Link
-								to='/dashboard'
-								style={{ textDecoration: 'none', color: '#283055' }}
-							>
-								DashBoard
-							</Link>
-						</li>
-						<li style={{ padding: '1rem 0.9rem' }} className='li-style'>
-							<BiWallet style={{ marginRight: '10px' }} />
-							<Link
-								to='getRequest'
-								style={{ textDecoration: 'none', color: '#283055' }}
-							>
-								Myleaves
-							</Link>
-						</li>
-						<li style={{ padding: '1rem 0.9rem' }} className='li-style'>
-							<BiUser style={{ marginRight: '10px' }} />
-							<Link
-								to='getProfile'
-								style={{ textDecoration: 'none', color: '#283055' }}
-							>
-								Account
-							</Link>
-						</li>
-						<li style={{ padding: '1rem 0.9rem' }} className='li-style'>
-							<SkillIcon />
-							<Link to='skill' style={{ textDecoration: 'none', color: '#283055' }}>
-								Skills
-							</Link>
-						</li>
-						<li style={{ padding: '1rem 0.9rem' }} className='li-style'>
-							<BiTime style={{ marginRight: '10px' }} />
-
-							<Link
-								to='getTimesheet'
-								style={{ textDecoration: 'none', color: '#283055' }}
-							>
-								Timesheets
-							</Link>
-						</li>
-					</ul>
-				</div>
+		<div className='left-sidebar'>
+			<div className='left-sidebar-logo-div'>
+				<img className='left-sidebar-logo' src={celebalLogo} alt='celebal' />
 			</div>
-		</>
+			<div className='left-sidebar-tabs'>
+				<NavLink end to='/dashboard' className={(navData) => (navData.isActive ? 'active-tab' : 'inactive-tab')}>
+					<div className='left-sidebar-tab'>
+						<span style={{ marginRight: '1rem' }}>
+							<i className='bi bi-window-sidebar' style={{ fontSize: '1.2rem' }}></i>
+						</span>
+						<span>Dashboard</span>
+					</div>
+				</NavLink>
+				<NavLink to='getRequest' className={(navData) => (navData.isActive ? 'active-tab' : 'inactive-tab')}>
+					<div className='left-sidebar-tab'>
+						<span style={{ marginRight: '1rem' }}>
+							<i className='bi bi-send' style={{ fontSize: '1.2rem' }}></i>
+						</span>
+						<span>Requests</span>
+					</div>
+				</NavLink>
+				<NavLink to='getProfile' className={(navData) => (navData.isActive ? 'active-tab' : 'inactive-tab')}>
+					<div className='left-sidebar-tab'>
+						<span style={{ marginRight: '1rem' }}>
+							<i className='bi bi-person' style={{ fontSize: '1.2rem' }}></i>
+						</span>
+						<span>Account</span>
+					</div>
+				</NavLink>
+				<NavLink to='getTimesheet' className={(navData) => (navData.isActive ? 'active-tab' : 'inactive-tab')}>
+					<div className='left-sidebar-tab'>
+						<span style={{ marginRight: '1rem' }}>
+							<i className='bi bi-calendar-check' style={{ fontSize: '1.2rem' }}></i>
+						</span>
+						<span>Timesheets</span>
+					</div>
+				</NavLink>
+			</div>
+		</div>
 	);
 }
 

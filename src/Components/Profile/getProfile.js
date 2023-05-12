@@ -17,11 +17,11 @@ function GetProfile() {
 		ProfileFormData()
 			.then((data) => {
 				setProfileFormdata({
-					name: data[0].profile.name,
-					profileImage: data[0].profile.profileImage,
-					userId: data[0].profile.userId
+					name: data.profile.name,
+					profileImage: data.profile.profileImage,
+					userId: data.profile.userId
 				});
-				setProfileFormData(data[0]);
+				setProfileFormData(data);
 			})
 			.catch((e) => {
 				console.log(e.message);
@@ -30,7 +30,7 @@ function GetProfile() {
 
 	useEffect(() => {
 		fetchSkills().then((data) => {
-			setSkillData(data[0]);
+			setSkillData(data);
 		});
 	}, []);
 
