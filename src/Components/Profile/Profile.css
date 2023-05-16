@@ -21,8 +21,7 @@
 	align-items: center;
 	justify-content: center;
 	background-color: rgb(37, 49, 75);
-	background-image: url(../../Assest/wallpaper-pattern.png),
-		linear-gradient(to bottom, transparent 1%, rgba(20, 20, 20) 75%);
+	background-image: url(../../Assest/wallpaper-pattern.png), linear-gradient(to bottom, transparent 1%, rgba(20, 20, 20) 75%);
 	background-size: 6rem;
 	background-repeat: repeat;
 }
@@ -49,7 +48,6 @@
 	margin: 1rem 0;
 }
 .wallpaper-profile-info li {
-	margin: 0 1rem;
 	color: rgb(220, 220, 220);
 	font-size: 0.9rem;
 }
@@ -93,11 +91,9 @@
 .first-column {
 	margin-right: 1rem;
 }
-
 .second-column {
 	margin-left: 1rem;
 }
-
 .profile-details-div-common {
 	box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.12);
 	background-color: #ffffff;
@@ -166,23 +162,14 @@
 	padding: 0.5rem;
 }
 .profile-details-card-div {
-
 	display: flex;
-	
 	flex-wrap: wrap;
-	
 	padding: 0.5rem;
-	
 	border-bottom: 1px solid #fafafa;
-	
 	border-top: 1px solid #fafafa;
-	
 }
-	
 .profile-details-card-div:hover {
-	
 	background-color: #fafafa;
-	
 }
 .profile-details-card-image-div {
 	display: flex;

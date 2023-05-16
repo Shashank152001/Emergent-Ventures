@@ -23,7 +23,9 @@ import WFHform from './Components/WFH/WFHform'
 import EditRequest from "./Components/WFH/EditRequest";
 import GetUserTimesheet from "./Components/Timesheet/GetUserTimesheet";
 import GetRmTimesheet from "./Components/Timesheet/GetRmTimesheet";
-import EditReporingTimeSheet from "./Components/Timesheet/EditReporingTimeSheet";
+import EditReporingTimeSheet from "./Components/Timesheet/EditReportingTimeSheet";
+import SearchProfile from "./Components/Profile/SearchProfile";
+
 
 function App() {
 
@@ -41,12 +43,14 @@ function App() {
         <Routes>
           <Route element={<RedirectRoute />} path="/">
             <Route element={<SignIn />} path="/"></Route>
+            
           </Route>
           <Route element={<SignUp />} path="/signup"></Route>
           <Route element={<EmployeeTable />} path="/table"></Route>
-          <Route element={<GetUserTimesheet/>} path="/getTimesheet"></Route>
+          {/* <Route element={<GetUserTimesheet/>} path="/getTimesheet"></Route>
           <Route element={<GetRmTimesheet/>} path="/viewTime"></Route>
-          <Route element={<EditReporingTimeSheet/>} path="/editTime"></Route>
+          <Route element={<EditReporingTimeSheet/>} path="/editTime"></Route> */}
+         
           {/* for hierarchy testing */}
 
           <Route element={<ProtectRoute />} path="/dashboard">
@@ -56,13 +60,15 @@ function App() {
               <Route element={<GetRequest />} path="getRequest" />
               <Route element={<EditRequest/>} path="editrequest/:id" />
               <Route element={<ViewRequest />} path="viewRequest" />
-              <Route element={<GetProfile />} path="getProfile" />
+              <Route element={<GetProfile />} path="getProfile/" />
+              <Route element={<SearchProfile />} path="searchprofile/:id" />
               <Route element={<Profile />} path="profile" />
               <Route element={<GetUserTimesheet/>} path="getTimesheet"/>
               <Route element={<GetRmTimesheet/>} path="viewTime"/>
               <Route element={<EditReporingTimeSheet/>} path="editTime/:id"/>
               <Route element={<TimesheetForm />} path="timesheetform"></Route>
               <Route element={<Gethierarchy/>} path="chart" />
+              
             </Route>
             
            

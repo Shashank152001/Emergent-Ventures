@@ -6,26 +6,36 @@ import { Link } from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.css';
 import 'primeicons/primeicons.css';
 import './Profile.css';
-
-function GetProfile() {
+import { useParams,useNavigate } from 'react-router-dom';
+import { GetUserId } from "../../Service/UserSearchService";
+function SearchProfile() {
 	const { profileformdata, setProfileFormdata } = useContext(LoginContext);
 	const [profileFormData, setProfileFormData] = useState(null);
+	const [searchdata,setsearchdata]= useState({
 
+	});
+	const { id } = useParams();
+	console.log(id);
 	// Profile Get Data
+	// userId=userId-10000;
+	// console.log(userId)
 	useEffect(() => {
-		ProfileFormData()
+		if (id) {
+		  GetUserId(id)
 			.then((data) => {
-				setProfileFormdata({
-					name: data[0].profile.name,
-					profileImage: data[0].profile.profileImage,
-					userId: data[0].profile.userId
-				});
-				setProfileFormData(data[0]);
+			  setsearchdata(data); 
+			  console.log(data);
 			})
 			.catch((e) => {
-				console.log(e.message);
+			  console.log(e.message);
+			  setsearchdata([]);
 			});
-	}, []);
+		}
+	  
+		return () => {
+		  setsearchdata([]);
+		};
+	  }, [id]);
 
 	return (
 		<>
@@ -35,29 +45,29 @@ function GetProfile() {
 						<img
 							className='profile-image'
 							name='image'
-							src={profileFormData?.profile?.profileImage}
+							src={searchdata.profileImage}
 							alt=''
 						/>
 					</div>
 					<div className='wallpaper-profile-info-div'>
 						<ul className='wallpaper-profile-info'>
 							<li>
-								{profileFormData?.profile?.hrmid || ''} -{' '}
-								{profileFormData?.profile?.name || ''}
+								{searchdata.hrmid || ''} -{' '}
+								{searchdata.name || ''}
 							</li>
-							<li>{profileFormData?.profile?.role || ''}</li>
-							<li>{profileFormData?.profile?.department || ''}</li>
-							<li>{profileFormData?.profile?.email || ''}</li>
+							<li>{searchdata.role || ''}</li>
+							<li>{searchdata.department || ''}</li>
+							<li>{searchdata.email || ''}</li>
 						</ul>
 					</div>
 				</div>
 
 				<div className='profile-options-div'>
-					<Link className='profile-options' to='/dashboard/profile'>
+					{/* <Link className='profile-options' to='/dashboard/profile'>
 						<h5 className='profile-options-h' style={{ margin: '0' }}>
 							Edit
 						</h5>
-					</Link>
+					</Link> */}
 				</div>
 				<div className='profile-details-div'>
 					<div className='first-column'>
@@ -73,7 +83,7 @@ function GetProfile() {
 											<i className='bi bi-diagram-3'></i>
 										</span>
 										<span style={{ padding: '1rem' }}>
-											{profileFormData?.profile?.department || ''}
+											{searchdata.department || ''}
 										</span>
 									</div>
 									<div className='profile-detail-field-div'>
@@ -81,7 +91,7 @@ function GetProfile() {
 											<i className='bi bi-people'></i>
 										</span>
 										<span style={{ padding: '1rem' }}>
-											{profileFormData?.profile?.role || ''}
+											{searchdata.role || ''}
 										</span>
 									</div>
 								</div>
@@ -91,7 +101,7 @@ function GetProfile() {
 											<i className='bi bi-phone'></i>
 										</span>
 										<span style={{ padding: '1rem' }}>
-											+91 {profileFormData?.profile?.phone || ''}
+											+91 {searchdata.phone || ''}
 										</span>
 									</div>
 									<div className='profile-detail-field-div'>
@@ -99,7 +109,7 @@ function GetProfile() {
 											<i className='bi bi-geo-alt'></i>
 										</span>
 										<span style={{ padding: '1rem' }}>
-											{profileFormData?.profile?.location || ''}
+											{searchdata.location || ''}
 										</span>
 									</div>
 								</div>
@@ -107,7 +117,7 @@ function GetProfile() {
 						</div>
 					</div>
 					<div className='second-column'>
-						{profileFormData?.reportingManager ? (
+						{searchdata ?.reportingManager ? (
 							<div className='reporting-to-div  profile-details-div-common'>
 								<div className='inner-details-title-div'>
 									<div className='notch'></div>
@@ -120,7 +130,7 @@ function GetProfile() {
 												className='profile-image-mini'
 												name='image'
 												src={
-													profileFormData?.reportingManager?.profileImage
+													searchdata ?.reportingManager?.profileImage
 												}
 												alt=''
 											/>
@@ -128,7 +138,7 @@ function GetProfile() {
 										<div className='profile-details-card-content-div'>
 											<div>
 												<span style={{ fontSize: '0.9rem' }}>
-													{profileFormData?.reportingManager?.hrmid || ''}
+													{searchdata ?.reportingManager?.hrmid  || ''}
 													<span> - </span>
 												</span>
 												<span
@@ -137,17 +147,16 @@ function GetProfile() {
 														fontSize: '0.9rem'
 													}}
 												>
-													{profileFormData?.reportingManager?.name || ''}
+													{searchdata ?.reportingManager?.name || ''}
 												</span>
 											</div>
 											<div>
 												<span>
-													{profileFormData?.reportingManager?.role || ''}
+													{searchdata ?.reportingManager?.role  || ''}
 													<span> - </span>
 												</span>
 												<span>
-													{profileFormData?.reportingManager
-														?.department || ''}
+													{searchdata ?.reportingManager?.department || ''}
 												</span>
 											</div>
 										</div>
@@ -157,14 +166,14 @@ function GetProfile() {
 						) : (
 							<></>
 						)}
-						{profileFormData?.subordinates ? (
+						{searchdata?.subordinates ? (
 							<div className='direct-reports-div profile-details-div-common'>
 								<div className='inner-details-title-div'>
 									<div className='notch'></div>
 									<span className='inner-details-title'>Direct Reports</span>
 								</div>
 								<div className='profile-details-content-div'>
-									{profileFormData?.subordinates.map((subordinate) => {
+									{searchdata?.subordinates.map((subordinate) => {
 										return (
 											<div className='profile-details-card-div'>
 												<div className='profile-details-card-image-div'>
@@ -212,4 +221,4 @@ function GetProfile() {
 		</>
 	);
 }
-export default GetProfile;
+export default SearchProfile;

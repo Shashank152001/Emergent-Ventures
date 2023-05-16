@@ -128,14 +128,14 @@ function Profile() {
 	useEffect(() => {
 		ProfileFormData()
 			.then((profiledata) => {
-				setProfileFormData(profiledata[0]);
+				setProfileFormData(profiledata);
 				setFormData({
-					profileImage: profiledata[0].profile.profileImage,
-					permanentAddress: profiledata[0].profile.permanentAddress,
-					city: profiledata[0].profile.city,
-					state: profiledata[0].profile.state,
-					country: profiledata[0].profile.country,
-					emergencyPhone: profiledata[0].profile.emergencyPhone
+					profileImage: profiledata.profile.profileImage,
+					permanentAddress: profiledata.profile.permanentAddress,
+					city: profiledata.profile.city,
+					state: profiledata.profile.state,
+					country: profiledata.profile.country,
+					emergencyPhone: profiledata.profile.emergencyPhone
 				});
 			})
 			.catch((e) => {
@@ -146,9 +146,9 @@ function Profile() {
 	useEffect(() => {
 		fetchSkills().then((data) => {
 			setSkillData({
-				primarySkills: data[0].primarySkills,
-				secondarySkills: data[0].secondarySkills,
-				certifications: data[0].certifications
+				primarySkills: data.primarySkills,
+				secondarySkills: data.secondarySkills,
+				certifications: data.certifications
 			});
 		});
 	}, []);
@@ -212,7 +212,7 @@ function Profile() {
 										height={200}
 										onCrop={onCrop}
 										onClose={onClose}
-										src={profileformData.profile?.profileImage}
+										src={profileformData?.profile?.profileImage}
 										sheadingColor={'#474649'}
 										backgroundColor={'#00FFFF'}
 										// onFileLoad ={(file)=>{

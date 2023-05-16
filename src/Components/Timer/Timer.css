@@ -1,37 +1,46 @@
- .input{
-    height: 42px;
-    width: 40px;
-    background-color: #DEE2F5;
-    border-radius: 5px;
-    text-align: center;
-    margin: 5px 3px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bolder;
-  }
-  .inputcolon{
-  margin-top: 14px;
-  color: #DEE2F5;
-  font-weight: bolder;
-  }
+.input {
+	position: relative;
+	height: 42px;
+	width: 40px;
+	background-color: #dee2f5;
+	border-radius: 5px;
+	text-align: center;
+	margin: 5px 3px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-weight: bolder;
+	z-index: 1;
+}
+h2,
+p {
+	position: relative;
+}
+.inputcolon {
+	position: relative;
+	margin-top: 14px;
+	color: #dee2f5;
+	font-weight: bolder;
+	z-index: 1;
+}
 
-  #timer{
-    height: 290px;
-    /* background-image: url('../../Assest/Vector.svg');
+#timer {
+	height: 290px;
+	/* background-image: url('../../Assest/Vector.svg');
     background-position: bottom right;
     background-repeat: no-repeat;
     background-size: contain; */
-    /* width: 80%; */
-  }
+	/* width: 80%; */
+}
 
-  .timer-container{
-    background: #F7F9FB;
-    height: 100%;
-    border-radius: 6px;
-    padding: 1.3rem;
-  }
-  /* @media only screen and (min-width: 740px ) and (max-height:1440px) {
+.timer-container {
+	background: #f7f9fb;
+	height: 100%;
+	border-radius: 6px;
+	padding: 1.3rem;
+}
+
+/* @media only screen and (min-width: 740px ) and (max-height:1440px) {
  
   
     .input{
@@ -52,3 +61,25 @@
   }
   
   }  */
+
+.timer-div {
+	background-color: #f7f9fb;
+	border-radius: 6px;
+	position: relative;
+	padding: 1.5rem 0 0 1.5rem;
+}
+.timer-content {
+	z-index: 1;
+}
+.timer-clock {
+	display: flex;
+}
+.button {
+	position: relative;
+}
+.vector-img {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	fill: #5774ff;
+}

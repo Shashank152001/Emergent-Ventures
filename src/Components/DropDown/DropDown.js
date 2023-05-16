@@ -9,11 +9,9 @@ export const DropDown = () => {
     const navigate=useNavigate()
     function handleLogOut(){
         logOut().then((data) => {
-       
             localStorage.clear();
             navigate("/");
             toast.success(`${data.message}`, {
-
                 position: "top-center",
                 autoClose: 2000,
                 hideProgressBar: false,
