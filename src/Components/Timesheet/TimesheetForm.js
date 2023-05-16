@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useContext, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   addDays,
@@ -24,7 +24,7 @@ const Timesheetform = () => {
   const [end, setEnd] = useState(addDays(start, 6)); // end of the week
   const [slide, setSlide] = useState([]);
   const [date, setdate] = useState([]);
-  const [row, setRow] = useState(1);
+  const [row, setRow] = useState(0);
   const startDate = start.toLocaleDateString("en-GB").split("/");
   const endDate = end.toLocaleDateString("en-GB").split("/");
   let formattedStartDate =
@@ -34,17 +34,15 @@ const Timesheetform = () => {
   const { profileformdata } = useContext(LoginContext);
   const [UserTimeSheetData, setUserTimeSheetData] = useState([]);
   const [TimesheetData, setTimeSheetData] = useState({
-    totalTime:''
+    totalTime: "",
   });
-// clear all the rows and clear data from the first row in reset
 
   const [FinalData, setFinalData] = useState([]);
   const [isFilled, setFilled] = useState(false);
 
   const handlechange = (event) => {
-
     const { name, value, dataset } = event.target;
-    
+
     if (dataset.hasOwnProperty("date")) {
       setTimeSheetData((prevData) => ({
         ...UserTimeSheetData[dataset.row - 1],
@@ -66,28 +64,61 @@ const Timesheetform = () => {
   };
 
   useEffect(() => {
-    
-    // console.log(week);
     getTimeSheet(week)
       .then((data) => {
         setRow(data.length);
-        setUserTimeSheetData(data); 
+        setUserTimeSheetData(data);
       })
       .catch((e) => {
-        console.log(e.message);
-        setUserTimeSheetData([])
+        // console.log(e.message);
         setRow(1);
+        setUserTimeSheetData([]);
       });
 
     return () => {
       setUserTimeSheetData([]);
     };
+  }, [start, end]);
 
-  }, [start,end]);
+  const leftRows = useMemo(() => {
+    const leftRows = [];
+
+    for (let i = 1; i <= row; i++) {
+      leftRows.push(
+        <LeftRow
+          row={i}
+          key={i}
+          handlechange={handlechange}
+          UserTimeSheetData={UserTimeSheetData}
+        />
+      );
+    }
+
+    return leftRows;
+  }, [row,date]);
+
+  const rightRows = useMemo(() => {
+    const rightRows = [];
+
+    for (let i = 1; i <= row; i++) {
+      rightRows.push(
+        <RightRow
+          key={i}
+          row={i}
+          handlechange={handlechange}
+          date={date}
+          UserTimeSheetData={UserTimeSheetData}
+        />
+      );
+    }
+
+    return rightRows;
+  }, [row,date]);
+
+
 
   useEffect(() => {
     if (isFilled) {
-    
       CreateTimeSheet(FinalData)
         .then((data) => {
           navigate("/dashboard/getTimesheet");
@@ -113,51 +144,6 @@ const Timesheetform = () => {
     };
   }, [isFilled]);
 
-  const handleSubmit = () => {
-    
-    if (FinalData.length === 0 && TimesheetData?.clientName) {
-      setFinalData((prevData) => [...prevData, TimesheetData]);
-      setFilled(true);
-    } else if (FinalData.length && TimesheetData?.clientName) {
-      setFinalData((prevData) => [...prevData, TimesheetData]);
-      setFilled(true);
-    }
-  };
-
-  const leftRows = [];
-  const rightRows = [];
-
-  for (let i = 1; i <= row; i++) {
-    leftRows.push(
-      <LeftRow
-        row={i}
-        key={i}
-        handlechange={handlechange}
-        week={week}
-        start={start}
-        end={end}
-      />
-    );
-  }
-  for (let i = 1; i <= row; i++) {
-    rightRows.push(
-      <RightRow
-        key={i}
-        row={i}
-        handlechange={handlechange}
-        date={date}
-        week={week}
-        start={start}
-        end={end}
-      />
-    );
-  }
-
-  const addRow = () => {
-    setRow((prevRow) => prevRow + 1);
-    setFinalData((prevData) => [...prevData, TimesheetData]);
-  };
-
   useEffect(() => {
     const daydate = eachDayOfInterval({ start: start, end: end }).map(
       (date) => {
@@ -177,6 +163,21 @@ const Timesheetform = () => {
     setdate(dd);
   }, [start, end]);
 
+  const handleSubmit = () => {
+    if (FinalData.length === 0 && TimesheetData?.clientName) {
+      setFinalData((prevData) => [...prevData, TimesheetData]);
+      setFilled(true);
+    } else if (FinalData.length && TimesheetData?.clientName) {
+      setFinalData((prevData) => [...prevData, TimesheetData]);
+      setFilled(true);
+    }
+  };
+
+  const addRow = () => {
+    setRow((prevRow) => prevRow + 1);
+    setFinalData((prevData) => [...prevData, TimesheetData]);
+  };
+
   const nextweek = () => {
     setStart(addDays(start, 7));
     setEnd(addDays(end, 7));
@@ -186,8 +187,6 @@ const Timesheetform = () => {
     setStart(subDays(start, 7));
     setEnd(subDays(end, 7));
   };
-
- 
 
   return (
     <>
@@ -318,7 +317,7 @@ const Timesheetform = () => {
             Save
           </button>
           <button
-            onClick={()=>setRow(1)}
+            onClick={() => setRow(1)}
             className="btn"
             style={{
               textAlign: "center",

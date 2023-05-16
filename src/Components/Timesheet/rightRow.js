@@ -1,25 +1,9 @@
-import React,{useEffect,useState,useRef} from "react";
+import React from "react";
 import "./Timesheet.css";
-import {getTimeSheet} from "../../Service/TimesheetService";
 
-const RightRow = ({ row,handlechange,date,week,start,end}) => {
+const RightRow = ({ row,handlechange,date,UserTimeSheetData}) => {
+
   
-  const[userTimeSheetData,setuserTimeSheetData] = useState([]);
-  const BillableRef = useRef('');
- 
-  useEffect(() => {
-    getTimeSheet(week)
-      .then((data) => {
-        
-        setuserTimeSheetData(data);
-      })
-      .catch((e) => {
-        // console.log(e.message);
-        setuserTimeSheetData([]);
-        BillableRef.current.value  = '';
-      });
-
-  }, [start,end]);
 
   return (
     <tbody>
@@ -31,7 +15,8 @@ const RightRow = ({ row,handlechange,date,week,start,end}) => {
             onChange={handlechange}
             name="workItem"
             data-row = {row}
-            defaultValue={userTimeSheetData[row-1]?.workItem || ''}
+            defaultValue={UserTimeSheetData[row-1]?.workItem || ''}
+            disabled={UserTimeSheetData[row-1]?.workItem?true:false}
             
           />
         </td>
@@ -42,7 +27,9 @@ const RightRow = ({ row,handlechange,date,week,start,end}) => {
             onChange={handlechange}
             name="description"
             data-row = {row}
-            defaultValue={userTimeSheetData[row-1]?.description || ''}
+            defaultValue={UserTimeSheetData[row-1]?.description || ''}
+            
+            // value={UserTimeSheetData[row-1]?.description || ''}
           />
         </td>
         <td>
@@ -51,9 +38,10 @@ const RightRow = ({ row,handlechange,date,week,start,end}) => {
             onChange={handlechange}
             name="billableStatus"
             data-row = {row}
-            defaultValue={userTimeSheetData[row-1]?.billableStatus }
-            value={userTimeSheetData[row-1]?.billableStatus  }
-            ref={BillableRef}
+            defaultValue={UserTimeSheetData[row-1]?.billableStatus }
+            disabled={UserTimeSheetData[row-1]?.billableStatus?true:false}
+            // value={UserTimeSheetData[row-1]?.billableStatus}
+            
           >
             <option value="">Select status</option>
             <option value="Billable">Billable</option>
@@ -68,8 +56,9 @@ const RightRow = ({ row,handlechange,date,week,start,end}) => {
               placeholder="00:00"
               onChange={handlechange}
               name="totalTime"
-              defaultValue={userTimeSheetData[row-1]?.date === day ? userTimeSheetData[row-1]?.totalTime:'' }
-              // value={userTimeSheetData[row-1]?.date === day ? userTimeSheetData[row-1]?.totalTime:'' }
+              defaultValue={UserTimeSheetData[row-1]?.date === day ? UserTimeSheetData[row-1]?.totalTime:'' }
+              // value={UserTimeSheetData[row-1]?.date === day ? UserTimeSheetData[row-1]?.totalTime:'' }
+              disabled={UserTimeSheetData[row-1]?.totalTime && UserTimeSheetData[row-1]?.date === day ?true:false}
 			        data-date = {day}
               data-row =  {row}
             />

@@ -1,35 +1,20 @@
-import React,{useEffect,useState,useRef} from "react";
+import React,{useEffect, useRef, useState} from "react";
 import "./Timesheet.css";
-import {getTimeSheet} from "../../Service/TimesheetService";
-// import Timesheetform from "./TimesheetForm";
-const LeftRow = ({ row,handlechange,week,start,end}) => {
 
-  const[userTimeSheetData,setuserTimeSheetData] = useState([]);
-  const ClientRef = useRef(''); 
-  const projectRef = useRef(''); 
-  const jobRef = useRef(''); 
+const LeftRow = ({ row,handlechange,UserTimeSheetData}) => {
 
-  useEffect(() => {
-    
-    getTimeSheet(week)
-      .then((data) => {
-        setuserTimeSheetData(data);
-      })
-      .catch((e) => {
-        // console.log(e.message);
-        setuserTimeSheetData([]);
-        ClientRef.current.value  = '';
-        projectRef.current.value  = '';
-        jobRef.current.value  = '';
-      });
 
-     return ()=>{
-      setuserTimeSheetData([]);
-     }
+  const demo = useState({
+    clientName:'',
+    projectName:'',
+    jobName:''
+  });
 
-  }, [start,end]);
+  const clientRef = useRef('');
 
-  
+  useEffect(()=>{
+    console.log(clientRef.current.value);
+  },[])
 
 
 
@@ -43,10 +28,11 @@ const LeftRow = ({ row,handlechange,week,start,end}) => {
             className="left-table-td"
             name="clientName"
             onChange={handlechange}
-            defaultValue={userTimeSheetData[row-1]?.clientName}
+            defaultValue={UserTimeSheetData[row-1]?.clientName}
+            disabled={UserTimeSheetData[row-1]?.clientName?true:false}
             data-row = {row}
-            value={userTimeSheetData[row-1]?.clientName}
-            ref={ClientRef}
+            ref={clientRef}
+            value={UserTimeSheetData[row-1]?.clientName || demo.clientName}
           >
             <option value="">Select Client</option>
             <option value="CT-L&D">CT-L&D</option>
@@ -59,9 +45,11 @@ const LeftRow = ({ row,handlechange,week,start,end}) => {
             onChange={handlechange}
             name="projectName"
             data-row = {row}
-            defaultValue={userTimeSheetData[row-1]?.projectName}
-            value={userTimeSheetData[row-1]?.projectName}
-            ref={projectRef}
+            defaultValue={UserTimeSheetData[row-1]?.projectName}
+            disabled={UserTimeSheetData[row-1]?.projectName?true:false}
+            value={UserTimeSheetData[row-1]?.projectName || demo.projectName}
+            // ref = {projectRef}
+           
           >
             <option value="">Select Project</option>
             <option value="Zoho People">Zoho People</option>
@@ -74,9 +62,10 @@ const LeftRow = ({ row,handlechange,week,start,end}) => {
             onChange={handlechange}
             name="jobName"
             data-row = {row}
-            defaultValue = {userTimeSheetData[row-1]?.jobName}
-            value={userTimeSheetData[row-1]?.jobName}
-            ref={jobRef}
+            defaultValue = {UserTimeSheetData[row-1]?.jobName}
+            disabled={UserTimeSheetData[row-1]?.jobName?true:false}
+            value={UserTimeSheetData[row-1]?.jobName || demo.jobName}
+            // ref = {jobRef}
           >
             <option value="">Select Job</option>
             <option value="Frontend">Frontend</option>
