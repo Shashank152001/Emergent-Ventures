@@ -9,7 +9,7 @@ section.timesheet-container {
 	fill: #14e047;
 }
 .not-checked {
-	fill: #d3d3d3;
+	fill: #c0c0c0;
 }
 
 .image-container-timesheet {
@@ -203,4 +203,77 @@ select {
 .timesheet-content-title {
 	font-size: 1.5rem;
 	font-weight: 500;
+}
+
+/* Dashboard Timesheet */
+.dashboard-timesheet-content-div {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.dashboard-timesheet-tbody-div {
+	max-width: inherit;
+	width: 100%;
+	overflow-x: scroll;
+	overflow-y: scroll;
+	max-height: 14.4rem;
+	height: 14.4rem;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: flex-start;
+}
+.dashboard-timesheet-card {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	border-bottom: 1px rgb(222, 222, 222) solid;
+	padding: 0.6rem 0;
+}
+.dashboard-timesheet-card:last-child {
+	border-bottom: none;
+}
+.dashboard-timesheet-tick {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.dashboard-timesheet-name-div {
+	margin-left: 1rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.dashboard-timesheet-profile-img {
+	width: 2rem;
+}
+.dashboard-timesheet-name {
+	font-weight: bold;
+	color: #41496a;
+	width: 9rem;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	font-size: 0.9rem;
+	margin-left: 1rem;
+}
+.dashboard-week-div {
+	margin-left: 1rem;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: center;
+}
+.dashboard-week-start,
+.dashboard-week-end {
+	font-size: 0.9rem;
+	width: 7rem;
+}
+.dashboard-submitted-hours-div,
+.dashboard-approved-hours-div {
+	margin-left: 1rem;
+	font-size: 0.9rem;
+	display: flex;
+	flex-direction: column;
 }

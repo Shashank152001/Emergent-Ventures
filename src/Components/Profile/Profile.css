@@ -21,8 +21,7 @@
 	align-items: center;
 	justify-content: center;
 	background-color: rgb(37, 49, 75);
-	background-image: url(../../Assest/wallpaper-pattern.png),
-		linear-gradient(to bottom, transparent 1%, rgba(20, 20, 20) 75%);
+	background-image: url(../../Assest/wallpaper-pattern.png), linear-gradient(to bottom, transparent 1%, rgba(20, 20, 20) 75%);
 	background-size: 6rem;
 	background-repeat: repeat;
 }
@@ -49,7 +48,6 @@
 	margin: 1rem 0;
 }
 .wallpaper-profile-info li {
-	margin:1rem 0;
 	color: rgb(220, 220, 220);
 	font-size: 0.9rem;
 }

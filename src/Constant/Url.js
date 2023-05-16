@@ -1,1 +1,1 @@
-export const url = 'https://printed-infected-dream-supplement.trycloudflare.com/';
+export const url = 'https://loc-moderators-flux-om.trycloudflare.com/';

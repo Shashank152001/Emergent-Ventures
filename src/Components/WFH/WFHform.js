@@ -224,9 +224,9 @@ const WFHform = () => {
 								onChange={handleChange}
 							>
 								<option>Select Request</option>
-								<option value='Casual Intern Leave'>Casual Intern Leave</option>
+								<option value='Casual Leave'>Casual Leave</option>
 								<option value='Work From Home'>Work From Home</option>
-								<option value='Restricted Leaves'>Restricted Leave</option>
+								<option value='Restricted Holiday'>Restricted Holiday</option>
 								<option value='Leave Without Pay'>Leave Without Pay</option>
 							</select>
 							{formErrors.request && (
