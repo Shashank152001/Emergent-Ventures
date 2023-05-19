@@ -55,6 +55,7 @@ function App() {
 
           <Route element={<ProtectRoute />} path="/dashboard">
             <Route element={<Dashboard />} path="/dashboard">
+              
               <Route element={<Home />} path="" />
               <Route element={<LeaveForm />} path="leave" />
               <Route element={<GetRequest />} path="getRequest" />
@@ -70,8 +71,7 @@ function App() {
               <Route element={<Gethierarchy/>} path="chart" />
               
             </Route>
-            
-           
+
           </Route>
             
             

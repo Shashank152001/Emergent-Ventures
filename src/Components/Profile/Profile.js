@@ -293,18 +293,6 @@ function Profile() {
 								/>
 							</div>
 							<div className='col'>
-								<label className='labels'> Password</label>
-								<input
-									type='password'
-									className='form-control'
-									value={profileformData?.profile?.password || 'Password'}
-									style={{ backgroundColor: '#EAEAEA' }}
-									onChange={handleChange}
-								/>
-							</div>
-						</div>
-						<div className='row name-form'>
-							<div className='col'>
 								<label className='labels'>Joining Date</label>
 								<input
 									type='date'
@@ -314,6 +302,9 @@ function Profile() {
 									onChange={handleChange}
 								/>
 							</div>
+						</div>
+						<div className='row name-form'>
+							
 							<div className='col'>
 								<label className='labels'>Location</label>
 								<input
@@ -324,8 +315,6 @@ function Profile() {
 									onChange={handleChange}
 								/>
 							</div>
-						</div>
-						<div className='row name-form'>
 							<div className='col'>
 								<label className='labels'>Phone</label>
 								<input
@@ -336,6 +325,9 @@ function Profile() {
 									onChange={handleChange}
 								/>
 							</div>
+						</div>
+						<div className='row name-form'>
+							
 							<div class='col'>
 								<label className='labels'>Emergency Phone</label>
 								<input
@@ -348,8 +340,6 @@ function Profile() {
 									onChange={handleChange}
 								/>
 							</div>
-						</div>
-						<div className='row name-form'>
 							<div className='col'>
 								<label className='labels'>Permanent Address</label>
 								<input
@@ -362,6 +352,9 @@ function Profile() {
 									onChange={handleChange}
 								/>
 							</div>
+						</div>
+						<div className='row name-form'>
+							
 							<div className='col'>
 								<label className='labels'>City</label>
 								<input
@@ -374,8 +367,7 @@ function Profile() {
 									onChange={handleChange}
 								/>
 							</div>
-						</div>
-						<div className='row name-form'>
+
 							<div className='col'>
 								<label className='labels'>State</label>
 								<input
@@ -388,6 +380,9 @@ function Profile() {
 									onChange={handleChange}
 								/>
 							</div>
+						</div>
+						<div className='row name-form'>
+							
 							<div className='col'>
 								<label className='labels'>Country</label>
 								<input

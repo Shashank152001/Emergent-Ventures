@@ -46,7 +46,7 @@ export async function UpdateReportingTimesheet(data) {
 }
 
 export const CreateTimeSheet = async (formData) => {
-  console.log(formData);
+
   const timesheetData = JSON.stringify(formData);
 
   const response = await fetch(url + "user/timesheets/add-user-timesheet", {
@@ -68,6 +68,24 @@ export const getTimeSheet = async (week) => {
   const response = await fetch(
     url +
       `user/timesheets/get-user-weekly-timesheets?week=${week}`,
+    {
+      mode: "cors",
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+    }
+  );
+
+  if (!response.ok) {
+    throw new Error("Data could not be fetched");
+  } else {
+    return await response.json();
+  }
+};
+
+export const getClientAndProject = async (week) => {
+  const response = await fetch(
+    url +
+      `user/get-user-projects-minimal-data`,
     {
       mode: "cors",
       headers: { "Content-Type": "application/json" },

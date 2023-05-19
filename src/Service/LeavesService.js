@@ -2,6 +2,7 @@
 import {url} from '../Constant/Url';
 
 export async function leaveRequest(data){
+    console.log(data);
     const response=await fetch(url+'user/requests/add-user-request',{
         method:"POST",
         mode:"cors",

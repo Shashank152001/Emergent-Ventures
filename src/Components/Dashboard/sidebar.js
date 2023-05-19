@@ -11,7 +11,7 @@ function Sidebar() {
 				<NavLink end to='/dashboard' className={(navData) => (navData.isActive ? 'active-tab' : 'inactive-tab')}>
 					<div className='left-sidebar-tab'>
 						<span style={{ marginRight: '1rem' }}>
-							<i className='bi bi-window-sidebar' style={{ fontSize: '1.2rem' }}></i>
+							<i className='bi bi-grid' style={{ fontSize: '1.2rem' }}></i>
 						</span>
 						<span>Dashboard</span>
 					</div>
@@ -19,7 +19,7 @@ function Sidebar() {
 				<NavLink to='getRequest' className={(navData) => (navData.isActive ? 'active-tab' : 'inactive-tab')}>
 					<div className='left-sidebar-tab'>
 						<span style={{ marginRight: '1rem' }}>
-							<i className='bi bi-send' style={{ fontSize: '1.2rem' }}></i>
+							<i className='bi bi-wallet2' style={{ fontSize: '1.2rem' }}></i>
 						</span>
 						<span>Requests</span>
 					</div>

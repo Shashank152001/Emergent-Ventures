@@ -176,8 +176,6 @@ ul {
 	position: relative;
 	margin-right: 4rem;
 }
-.upload-button {
-}
 .file-upload-dialog {
 	z-index: 5;
 }
@@ -186,10 +184,17 @@ ul {
 	align-items: center;
 	justify-content: center;
 	margin-right: 2rem;
+	flex-wrap: nowrap;
+}
+.bell-icon-div {
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 .header-bell-icon {
 	margin-right: 1rem;
 	font-size: 1.4rem;
+	cursor: pointer;
 }
 .header-user-profile {
 	display: flex;
@@ -202,11 +207,18 @@ ul {
 }
 .header-profile-name-div {
 	padding: 0.4rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.profile-name {
+	width: max-content;
 }
 .cheveron-down {
 	margin-left: 0.5rem;
 	font-size: 1.4rem;
 	border-radius: 50%;
+	cursor: pointer;
 }
 .cheveron-down:hover {
 	background-color: #ececec;
@@ -311,4 +323,22 @@ ul {
 }
 .search-result-name {
 	font-size: 0.9rem;
+}
+.notification-div {
+	display: flex;
+	flex-direction: column;
+}
+.notification-unread-count {
+	background-color: rgb(200, 0, 0);
+	color: #ffffff;
+	font-size: 0.6rem;
+	border-radius: 50%;
+	position: absolute;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0.06rem 0.39rem;
+	top: 0;
+	margin-left: 0.8rem;
+	text-align: center;
 }
