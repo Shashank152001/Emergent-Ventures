@@ -1,1 +1,1 @@
-export const url = 'https://loc-moderators-flux-om.trycloudflare.com/';
+export const url = 'https://dim-validity-pickup-ot.trycloudflare.com/';

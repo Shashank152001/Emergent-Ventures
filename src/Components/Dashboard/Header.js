@@ -2,9 +2,11 @@ import React, { useState, useEffect, useContext } from 'react';
 import { useRef } from 'react';
 import { BiBell, BiChevronDown, BiSearch, BiPlusCircle } from 'react-icons/bi';
 import './Dashboard.css';
+import { socket } from '../../socket';
 import { LoginContext } from '../../Context/LoginContext';
 import FileUpload from './fileupload';
 import { DropDown } from '../DropDown/DropDown';
+import { Notification } from '../Notification/Notification';
 import { ProfileFormData } from '../../Service/ProfileService';
 import { UserSearchBar, GetUserId } from '../../Service/UserSearchService';
 import { useNavigate } from 'react-router-dom';
@@ -12,6 +14,8 @@ import { useNavigate } from 'react-router-dom';
 function Header() {
 	const [showModal, setShowModal] = useState(false);
 	const [openProfile, setOpenProfile] = useState(false);
+	const [notificationData, setNotificationData] = useState([]);
+	const [openNotification, setOpenNotification] = useState(false);
 	const { profileformdata, setProfileFormdata } = useContext(LoginContext);
 
 	// search Field
@@ -20,6 +24,20 @@ function Header() {
 	const [searchResult, setSearchResult] = useState([]);
 	const [showResults, setShowResults] = useState(false);
 	const navigate = useNavigate();
+
+	useEffect(() => {
+		socket.connect();
+		socket.emit('join', 'Joined Room');
+		socket.on('notifications', (data) => {
+			// console.log(data);
+			setNotificationData(data);
+		});
+		return () => {
+			socket.disconnect();
+			socket.off('join');
+			socket.off('notifications');
+		};
+	}, []);
 
 	const searchBoxRef = useRef(null); //for close outside
 	useEffect(() => {
@@ -44,7 +62,7 @@ function Header() {
 						return Name && Name.name && Name.name.toLowerCase().includes(input.toLowerCase());
 					});
 					setSearchResult(result);
-					console.log(result);
+					
 				})
 				.catch((e) => {
 					console.log(e.message);
@@ -121,7 +139,26 @@ function Header() {
 				</div>
 
 				<div className='header-profile-div'>
-					<BiBell className='header-bell-icon' />
+					<div className='notification-div'>
+						<div className='bell-icon-div'>
+							<BiBell
+								className='header-bell-icon'
+								onClick={() => {
+									setOpenNotification((previousState) => !previousState);
+								}}
+							/>
+						</div>
+						{notificationData?.unread === undefined ? <></> : <div className='notification-unread-count'>{notificationData.unread}</div>}
+						{openNotification && (
+							<Notification
+								messages={notificationData?.messages}
+								closeNotification={() => {
+									setOpenNotification((previousState) => !previousState);
+								}}
+							/>
+						)}
+					</div>
+
 					<div className='header-user-profile'>
 						<img className='header-profile-image' src={profileformdata?.profileImage || ''} alt='profile' />
 						<div className='header-profile-name-div'>

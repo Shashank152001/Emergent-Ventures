@@ -127,7 +127,7 @@ function GetRequest() {
 			<div className='tabs-div'>
 				<RequestTabs />
 			</div>
-			<div className='request-content-div'>
+			<div className='request-content-div' style={{width:'80%'}}>
 				<span className='request-content-title'>My Requests</span>
 				<table className='table table-hover' style={{ marginTop: '2rem' }}>
 					<thead>

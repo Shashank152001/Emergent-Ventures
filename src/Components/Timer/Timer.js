@@ -15,13 +15,18 @@ function Timer() {
 	const [checkOutData, setcheckOutData] = useState(null);
 
 	useEffect(() => {
-		socket.connect();
-		socket.on('startClock', () => {
+		// socket.connect();
+	socket.on('startClock', () => {
 			socket.emit('checkin');
 		});
+
+	
+
 		return () => {
-			socket.disconnect();
+			// socket.disconnect();
 			socket.off('startClock');
+			socket.off('notifications');
+			socket.off('join');
 		};
 	}, []);
 
