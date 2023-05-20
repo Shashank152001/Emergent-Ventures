@@ -1,1 +1,1 @@
-export const url = 'https://dim-validity-pickup-ot.trycloudflare.com/';
+export const url = 'https://connectivity-rom-require-asn.trycloudflare.com/';
