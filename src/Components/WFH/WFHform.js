@@ -5,6 +5,8 @@ import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.css';
 import RequestTabs from './RequestTabs';
+import { socket } from '../../socket';
+
 const WFHform = () => {
 	const navigate = useNavigate();
 	const [formData, setFormData] = useState({
@@ -34,6 +36,7 @@ const WFHform = () => {
 		if (isFilled) {
 			leaveRequest(formData)
 				.then((data) => {
+					socket.emit('sendNotifications');
 					navigate('/dashboard/getRequest');
 					toast.success('Request Submitted Successfull', {
 						position: 'top-left',
@@ -253,14 +256,14 @@ const WFHform = () => {
 										fontWeight: '500',
 										width: '6rem',
 										textAlign: 'center',
-										marginLeft: '6rem'
+										marginLeft: '4.1rem'
 									}}
 								>
 									From
 								</label>
 								<input
 									style={{
-										width: '10rem',
+										width: '11rem',
 										backgroundColor: '#fffff',
 										padding: '0.6rem',
 										outline: 'none',
@@ -287,7 +290,7 @@ const WFHform = () => {
 								<label style={{ fontWeight: '500', width: '4rem', textAlign: 'center' }}>To</label>
 								<input
 									style={{
-										width: '10rem',
+										width: '11rem',
 										backgroundColor: '#fffff',
 										padding: '0.6rem',
 										outline: 'none',

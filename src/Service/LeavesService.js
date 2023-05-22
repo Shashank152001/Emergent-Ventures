@@ -79,3 +79,18 @@ export async function CancelRequest(data) {
     })
     return response; 
 }
+
+
+export const availableRequest=async()=>{
+    const response=await fetch(url+'user/requests/get-user-available-requests',{
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+    })
+    
+    if(!response.ok){
+        throw new Error('your Get Request Data not be fetched')
+    }else{
+        return await response.json()
+    }
+}

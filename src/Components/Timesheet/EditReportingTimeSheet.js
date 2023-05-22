@@ -3,6 +3,8 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { fetchReportingTimesheet, UpdateReportingTimesheet } from '../../Service/TimesheetService';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { socket } from '../../socket';
+
 function EditReportingTimeSheet() {
 	const navigate = useNavigate();
 	const [reportingTimeSheet, SetReportingTimesheet] = useState([]);
@@ -26,7 +28,8 @@ function EditReportingTimeSheet() {
 		if (putTimesheet) {
 			UpdateReportingTimesheet(formData)
 				.then((data) => {
-					console.log(data);
+					socket.emit('sendNotifications');
+					// console.log(data);
 					toast.success('Status Updated Successfull', {
 						position: 'top-left',
 						autoClose: 2000,
@@ -85,13 +88,7 @@ function EditReportingTimeSheet() {
 							<div className='form-group row'>
 								<label className='col-sm-2 col-form-label'>Timesheet Name</label>
 								<div className='col-sm-10'>
-									<input
-										type='text'
-										className='form-control'
-										placeholder='Email'
-										value={reportingTimeSheet.timesheetName}
-										disabled
-									/>
+									<input type='text' className='form-control' placeholder='Email' value={reportingTimeSheet.timesheetName} disabled />
 								</div>
 							</div>
 							<div className='form-group row'>
@@ -103,13 +100,7 @@ function EditReportingTimeSheet() {
 							<div className='form-group row'>
 								<label className='col-sm-2 col-form-label'>Project Name</label>
 								<div className='col-sm-10'>
-									<input
-										type='text'
-										className='form-control'
-										placeholder='RequestType'
-										value={reportingTimeSheet.projectName}
-										disabled
-									/>
+									<input type='text' className='form-control' placeholder='RequestType' value={reportingTimeSheet.projectName} disabled />
 								</div>
 							</div>
 							<div className='form-group row'>
@@ -121,25 +112,13 @@ function EditReportingTimeSheet() {
 							<div className='form-group row'>
 								<label className='col-sm-2 col-form-label'>Work Item</label>
 								<div className='col-sm-10'>
-									<input
-										type='text'
-										className='form-control'
-										placeholder='startDate'
-										value={reportingTimeSheet.workItem}
-										disabled
-									/>
+									<input type='text' className='form-control' placeholder='startDate' value={reportingTimeSheet.workItem} disabled />
 								</div>
 							</div>
 							<div className='form-group row'>
 								<label className='col-sm-2 col-form-label'>Description</label>
 								<div className='col-sm-10'>
-									<input
-										type='text'
-										className='form-control'
-										placeholder='EndDate'
-										value={reportingTimeSheet.description}
-										disabled
-									/>
+									<input type='text' className='form-control' placeholder='EndDate' value={reportingTimeSheet.description} disabled />
 								</div>
 							</div>
 							<div className='form-group row'>
@@ -163,37 +142,19 @@ function EditReportingTimeSheet() {
 							<div className='form-group row'>
 								<label className='col-sm-2 col-form-label'>Billable Status</label>
 								<div className='col-sm-10'>
-									<input
-										type='text'
-										className='form-control'
-										placeholder='Reason'
-										value={reportingTimeSheet.billableStatus}
-										disabled
-									/>
+									<input type='text' className='form-control' placeholder='Reason' value={reportingTimeSheet.billableStatus} disabled />
 								</div>
 							</div>
 							<div className='form-group row'>
 								<label className='col-sm-2 col-form-label'>Submitted Hours</label>
 								<div className='col-sm-10'>
-									<input
-										type='text'
-										className='form-control'
-										placeholder='Reason'
-										value={reportingTimeSheet.submittedHours}
-										disabled
-									/>
+									<input type='text' className='form-control' placeholder='Reason' value={reportingTimeSheet.submittedHours} disabled />
 								</div>
 							</div>
 							<div className='form-group row'>
 								<label className='col-sm-2 col-form-label'>Approved Hours</label>
 								<div className='col-sm-10'>
-									<input
-										type='text'
-										className='form-control'
-										placeholder='Reason'
-										value={reportingTimeSheet.approvedHours}
-										disabled
-									/>
+									<input type='text' className='form-control' placeholder='Reason' value={reportingTimeSheet.approvedHours} disabled />
 								</div>
 							</div>
 

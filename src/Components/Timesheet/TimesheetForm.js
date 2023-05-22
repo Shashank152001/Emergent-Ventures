@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import {
@@ -25,7 +26,7 @@ const Timesheetform = () => {
   const [end, setEnd] = useState(addDays(start, 6)); // end of the week
   const [slide, setSlide] = useState([]);
   const [date, setdate] = useState([]);
-  const [row, setRow] = useState(1);
+  const [row, setRow] = useState(6);
   const startDate = start.toLocaleDateString("en-GB").split("/");
   const endDate = end.toLocaleDateString("en-GB").split("/");
   let formattedStartDate =
@@ -34,10 +35,10 @@ const Timesheetform = () => {
   let week = `${formattedStartDate} - ${formattedEndDate}`;
   const { profileformdata } = useContext(LoginContext);
   const [UserTimeSheetData, setUserTimeSheetData] = useState([]);
+ 
   const [totalHours, setTotalHours] = useState({});
   const [TimesheetData, setTimeSheetData] = useState({
     totalTime: "",
-    description: "timesheet ui and api",
     timesheetId: "",
   });
 
@@ -45,27 +46,27 @@ const Timesheetform = () => {
 
   const [FinalData, setFinalData] = useState([]);
   const [isFilled, setFilled] = useState(false);
+  
 
   const handleBlur = () => {
-    console.log(TimesheetData);
+    
     setFinalData((prevData) => [...prevData, TimesheetData]);
   };
 
   const handlechange = (event) => {
     const { name, value, dataset } = event.target;
 
-   
-
+      
     if (dataset.hasOwnProperty("date")) {
       setTimeSheetData((prevData) => ({
         ...UserTimeSheetData[dataset.row - 1],
         ...prevData,
         date: dataset.date,
-        submittedHours: name === 'totalTime' ? `${value.split(':')[0].padStart(2,0)}:${'0:00'.split(':')[1].padStart(2,0)}` : value,
+        submittedHours: (name === 'totalTime' && value.split(':')[1]) ? `${value.split(':')[0].padStart(2,0)}:${value.split(':')[1].padStart(2,0)}` : value,
         userId: profileformdata.userId,
         week: `${formattedStartDate} - ${formattedEndDate}`,
         timesheetName: `Timesheet (${formattedStartDate} - ${formattedEndDate})`,
-        [name]: name === 'totalTime' ? `${value.split(':')[0].padStart(2,0)}:${'0:00'.split(':')[1].padStart(2,0)}` : value,
+        [name]: (name === 'totalTime' && value.split(':')[1])  ? `${value.split(':')[0].padStart(2,0)}:${value.split(':')[1].padStart(2,0)}` : value,
         timesheetId: String(dataset.row),
       }));
     } else {
@@ -102,7 +103,7 @@ const Timesheetform = () => {
 
     getTimeSheet(week)
       .then((data) => {
-
+       
         const totalHour = {
           finalTotalHours:0,
           finalTotalMinutes:0
@@ -161,13 +162,14 @@ const Timesheetform = () => {
         }, []);
 
         setTotalHours(totalHour);
-        setRow(newData.length);
+        
+        // setRow(newData.length);
         setUserTimeSheetData(() => [...newData]);
       })
       .catch((e) => {
         setUserTimeSheetData([]);
         setTotalHours({});
-        setRow(1);
+        setRow(6);
       });
 
     return () => {
@@ -239,6 +241,8 @@ for (let i = 1; i <= row; i++) {
         start={start}
         end={end}
         handleBlur={handleBlur}
+        slide={slide}
+        setTimeSheetData={setTimeSheetData}
       />
     );
   }
@@ -312,7 +316,7 @@ for (let i = 1; i <= row; i++) {
                 <thead>
                   <tr>
                     <th className="right-table-th">Work Item</th>
-                    <th className="right-table-th d-none">Description</th>
+                    <th className=""></th>
                     <th className="right-table-th">Billable Status</th>
                     {slide.map((day, index) => (
                       <th className="date-th" key={index}>
@@ -330,9 +334,9 @@ for (let i = 1; i <= row; i++) {
                     <td>
                       <span className="right-table-td"></span>
                     </td>
-                    {/* <td>
+                    <td>
                       <span className="right-table-td"></span>
-                    </td> */}
+                    </td>
                     <td style={{ textAlign: "left", paddingLeft: "1.3rem" }}>
                       <span>Total</span>
                     </td>

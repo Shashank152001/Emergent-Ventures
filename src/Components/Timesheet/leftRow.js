@@ -87,6 +87,8 @@ const LeftRow = ({ row, handlechange, week, start, end }) => {
             ref={ClientRef}
           >
             <option value="">Select Client</option>
+            <option value="Microsoft">Microsoft</option>
+            <option value="Google">Google</option>
             {
               optionData.map((data,index)=>(
                 <option value={data.clientName} key={index}>{data.clientName}</option>
@@ -106,6 +108,8 @@ const LeftRow = ({ row, handlechange, week, start, end }) => {
             ref={projectRef}
           >
             <option value="">Select Project</option>
+            <option value="Microsoft">Microsoft</option>
+            <option value="Google">Google</option>
             {
               optionData.map((data,index)=>(
                 <option value={data.projectName} key={index}>{data.projectName}</option>

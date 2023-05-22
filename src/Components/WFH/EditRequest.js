@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-
+import { socket } from '../../socket';
 import { useParams, useNavigate } from 'react-router-dom';
 import { EditUpdate, ReportingGetdata } from '../../Service/LeavesService';
 import { toast } from 'react-toastify';
@@ -31,7 +31,8 @@ function EditRequest() {
 		if (putData) {
 			EditUpdate(formData)
 				.then((data) => {
-					console.log(data);
+					// console.log(data);
+					socket.emit('sendNotifications');
 					navigate('/dashboard/viewRequest');
 					toast.success('Status Updated Successfull', {
 						position: 'top-left',
