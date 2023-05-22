@@ -7,6 +7,9 @@ import { userLogin } from '../../Service/LoginService';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import bgSvg from '../Spheres.svg';
+import {success} from '../../Utils/SuccessToast'
+import { error } from '../../Utils/ErrorToast';
+import { serverError } from '../../Utils/ServerToast';
 // import {url} from '../../Constant/Url'
 
 function SignIn() {
@@ -28,44 +31,17 @@ function SignIn() {
 
 					if (response.status === 201) {
 						navigate('/dashboard');
-						toast.success(`${msg}`, {
-							position: 'top-left',
-							autoClose: 2000,
-							hideProgressBar: false,
-							closeOnClick: true,
-							pauseOnHover: true,
-							draggable: true,
-							progress: undefined,
-							theme: 'colored'
-						});
+						success(msg)
 						localStorage.setItem('loggedInUser', '1');
 						setFilled(false);
 					} else {
 						navigate('/');
-						toast.error(`${msg}`, {
-							position: 'top-right',
-							autoClose: 2000,
-							hideProgressBar: false,
-							closeOnClick: true,
-							pauseOnHover: true,
-							draggable: true,
-							progress: undefined,
-							theme: 'colored'
-						});
+						error(msg)
 					}
 				})
 				.catch((e) => {
 					navigate('/');
-					toast.error('Could not Connect with Server', {
-						position: 'top-right',
-						autoClose: 2000,
-						hideProgressBar: false,
-						closeOnClick: true,
-						pauseOnHover: true,
-						draggable: true,
-						progress: undefined,
-						theme: 'colored'
-					});
+					serverError();
 				});
 		}
 
