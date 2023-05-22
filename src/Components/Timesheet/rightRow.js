@@ -3,7 +3,7 @@ import "./Timesheet.css";
 import { getTimeSheet } from "../../Service/TimesheetService";
 import DescriptionForm from "./descriptionForm";
 import { SiReadthedocs } from "react-icons/si";
-
+import {reduceFetchedTimeSheetData} from '../../Utils/getTemplate';
 
 const RightRow = ({
   row,
@@ -13,56 +13,21 @@ const RightRow = ({
   start,
   end,
   slide,
-  demoFinalData,
-  setDemoFinalData,
+  userFinalData,
+  setUserFinalData,
 }) => {
   const [userTimeSheetData, setuserTimeSheetData] = useState([]);
   const [isDescription, setDescription] = useState(false);
-  // const [UserDesCriptionData, setDesCriptionData] = useState([]);
+  
 
   const BillableRef = useRef("");
 
   useEffect(() => {
     getTimeSheet(week)
       .then((data) => {
-        const newData = data.reduce((acc, item) => {
-          const existingItem = acc.find((x) => {
-            if (
-              x.workItem === item.workItem &&
-              x.clientName === item.clientName &&
-              x.projectName === item.projectName &&
-              x.jobName === item.jobName &&
-              x.billableStatus === item.billableStatus &&
-              x.timesheetId === item.timesheetId
-            ) {
-              return true;
-            }
-
-            return false;
-          });
-
-          const [hour, minute] = item.totalTime.split(":");
-          if (existingItem) {
-            existingItem.dates = {
-              ...existingItem.dates,
-              [item.date]: item.totalTime,
-            };
-            existingItem.totalHour = existingItem.totalHour + Number(hour);
-            existingItem.totalMinute =
-              existingItem.totalMinute + Number(minute);
-          } else {
-            acc.push({
-              ...item,
-              dates: { ...item.dates, [item.date]: item.totalTime },
-              totalHour: Number(hour),
-              totalMinute: Number(minute),
-            });
-          }
-          return acc;
-        }, []);
-
-        setuserTimeSheetData(() => [...newData]);
-        // setDesCriptionData(data);
+        const newPreparedData = reduceFetchedTimeSheetData(data);
+        setuserTimeSheetData(() => [...newPreparedData]);
+        
       })
       .catch((e) => {
         setuserTimeSheetData([]);
@@ -74,9 +39,11 @@ const RightRow = ({
     };
   }, [start, end]);
 
+  console.log(userTimeSheetData);
+
   return (
     <>
-      {/* <tbody > */}
+ 
       <tr>
         <td style={{ position: "relative" }}>
           <input
@@ -98,8 +65,8 @@ const RightRow = ({
             <DescriptionForm
               slide={slide}
               setDescription={setDescription}
-              demoFinalData={demoFinalData}
-              setDemoFinalData={setDemoFinalData}
+              userFinalData={userFinalData}
+              setUserFinalData={setUserFinalData}
               row={row}
               date={date}
             />
@@ -107,17 +74,7 @@ const RightRow = ({
             ""
           )}
         </td>
-        <td className="d-none">
-          <input
-            type="text"
-            className="right-table-td"
-            onChange={handlechange}
-            name="description"
-            data-row={row}
-            defaultValue={userTimeSheetData[row - 1]?.description || ""}
-            disabled={userTimeSheetData[row - 1]?.description ? true : false}
-          />
-        </td>
+        
         <td>
           <select
             className="right-table-td"
@@ -180,7 +137,7 @@ const RightRow = ({
           </span>
         </td>
       </tr>
-      {/* </tbody> */}
+      
     </>
   );
 };

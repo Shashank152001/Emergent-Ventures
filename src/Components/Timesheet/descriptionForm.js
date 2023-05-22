@@ -4,19 +4,48 @@ import { Dropdown, Tab, Row, Col, Nav, Form, Button } from "react-bootstrap";
 function DescriptionForm({
   slide,
   setDescription,
-  demoFinalData,
-  setDemoFinalData,
+  userFinalData,
+  setUserFinalData,
   row,
   date,
 }) {
   const [data, setData] = useState(date[0]);
   const [Description, setDescriptionData] = useState(
-    demoFinalData[row - 1][0].description
+    userFinalData[row - 1][0].description
   );
 
   const dates = slide.map((item) => {
     return item.monthDate;
   });
+
+  const handleClick = (event)=>{
+    const { date, row } = event.target.dataset;
+    userFinalData[row - 1].forEach((item) => {
+      if (item.date === date) {
+        setDescriptionData(item.description);
+      }
+    });
+    setData(date);
+  }
+
+  const handleChange = (event )=> {setDescriptionData(event.target.value)};
+
+  const handleConfirmButton = ()=>{
+    const tempData = userFinalData;
+    const currentData = tempData[row - 1];
+    currentData.forEach((item, index) => {
+      if (item?.date === data) {
+        currentData[index] = {
+          ...item,
+          description: Description.trim(),
+        };
+      }
+    });
+    tempData[row - 1] = currentData;
+    setUserFinalData(tempData);
+    setDescription((prev) => !prev);
+  }
+
 
   return (
     <div
@@ -52,16 +81,7 @@ function DescriptionForm({
                           eventKey={d}
                           data-date={date[index]}
                           data-row={row}
-                          onClick={(e) => {
-                            const { date, row } = e.target.dataset;
-                            // console.log(date);
-                            demoFinalData[row - 1].forEach((item) => {
-                              if (item.date === date) {
-                                setDescriptionData(item.description);
-                              }
-                            });
-                            setData(date);
-                          }}
+                          onClick={handleClick}
                         >
                           {d}
                         </Nav.Link>
@@ -81,29 +101,14 @@ function DescriptionForm({
                           style={{ height: "170px", color: "#000" }}
                           name="description"
                           defaultValue={Description}
-                          // disabled={Description ? true :false}
-                          onChange={(e) => setDescriptionData(e.target.value)}
+                          onChange={handleChange}
                         />
 
                         <Button
                           variant="primary"
                           type="button"
                           className="mt-2 float-end"
-                          onClick={() => {
-                            const myData = demoFinalData;
-                            const currentData = myData[row - 1];
-                            currentData.forEach((item, index) => {
-                              if (item?.date === data) {
-                                currentData[index] = {
-                                  ...item,
-                                  description: Description.trim(),
-                                };
-                              }
-                            });
-                            myData[row - 1] = currentData;
-                            setDemoFinalData(myData);
-                            setDescription((prev) => !prev);
-                          }}
+                          onClick={handleConfirmButton}
                         >
                           Confirm
                         </Button>

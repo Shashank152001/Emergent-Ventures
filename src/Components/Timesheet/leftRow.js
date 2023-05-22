@@ -1,17 +1,14 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState} from "react";
 import "./Timesheet.css";
 import {
   getTimeSheet,
   getClientAndProject,
 } from "../../Service/TimesheetService";
+import {reduceFetchedTimeSheetData} from '../../Utils/getTemplate';
 
 const LeftRow = ({ row, handlechange, week, start, end }) => {
   const [userTimeSheetData, setuserTimeSheetData] = useState([]);
   const [optionData, setOptionData] = useState([]);
-
-  const ClientRef = useRef("");
-  const projectRef = useRef("");
-  const jobRef = useRef("");
 
   useEffect(() => {
     getClientAndProject()
@@ -26,42 +23,11 @@ const LeftRow = ({ row, handlechange, week, start, end }) => {
   useEffect(() => {
     getTimeSheet(week)
       .then((data) => {
-        const newData = data.reduce((acc, item) => {
-          const existingItem = acc.find((x) => {
-            if (
-              x.workItem === item.workItem &&
-              x.clientName === item.clientName &&
-              x.projectName === item.projectName &&
-              x.jobName === item.jobName &&
-              x.billableStatus === item.billableStatus &&
-              x.timesheetId === item.timesheetId
-            ) {
-              return true;
-            }
-
-            return false;
-          });
-          if (existingItem) {
-            existingItem.dates = {
-              ...existingItem.dates,
-              [item.date]: item.totalTime,
-            };
-          } else {
-            acc.push({
-              ...item,
-              dates: { ...item.dates, [item.date]: item.totalTime },
-            });
-          }
-          return acc;
-        }, []);
-
-        setuserTimeSheetData(() => [...newData]);
+        const newPreparedData = reduceFetchedTimeSheetData(data);
+        setuserTimeSheetData(() => [...newPreparedData]);
       })
       .catch((e) => {
         setuserTimeSheetData([]);
-        ClientRef.current.value = "";
-        projectRef.current.value = "";
-        jobRef.current.value = "";
       });
 
     return () => {
@@ -82,7 +48,7 @@ const LeftRow = ({ row, handlechange, week, start, end }) => {
             disabled={userTimeSheetData[row - 1]?.clientName ? true : false}
             data-row={row}
             value={userTimeSheetData[row - 1]?.clientName}
-            ref={ClientRef}
+            
           >
             <option value="">Select Client</option>
             <option value="Microsoft">Microsoft</option>
@@ -103,7 +69,7 @@ const LeftRow = ({ row, handlechange, week, start, end }) => {
             defaultValue={userTimeSheetData[row - 1]?.projectName}
             disabled={userTimeSheetData[row - 1]?.clientName ? true : false}
             value={userTimeSheetData[row - 1]?.projectName}
-            ref={projectRef}
+            
           >
             <option value="">Select Project</option>
             <option value="Microsoft">Microsoft</option>
@@ -124,7 +90,6 @@ const LeftRow = ({ row, handlechange, week, start, end }) => {
             defaultValue={userTimeSheetData[row - 1]?.jobName}
             disabled={userTimeSheetData[row - 1]?.clientName ? true : false}
             value={userTimeSheetData[row - 1]?.jobName}
-            ref={jobRef}
           >
             <option value="">Select Job</option>
             <option value="Frontend">Frontend</option>

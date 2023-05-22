@@ -22,6 +22,8 @@ import { LoginContext } from "../../Context/LoginContext";
 import { CreateTimeSheet, getTimeSheet } from "../../Service/TimesheetService";
 import { toast } from "react-toastify";
 import Tabs from "../Timesheet/Tabs";
+import {timesheetTemplate,reduceFetchedTimeSheetData,finalWorkingHours} from '../../Utils/getTemplate';
+import {totalTimesheetRecords,finalTimesheetData} from '../../Utils/templateRecords';
 
 const Timesheetform = () => {
   const navigate = useNavigate();
@@ -43,116 +45,14 @@ const Timesheetform = () => {
   const [totalHours, setTotalHours] = useState({});
   const trackRow = useRef(1);
   const dateTrack = useRef([]);
-  const [demoTimeSheetData, setdemoTimeSheetData] = useState([]);
-  const [demoFinalData, setDemoFinalData] = useState([]);
-  const templatedata = [
-    {
-      clientName: "",
-      projectName: "",
-      jobName: "",
-      workItem: "",
-      description: "",
-      timesheetName: `Timesheet (${formattedStartDate} - ${formattedEndDate})`,
-      week: `${formattedStartDate} - ${formattedEndDate}`,
-      totalTime: "",
-      timesheetId: trackRow.current,
-      date: "",
-      submittedHours: "",
-      userId: profileformdata?.userId,
-    },
-    {
-      clientName: "",
-      projectName: "",
-      jobName: "",
-      workItem: "",
-      description: "",
-      timesheetName: `Timesheet (${formattedStartDate} - ${formattedEndDate})`,
-      week: `${formattedStartDate} - ${formattedEndDate}`,
-      totalTime: "",
-      timesheetId: trackRow.current,
-      date: "",
-      submittedHours: "",
-      userId: profileformdata?.userId,
-    },
-    {
-      clientName: "",
-      projectName: "",
-      jobName: "",
-      workItem: "",
-      description: "",
-      timesheetName: `Timesheet (${formattedStartDate} - ${formattedEndDate})`,
-      week: `${formattedStartDate} - ${formattedEndDate}`,
-      totalTime: "",
-      timesheetId: trackRow.current,
-      date: "",
-      submittedHours: "",
-      userId: profileformdata?.userId,
-    },
-    {
-      clientName: "",
-      projectName: "",
-      jobName: "",
-      workItem: "",
-      description: "",
-      timesheetName: `Timesheet (${formattedStartDate} - ${formattedEndDate})`,
-      week: `${formattedStartDate} - ${formattedEndDate}`,
-      totalTime: "",
-      timesheetId: trackRow.current,
-      date: "",
-      submittedHours: "",
-      userId: profileformdata?.userId,
-    },
-    {
-      clientName: "",
-      projectName: "",
-      jobName: "",
-      workItem: "",
-      description: "",
-      timesheetName: `Timesheet (${formattedStartDate} - ${formattedEndDate})`,
-      week: `${formattedStartDate} - ${formattedEndDate}`,
-      totalTime: "",
-      timesheetId: trackRow.current,
-      date: "",
-      submittedHours: "",
-      userId: profileformdata?.userId,
-    },
-    {
-      clientName: "",
-      projectName: "",
-      jobName: "",
-      workItem: "",
-      description: "",
-      timesheetName: `Timesheet (${formattedStartDate} - ${formattedEndDate})`,
-      week: `${formattedStartDate} - ${formattedEndDate}`,
-      totalTime: "",
-      timesheetId: trackRow.current,
-      date: "",
-      submittedHours: "",
-      userId: profileformdata?.userId,
-    },
-    {
-      clientName: "",
-      projectName: "",
-      jobName: "",
-      workItem: "",
-      description: "",
-      timesheetName: `Timesheet (${formattedStartDate} - ${formattedEndDate})`,
-      week: `${formattedStartDate} - ${formattedEndDate}`,
-      totalTime: "",
-      timesheetId: trackRow.current,
-      date: "",
-      submittedHours: "",
-      userId: profileformdata?.userId,
-    },
-  ];
+  const [userTimeSheetData, setUserTimeSheetData] = useState([]);
+  const [userFinalData, setUserFinalData] = useState([]); 
 
 
   const handlechange = (event) => {
     const { name, value, dataset } = event.target;
-
-    const mydata = demoFinalData;
-
-    const currentData = mydata[dataset.row - 1];
+    const tempdata = userFinalData;
+    const currentData = tempdata[dataset.row - 1];
 
     for (let i = 0; i < currentData.length; i++) {
       if (
@@ -185,8 +85,8 @@ const Timesheetform = () => {
         }
       }
     }
-    mydata[dataset.row - 1] = currentData;
-    setDemoFinalData(mydata);
+    tempdata[dataset.row - 1] = currentData;
+    setUserFinalData(tempdata);
   };
 
   useEffect(() => {
@@ -199,7 +99,7 @@ const Timesheetform = () => {
     );
 
     const dd = eachDayOfInterval({ start: start, end: end }).map((date) => {
-      const [Date, month, year] = date.toLocaleDateString("en-GB").split("/");
+    const [Date, month, year] = date.toLocaleDateString("en-GB").split("/");
 
       return `${year}-${month}-${Date}`;
     });
@@ -209,29 +109,12 @@ const Timesheetform = () => {
     setSlide(daydate);
   }, [start, end]);
 
+
+  // post data to the server
   useEffect(() => {
     if (isFilled) {
-      let finalData = [];
-      demoFinalData.forEach((item) => {
-        item.forEach((ele) => {
-          if (ele?.totalTime !== "") {
-            finalData.push(ele);
-          }
-        });
-      });
-
-      console.log(finalData);
-
-      if (demoTimeSheetData.length > 0) {
-        const lastData = finalData.filter((item) => {
-          return !demoTimeSheetData.some((element) => {
-            return item.date === element.date && item.timesheetId === parseInt(element.timesheetId);
-          });
-        });
-        finalData = [...lastData];
-      }
-      console.log(finalData);
-      CreateTimeSheet(finalData)
+      const finalTimesheetRecord = finalTimesheetData(userFinalData,userTimeSheetData);
+      CreateTimeSheet(finalTimesheetRecord)
         .then((data) => {
           navigate("/dashboard/getTimesheet");
         })
@@ -245,144 +128,42 @@ const Timesheetform = () => {
     };
   }, [isFilled]);
 
+
+  // getTimesheetData
   useEffect(() => {
     getTimeSheet(week)
-      .then((data) => {
-        setdemoTimeSheetData(data);
-
-        const totalHour = {
-          finalTotalHours: 0,
-          finalTotalMinutes: 0,
-        };
-
-        data.forEach((item) => {
-          const [Hour, Min] = item.totalTime.split(":");
-
-          totalHour.finalTotalHours = Number(Hour) + totalHour.finalTotalHours;
-          totalHour.finalTotalMinutes =
-            Number(Min) + totalHour.finalTotalMinutes;
-
-          if (!totalHour[item.date]) {
-            totalHour[item.date] = {
-              hour: Number(Hour),
-              min: Number(Min),
-            };
-          } else {
-            totalHour[item.date] = {
-              hour: Number(Hour) + totalHour[item.date].hour,
-              min: Number(Min) + totalHour[item.date].min,
-            };
-          }
-        });
-
-        const newData = data.reduce((acc, item) => {
-          const existingItem = acc.find((x) => {
-            if (
-              x.workItem === item.workItem &&
-              x.clientName === item.clientName &&
-              x.projectName === item.projectName &&
-              x.jobName === item.jobName &&
-              x.billableStatus === item.billableStatus &&
-              x.timesheetId === item.timesheetId
-            ) {
-              return true;
-            }
-
-            return false;
-          });
-          if (existingItem) {
-            existingItem.dates = {
-              ...existingItem.dates,
-              [item.date]: item.totalTime,
-            };
-          } else {
-            acc.push({
-              ...item,
-              dates: { ...item.dates, [item.date]: item.totalTime },
-            });
-          }
-          return acc;
-        }, []);
-
-        // demoFinalData
-        const totalTimesheet = [];
-        for (let i = 1; i <= newData.length; i++) {
-          totalTimesheet.push(templatedata);
-        }
-
-        totalTimesheet.forEach((item, idx) => {
-          const temp = [];
-          item.forEach((ele, index) => {
-            let obj = {
-              ...ele,
-              timesheetId: idx + 1,
-              date: dateTrack.current[index],
-            };
-            temp.push(obj);
-          });
-          totalTimesheet[idx] = temp;
-        });
-
-        totalTimesheet.forEach((item) => {
-          item.forEach((obj) => {
-            data.forEach((tempData) => {
-              if (
-                parseInt(tempData.timesheetId) === obj.timesheetId &&
-                tempData.date === obj.date
-              ) {
-                obj.clientName = tempData.clientName;
-                obj.projectName = tempData.projectName;
-                obj.jobName = tempData.jobName;
-                obj.workItem = tempData.workItem;
-                obj.billableStatus = tempData.billableStatus;
-                obj.description = tempData.description;
-                obj.totalTime = tempData.totalTime;
-                obj.submittedHours = tempData.submittedHours;
-                obj.userId = tempData.userId;
-              } else {
-                obj.clientName = tempData.clientName;
-                obj.projectName = tempData.projectName;
-                obj.jobName = tempData.jobName;
-                obj.workItem = tempData.workItem;
-                obj.userId = tempData.userId;
-                obj.billableStatus = tempData.billableStatus;
-              }
-            });
-          });
-        });
-
-        
-        trackRow.current = newData.length;
-        setDemoFinalData(() => [...totalTimesheet]);
+      .then((data) => { 
+        const totalHour = finalWorkingHours(data);
+        const newRecordsLength = reduceFetchedTimeSheetData(data).length;
+        const totalTimesheet = totalTimesheetRecords(data,newRecordsLength,dateTrack.current,
+          formattedStartDate,formattedEndDate,profileformdata?.userId);
+        trackRow.current = newRecordsLength;
+        setUserTimeSheetData(data);
+        setUserFinalData(() => [...totalTimesheet]);
         setTotalHours(totalHour);
-        setRow(newData.length);
-        // setUserTimeSheetData(() => [...newData]);
+        setRow(newRecordsLength);
       })
       .catch((err) => {
-        const totalHour = {
-          finalTotalHours: 0,
-          finalTotalMinutes: 0,
-        };
-
-        const Mydata = templatedata;
-        const temp = Mydata.map((item, index) => {
-          return {
-            ...item,
-            date: dateTrack.current[index],
-            userId: profileformdata?.userId,
-            timesheetId: 1,
-          };
-        });
-
-        setDemoFinalData(() => [temp]);
-        setTotalHours(totalHour);
+        const initialData = timesheetTemplate(
+          dateTrack.current,1,formattedStartDate,
+          formattedEndDate,profileformdata?.userId
+          );
+        
+        setUserFinalData(() => [initialData ]);
+        setTotalHours(
+          {
+            finalTotalHours: 0,
+            finalTotalMinutes: 0,
+          }
+        );
         setRow(1);
         trackRow.current = 1;
       });
+
   }, [start, end]);
 
   const handleSubmit = () => {
-    if (demoFinalData.length) {
+    if (userFinalData.length) {
       setFilled(true);
     }
   };
@@ -413,8 +194,8 @@ const Timesheetform = () => {
         start={start}
         end={end}
         slide={slide}
-        demoFinalData={demoFinalData}
-        setDemoFinalData={setDemoFinalData}
+        userFinalData={userFinalData}
+        setUserFinalData={setUserFinalData}
       />
     );
   }
@@ -422,16 +203,11 @@ const Timesheetform = () => {
   // add one more row in the table
   const addRow = () => {
     setRow((prevRow) => prevRow + 1);
-    const myData = templatedata;
-    myData.forEach((item, index) => {
-      myData[index] = {
-        ...item,
-        timesheetId: trackRow.current + 1,
-        date: date[index],
-      };
-    });
-
-    setDemoFinalData((prevData) => [...prevData, myData]);
+    const newCreatedRow =  timesheetTemplate(
+      date,trackRow.current+1,formattedStartDate,
+      formattedEndDate,profileformdata?.userId
+      );
+    setUserFinalData((prevData) => [...prevData, newCreatedRow]);
     trackRow.current = trackRow.current + 1;
   };
 
@@ -448,7 +224,6 @@ const Timesheetform = () => {
     setEnd(subDays(end, 7));
   }, [start, end]);
 
-  console.log(demoFinalData);
 
   return (
     <div className="view-timesheet-container-div">
