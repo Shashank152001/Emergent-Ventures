@@ -225,7 +225,7 @@ const Timesheetform = () => {
       if (demoTimeSheetData.length > 0) {
         const lastData = finalData.filter((item) => {
           return !demoTimeSheetData.some((element) => {
-            return item.date === element.date && item.id === element.id;
+            return item.date === element.date && item.timesheetId === parseInt(element.timesheetId);
           });
         });
         finalData = [...lastData];
