@@ -1,85 +1,35 @@
-import { useState,useEffect } from "react";
-import {
-  Dropdown,
-  Tab,
-  Row,
-  Col,
-  Nav,
-  Form,
-  Button,
-} from "react-bootstrap";
+import { useState, useEffect } from "react";
+import { Dropdown, Tab, Row, Col, Nav, Form, Button } from "react-bootstrap";
 
-
-const dummyData = {
-
-    '1':{
-        '14':'Hello',
-        '15':'Hello2',
-        '16':'Hello3',
-        '17':'Hello4',
-        '18':'Hello5',
-        '19':'Hello6',
-        '20':'Hello7',
-    },
-
-    '2':{
-        '14':'world',
-        '15':'Hello2world',
-        '16':'Hello3world',
-        '17':'Hello4world',
-        '18':'Hello5world',
-        '19':'Hello6worldworld',
-        '20':'Hello7world',
-    }
-}
-
-
-
-function DescriptionForm({slide,
-    setTimeSheetData,
-    setDescription,
-    UserDesCriptionData,
-    row
+function DescriptionForm({
+  slide,
+  setDescription,
+  demoFinalData,
+  setDemoFinalData,
+  row,
+  date,
 }) {
+  const [data, setData] = useState(date[0]);
+  const [Description, setDescriptionData] = useState(
+    demoFinalData[row - 1][0].description
+  );
 
-    const tempData = {};
-    
-
-    UserDesCriptionData.forEach(element => {
-
-         if(tempData[element.timesheetId]){
-            tempData[element.timesheetId] = {...tempData[element.timesheetId],
-                [element.date.substr(8)]:element.description}
-         }
-         else{
-            tempData[element.timesheetId] = {
-                [element.date.substr(8)]:element.description}
-         }
-    })
-
-    console.log(tempData);
-        
-    
-    
-    const[data,setData] = useState({
-        description:''
-    })
-
-    const dates = slide.map((item)=>{
-        
-        return item.monthDate;
-   });
-
-  
-
+  const dates = slide.map((item) => {
+    return item.monthDate;
+  });
 
   return (
-    <div className="App" style={{position:"absolute",right:'15px',top:'18px'}}>
+    <div
+      className="App"
+      style={{ position: "absolute", right: "15px", top: "18px" }}
+    >
       <header className="App-header"></header>
       <Dropdown drop="end">
-       
-
-        <Dropdown.Menu variant="dark" style={{transform:'translate3d(0,0,0)'}} show={true}>
+        <Dropdown.Menu
+          // variant="dark"
+          style={{ transform: "translate3d(0,0,0)" }}
+          show={true}
+        >
           <Tab.Container id="left-tabs-example" defaultActiveKey={dates[0]}>
             <Row
               style={{
@@ -87,7 +37,7 @@ function DescriptionForm({slide,
                 margin: "0px",
               }}
             >
-              <Col sm="3" style={{height:"203px",overflowY:"auto"}}>
+              <Col sm="3" style={{ height: "203px", overflowY: "auto" }}>
                 <Nav
                   variant="pills"
                   className="flex-column"
@@ -95,10 +45,26 @@ function DescriptionForm({slide,
                     width: "100px",
                   }}
                 >
-                  {dates.map((date) => {
+                  {dates.map((d, index) => {
                     return (
                       <Nav.Item>
-                        <Nav.Link eventKey={date}>{date}</Nav.Link>
+                        <Nav.Link
+                          eventKey={d}
+                          data-date={date[index]}
+                          data-row={row}
+                          onClick={(e) => {
+                            const { date, row } = e.target.dataset;
+                            // console.log(date);
+                            demoFinalData[row - 1].forEach((item) => {
+                              if (item.date === date) {
+                                setDescriptionData(item.description);
+                              }
+                            });
+                            setData(date);
+                          }}
+                        >
+                          {d}
+                        </Nav.Link>
                       </Nav.Item>
                     );
                   })}
@@ -109,26 +75,35 @@ function DescriptionForm({slide,
                   {dates.map((date) => {
                     return (
                       <Tab.Pane eventKey={date}>
-                           
-                          <Form.Control
-                            as="textarea"
-                            placeholder="Add Description"
-                            style={{ height: "170px",color:'#000' }}
-                            name="description"
-                            defaultValue={tempData[row] ? tempData[row][date.substr(4)] : ''}
-                            onChange={(e)=>setData((prev)=>({
-                                ...prev,[e.target.name]:e.target.value
-                            }))}
-                          />
-                       
+                        <Form.Control
+                          as="textarea"
+                          placeholder="Add Description"
+                          style={{ height: "170px", color: "#000" }}
+                          name="description"
+                          defaultValue={Description}
+                          // disabled={Description ? true :false}
+                          onChange={(e) => setDescriptionData(e.target.value)}
+                        />
+
                         <Button
                           variant="primary"
                           type="button"
                           className="mt-2 float-end"
-                          onClick={() =>{ 
-                            setTimeSheetData((prev)=>({...prev,...data}))
-                            setDescription((prev)=>!prev);
-                        }}
+                          onClick={() => {
+                            const myData = demoFinalData;
+                            const currentData = myData[row - 1];
+                            currentData.forEach((item, index) => {
+                              if (item?.date === data) {
+                                currentData[index] = {
+                                  ...item,
+                                  description: Description.trim(),
+                                };
+                              }
+                            });
+                            myData[row - 1] = currentData;
+                            setDemoFinalData(myData);
+                            setDescription((prev) => !prev);
+                          }}
                         >
                           Confirm
                         </Button>

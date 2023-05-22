@@ -3,7 +3,7 @@ import "./Timesheet.css";
 import { getTimeSheet } from "../../Service/TimesheetService";
 import DescriptionForm from "./descriptionForm";
 import { SiReadthedocs } from "react-icons/si";
-import SuccessMessage from "../Message/successmessage";
+
 
 const RightRow = ({
   row,
@@ -12,19 +12,16 @@ const RightRow = ({
   week,
   start,
   end,
-  handleBlur,
   slide,
-  TimesheetData,
-  setTimeSheetData
+  demoFinalData,
+  setDemoFinalData,
 }) => {
   const [userTimeSheetData, setuserTimeSheetData] = useState([]);
   const [isDescription, setDescription] = useState(false);
-  const [UserDesCriptionData, setDesCriptionData] = useState([]);
-  
+  // const [UserDesCriptionData, setDesCriptionData] = useState([]);
 
   const BillableRef = useRef("");
 
- 
   useEffect(() => {
     getTimeSheet(week)
       .then((data) => {
@@ -65,122 +62,125 @@ const RightRow = ({
         }, []);
 
         setuserTimeSheetData(() => [...newData]);
-        setDesCriptionData(data);
+        // setDesCriptionData(data);
       })
       .catch((e) => {
         setuserTimeSheetData([]);
         BillableRef.current.value = "";
       });
 
-      return ()=>{
-        setDescription(false);
-      }
+    return () => {
+      setDescription(false);
+    };
   }, [start, end]);
 
   return (
     <>
-      <tbody >
-        <tr>
-          <td style={{ position: "relative" }}>
-            <input
-              type="text"
-              className="right-table-td"
-              onChange={handlechange}
-              name="workItem"
-              data-row={row}
-              defaultValue={userTimeSheetData[row - 1]?.workItem || ""}
-              disabled={userTimeSheetData[row - 1]?.workItem ? true : false}
-              
+      {/* <tbody > */}
+      <tr>
+        <td style={{ position: "relative" }}>
+          <input
+            type="text"
+            className="right-table-td"
+            onChange={handlechange}
+            name="workItem"
+            data-row={row}
+            defaultValue={userTimeSheetData[row - 1]?.workItem || ""}
+            disabled={userTimeSheetData[row - 1]?.workItem ? true : false}
+          />
+        </td>
+        <td style={{ position: "relative" }}>
+          <SiReadthedocs
+            onClick={() => setDescription(!isDescription)}
+            style={{ position: "absolute", right: "26px" }}
+          />
+          {isDescription ? (
+            <DescriptionForm
+              slide={slide}
+              setDescription={setDescription}
+              demoFinalData={demoFinalData}
+              setDemoFinalData={setDemoFinalData}
+              row={row}
+              date={date}
             />
-            
-            
+          ) : (
+            ""
+          )}
+        </td>
+        <td className="d-none">
+          <input
+            type="text"
+            className="right-table-td"
+            onChange={handlechange}
+            name="description"
+            data-row={row}
+            defaultValue={userTimeSheetData[row - 1]?.description || ""}
+            disabled={userTimeSheetData[row - 1]?.description ? true : false}
+          />
+        </td>
+        <td>
+          <select
+            className="right-table-td"
+            onChange={handlechange}
+            name="billableStatus"
+            data-row={row}
+            defaultValue={userTimeSheetData[row - 1]?.billableStatus}
+            disabled={userTimeSheetData[row - 1]?.billableStatus ? true : false}
+            value={userTimeSheetData[row - 1]?.billableStatus}
+            ref={BillableRef}
+          >
+            <option value="">Select status</option>
+            <option value="Billable">Billable</option>
+            <option value="Non-Billable">Non-Billable</option>
+          </select>
+        </td>
 
-          </td>
-          <td style={{position:'relative'}}>
-             <SiReadthedocs onClick={()=>setDescription(!isDescription)} style={{position:'absolute',right:'26px'}}/>
-             {isDescription ? <DescriptionForm slide={slide} setDescription={setDescription}
-        setTimeSheetData={setTimeSheetData} UserDesCriptionData={UserDesCriptionData} row={row}/> :''}
-          </td>
-          <td className="d-none">
+        {date.map((day, index) => (
+          <td key={index}>
             <input
               type="text"
-              className="right-table-td"
-              onChange={handlechange}
-              name="description"
-              data-row={row}
-              defaultValue={userTimeSheetData[row - 1]?.description || ""}
-              disabled={userTimeSheetData[row - 1]?.description ? true : false}
-            />
-          </td>
-          <td>
-            <select
-              className="right-table-td"
-              onChange={handlechange}
-              name="billableStatus"
-              data-row={row}
-              defaultValue={userTimeSheetData[row - 1]?.billableStatus}
-              disabled={
-                userTimeSheetData[row - 1]?.billableStatus ? true : false
+              className={
+                index === 0 || index === 6 ? "date-td date-holiday" : "date-td"
               }
-              value={userTimeSheetData[row - 1]?.billableStatus}
-              ref={BillableRef}
-            >
-              <option value="">Select status</option>
-              <option value="Billable">Billable</option>
-              <option value="Non-Billable">Non-Billable</option>
-            </select>
+              placeholder="00:00"
+              onChange={handlechange}
+              name="totalTime"
+              defaultValue={
+                userTimeSheetData.length > 0
+                  ? userTimeSheetData[row - 1]?.dates[day]
+                  : ""
+              }
+              disabled={
+                userTimeSheetData.length > 0 &&
+                userTimeSheetData[row - 1]?.dates[day]
+                  ? true
+                  : false
+              }
+              data-date={day}
+              data-row={row}
+            />
           </td>
+        ))}
 
-          {date.map((day, index) => (
-            <td key={index}>
-              <input
-                type="text"
-                className={
-                  index === 0 || index === 6
-                    ? "date-td date-holiday"
-                    : "date-td"
-                }
-                placeholder="00:00"
-                onChange={handlechange}
-                onBlur={handleBlur}
-                name="totalTime"
-                defaultValue={
-                  userTimeSheetData.length > 0
-                    ? userTimeSheetData[row - 1]?.dates[day]
-                    : ""
-                }
-                disabled={
-                  userTimeSheetData.length > 0 &&
-                  userTimeSheetData[row - 1]?.dates[day]
-                    ? true
-                    : false
-                }
-                data-date={day}
-                data-row={row}
-              />
-            </td>
-          ))}
-
-          <td className="date-td-span-row">
-            <span>
-              {userTimeSheetData[row - 1]?.totalHour
-                ? String(
-                    userTimeSheetData[row - 1]?.totalHour +
-                      parseInt(userTimeSheetData[row - 1]?.totalMinute / 60)
-                  ).padStart(2, 0)
-                : "00"}
-              :
-              {userTimeSheetData[row - 1]?.totalMinute
-                ? String(userTimeSheetData[row - 1]?.totalMinute % 60).padStart(
-                    2,
-                    0
-                  )
-                : "00"}
-            </span>
-          </td>
-        </tr>
-      </tbody>
-      
+        <td className="date-td-span-row">
+          <span>
+            {userTimeSheetData[row - 1]?.totalHour
+              ? String(
+                  userTimeSheetData[row - 1]?.totalHour +
+                    parseInt(userTimeSheetData[row - 1]?.totalMinute / 60)
+                ).padStart(2, 0)
+              : "00"}
+            :
+            {userTimeSheetData[row - 1]?.totalMinute
+              ? String(userTimeSheetData[row - 1]?.totalMinute % 60).padStart(
+                  2,
+                  0
+                )
+              : "00"}
+          </span>
+        </td>
+      </tr>
+      {/* </tbody> */}
     </>
   );
 };

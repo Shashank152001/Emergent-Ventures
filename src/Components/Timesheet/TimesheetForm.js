@@ -1,5 +1,10 @@
-
-import React, { useEffect, useState, useContext } from "react";
+import React, {
+  useEffect,
+  useState,
+  useContext,
+  useCallback,
+  useRef,
+} from "react";
 import { useNavigate } from "react-router-dom";
 import {
   addDays,
@@ -26,7 +31,7 @@ const Timesheetform = () => {
   const [end, setEnd] = useState(addDays(start, 6)); // end of the week
   const [slide, setSlide] = useState([]);
   const [date, setdate] = useState([]);
-  const [row, setRow] = useState(6);
+  const [row, setRow] = useState(1);
   const startDate = start.toLocaleDateString("en-GB").split("/");
   const endDate = end.toLocaleDateString("en-GB").split("/");
   let formattedStartDate =
@@ -34,51 +39,155 @@ const Timesheetform = () => {
   let formattedEndDate = endDate[0] + "-" + endDate[1] + "-" + endDate[2];
   let week = `${formattedStartDate} - ${formattedEndDate}`;
   const { profileformdata } = useContext(LoginContext);
-  const [UserTimeSheetData, setUserTimeSheetData] = useState([]);
- 
-  const [totalHours, setTotalHours] = useState({});
-  const [TimesheetData, setTimeSheetData] = useState({
-    totalTime: "",
-    timesheetId: "",
-  });
-
-
-
-  const [FinalData, setFinalData] = useState([]);
   const [isFilled, setFilled] = useState(false);
-  
+  const [totalHours, setTotalHours] = useState({});
+  const trackRow = useRef(1);
+  const dateTrack = useRef([]);
+  const [demoTimeSheetData, setdemoTimeSheetData] = useState([]);
+  const [demoFinalData, setDemoFinalData] = useState([]);
+  const templatedata = [
+    {
+      clientName: "",
+      projectName: "",
+      jobName: "",
+      workItem: "",
+      description: "",
+      timesheetName: `Timesheet (${formattedStartDate} - ${formattedEndDate})`,
+      week: `${formattedStartDate} - ${formattedEndDate}`,
+      totalTime: "",
+      timesheetId: trackRow.current,
+      date: "",
+      submittedHours: "",
+      userId: profileformdata?.userId,
+    },
+    {
+      clientName: "",
+      projectName: "",
+      jobName: "",
+      workItem: "",
+      description: "",
+      timesheetName: `Timesheet (${formattedStartDate} - ${formattedEndDate})`,
+      week: `${formattedStartDate} - ${formattedEndDate}`,
+      totalTime: "",
+      timesheetId: trackRow.current,
+      date: "",
+      submittedHours: "",
+      userId: profileformdata?.userId,
+    },
+    {
+      clientName: "",
+      projectName: "",
+      jobName: "",
+      workItem: "",
+      description: "",
+      timesheetName: `Timesheet (${formattedStartDate} - ${formattedEndDate})`,
+      week: `${formattedStartDate} - ${formattedEndDate}`,
+      totalTime: "",
+      timesheetId: trackRow.current,
+      date: "",
+      submittedHours: "",
+      userId: profileformdata?.userId,
+    },
+    {
+      clientName: "",
+      projectName: "",
+      jobName: "",
+      workItem: "",
+      description: "",
+      timesheetName: `Timesheet (${formattedStartDate} - ${formattedEndDate})`,
+      week: `${formattedStartDate} - ${formattedEndDate}`,
+      totalTime: "",
+      timesheetId: trackRow.current,
+      date: "",
+      submittedHours: "",
+      userId: profileformdata?.userId,
+    },
+    {
+      clientName: "",
+      projectName: "",
+      jobName: "",
+      workItem: "",
+      description: "",
+      timesheetName: `Timesheet (${formattedStartDate} - ${formattedEndDate})`,
+      week: `${formattedStartDate} - ${formattedEndDate}`,
+      totalTime: "",
+      timesheetId: trackRow.current,
+      date: "",
+      submittedHours: "",
+      userId: profileformdata?.userId,
+    },
+    {
+      clientName: "",
+      projectName: "",
+      jobName: "",
+      workItem: "",
+      description: "",
+      timesheetName: `Timesheet (${formattedStartDate} - ${formattedEndDate})`,
+      week: `${formattedStartDate} - ${formattedEndDate}`,
+      totalTime: "",
+      timesheetId: trackRow.current,
+      date: "",
+      submittedHours: "",
+      userId: profileformdata?.userId,
+    },
+    {
+      clientName: "",
+      projectName: "",
+      jobName: "",
+      workItem: "",
+      description: "",
+      timesheetName: `Timesheet (${formattedStartDate} - ${formattedEndDate})`,
+      week: `${formattedStartDate} - ${formattedEndDate}`,
+      totalTime: "",
+      timesheetId: trackRow.current,
+      date: "",
+      submittedHours: "",
+      userId: profileformdata?.userId,
+    },
+  ];
 
-  const handleBlur = () => {
-    
-    setFinalData((prevData) => [...prevData, TimesheetData]);
-  };
 
   const handlechange = (event) => {
     const { name, value, dataset } = event.target;
 
-      
-    if (dataset.hasOwnProperty("date")) {
-      setTimeSheetData((prevData) => ({
-        ...UserTimeSheetData[dataset.row - 1],
-        ...prevData,
-        date: dataset.date,
-        submittedHours: (name === 'totalTime' && value.split(':')[1]) ? `${value.split(':')[0].padStart(2,0)}:${value.split(':')[1].padStart(2,0)}` : value,
-        userId: profileformdata.userId,
-        week: `${formattedStartDate} - ${formattedEndDate}`,
-        timesheetName: `Timesheet (${formattedStartDate} - ${formattedEndDate})`,
-        [name]: (name === 'totalTime' && value.split(':')[1])  ? `${value.split(':')[0].padStart(2,0)}:${value.split(':')[1].padStart(2,0)}` : value,
-        timesheetId: String(dataset.row),
-      }));
-    } else {
-      setTimeSheetData((prevData) => ({
-        ...UserTimeSheetData[dataset.row - 1],
-        ...prevData,
-        [name]: value,
-        timesheetId: String(dataset.row),
-      }));
-    }
-  };
+    const mydata = demoFinalData;
 
+    const currentData = mydata[dataset.row - 1];
+
+    for (let i = 0; i < currentData.length; i++) {
+      if (
+        currentData[i]?.date === dataset.date &&
+        currentData[i].timesheetId === parseInt(dataset.row)
+      ) {
+        currentData[i] = {
+          ...currentData[i],
+          submittedHours:
+            name === "totalTime" && value.split(":")[1]
+              ? `${value.split(":")[0].padStart(2, 0)}:${value
+                  .split(":")[1]
+                  .padStart(2, 0)}`
+              : value,
+          [name]:
+            name === "totalTime" && value.split(":")[1]
+              ? `${value.split(":")[0].padStart(2, 0)}:${value
+                  .split(":")[1]
+                  .padStart(2, 0)}`
+              : value.trim(),
+        };
+        break;
+      } else {
+        if (name !== "totalTime") {
+          currentData[i] = {
+            ...currentData[i],
+            [name]: value.trim(),
+            userId: profileformdata.userId,
+          };
+        }
+      }
+    }
+    mydata[dataset.row - 1] = currentData;
+    setDemoFinalData(mydata);
+  };
 
   useEffect(() => {
     const daydate = eachDayOfInterval({ start: start, end: end }).map(
@@ -94,43 +203,77 @@ const Timesheetform = () => {
 
       return `${year}-${month}-${Date}`;
     });
+
+    dateTrack.current = dd;
     setdate(dd);
     setSlide(daydate);
   }, [start, end]);
 
+  useEffect(() => {
+    if (isFilled) {
+      let finalData = [];
+      demoFinalData.forEach((item) => {
+        item.forEach((ele) => {
+          if (ele?.totalTime !== "") {
+            finalData.push(ele);
+          }
+        });
+      });
+
+      console.log(finalData);
+
+      if (demoTimeSheetData.length > 0) {
+        const lastData = finalData.filter((item) => {
+          return !demoTimeSheetData.some((element) => {
+            return item.date === element.date && item.id === element.id;
+          });
+        });
+        finalData = [...lastData];
+      }
+      console.log(finalData);
+      CreateTimeSheet(finalData)
+        .then((data) => {
+          navigate("/dashboard/getTimesheet");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+
+    return () => {
+      setFilled(false);
+    };
+  }, [isFilled]);
 
   useEffect(() => {
-
     getTimeSheet(week)
       .then((data) => {
-       
+        setdemoTimeSheetData(data);
+
         const totalHour = {
-          finalTotalHours:0,
-          finalTotalMinutes:0
+          finalTotalHours: 0,
+          finalTotalMinutes: 0,
         };
 
         data.forEach((item) => {
           const [Hour, Min] = item.totalTime.split(":");
 
           totalHour.finalTotalHours = Number(Hour) + totalHour.finalTotalHours;
-          totalHour.finalTotalMinutes = Number(Min) + totalHour.finalTotalMinutes;
+          totalHour.finalTotalMinutes =
+            Number(Min) + totalHour.finalTotalMinutes;
 
           if (!totalHour[item.date]) {
             totalHour[item.date] = {
               hour: Number(Hour),
               min: Number(Min),
             };
-           
           } else {
             totalHour[item.date] = {
               hour: Number(Hour) + totalHour[item.date].hour,
               min: Number(Min) + totalHour[item.date].min,
             };
-
           }
         });
-
-        
 
         const newData = data.reduce((acc, item) => {
           const existingItem = acc.find((x) => {
@@ -161,59 +304,92 @@ const Timesheetform = () => {
           return acc;
         }, []);
 
-        setTotalHours(totalHour);
-        
-        // setRow(newData.length);
-        setUserTimeSheetData(() => [...newData]);
-      })
-      .catch((e) => {
-        setUserTimeSheetData([]);
-        setTotalHours({});
-        setRow(6);
-      });
+        // demoFinalData
+        const totalTimesheet = [];
+        for (let i = 1; i <= newData.length; i++) {
+          totalTimesheet.push(templatedata);
+        }
 
-    return () => {
-      setUserTimeSheetData([]);
-    };
+        totalTimesheet.forEach((item, idx) => {
+          const temp = [];
+          item.forEach((ele, index) => {
+            let obj = {
+              ...ele,
+              timesheetId: idx + 1,
+              date: dateTrack.current[index],
+            };
+            temp.push(obj);
+          });
+          totalTimesheet[idx] = temp;
+        });
+
+        totalTimesheet.forEach((item) => {
+          item.forEach((obj) => {
+            data.forEach((tempData) => {
+              if (
+                parseInt(tempData.timesheetId) === obj.timesheetId &&
+                tempData.date === obj.date
+              ) {
+                obj.clientName = tempData.clientName;
+                obj.projectName = tempData.projectName;
+                obj.jobName = tempData.jobName;
+                obj.workItem = tempData.workItem;
+                obj.billableStatus = tempData.billableStatus;
+                obj.description = tempData.description;
+                obj.totalTime = tempData.totalTime;
+                obj.submittedHours = tempData.submittedHours;
+                obj.userId = tempData.userId;
+              } else {
+                obj.clientName = tempData.clientName;
+                obj.projectName = tempData.projectName;
+                obj.jobName = tempData.jobName;
+                obj.workItem = tempData.workItem;
+                obj.userId = tempData.userId;
+                obj.billableStatus = tempData.billableStatus;
+              }
+            });
+          });
+        });
+
+        
+        trackRow.current = newData.length;
+        setDemoFinalData(() => [...totalTimesheet]);
+        setTotalHours(totalHour);
+        setRow(newData.length);
+        // setUserTimeSheetData(() => [...newData]);
+      })
+      .catch((err) => {
+        const totalHour = {
+          finalTotalHours: 0,
+          finalTotalMinutes: 0,
+        };
+
+        const Mydata = templatedata;
+        const temp = Mydata.map((item, index) => {
+          return {
+            ...item,
+            date: dateTrack.current[index],
+            userId: profileformdata?.userId,
+            timesheetId: 1,
+          };
+        });
+
+        setDemoFinalData(() => [temp]);
+        setTotalHours(totalHour);
+        setRow(1);
+        trackRow.current = 1;
+      });
   }, [start, end]);
 
-
-  useEffect(() => {
-    if (isFilled) {
-      CreateTimeSheet(FinalData)
-        .then((data) => {
-          navigate("/dashboard/getTimesheet");
-
-          toast.success(`${data.message}`, {
-            position: "top-left",
-            autoClose: 2000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "colored",
-          });
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
-
-    return () => {
-      setFilled(false);
-    };
-  }, [isFilled]);
-
   const handleSubmit = () => {
-    if (FinalData.length === 0 && TimesheetData?.clientName) {
-      setFilled(true);
-    } else if (FinalData.length && TimesheetData?.clientName) {
+    if (demoFinalData.length) {
       setFilled(true);
     }
   };
 
-  const leftRows =  [];
+  // left and right table row
+
+  const leftRows = [];
   const rightRows = [];
 
   for (let i = 1; i <= row; i++) {
@@ -227,10 +403,6 @@ const Timesheetform = () => {
         end={end}
       />
     );
-  }
-
-
-for (let i = 1; i <= row; i++) {
     rightRows.push(
       <RightRow
         key={i}
@@ -240,35 +412,50 @@ for (let i = 1; i <= row; i++) {
         week={week}
         start={start}
         end={end}
-        handleBlur={handleBlur}
         slide={slide}
-        setTimeSheetData={setTimeSheetData}
+        demoFinalData={demoFinalData}
+        setDemoFinalData={setDemoFinalData}
       />
     );
   }
 
- const addRow = () => {
-    
+  // add one more row in the table
+  const addRow = () => {
     setRow((prevRow) => prevRow + 1);
+    const myData = templatedata;
+    myData.forEach((item, index) => {
+      myData[index] = {
+        ...item,
+        timesheetId: trackRow.current + 1,
+        date: date[index],
+      };
+    });
+
+    setDemoFinalData((prevData) => [...prevData, myData]);
+    trackRow.current = trackRow.current + 1;
   };
 
-  const nextweek = () => {
+
+  //nextWeek
+  const nextweek = useCallback(() => {
     setStart(addDays(start, 7));
     setEnd(addDays(end, 7));
-  };
+  }, [start, end]);
 
-  const prevWeek = () => {
+  // prevWeek
+  const prevWeek = useCallback(() => {
     setStart(subDays(start, 7));
     setEnd(subDays(end, 7));
-  };
+  }, [start, end]);
 
+  console.log(demoFinalData);
 
   return (
     <div className="view-timesheet-container-div">
       <div className="tabs-div">
         <Tabs />
       </div>
-      <div className="timesheet-content-div">
+      <div className="timesheet-content-div" style={{ overflowY: "auto" }}>
         <span className="timesheet-content-title">Add Timesheet</span>
         <div
           style={{
@@ -281,15 +468,22 @@ for (let i = 1; i <= row; i++) {
             <FontAwesomeIcon
               onClick={prevWeek}
               icon={faArrowLeft}
-              style={{ alignSelf: "center" }}
+              style={{ alignSelf: "center", marginRight: "0.6rem" }}
             />
-            <span style={{ marginRight: "5px", marginLeft: "5px" }}>
+            <span
+              style={{
+                display: "inline-block",
+                width: "13.5rem",
+                textAlign: "center",
+                padding: "0.1rem",
+              }}
+            >
               {formattedStartDate} - {formattedEndDate}
             </span>
             <FontAwesomeIcon
               onClick={nextweek}
               icon={faArrowRight}
-              style={{ alignSelf: "center" }}
+              style={{ alignSelf: "center", marginLeft: "0.3rem" }}
             />
           </div>
         </div>
@@ -308,7 +502,8 @@ for (let i = 1; i <= row; i++) {
                     <th className="left-table-th">Job Name</th>
                   </tr>
                 </thead>
-                {leftRows}
+
+                <tbody>{leftRows}</tbody>
               </table>
             </div>
             <div className="right-table-div">
@@ -328,7 +523,8 @@ for (let i = 1; i <= row; i++) {
                     <th className="date-th">Total</th>
                   </tr>
                 </thead>
-                {rightRows}
+                <tbody>{rightRows}</tbody>
+
                 <tbody>
                   <tr>
                     <td>
@@ -340,35 +536,40 @@ for (let i = 1; i <= row; i++) {
                     <td style={{ textAlign: "left", paddingLeft: "1.3rem" }}>
                       <span>Total</span>
                     </td>
-                    
-                    
+
                     {date.map((day, index) => (
                       <td key={index} className="date-td-span-col">
                         <span>
                           {totalHours[day]?.hour
-                            ? (String(totalHours[day]?.hour +
-                              parseInt(totalHours[day]?.min / 60))).padStart(2,0)
+                            ? String(
+                                totalHours[day]?.hour +
+                                  parseInt(totalHours[day]?.min / 60)
+                              ).padStart(2, 0)
                             : "00"}
                           :
                           {totalHours[day]?.min
-                            ? (String(totalHours[day]?.min % 60)).padStart(2,0)
+                            ? String(totalHours[day]?.min % 60).padStart(2, 0)
                             : "00"}
                         </span>
                       </td>
                     ))}
 
                     <td className="date-td-span-col">
-                      
                       <span>
-                          {totalHours?.finalTotalHours
-                            ? (String(totalHours?.finalTotalHours +
-                              parseInt(totalHours?.finalTotalMinutes / 60))).padStart(2,0)
-                            : "00"}
-                          :
-                          {totalHours?.finalTotalMinutes 
-                            ? String(totalHours?.finalTotalMinutes  % 60).padStart(2,0)
-                            : "00"}
-                        </span>
+                        {totalHours?.finalTotalHours
+                          ? String(
+                              totalHours?.finalTotalHours +
+                                parseInt(totalHours?.finalTotalMinutes / 60)
+                            ).padStart(2, 0)
+                          : "00"}
+                        :
+                        {totalHours?.finalTotalMinutes
+                          ? String(totalHours?.finalTotalMinutes % 60).padStart(
+                              2,
+                              0
+                            )
+                          : "00"}
+                      </span>
                     </td>
                   </tr>
                 </tbody>
@@ -409,7 +610,6 @@ for (let i = 1; i <= row; i++) {
               Save
             </button>
             <button
-              onClick={() => setRow(1)}
               className="btn"
               style={{
                 textAlign: "center",
