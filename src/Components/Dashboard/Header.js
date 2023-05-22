@@ -23,21 +23,27 @@ function Header() {
 	const [input, setInput] = useState([]);
 	const [searchResult, setSearchResult] = useState([]);
 	const [showResults, setShowResults] = useState(false);
+	const [notify, setNotify] = useState(false);
 	const navigate = useNavigate();
 
 	useEffect(() => {
 		socket.connect();
+		socket.on('notify', () => {
+			console.log('notified');
+			setNotify((previousState) => !previousState);
+		});
 		socket.emit('join', 'Joined Room');
 		socket.on('notifications', (data) => {
 			// console.log(data);
 			setNotificationData(data);
 		});
+
 		return () => {
 			socket.disconnect();
-			socket.off('join');
+			socket.off('notify');
 			socket.off('notifications');
 		};
-	}, []);
+	}, [notify]);
 
 	const searchBoxRef = useRef(null); //for close outside
 	useEffect(() => {
@@ -62,7 +68,7 @@ function Header() {
 						return Name && Name.name && Name.name.toLowerCase().includes(input.toLowerCase());
 					});
 					setSearchResult(result);
-					
+					console.log(result);
 				})
 				.catch((e) => {
 					console.log(e.message);
@@ -148,10 +154,11 @@ function Header() {
 								}}
 							/>
 						</div>
-						{notificationData?.unread === undefined ? <></> : <div className='notification-unread-count'>{notificationData.unread}</div>}
+						{notificationData?.unread === undefined || notificationData?.unread === 0 ? <></> : <div className='notification-unread-count'>{notificationData.unread}</div>}
 						{openNotification && (
 							<Notification
 								messages={notificationData?.messages}
+								unread={notificationData?.unread}
 								closeNotification={() => {
 									setOpenNotification((previousState) => !previousState);
 								}}

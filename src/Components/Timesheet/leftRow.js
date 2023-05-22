@@ -1,9 +1,9 @@
 import React, { useEffect, useState, useRef } from "react";
 import "./Timesheet.css";
-import { getTimeSheet,getClientAndProject } from "../../Service/TimesheetService";
-
-
-
+import {
+  getTimeSheet,
+  getClientAndProject,
+} from "../../Service/TimesheetService";
 
 const LeftRow = ({ row, handlechange, week, start, end }) => {
   const [userTimeSheetData, setuserTimeSheetData] = useState([]);
@@ -13,50 +13,49 @@ const LeftRow = ({ row, handlechange, week, start, end }) => {
   const projectRef = useRef("");
   const jobRef = useRef("");
 
-  
-  useEffect(()=>{
-    getClientAndProject().then((data)=>{
-      setOptionData(data);
-    }).catch((err)=>{
-      console.log(err);
-    })
-  },[])
+  useEffect(() => {
+    getClientAndProject()
+      .then((data) => {
+        setOptionData(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   useEffect(() => {
     getTimeSheet(week)
       .then((data) => {
-
         const newData = data.reduce((acc, item) => {
-          const existingItem = acc.find((x) =>{
-          
-          if(x.workItem === item.workItem &&
-            x.clientName === item.clientName &&
-            x.projectName === item.projectName &&
-            x.jobName === item.jobName &&
-            x.billableStatus === item.billableStatus &&
-            x.timesheetId === item.timesheetId){
-            return true;
-          }
-        
-          return false;
-          
-          }
-          );
-          if (existingItem) {
-            existingItem.dates = {...existingItem.dates,[item.date]:item.totalTime}
+          const existingItem = acc.find((x) => {
+            if (
+              x.workItem === item.workItem &&
+              x.clientName === item.clientName &&
+              x.projectName === item.projectName &&
+              x.jobName === item.jobName &&
+              x.billableStatus === item.billableStatus &&
+              x.timesheetId === item.timesheetId
+            ) {
+              return true;
+            }
 
+            return false;
+          });
+          if (existingItem) {
+            existingItem.dates = {
+              ...existingItem.dates,
+              [item.date]: item.totalTime,
+            };
           } else {
             acc.push({
               ...item,
-              dates:{...item.dates,[item.date]:item.totalTime}
+              dates: { ...item.dates, [item.date]: item.totalTime },
             });
           }
           return acc;
         }, []);
- 
-        
-        setuserTimeSheetData(()=>[...newData]);
-        
+
+        setuserTimeSheetData(() => [...newData]);
       })
       .catch((e) => {
         setuserTimeSheetData([]);
@@ -70,9 +69,8 @@ const LeftRow = ({ row, handlechange, week, start, end }) => {
     };
   }, [start, end]);
 
-
   return (
-    <tbody>
+    <>
       <tr>
         <td style={{ textAlign: "center" }}>{row}.</td>
         <td>
@@ -87,11 +85,13 @@ const LeftRow = ({ row, handlechange, week, start, end }) => {
             ref={ClientRef}
           >
             <option value="">Select Client</option>
-            {
-              optionData.map((data,index)=>(
-                <option value={data.clientName} key={index}>{data.clientName}</option>
-              ))
-            }
+            <option value="Microsoft">Microsoft</option>
+            <option value="Google">Google</option>
+            {optionData.map((data, index) => (
+              <option value={data.clientName} key={index}>
+                {data.clientName}
+              </option>
+            ))}
           </select>
         </td>
         <td>
@@ -106,12 +106,13 @@ const LeftRow = ({ row, handlechange, week, start, end }) => {
             ref={projectRef}
           >
             <option value="">Select Project</option>
-            {
-              optionData.map((data,index)=>(
-                <option value={data.projectName} key={index}>{data.projectName}</option>
-              ))
-            }
-        
+            <option value="Microsoft">Microsoft</option>
+            <option value="Google">Google</option>
+            {optionData.map((data, index) => (
+              <option value={data.projectName} key={index}>
+                {data.projectName}
+              </option>
+            ))}
           </select>
         </td>
         <td>
@@ -131,7 +132,7 @@ const LeftRow = ({ row, handlechange, week, start, end }) => {
           </select>
         </td>
       </tr>
-    </tbody>
+    </>
   );
 };
 
