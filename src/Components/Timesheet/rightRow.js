@@ -1,6 +1,9 @@
 import React, { useEffect, useState, useRef } from "react";
 import "./Timesheet.css";
 import { getTimeSheet } from "../../Service/TimesheetService";
+import DescriptionForm from "./descriptionForm";
+import { SiReadthedocs } from "react-icons/si";
+import {reduceFetchedTimeSheetData} from '../../Utils/getTemplate';
 
 const RightRow = ({
   row,
@@ -9,62 +12,40 @@ const RightRow = ({
   week,
   start,
   end,
-  handleBlur,
+  slide,
+  userFinalData,
+  setUserFinalData,
 }) => {
   const [userTimeSheetData, setuserTimeSheetData] = useState([]);
+  const [isDescription, setDescription] = useState(false);
+  
+
   const BillableRef = useRef("");
 
   useEffect(() => {
     getTimeSheet(week)
       .then((data) => {
-        const newData = data.reduce((acc, item) => {
-          const existingItem = acc.find((x) => {
-            if (
-              x.workItem === item.workItem &&
-              x.clientName === item.clientName &&
-              x.projectName === item.projectName &&
-              x.jobName === item.jobName &&
-              x.billableStatus === item.billableStatus &&
-              x.timesheetId === item.timesheetId
-            ) {
-              return true;
-            }
-
-            return false;
-          });
-
-          const [hour, minute] = item.totalTime.split(":");
-          if (existingItem) {
-            existingItem.dates = {
-              ...existingItem.dates,
-              [item.date]: item.totalTime,
-            };
-            existingItem.totalHour = existingItem.totalHour + Number(hour);
-            existingItem.totalMinute =
-              existingItem.totalMinute + Number(minute);
-          } else {
-            acc.push({
-              ...item,
-              dates: { ...item.dates, [item.date]: item.totalTime },
-              totalHour: Number(hour),
-              totalMinute: Number(minute),
-            });
-          }
-          return acc;
-        }, []);
-
-        setuserTimeSheetData(() => [...newData]);
+        const newPreparedData = reduceFetchedTimeSheetData(data);
+        setuserTimeSheetData(() => [...newPreparedData]);
+        
       })
       .catch((e) => {
         setuserTimeSheetData([]);
         BillableRef.current.value = "";
       });
+
+    return () => {
+      setDescription(false);
+    };
   }, [start, end]);
 
+  console.log(userTimeSheetData);
+
   return (
-    <tbody>
+    <>
+ 
       <tr>
-        <td>
+        <td style={{ position: "relative" }}>
           <input
             type="text"
             className="right-table-td"
@@ -75,17 +56,25 @@ const RightRow = ({
             disabled={userTimeSheetData[row - 1]?.workItem ? true : false}
           />
         </td>
-        <td className="d-none">
-          <input
-            type="text"
-            className="right-table-td"
-            onChange={handlechange}
-            name="description"
-            data-row={row}
-            defaultValue={userTimeSheetData[row - 1]?.description || ""}
-            disabled={userTimeSheetData[row - 1]?.description ? true : false}
+        <td style={{ position: "relative" }}>
+          <SiReadthedocs
+            onClick={() => setDescription(!isDescription)}
+            style={{ position: "absolute", right: "26px" }}
           />
+          {isDescription ? (
+            <DescriptionForm
+              slide={slide}
+              setDescription={setDescription}
+              userFinalData={userFinalData}
+              setUserFinalData={setUserFinalData}
+              row={row}
+              date={date}
+            />
+          ) : (
+            ""
+          )}
         </td>
+        
         <td>
           <select
             className="right-table-td"
@@ -112,7 +101,6 @@ const RightRow = ({
               }
               placeholder="00:00"
               onChange={handlechange}
-              onBlur={handleBlur}
               name="totalTime"
               defaultValue={
                 userTimeSheetData.length > 0
@@ -149,7 +137,8 @@ const RightRow = ({
           </span>
         </td>
       </tr>
-    </tbody>
+      
+    </>
   );
 };
 

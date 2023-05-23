@@ -60,7 +60,7 @@ section.timesheet-container {
 	display: flex;
 	margin: 1rem;
 	border-radius: 5px;
-	box-shadow: 0 0 8px #dddddd;
+	/* box-shadow: 0 0 8px #dddddd; */
 }
 
 .left-table-div {
@@ -277,3 +277,29 @@ select {
 	display: flex;
 	flex-direction: column;
 }
+
+/* description css */
+
+.custom-drop {
+	position: absolute;
+	inset: 0px auto auto 0px;
+	/* transform: translate3d(32px, 0px, 0px); */
+	height: 180px;
+	max-height: 181px;
+	overflow-y: auto;
+  }
+
+.dropdown-menu::before {
+	content: "";
+	position: absolute;
+	left: -10px;
+	width: 0;
+	height: 0;
+	border-top: 10px solid transparent;
+	border-bottom: 10px solid transparent;
+	border-right: 10px solid #333;
+  }
+  
+  .dropdown-toggle::after {
+	display: none !important;
+  }
