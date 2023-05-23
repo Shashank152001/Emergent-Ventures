@@ -146,8 +146,8 @@ function GetRequest() {
 						{GetRequestData ? (
 							GetRequestData.map((item, index) => (
 								<tr key={index}>
-									<td style={{ textAlign: 'center' }}>{index + 1}</td>
-									<td style={{ textAlign: 'center' }}>
+									<td>{index + 1}</td>
+									<td>
 										<span>
 											<img style={{ width: '2rem', height: '2rem' }} src={item.profileImage} alt='employee' />
 										</span>
@@ -156,31 +156,31 @@ function GetRequest() {
 										<span> - </span>
 										{item.name}
 									</td>
-									<td style={{ textAlign: 'center' }}>{item.request}</td>
-									<td style={{ textAlign: 'center' }}>{item.leaveType}</td>
-									<td style={{ textAlign: 'center' }}>{item.startDate}</td>
-									<td style={{ textAlign: 'center' }}>{item.endDate}</td>
+									<td >{item.request}</td>
+									<td >{item.leaveType}</td>
+									<td >{item.startDate}</td>
+									<td >{item.endDate}</td>
 									{item.status === 'Approved' ? (
 										<td>
-											<i className='bi bi-check-circle-fill text-success ms-2'></i>
+											<i className='bi bi-check-circle-fill text-success '></i>
 										</td>
 									) : item.status === 'Rejected' ? (
 										<td>
-											<i className='bi bi-x-circle-fill text-danger ms-2'></i>
+											<i className='bi bi-x-circle-fill text-danger '></i>
 										</td>
 									) : item.status === 'Cancelled' ? (
 										<td>
-											<i className='bi bi-x-circle-fill text-danger ms-2'></i>
+											<i className='bi bi-x-circle-fill text-danger '></i>
 										</td>
 									) : (
 										<td>
-											<i className='bi bi-hourglass text-warning ms-2'></i>
+											<i className='bi bi-hourglass text-warning'></i>
 										</td>
 									)}
 									{item.status === 'Pending' ? (
 										<td>
 											<i
-												class='bi bi-x-lg text-danger'
+												className='bi bi-x-lg text-danger'
 												onClick={() => {
 													cancelRequest(item.id);
 												}}
@@ -188,7 +188,7 @@ function GetRequest() {
 										</td>
 									) : item.status === 'Rejected' ? (
 										<td>
-											<i class='bi bi-send text-primary' onClick={() => resendRequest(item.id, item.userId)}></i>
+											<i className='bi bi-send text-primary' onClick={() => resendRequest(item.id, item.userId)}></i>
 										</td>
 									) : item.status === 'Cancelled' ? (
 										<td>
@@ -196,7 +196,7 @@ function GetRequest() {
 										</td>
 									) : (
 										<td>
-											<i class='bi bi-hand-thumbs-up text-success'></i>
+											<i className='bi bi-hand-thumbs-up text-success'></i>
 										</td>
 									)}
 								</tr>

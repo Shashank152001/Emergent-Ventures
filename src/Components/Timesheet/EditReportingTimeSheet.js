@@ -11,13 +11,14 @@ function EditReportingTimeSheet() {
 	const { id } = useParams();
 	const [putTimesheet, setPutTimesheet] = useState(false);
 	const [formData, setFormData] = useState({
+		id:'',
 		userId: '',
-		timesheetId: '',
 		status: ''
 	});
 	useEffect(() => {
 		fetchReportingTimesheet()
 			.then((data) => {
+			
 				SetReportingTimesheet(data[id]);
 			})
 			.catch((e) => {
@@ -29,7 +30,7 @@ function EditReportingTimeSheet() {
 			UpdateReportingTimesheet(formData)
 				.then((data) => {
 					socket.emit('sendNotifications');
-					// console.log(data);
+					
 					toast.success('Status Updated Successfull', {
 						position: 'top-left',
 						autoClose: 2000,
@@ -56,12 +57,13 @@ function EditReportingTimeSheet() {
 				});
 		}
 	}, [putTimesheet]);
+
 	const handleSubmit = (event) => {
 		event.preventDefault();
-
+         
 		setFormData({
+			id: reportingTimeSheet.id,
 			userId: reportingTimeSheet.userId,
-			timesheetId: reportingTimeSheet.id,
 			status: event.target['status'].value
 		});
 		setPutTimesheet(true);

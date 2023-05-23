@@ -1,21 +1,28 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useContext } from 'react';
 import './WFH.css';
 import RequestTabs from './RequestTabs';
+
 import { ReportingGetdata } from '../../Service/LeavesService';
 import { Link } from 'react-router-dom';
 import NoRecord from '../Project/norecord';
+import { RealDataContext } from '../../Context/LoginContext';
+
 function ViewRequest() {
 	const [ReportingData, SetReportingData] = useState(null);
+	const {isRealTime} = useContext(RealDataContext);
 
 	useEffect(() => {
+
 		ReportingGetdata()
 			.then((data) => {
+				
 				SetReportingData(data);
 			})
 			.catch((e) => {
 				console.log(e.message);
 			});
-	}, []);
+
+}, [isRealTime]);
 
 	return (
 		<div className='view-request-container-div'>
@@ -42,7 +49,7 @@ function ViewRequest() {
 							ReportingData.map((item, index) => (
 								<tr key={index}>
 									<td style={{ textAlign: 'center' }}>{index + 1}</td>
-									<td style={{ textAlign: 'center' }}>
+									<td >
 										<span>
 											<img style={{ width: '2rem', height: '2rem' }} src={item.profileImage} alt='employee' />
 										</span>
@@ -51,11 +58,11 @@ function ViewRequest() {
 										<span> - </span>
 										{item.name}
 									</td>
-									<td style={{ textAlign: 'center' }}>{item.role}</td>
-									<td style={{ textAlign: 'center' }}>{item.leaveType}</td>
-									<td style={{ textAlign: 'center' }}>{item.startDate}</td>
-									<td style={{ textAlign: 'center' }}>{item.endDate}</td>
-									<td style={{ textAlign: 'center' }}>{item.status}</td>
+									<td >{item.role}</td>
+									<td >{item.leaveType}</td>
+									<td >{item.startDate}</td>
+									<td >{item.endDate}</td>
+									<td >{item.status}</td>
 									{item.status === 'Pending' ? (
 										<>
 											<td>

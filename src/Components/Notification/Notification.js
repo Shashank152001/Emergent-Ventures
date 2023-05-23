@@ -33,6 +33,9 @@ export const Notification = ({ messages, unread, closeNotification }) => {
 					console.log(e.message);
 				});
 		}
+		return ()=>{
+			socket.off('sendNotifications');
+		}
 	}, [notificationRead]);
 
 	useEffect(() => {
@@ -45,6 +48,9 @@ export const Notification = ({ messages, unread, closeNotification }) => {
 				.catch((e) => {
 					console.log(e.message);
 				});
+		}
+		return ()=>{
+			socket.off('sendNotifications');
 		}
 	}, [allNotificationRead]);
 
@@ -76,7 +82,7 @@ export const Notification = ({ messages, unread, closeNotification }) => {
 								<div className='notification-content-div unread-bold'>
 									<span>{message.content}</span>
 									<span className='unread-bold'>
-										{new Date(message.date).toLocaleString(undefined, {
+										{new Date(message.date.substr(0,23)).toLocaleString(undefined, {
 											day: 'numeric',
 											month: 'short',
 											year: 'numeric',
@@ -94,7 +100,7 @@ export const Notification = ({ messages, unread, closeNotification }) => {
 								<div className='notification-content-div'>
 									<span>{message.content}</span>
 									<span className='notification-message-date'>
-										{new Date(message.date).toLocaleString(undefined, {
+										{new Date(message.date.substr(0,23)).toLocaleString(undefined, {
 											day: 'numeric',
 											month: 'short',
 											year: 'numeric',
