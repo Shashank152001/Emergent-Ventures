@@ -1,6 +1,6 @@
 import React, {useState } from "react";
 import "./App.css";
-import {LoginContext} from './Context/LoginContext'
+import {LoginContext,RealDataContext} from './Context/LoginContext'
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -30,17 +30,20 @@ import DescriptionForm from './Components/Timesheet/descriptionForm'
 
 
 function App() {
-
+  const [isRealTime,setIsRealTime] = useState(false);
   const[profileformdata,setProfileFormdata]=useState({
     name:'',
     profileImage:'',
     userId:''
   })
+
+  
   
    
   return (
     <>
     <LoginContext.Provider value={{profileformdata,setProfileFormdata}}>
+    <RealDataContext.Provider value={{isRealTime,setIsRealTime}}>
       <Router>
         <Routes>
           <Route element={<RedirectRoute />} path="/">
@@ -54,8 +57,10 @@ function App() {
           <Route element={<EditReporingTimeSheet/>} path="/editTime"></Route> */}
          
           {/* for hierarchy testing */}
-
+          
           <Route element={<ProtectRoute />} path="/dashboard">
+            
+            
             <Route element={<Dashboard />} path="/dashboard">
               
               <Route element={<Home />} path="" />
@@ -74,8 +79,12 @@ function App() {
               
               
             </Route>
+             
+            
 
           </Route>
+
+         
             
             
           
@@ -91,6 +100,7 @@ function App() {
 
         </Routes>
       </Router>
+      </RealDataContext.Provider>
       </LoginContext.Provider>
       <ToastContainer />
     </>

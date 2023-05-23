@@ -3,7 +3,7 @@ import { useRef } from 'react';
 import { BiBell, BiChevronDown, BiSearch, BiPlusCircle } from 'react-icons/bi';
 import './Dashboard.css';
 import { socket } from '../../socket';
-import { LoginContext } from '../../Context/LoginContext';
+import { LoginContext,RealDataContext } from '../../Context/LoginContext';
 import FileUpload from './fileupload';
 import { DropDown } from '../DropDown/DropDown';
 import { Notification } from '../Notification/Notification';
@@ -16,9 +16,12 @@ function Header() {
 	const [openProfile, setOpenProfile] = useState(false);
 	const [notificationData, setNotificationData] = useState([]);
 	const [openNotification, setOpenNotification] = useState(false);
-	const { profileformdata, setProfileFormdata } = useContext(LoginContext);
+	const { profileformdata, setProfileFormdata} = useContext(LoginContext);
+	const { isRealTime,setIsRealTime} = useContext(RealDataContext);
 
 	// search Field
+
+	
 
 	const [input, setInput] = useState([]);
 	const [searchResult, setSearchResult] = useState([]);
@@ -27,21 +30,25 @@ function Header() {
 	const navigate = useNavigate();
 
 	useEffect(() => {
+		
 		socket.connect();
-		socket.on('notify', () => {
-			console.log('notified');
+		socket.emit('join', 'Joined Room');
+
+		socket.on('notify', (data) => {
 			setNotify((previousState) => !previousState);
 		});
-		socket.emit('join', 'Joined Room');
+		
 		socket.on('notifications', (data) => {
-			// console.log(data);
 			setNotificationData(data);
+			setIsRealTime((prev)=>!prev);
 		});
+
 
 		return () => {
 			socket.disconnect();
 			socket.off('notify');
 			socket.off('notifications');
+			socket.off('join');
 		};
 	}, [notify]);
 

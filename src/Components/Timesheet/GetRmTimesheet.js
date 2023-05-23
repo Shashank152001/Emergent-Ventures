@@ -1,19 +1,26 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useContext } from 'react';
 import { fetchReportingTimesheet } from '../../Service/TimesheetService';
 import { Link } from 'react-router-dom';
 import NoRecord from '../Project/norecord';
+import {RealDataContext } from '../../Context/LoginContext';
 import Tabs from './Tabs';
+
 function GetRmTimesheet() {
 	const [rmTimesheet, setRmTimesheet] = useState(null);
+	const {isRealTime} = useContext(RealDataContext);
+
+
+
 	useEffect(() => {
 		fetchReportingTimesheet()
 			.then((data) => {
 				setRmTimesheet(data);
+				
 			})
 			.catch((e) => {
 				console.log(e.message);
 			});
-	}, []);
+	}, [isRealTime]);
 	return (
 		<div className='view-timesheet-container-div'>
 			<div className='tabs-div'>
@@ -38,7 +45,7 @@ function GetRmTimesheet() {
 							rmTimesheet.map((item, index) => (
 								<tr key={index}>
 									<td style={{ textAlign: 'center' }}>{index + 1}</td>
-									<td style={{ textAlign: 'center' }}>
+									<td >
 										<span>
 											<img style={{ width: '2rem', height: '2rem' }} src={item.profileImage} alt='employee' />
 										</span>
@@ -47,10 +54,10 @@ function GetRmTimesheet() {
 										<span> - </span>
 										{item.name}
 									</td>
-									<td style={{ textAlign: 'center' }}>{item.timesheetName}</td>
-									<td style={{ textAlign: 'center' }}>{item.submittedHours}</td>
-									<td style={{ textAlign: 'center' }}>{item.approvedHours}</td>
-									<td style={{ textAlign: 'center' }}>{item.status}</td>
+									<td >{item.timesheetName}</td>
+									<td >{item.submittedHours}</td>
+									<td >{item.approvedHours}</td>
+									<td >{item.status}</td>
 
 									{item.status === 'Pending' ? (
 										<>

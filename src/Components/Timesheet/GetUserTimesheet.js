@@ -7,6 +7,7 @@ function GetUserTimesheet() {
 	useEffect(() => {
 		fetchTimeSheet()
 			.then((data) => {
+				console.log(data);
 				setUserTimesheet(data);
 			})
 			.catch((e) => {
@@ -37,8 +38,8 @@ function GetUserTimesheet() {
 						{userTimesheet ? (
 							userTimesheet.map((item, index) => (
 								<tr key={index}>
-									<td style={{ textAlign: 'center' }}>{index + 1}</td>
-									<td style={{ textAlign: 'center' }}>
+									<td >{index + 1}</td>
+									<td >
 										<span>
 											<img style={{ width: '2rem', height: '2rem' }} src={item.profileImage} alt='employee' />
 										</span>
@@ -47,21 +48,21 @@ function GetUserTimesheet() {
 										<span> - </span>
 										{item.name}
 									</td>
-									<td style={{ textAlign: 'center' }}>{item.timesheetName}</td>
-									<td style={{ textAlign: 'center' }}>{item.date}</td>
-									<td style={{ textAlign: 'center' }}>{item.submittedHours}</td>
-									<td style={{ textAlign: 'center' }}>{item.approvedHours}</td>
+									<td>{item.timesheetName}</td>
+									<td>{item.date}</td>
+									<td>{item.submittedHours}</td>
+									<td>{item.approvedHours}</td>
 									{item.status === 'Approved' ? (
 										<td>
-											<i className='bi bi-check-circle-fill text-success ms-2'></i>
+											<i className='bi bi-check-circle-fill text-success'></i>
 										</td>
 									) : item.status === 'Rejected' ? (
 										<td>
-											<i className='bi bi-x-circle-fill text-danger ms-2'></i>
+											<i className='bi bi-x-circle-fill text-danger'></i>
 										</td>
 									) : (
 										<td>
-											<i className='bi bi-hourglass text-warning ms-2'></i>
+											<i className='bi bi-hourglass text-warning'></i>
 										</td>
 									)}
 								</tr>
