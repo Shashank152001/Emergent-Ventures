@@ -22,7 +22,7 @@ import { LoginContext } from "../../Context/LoginContext";
 import { CreateTimeSheet, getTimeSheet } from "../../Service/TimesheetService";
 import { toast } from "react-toastify";
 import Tabs from "../Timesheet/Tabs";
-import {timesheetTemplate,reduceFetchedTimeSheetData,finalWorkingHours} from '../../Utils/getTemplate';
+import {timesheetTemplate,reduceFetchedTimeSheetData,finalWorkingHours,formatTotalTime} from '../../Utils/getTemplate';
 import {totalTimesheetRecords,finalTimesheetData} from '../../Utils/templateRecords';
 
 const Timesheetform = () => {
@@ -50,7 +50,12 @@ const Timesheetform = () => {
 
 
   const handlechange = (event) => {
+    let timeValue = '';
     const { name, value, dataset } = event.target;
+    if(name === 'totalTime'){
+      timeValue = formatTotalTime(value);
+      
+    }
     const tempdata = userFinalData;
     const currentData = tempdata[dataset.row - 1];
 
@@ -62,17 +67,13 @@ const Timesheetform = () => {
         currentData[i] = {
           ...currentData[i],
           submittedHours:
-            name === "totalTime" && value.split(":")[1]
-              ? `${value.split(":")[0].padStart(2, 0)}:${value
-                  .split(":")[1]
-                  .padStart(2, 0)}`
-              : value,
+          name === "totalTime" && timeValue.split(":")[1]
+          ? timeValue
+          : value,
           [name]:
-            name === "totalTime" && value.split(":")[1]
-              ? `${value.split(":")[0].padStart(2, 0)}:${value
-                  .split(":")[1]
-                  .padStart(2, 0)}`
-              : value.trim(),
+          name === "totalTime" && timeValue.split(":")[1]
+          ? timeValue
+          : value.trim(),
         };
         break;
       } else {

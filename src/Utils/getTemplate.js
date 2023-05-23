@@ -105,3 +105,18 @@ const rawData = {
   return totalHour;
   
   };
+
+  
+export const formatTotalTime = (time)=>{
+  let totalTime = '0:00';
+
+ if(time.includes(':')){
+    totalTime = `${time.split(":")[0].padStart(2, 0)}:${time
+                .split(":")[1]
+                .padStart(2, 0)}`
+ }
+ else{
+  totalTime = `${time.padStart(2, 0)}:${'0'.padStart(2, 0)}`
+ }
+return totalTime; 
+}

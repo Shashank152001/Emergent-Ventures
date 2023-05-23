@@ -58,7 +58,12 @@ export const finalTimesheetData = (preparedTimesheetData,timesheetData)=>{
      
      preparedTimesheetData.forEach((item) => {
         item.forEach((ele) => {
-          if (ele?.totalTime !== "") {
+          if (ele?.totalTime !== "" &&
+           ele?.clientName &&
+           ele?.projectName &&
+           ele?.billableStatus &&
+           ele?.jobName &&
+           ele?.workItem ) {
             finalData.push(ele);
           }
         });

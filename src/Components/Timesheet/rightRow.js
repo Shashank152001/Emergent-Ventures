@@ -3,7 +3,7 @@ import "./Timesheet.css";
 import { getTimeSheet } from "../../Service/TimesheetService";
 import DescriptionForm from "./descriptionForm";
 import { SiReadthedocs } from "react-icons/si";
-import {reduceFetchedTimeSheetData} from '../../Utils/getTemplate';
+import {formatTotalTime, reduceFetchedTimeSheetData} from '../../Utils/getTemplate';
 
 const RightRow = ({
   row,
@@ -102,6 +102,9 @@ const RightRow = ({
               placeholder="00:00"
               onChange={handlechange}
               name="totalTime"
+              onBlur={(e)=>{
+                 e.target.value = formatTotalTime(e.target.value);
+              }}
               defaultValue={
                 userTimeSheetData.length > 0
                   ? userTimeSheetData[row - 1]?.dates[day]
