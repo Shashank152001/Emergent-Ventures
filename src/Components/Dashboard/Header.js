@@ -44,10 +44,13 @@ function Header() {
     if (input!= "") {
       UserSearchBar(input)
         .then((UserSearch) => {
+          console.log(UserSearch);
           const result = UserSearch.filter((Name) => {
             return (
               Name &&
               Name.name &&
+              Name.profileImage&&
+              Name.hrmid&&
               Name.name.toLowerCase().includes(input.toLowerCase())
             );
           });
@@ -146,28 +149,33 @@ function Header() {
         ref={searchBoxRef}
           style={{
             position: "absolute",
-            top: "100%",
+            top: "48px",
             left: "0",
             zIndex: "999",
             borderRadius: "10px",
             border: "none",
             background: "rgba(211,224,253,1)",
-            width: "100%",
-            maxHeight: "200px",
+            width: "400px",
+            // maxHeight: "200px",
             overflow: "auto",
+            
             boxShadow: "0 3px 6px rgba(0, 0, 0, 0.16)"
           }}
         >
           {searchResult.map((Name) => (
             <table
-              className="table"
+              // className="table"
               key={Name.id}
               style={{ width: "100%", marginBottom: "0" }}
             >
              
               <tbody>
                 <tr className="Search-Table-text"   onClick={() => handleRowClick(Name.id)}>
-                  <td>{Name.hrmId}</td>
+              <div className="Search-img"> <td >
+          <img src={Name.profileImage} alt="Profile" className="responsive-image" />
+        </td></div> 
+
+                  <td>{Name.hrmid}</td>
                   <td>{Name.name}</td>
                 </tr>
               </tbody>
