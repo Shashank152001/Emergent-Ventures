@@ -1,41 +1,42 @@
-import React,{useEffect,useState,useRef} from "react";
+import React, { useEffect, useState} from "react";
 import "./Timesheet.css";
-import {getTimeSheet} from "../../Service/TimesheetService";
-// import Timesheetform from "./TimesheetForm";
-const LeftRow = ({ row,handlechange,week,start,end}) => {
+import {
+  getTimeSheet,
+  getClientAndProject,
+} from "../../Service/TimesheetService";
+import {reduceFetchedTimeSheetData} from '../../Utils/getTemplate';
 
-  const[userTimeSheetData,setuserTimeSheetData] = useState([]);
-  const ClientRef = useRef(''); 
-  const projectRef = useRef(''); 
-  const jobRef = useRef(''); 
+const LeftRow = ({ row, handlechange, week, start, end }) => {
+  const [userTimeSheetData, setuserTimeSheetData] = useState([]);
+  const [optionData, setOptionData] = useState([]);
 
   useEffect(() => {
-    
+    getClientAndProject()
+      .then((data) => {
+        setOptionData(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  useEffect(() => {
     getTimeSheet(week)
       .then((data) => {
-        setuserTimeSheetData(data);
+        const newPreparedData = reduceFetchedTimeSheetData(data);
+        setuserTimeSheetData(() => [...newPreparedData]);
       })
       .catch((e) => {
-        // console.log(e.message);
         setuserTimeSheetData([]);
-        ClientRef.current.value  = '';
-        projectRef.current.value  = '';
-        jobRef.current.value  = '';
       });
 
-     return ()=>{
+    return () => {
       setuserTimeSheetData([]);
-     }
-
-  }, [start,end]);
-
-  
-
-
+    };
+  }, [start, end]);
 
   return (
-   
-    <tbody>
+    <>
       <tr>
         <td style={{ textAlign: "center" }}>{row}.</td>
         <td>
@@ -43,14 +44,20 @@ const LeftRow = ({ row,handlechange,week,start,end}) => {
             className="left-table-td"
             name="clientName"
             onChange={handlechange}
-            defaultValue={userTimeSheetData[row-1]?.clientName}
-            data-row = {row}
-            value={userTimeSheetData[row-1]?.clientName}
-            ref={ClientRef}
+            defaultValue={userTimeSheetData[row - 1]?.clientName}
+            disabled={userTimeSheetData[row - 1]?.clientName ? true : false}
+            data-row={row}
+            value={userTimeSheetData[row - 1]?.clientName}
+            
           >
             <option value="">Select Client</option>
-            <option value="CT-L&D">CT-L&D</option>
-            <option value="CT-LMS">CT-LMS</option> 
+            {/* <option value="Microsoft">Microsoft</option>
+            <option value="Google">Google</option> */}
+            {optionData.map((data, index) => (
+              <option value={data.clientName} key={index}>
+                {data.clientName}
+              </option>
+            ))}
           </select>
         </td>
         <td>
@@ -58,14 +65,20 @@ const LeftRow = ({ row,handlechange,week,start,end}) => {
             className="left-table-td"
             onChange={handlechange}
             name="projectName"
-            data-row = {row}
-            defaultValue={userTimeSheetData[row-1]?.projectName}
-            value={userTimeSheetData[row-1]?.projectName}
-            ref={projectRef}
+            data-row={row}
+            defaultValue={userTimeSheetData[row - 1]?.projectName}
+            disabled={userTimeSheetData[row - 1]?.clientName ? true : false}
+            value={userTimeSheetData[row - 1]?.projectName}
+            
           >
             <option value="">Select Project</option>
-            <option value="Zoho People">Zoho People</option>
-            <option value="Zoho People">Zoho People</option>
+            {/* <option value="Microsoft">Microsoft</option>
+            <option value="Google">Google</option> */}
+            {optionData.map((data, index) => (
+              <option value={data.projectName} key={index}>
+                {data.projectName}
+              </option>
+            ))}
           </select>
         </td>
         <td>
@@ -73,10 +86,10 @@ const LeftRow = ({ row,handlechange,week,start,end}) => {
             className="left-table-td"
             onChange={handlechange}
             name="jobName"
-            data-row = {row}
-            defaultValue = {userTimeSheetData[row-1]?.jobName}
-            value={userTimeSheetData[row-1]?.jobName}
-            ref={jobRef}
+            data-row={row}
+            defaultValue={userTimeSheetData[row - 1]?.jobName}
+            disabled={userTimeSheetData[row - 1]?.clientName ? true : false}
+            value={userTimeSheetData[row - 1]?.jobName}
           >
             <option value="">Select Job</option>
             <option value="Frontend">Frontend</option>
@@ -84,8 +97,7 @@ const LeftRow = ({ row,handlechange,week,start,end}) => {
           </select>
         </td>
       </tr>
-    </tbody>
-    
+    </>
   );
 };
 

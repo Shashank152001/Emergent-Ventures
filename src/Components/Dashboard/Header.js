@@ -1,15 +1,103 @@
-import React, { useState, useEffect, useContext } from "react";
-import {useRef} from 'react';
-import { BiBell, BiChevronDown, BiSearch, BiPlusCircle } from "react-icons/bi";
-import "./Dashboard.css";
-import { LoginContext } from '../../Context/LoginContext'
-import FileUpload from "./fileupload";
-import { DropDown } from "../DropDown/DropDown";
-import { ProfileFormData } from '../../Service/ProfileService'
-import { UserSearchBar,GetUserId } from "../../Service/UserSearchService";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect, useContext } from 'react';
+import { useRef } from 'react';
+import { BiBell, BiChevronDown, BiSearch, BiPlusCircle } from 'react-icons/bi';
+import './Dashboard.css';
+import { socket } from '../../socket';
+import { LoginContext,RealDataContext } from '../../Context/LoginContext';
+import FileUpload from './fileupload';
+import { DropDown } from '../DropDown/DropDown';
+import { Notification } from '../Notification/Notification';
+import { ProfileFormData } from '../../Service/ProfileService';
+import { UserSearchBar, GetUserId } from '../../Service/UserSearchService';
+import { useNavigate } from 'react-router-dom';
 
 function Header() {
+	const [showModal, setShowModal] = useState(false);
+	const [openProfile, setOpenProfile] = useState(false);
+	const [notificationData, setNotificationData] = useState([]);
+	const [openNotification, setOpenNotification] = useState(false);
+	const { profileformdata, setProfileFormdata} = useContext(LoginContext);
+	const { isRealTime,setIsRealTime} = useContext(RealDataContext);
+
+	// search Field
+
+	
+
+	const [input, setInput] = useState([]);
+	const [searchResult, setSearchResult] = useState([]);
+	const [showResults, setShowResults] = useState(false);
+	const [notify, setNotify] = useState(false);
+	const navigate = useNavigate();
+
+	useEffect(() => {
+		
+		socket.connect();
+		socket.emit('join', 'Joined Room');
+
+		socket.on('notify', (data) => {
+			setNotify((previousState) => !previousState);
+		});
+		
+		socket.on('notifications', (data) => {
+			setNotificationData(data);
+			setIsRealTime((prev)=>!prev);
+		});
+
+
+		return () => {
+			socket.disconnect();
+			socket.off('notify');
+			socket.off('notifications');
+			socket.off('join');
+		};
+	}, [notify]);
+
+	const searchBoxRef = useRef(null); //for close outside
+	useEffect(() => {
+		const handleClickOutside = (event) => {
+			if (searchBoxRef.current && !searchBoxRef.current.contains(event.target)) {
+				setShowResults(false);
+			}
+		};
+		document.addEventListener('mousedown', handleClickOutside);
+
+		return () => {
+			document.removeEventListener('mousedown', handleClickOutside);
+		};
+	}, []);
+
+	//for search name
+	useEffect(() => {
+		if (input !== '') {
+			UserSearchBar(input)
+				.then((UserSearch) => {
+					const result = UserSearch.filter((Name) => {
+						return Name && Name.name && Name.name.toLowerCase().includes(input.toLowerCase());
+					});
+					setSearchResult(result);
+					console.log(result);
+				})
+				.catch((e) => {
+					console.log(e.message);
+				});
+		} else {
+			setSearchResult([]);
+		}
+	}, [input]);
+
+	const handleChange = (value) => {
+		setInput(value);
+		setShowResults(true);
+	};
+
+	const handleSearchBoxClick = () => {
+		setShowResults(true);
+	};
+
+	const handleRowClick = (id) => {
+		navigate(`/dashboard/searchprofile/${id}`);
+		setInput('');
+	};
 
   const [showModal, setShowModal] = useState(false);
   const [openProfile, setOpenProfile] = useState(false);
@@ -23,220 +111,87 @@ function Header() {
   const navigate = useNavigate();
 
 
-  const searchBoxRef = useRef(null);//for close outside 
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (searchBoxRef.current && !searchBoxRef.current.contains(event.target)) {
-        setShowResults(false);
-      }
-    };
+	useEffect(() => {
+		ProfileFormData().then((data) => {
+			setProfileFormdata({
+				name: data.profile.name,
+				profileImage: data.profile.profileImage,
+				userId: data.profile.userId
+			});
+		});
+	}, []);
 
-    document.addEventListener('mousedown', handleClickOutside);
+	return (
+		<div className='right-top'>
+			<div className='header-inner-div'>
+				<div className='search-div'>
+					<div className='search-bar-div'>
+						<div className='icon-div'>
+							<BiSearch className='search-bar-icon' />
+						</div>
+						<input className='search-bar-input' type='text' placeholder='search' value={input} onChange={(e) => handleChange(e.target.value)} onClick={handleSearchBoxClick} />
+					</div>
+					<div className='search-results-div'>
+						{showResults && (
+							<div className='search-results' ref={searchBoxRef}>
+								{searchResult.map((Name) => (
+									<div className='search-result-card' onClick={() => handleRowClick(Name.id)}>
+										<img className='search-result-profile' src={Name.profileImage} alt='profile' />
+										<span className='search-result-hrmid'>{Name.hrmid}</span>
+										<span className='search-result-name'>{Name.name}</span>
+									</div>
+								))}
+							</div>
+						)}
+					</div>
+				</div>
 
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, []);
+				<div className='upload-div'>
+					<button className='upload-button' onClick={handleShowModal}>
+						Upload
+					</button>
+					<FileUpload className='file-upload-dialog' isOpen={showModal} onClose={handleCloseModal} />
+				</div>
 
+				<div className='header-profile-div'>
+					<div className='notification-div'>
+						<div className='bell-icon-div'>
+							<BiBell
+								className='header-bell-icon'
+								onClick={() => {
+									setOpenNotification((previousState) => !previousState);
+								}}
+							/>
+						</div>
+						{notificationData?.unread === undefined || notificationData?.unread === 0 ? <></> : <div className='notification-unread-count'>{notificationData.unread}</div>}
+						{openNotification && (
+							<Notification
+								messages={notificationData?.messages}
+								unread={notificationData?.unread}
+								closeNotification={() => {
+									setOpenNotification((previousState) => !previousState);
+								}}
+							/>
+						)}
+					</div>
 
-//for search name
-  useEffect(() => {
-    if (input!= "") {
-      UserSearchBar(input)
-        .then((UserSearch) => {
-          console.log(UserSearch);
-          const result = UserSearch.filter((Name) => {
-            return (
-              Name &&
-              Name.name &&
-              Name.profileImage&&
-              Name.hrmid&&
-              Name.name.toLowerCase().includes(input.toLowerCase())
-            );
-          });
-          setSearchResult(result);
-          
-        })
-        .catch((e) => {
-          console.log(e.message);
-        });
-    } else {
-      setSearchResult([]);
-    }
-  }, [input]);
-
-  const handleChange = (value) => {
-    setInput(value);
-    setShowResults(true); 
-  };
-
-  const handleSearchBoxClick = () => {
-   
-    setShowResults(true); 
-  };
-
-  const handleRowClick = (id) => {
-  
-   
-    navigate(`/dashboard/searchprofile/${id}`);
-
-  };
- 
- 
-  const handleCloseModal = () => {
-    document.getElementById('scroll-hidden').style.overflow = 'visible';
-    setShowModal(false);
-  };
-
-  const handleShowModal = () => {
-    document.getElementById('scroll-hidden').style.overflow = 'hidden';
-    setShowModal(true);
-  };
-
-  useEffect(() => {
-    ProfileFormData().then((data) => {
-      setProfileFormdata({
-        name: data.profile.name,
-        profileImage: data.profile.profileImage,
-        userId: data.profile.userId
-      })
-    })
-  }, [])
-
-
-  return (
-
-    <div
-      className="right-top"
-      style={{
-        padding: "0.9rem 0",
-        borderBottom: "1px solid #000",
-        position: "fixed",
-        // position: "sticky",
-        width: '87%',
-        top: "0",
-        zIndex: "9",
-      }}
-    >
-      <div
-        className="right-nav-top-inner d-flex flex-col align-items-center justify-content-end"
-        style={{ width: "97%" }}
-      >
-        <div
-          className="input-container position-relative"
-          style={{ width: "27%", marginRight: "4rem" }}
-        >
-          <input
-            type="text"
-            placeholder="search"
-            className="position-relative"
-           
-            style={{
-              borderRadius: "10px",
-              height: "34px",
-              width: "100%",
-              padding: "0.4rem 2.8rem",
-              border: "none",
-              background: '#F7F9FB'
-            }}
-            value={input}
-            onChange={(e) => handleChange(e.target.value)}
-            onClick={handleSearchBoxClick}
-          />
-          {showResults && (
-        <div
-        className="search-box"
-        ref={searchBoxRef}
-          style={{
-            position: "absolute",
-            top: "48px",
-            left: "0",
-            zIndex: "999",
-            borderRadius: "10px",
-            border: "none",
-            background: "rgba(211,224,253,1)",
-            width: "400px",
-            // maxHeight: "200px",
-            overflow: "auto",
-            
-            boxShadow: "0 3px 6px rgba(0, 0, 0, 0.16)"
-          }}
-        >
-          {searchResult.map((Name) => (
-            <table
-              // className="table"
-              key={Name.id}
-              style={{ width: "100%", marginBottom: "0" }}
-            >
-             
-              <tbody>
-                <tr className="Search-Table-text"   onClick={() => handleRowClick(Name.id)}>
-              <div className="Search-img"> <td >
-          <img src={Name.profileImage} alt="Profile" className="responsive-image" />
-        </td></div> 
-
-                  <td>{Name.hrmid}</td>
-                  <td>{Name.name}</td>
-                </tr>
-              </tbody>
-            </table>
-          ))}
-        </div>
-      )}
-          <BiSearch
-            className="position-absolute "
-            style={{ left: "0", top: "10px", marginLeft: "15px" }}
-          />
-        </div>
-        <div style={{ marginRight: "3.4rem" }}>
-          <button
-            style={{
-              border: "none",
-              outline: "none",
-              borderRadius: "6px",
-              background: '#F7F9FB',
-              padding: '0.4rem 0.9rem',
-              color: '#6C63FF'
- }}
-            className=""
-            onClick={handleShowModal}
-          >
-            {/* <BiPlusCircle style={{ fontSize: "1.6rem", marginRight: "0.8rem" }}/> */}
-            Upload
-          </button>
-
-          <FileUpload isOpen={showModal} onClose={handleCloseModal} />
-
-        </div>
-
-        <div className="d-flex align-items-center justify-content-center shift ">
-          <BiBell style={{ fontSize: "1.6rem", marginRight: "0.8rem" }} />
-          <div className="d-flex  align-items-center right-corner">
-            <p
-              className="profile-container"
-              style={{ marginBottom: "0" }}
-            >
-              <img
-                src={
-                  profileformdata?.profileImage || ''}
-                alt="profile"
-                style={{ width: "30px", height: "30px" }}
-              />
-            </p>
-
-
-            <p className="" style={{ marginBottom: "0" }}>
-              <span style={{ paddingLeft: "0.5rem", color: "#000" }}>
-                {profileformdata?.name || ''}
-              </span>
-              <BiChevronDown style={{ marginLeft: "0.4rem" }} onClick={() => { setOpenProfile((prev) => !prev) }} />
-            </p>
-            {openProfile && <DropDown />}
-          </div>
-        </div>
-      </div>
-    </div>
-  )
+					<div className='header-user-profile'>
+						<img className='header-profile-image' src={profileformdata?.profileImage || ''} alt='profile' />
+						<div className='header-profile-name-div'>
+							<span className='profile-name'>{profileformdata?.name || ''}</span>
+							<BiChevronDown
+								className='cheveron-down'
+								onClick={() => {
+									setOpenProfile((prev) => !prev);
+								}}
+							/>
+						</div>
+						{openProfile && <DropDown />}
+					</div>
+				</div>
+			</div>
+		</div>
+	);
 }
 
 export default Header;

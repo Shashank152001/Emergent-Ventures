@@ -2,6 +2,7 @@
 import {url} from '../Constant/Url';
 
 export async function leaveRequest(data){
+    console.log(data);
     const response=await fetch(url+'user/requests/add-user-request',{
         method:"POST",
         mode:"cors",
@@ -39,7 +40,7 @@ export const YourRequestGetdata=async()=>{
     }
 }
 export async function EditUpdate(data) {
-    
+     console.log(data);
     const response=await fetch(url+'user/requests/update-user-subordinate-request',{
         method:"PUT",
         credentials:'include',
@@ -47,6 +48,7 @@ export async function EditUpdate(data) {
     })
     return response.json() 
 }
+
 export const ReportingGetdata=async()=>{
     const response=await fetch(url+'user/requests/get-user-subordinates-requests',{
         method: "GET",
@@ -59,6 +61,7 @@ export const ReportingGetdata=async()=>{
         return await response.json()
     }
 }
+
 export async function ResendRequest(data){
     const response=await fetch(url+'user/requests/resend-user-request',{
         method:"POST",
@@ -69,6 +72,7 @@ export async function ResendRequest(data){
     })
     return response;
 }
+
 export async function CancelRequest(data) {
     
     const response=await fetch(url+'user/requests/update-user-request',{
@@ -77,4 +81,19 @@ export async function CancelRequest(data) {
         body:new URLSearchParams(data)
     })
     return response; 
+}
+
+
+export const availableRequest=async()=>{
+    const response=await fetch(url+'user/requests/get-user-available-requests',{
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+    })
+    
+    if(!response.ok){
+        throw new Error('your Get Request Data not be fetched')
+    }else{
+        return await response.json()
+    }
 }

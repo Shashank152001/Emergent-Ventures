@@ -1,6 +1,6 @@
 import React, {useState } from "react";
 import "./App.css";
-import {LoginContext} from './Context/LoginContext'
+import {LoginContext,RealDataContext} from './Context/LoginContext'
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -23,22 +23,27 @@ import WFHform from './Components/WFH/WFHform'
 import EditRequest from "./Components/WFH/EditRequest";
 import GetUserTimesheet from "./Components/Timesheet/GetUserTimesheet";
 import GetRmTimesheet from "./Components/Timesheet/GetRmTimesheet";
-import EditReporingTimeSheet from "./Components/Timesheet/EditReporingTimeSheet";
+import EditReporingTimeSheet from "./Components/Timesheet/EditReportingTimeSheet";
 import SearchProfile from "./Components/Profile/SearchProfile";
+import DescriptionForm from './Components/Timesheet/descriptionForm'
+
 
 
 function App() {
-
+  const [isRealTime,setIsRealTime] = useState(false);
   const[profileformdata,setProfileFormdata]=useState({
     name:'',
     profileImage:'',
     userId:''
   })
+
+  
   
    
   return (
     <>
     <LoginContext.Provider value={{profileformdata,setProfileFormdata}}>
+    <RealDataContext.Provider value={{isRealTime,setIsRealTime}}>
       <Router>
         <Routes>
           <Route element={<RedirectRoute />} path="/">
@@ -47,14 +52,17 @@ function App() {
           </Route>
           <Route element={<SignUp />} path="/signup"></Route>
           <Route element={<EmployeeTable />} path="/table"></Route>
-          <Route element={<GetUserTimesheet/>} path="/getTimesheet"></Route>
+          {/* <Route element={<GetUserTimesheet/>} path="/getTimesheet"></Route>
           <Route element={<GetRmTimesheet/>} path="/viewTime"></Route>
-          <Route element={<EditReporingTimeSheet/>} path="/editTime"></Route>
+          <Route element={<EditReporingTimeSheet/>} path="/editTime"></Route> */}
          
           {/* for hierarchy testing */}
-
+          
           <Route element={<ProtectRoute />} path="/dashboard">
+            
+            
             <Route element={<Dashboard />} path="/dashboard">
+              
               <Route element={<Home />} path="" />
               <Route element={<LeaveForm />} path="leave" />
               <Route element={<GetRequest />} path="getRequest" />
@@ -69,10 +77,14 @@ function App() {
               <Route element={<TimesheetForm />} path="timesheetform"></Route>
               <Route element={<Gethierarchy/>} path="chart" />
               
+              
             </Route>
+             
             
-           
+
           </Route>
+
+         
             
             
           
@@ -80,9 +92,15 @@ function App() {
             <Route element={<WFHform />} path="/leaverequest"></Route>
           </Route>
 
+          
+
+          {/* <Route element={<DescriptionForm />} path="/testkaruna"></Route> */}
+          
           <Route element={<ErrorPage />} path="*"></Route>
+
         </Routes>
       </Router>
+      </RealDataContext.Provider>
       </LoginContext.Provider>
       <ToastContainer />
     </>
