@@ -81,8 +81,9 @@
 	padding: 2rem 0.5rem 0 0.5rem;
 }
 .active-request-tab {
-	background-color: rgb(230, 230, 230);
+    background-color: rgb(17, 180, 111);;
 	font-weight: 500;
+	width: 6.625rem;
 }
 .inactive-request-tab {
 	background-color: #ffffff;

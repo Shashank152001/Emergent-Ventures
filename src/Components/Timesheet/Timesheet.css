@@ -73,7 +73,11 @@ section.timesheet-container {
 	padding: 0.5rem;
 	overflow-x: scroll;
 	max-width: 40rem;
+    scrollbar-width: none;
 }
+
+
+
 .date-td:focus {
 	outline: none;
 }
@@ -186,11 +190,14 @@ select {
 	padding: 2rem 0.5rem 0 0.5rem;
 }
 .active-timesheet-tab {
-	background-color: rgb(230, 230, 230);
+	background-color: rgb(17, 180, 111);
 	font-weight: 500;
+	width: 6.625rem;
+	
 }
 .inactive-timesheet-tab {
 	background-color: #ffffff;
+	
 }
 .inactive-timesheet-tab:hover {
 	background-color: rgb(240, 240, 240);

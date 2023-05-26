@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useContext } from 'react';
 import { YourRequestGetdata, ResendRequest, CancelRequest } from '../../Service/LeavesService';
 import './WFH.css';
 import RequestTabs from './RequestTabs';
@@ -6,6 +6,8 @@ import NoRecord from '../Project/norecord';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FcCancel } from 'react-icons/fc';
+import { RealDataContext } from '../../Context/LoginContext';
+
 function GetRequest() {
 	const [GetRequestData, SetGetRequestData] = useState(null);
 	const [resendData, setResendData] = useState({
@@ -17,6 +19,11 @@ function GetRequest() {
 	});
 	const [send, setSend] = useState(false);
 	const [cancel, setCancel] = useState(false);
+	const [isCalled, setIsCalled] = useState(false);
+	const {isRealTime} = useContext(RealDataContext);
+	
+
+	
 
 	useEffect(() => {
 		YourRequestGetdata()
@@ -26,7 +33,7 @@ function GetRequest() {
 			.catch((e) => {
 				console.log(e.message);
 			});
-	}, []);
+	}, [isCalled,isRealTime]);
 
 	useEffect(() => {
 		if (send) {
@@ -65,6 +72,7 @@ function GetRequest() {
 				});
 		}
 	}, [send]);
+
 	const resendRequest = (id, userid) => {
 		if (id) {
 			setResendData({
@@ -77,13 +85,16 @@ function GetRequest() {
 
 	useEffect(() => {
 		if (cancel) {
+			
 			CancelRequest(canceldata)
 				.then(async (response) => {
 					const message = await response.json().then((data) => {
-						console.log(data);
+						// console.log(data);
+						
 						return data.message;
 					});
 					if (response.status === 201) {
+						
 						toast.success(`${message}`, {
 							position: 'top-left',
 							autoClose: 2000,
@@ -94,6 +105,9 @@ function GetRequest() {
 							progress: undefined,
 							theme: 'colored'
 						});
+
+						setIsCalled((prev)=>!prev);
+						
 					} else {
 						toast.error(`${message}`, {
 							position: 'top-right',
@@ -114,12 +128,14 @@ function GetRequest() {
 	}, [cancel]);
 
 	const cancelRequest = (id) => {
+		
 		if (id) {
 			setCancelData({
 				requestId: id
 			});
+			setCancel((prev)=>!prev);
 		}
-		setCancel(true);
+		
 	};
 
 	return (
