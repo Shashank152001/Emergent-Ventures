@@ -1,13 +1,14 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect,useRef } from 'react';
 import { socket } from '../../socket';
 import { updateUserNotification, updateUserAllNotifications } from '../../Service/NotificationService';
 import './Notification.css';
 
-export const Notification = ({ messages, unread, closeNotification }) => {
+export const Notification = ({ messages, unread, closeNotification ,setOpenNotification}) => {
 	const [notificationId, setNotificationId] = useState({});
 	const [allReadData, setAllReadData] = useState({});
 	const [notificationRead, setNotificationRead] = useState(false);
 	const [allNotificationRead, setAllNotificationRead] = useState(false);
+	const notificationRef = useRef(null);
 
 	const handleNotificationClick = (data) => {
 		setNotificationId(data);
@@ -20,6 +21,22 @@ export const Notification = ({ messages, unread, closeNotification }) => {
 			setAllNotificationRead(true);
 		}
 	};
+
+	 //for close outside
+    useEffect(() => {
+		
+        const handleClickOutside = (event) => {
+            if (notificationRef.current && !notificationRef.current.contains(event.target)) {
+                setOpenNotification(false);
+            }
+        };
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, []);
+
+
 
 	useEffect(() => {
 		if (notificationRead) {
@@ -55,7 +72,7 @@ export const Notification = ({ messages, unread, closeNotification }) => {
 	}, [allNotificationRead]);
 
 	return (
-		<div className='notification-messages-div'>
+		<div className='notification-messages-div' ref={notificationRef}>
 			<div className='notification-messages-heading'>
 				<span>Notifications</span>
 				<i className='bi bi-x text-danger cross-icon' onClick={closeNotification}></i>
