@@ -34,6 +34,7 @@ export const fetchReportingTimesheet = async () => {
 };
 
 export async function UpdateReportingTimesheet(data) {
+  console.log(data);
   const response = await fetch(
     url + "user/timesheets/update-user-subordinate-timesheet",
     {

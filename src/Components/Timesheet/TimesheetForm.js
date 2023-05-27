@@ -14,6 +14,7 @@ import {
   startOfWeek,
 } from "date-fns";
 import { AiOutlinePlus } from "react-icons/ai";
+import {socket} from '../../socket';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import LeftRow from "./leftRow";
@@ -47,6 +48,7 @@ const Timesheetform = () => {
   const dateTrack = useRef([]);
   const [userTimeSheetData, setUserTimeSheetData] = useState([]);
   const [userFinalData, setUserFinalData] = useState([]); 
+  const [isReset,setReset] = useState(false);
 
 
   const handlechange = (event) => {
@@ -117,6 +119,7 @@ const Timesheetform = () => {
       const finalTimesheetRecord = finalTimesheetData(userFinalData,userTimeSheetData);
       CreateTimeSheet(finalTimesheetRecord)
         .then((data) => {
+          socket.emit('sendNotifications',"hello timesheet");
           navigate("/dashboard/getTimesheet");
         })
         .catch((err) => {
@@ -150,7 +153,7 @@ const Timesheetform = () => {
           formattedEndDate,profileformdata?.userId
           );
         
-        setUserFinalData(() => [initialData ]);
+        setUserFinalData(() => [initialData]);
         setTotalHours(
           {
             finalTotalHours: 0,
@@ -161,7 +164,7 @@ const Timesheetform = () => {
         trackRow.current = 1;
       });
 
-  }, [start, end]);
+  }, [start, end,isReset]);
 
   const handleSubmit = () => {
     if (userFinalData.length) {
@@ -396,6 +399,7 @@ const Timesheetform = () => {
                 border: "none",
                 backgroundColor: "#283055",
               }}
+              onClick={()=>setReset(!isReset)}
             >
               Reset
             </button>

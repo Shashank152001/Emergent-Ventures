@@ -8,7 +8,7 @@ import "primeicons/primeicons.css";
 import "./Profile.css";
 
 function GetProfile() {
-  const { profileformdata, setProfileFormdata } = useContext(LoginContext);
+  const { setProfileFormdata } = useContext(LoginContext);
   const [profileFormData, setProfileFormData] = useState(null);
   const [skilldata, setSkillData] = useState([]);
 
@@ -60,11 +60,23 @@ function GetProfile() {
         </div>
 
         <div className="profile-options-div">
+        <Link
+            to="/dashboard/chart"
+            style={{
+              textDecoration: "none",
+              color: "rgb(61, 172, 143)",
+            }}
+          >
+            Organization Hierarchy
+          </Link>
+
           <Link className="profile-options" to="/dashboard/profile">
             <h5 className="profile-options-h" style={{ margin: "0" }}>
               Edit
             </h5>
           </Link>
+
+          
         </div>
         <div className="profile-details-div">
           <div className="first-column">
@@ -195,7 +207,6 @@ function GetProfile() {
                   <span className="inner-details-title">Reporting To</span>
                 </div>
                 <div className="profile-details-content-div">
-                 
                   <div className="profile-details-card-div">
                     <div className="profile-details-card-image-div">
                       <img
@@ -232,22 +243,12 @@ function GetProfile() {
                       </div>
                     </div>
                   </div>
-				  <div style={{ marginLeft: "4rem" }}>
-                    <Link
-                      to="/dashboard/chart"
-                      style={{
-                        textDecoration: "none",
-                        color: "rgb(61, 172, 143)",
-                      }}
-                    >
-                      View in Organization Hierarchy
-                    </Link>
-                  </div>
                 </div>
               </div>
             ) : (
               <></>
             )}
+
             {profileFormData?.subordinates ? (
               <div className="direct-reports-div profile-details-div-common">
                 <div className="inner-details-title-div">

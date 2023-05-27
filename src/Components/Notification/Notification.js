@@ -1,13 +1,14 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect,useRef } from 'react';
 import { socket } from '../../socket';
 import { updateUserNotification, updateUserAllNotifications } from '../../Service/NotificationService';
 import './Notification.css';
 
-export const Notification = ({ messages, unread, closeNotification }) => {
+export const Notification = ({ messages, unread, closeNotification ,setOpenNotification}) => {
 	const [notificationId, setNotificationId] = useState({});
 	const [allReadData, setAllReadData] = useState({});
 	const [notificationRead, setNotificationRead] = useState(false);
 	const [allNotificationRead, setAllNotificationRead] = useState(false);
+	const notificationRef = useRef(null);
 
 	const handleNotificationClick = (data) => {
 		setNotificationId(data);
@@ -21,6 +22,22 @@ export const Notification = ({ messages, unread, closeNotification }) => {
 		}
 	};
 
+	 //for close outside
+    useEffect(() => {
+		
+        const handleClickOutside = (event) => {
+            if (notificationRef.current && !notificationRef.current.contains(event.target)) {
+                setOpenNotification(false);
+            }
+        };
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, []);
+
+
+
 	useEffect(() => {
 		if (notificationRead) {
 			updateUserNotification(notificationId)
@@ -32,6 +49,9 @@ export const Notification = ({ messages, unread, closeNotification }) => {
 				.catch((e) => {
 					console.log(e.message);
 				});
+		}
+		return ()=>{
+			socket.off('sendNotifications');
 		}
 	}, [notificationRead]);
 
@@ -46,10 +66,13 @@ export const Notification = ({ messages, unread, closeNotification }) => {
 					console.log(e.message);
 				});
 		}
+		return ()=>{
+			socket.off('sendNotifications');
+		}
 	}, [allNotificationRead]);
 
 	return (
-		<div className='notification-messages-div'>
+		<div className='notification-messages-div' ref={notificationRef}>
 			<div className='notification-messages-heading'>
 				<span>Notifications</span>
 				<i className='bi bi-x text-danger cross-icon' onClick={closeNotification}></i>
@@ -76,7 +99,7 @@ export const Notification = ({ messages, unread, closeNotification }) => {
 								<div className='notification-content-div unread-bold'>
 									<span>{message.content}</span>
 									<span className='unread-bold'>
-										{new Date(message.date).toLocaleString(undefined, {
+										{new Date(message.date.substr(0,23)).toLocaleString(undefined, {
 											day: 'numeric',
 											month: 'short',
 											year: 'numeric',
@@ -94,7 +117,7 @@ export const Notification = ({ messages, unread, closeNotification }) => {
 								<div className='notification-content-div'>
 									<span>{message.content}</span>
 									<span className='notification-message-date'>
-										{new Date(message.date).toLocaleString(undefined, {
+										{new Date(message.date.substr(0,23)).toLocaleString(undefined, {
 											day: 'numeric',
 											month: 'short',
 											year: 'numeric',

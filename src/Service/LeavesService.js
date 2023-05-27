@@ -40,7 +40,7 @@ export const YourRequestGetdata=async()=>{
     }
 }
 export async function EditUpdate(data) {
-    
+     console.log(data);
     const response=await fetch(url+'user/requests/update-user-subordinate-request',{
         method:"PUT",
         credentials:'include',
@@ -48,6 +48,7 @@ export async function EditUpdate(data) {
     })
     return response.json() 
 }
+
 export const ReportingGetdata=async()=>{
     const response=await fetch(url+'user/requests/get-user-subordinates-requests',{
         method: "GET",
@@ -60,6 +61,7 @@ export const ReportingGetdata=async()=>{
         return await response.json()
     }
 }
+
 export async function ResendRequest(data){
     const response=await fetch(url+'user/requests/resend-user-request',{
         method:"POST",
@@ -70,6 +72,7 @@ export async function ResendRequest(data){
     })
     return response;
 }
+
 export async function CancelRequest(data) {
     
     const response=await fetch(url+'user/requests/update-user-request',{

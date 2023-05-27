@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useContext } from 'react';
 import { YourRequestGetdata, ResendRequest, CancelRequest } from '../../Service/LeavesService';
 import './WFH.css';
 import RequestTabs from './RequestTabs';
@@ -6,6 +6,8 @@ import NoRecord from '../Project/norecord';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FcCancel } from 'react-icons/fc';
+import { RealDataContext } from '../../Context/LoginContext';
+
 function GetRequest() {
 	const [GetRequestData, SetGetRequestData] = useState(null);
 	const [resendData, setResendData] = useState({
@@ -17,6 +19,11 @@ function GetRequest() {
 	});
 	const [send, setSend] = useState(false);
 	const [cancel, setCancel] = useState(false);
+	const [isCalled, setIsCalled] = useState(false);
+	const {isRealTime} = useContext(RealDataContext);
+	
+
+	
 
 	useEffect(() => {
 		YourRequestGetdata()
@@ -26,7 +33,7 @@ function GetRequest() {
 			.catch((e) => {
 				console.log(e.message);
 			});
-	}, []);
+	}, [isCalled,isRealTime]);
 
 	useEffect(() => {
 		if (send) {
@@ -65,6 +72,7 @@ function GetRequest() {
 				});
 		}
 	}, [send]);
+
 	const resendRequest = (id, userid) => {
 		if (id) {
 			setResendData({
@@ -77,13 +85,16 @@ function GetRequest() {
 
 	useEffect(() => {
 		if (cancel) {
+			
 			CancelRequest(canceldata)
 				.then(async (response) => {
 					const message = await response.json().then((data) => {
-						console.log(data);
+						// console.log(data);
+						
 						return data.message;
 					});
 					if (response.status === 201) {
+						
 						toast.success(`${message}`, {
 							position: 'top-left',
 							autoClose: 2000,
@@ -94,6 +105,9 @@ function GetRequest() {
 							progress: undefined,
 							theme: 'colored'
 						});
+
+						setIsCalled((prev)=>!prev);
+						
 					} else {
 						toast.error(`${message}`, {
 							position: 'top-right',
@@ -114,12 +128,14 @@ function GetRequest() {
 	}, [cancel]);
 
 	const cancelRequest = (id) => {
+		
 		if (id) {
 			setCancelData({
 				requestId: id
 			});
+			setCancel((prev)=>!prev);
 		}
-		setCancel(true);
+		
 	};
 
 	return (
@@ -146,8 +162,8 @@ function GetRequest() {
 						{GetRequestData ? (
 							GetRequestData.map((item, index) => (
 								<tr key={index}>
-									<td style={{ textAlign: 'center' }}>{index + 1}</td>
-									<td style={{ textAlign: 'center' }}>
+									<td>{index + 1}</td>
+									<td>
 										<span>
 											<img style={{ width: '2rem', height: '2rem' }} src={item.profileImage} alt='employee' />
 										</span>
@@ -156,31 +172,31 @@ function GetRequest() {
 										<span> - </span>
 										{item.name}
 									</td>
-									<td style={{ textAlign: 'center' }}>{item.request}</td>
-									<td style={{ textAlign: 'center' }}>{item.leaveType}</td>
-									<td style={{ textAlign: 'center' }}>{item.startDate}</td>
-									<td style={{ textAlign: 'center' }}>{item.endDate}</td>
+									<td >{item.request}</td>
+									<td >{item.leaveType}</td>
+									<td >{item.startDate}</td>
+									<td >{item.endDate}</td>
 									{item.status === 'Approved' ? (
 										<td>
-											<i className='bi bi-check-circle-fill text-success ms-2'></i>
+											<i className='bi bi-check-circle-fill text-success '></i>
 										</td>
 									) : item.status === 'Rejected' ? (
 										<td>
-											<i className='bi bi-x-circle-fill text-danger ms-2'></i>
+											<i className='bi bi-x-circle-fill text-danger '></i>
 										</td>
 									) : item.status === 'Cancelled' ? (
 										<td>
-											<i className='bi bi-x-circle-fill text-danger ms-2'></i>
+											<i className='bi bi-x-circle-fill text-danger '></i>
 										</td>
 									) : (
 										<td>
-											<i className='bi bi-hourglass text-warning ms-2'></i>
+											<i className='bi bi-hourglass text-warning'></i>
 										</td>
 									)}
 									{item.status === 'Pending' ? (
 										<td>
 											<i
-												class='bi bi-x-lg text-danger'
+												className='bi bi-x-lg text-danger'
 												onClick={() => {
 													cancelRequest(item.id);
 												}}
@@ -188,7 +204,7 @@ function GetRequest() {
 										</td>
 									) : item.status === 'Rejected' ? (
 										<td>
-											<i class='bi bi-send text-primary' onClick={() => resendRequest(item.id, item.userId)}></i>
+											<i className='bi bi-send text-primary' onClick={() => resendRequest(item.id, item.userId)}></i>
 										</td>
 									) : item.status === 'Cancelled' ? (
 										<td>
@@ -196,7 +212,7 @@ function GetRequest() {
 										</td>
 									) : (
 										<td>
-											<i class='bi bi-hand-thumbs-up text-success'></i>
+											<i className='bi bi-hand-thumbs-up text-success'></i>
 										</td>
 									)}
 								</tr>

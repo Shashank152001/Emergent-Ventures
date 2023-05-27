@@ -19,9 +19,7 @@ const RightRow = ({
   const [userTimeSheetData, setuserTimeSheetData] = useState([]);
   const [isDescription, setDescription] = useState(false);
   
-
-  const BillableRef = useRef("");
-
+  
   useEffect(() => {
     getTimeSheet(week)
       .then((data) => {
@@ -31,7 +29,7 @@ const RightRow = ({
       })
       .catch((e) => {
         setuserTimeSheetData([]);
-        BillableRef.current.value = "";
+        
       });
 
     return () => {
@@ -39,7 +37,7 @@ const RightRow = ({
     };
   }, [start, end]);
 
-  console.log(userTimeSheetData);
+
 
   return (
     <>
@@ -84,7 +82,7 @@ const RightRow = ({
             defaultValue={userTimeSheetData[row - 1]?.billableStatus}
             disabled={userTimeSheetData[row - 1]?.billableStatus ? true : false}
             value={userTimeSheetData[row - 1]?.billableStatus}
-            ref={BillableRef}
+            
           >
             <option value="">Select status</option>
             <option value="Billable">Billable</option>

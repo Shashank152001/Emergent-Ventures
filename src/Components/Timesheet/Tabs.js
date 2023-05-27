@@ -1,29 +1,36 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+
 function Tabs() {
 	return (
 		<nav className='timesheet-tabs-nav-div'>
 			<span style={{ marginBottom: '1rem', fontWeight: 'bold', color: 'rgb(80, 80, 80)', padding: '0.4rem' }}>Timesheets</span>
 			<NavLink
-				className={(navData) => (navData.isActive ? 'active-timesheet-tab' : 'inactive-timesheet-tab')}
+				className={(navData) => (navData.isActive ? 'active-timesheet-tab text-white' : 'inactive-timesheet-tab text-black')}
 				to='/dashboard/getTimesheet'
-				style={{ textDecoration: 'none', marginBottom: '0.8rem', fontSize: '0.9rem', padding: '0.3rem', borderRadius: '2px', color: 'black' }}
+				style={{ textDecoration: 'none', marginBottom: '0.8rem', fontSize: '0.9rem', 
+				padding: '0.3rem', borderRadius: '2px'
+			 }}
+
 			>
-				<span>View</span>
+				{/* <span style={{color:'#000'}}>View</span> */}
+				View
 			</NavLink>
 			<NavLink
-				className={(navData) => (navData.isActive ? 'active-timesheet-tab' : 'inactive-timesheet-tab')}
+				className={(navData) => (navData.isActive ? 'active-timesheet-tab text-white' : 'inactive-timesheet-tab text-black')}
 				to='/dashboard/viewTime'
-				style={{ textDecoration: 'none', marginBottom: '0.8rem', fontSize: '0.9rem', padding: '0.3rem', borderRadius: '2px', color: 'black' }}
+				style={{ textDecoration: 'none', marginBottom: '0.8rem', fontSize: '0.9rem', padding: '0.3rem', borderRadius: '2px' }}
 			>
-				<span>Approve</span>
+				{/* <span>Approve</span> */}
+				Approve
 			</NavLink>
 			<NavLink
-				className={(navData) => (navData.isActive ? 'active-timesheet-tab' : 'inactive-timesheet-tab')}
+				className={(navData) => (navData.isActive ? 'active-timesheet-tab text-white' : 'inactive-timesheet-tab text-black')}
 				to='/dashboard/timesheetform'
-				style={{ textDecoration: 'none', fontSize: '0.9rem', padding: '0.3rem', borderRadius: '2px', color: 'black' }}
+				style={{ textDecoration: 'none', fontSize: '0.9rem', padding: '0.3rem', borderRadius: '2px' }}
 			>
-				<span>Add</span>
+				{/* <span>Add</span> */}
+				Add
 			</NavLink>
 		</nav>
 	);
