@@ -99,17 +99,15 @@ function Header() {
 		setInput('');
 	};
 
-  const [showModal, setShowModal] = useState(false);
-  const [openProfile, setOpenProfile] = useState(false);
-  const { profileformdata, setProfileFormdata } = useContext(LoginContext)
-  
-  // search Field
-  
-  const [input, setInput] = useState([]);
-  const [searchResult, setSearchResult] = useState([]);
-  const [showResults, setShowResults] = useState(false);
-  const navigate = useNavigate();
+	const handleCloseModal = () => {
+		document.getElementById('scroll-hidden').style.overflow = 'visible';
+		setShowModal(false);
+	};
 
+	const handleShowModal = () => {
+		document.getElementById('scroll-hidden').style.overflow = 'hidden';
+		setShowModal(true);
+	};
 
 	useEffect(() => {
 		ProfileFormData().then((data) => {
