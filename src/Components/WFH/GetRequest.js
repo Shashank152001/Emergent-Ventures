@@ -5,7 +5,7 @@ import RequestTabs from './RequestTabs';
 import NoRecord from '../Project/norecord';
 // import { toast } from 'react-toastify';
 import { success } from '../../Utils/SuccessToast';
-import { error } from '../../Utils/ErrorToast';
+import { Error } from '../../Utils/ErrorToast';
 import 'react-toastify/dist/ReactToastify.css';
 import { FcCancel } from 'react-icons/fc';
 import { RealDataContext } from '../../Context/LoginContext';
@@ -46,31 +46,9 @@ function GetRequest() {
 					});
 
 					if (response.status === 201) {
-						// toast.success(`${msg}`, {
-						// 	position: 'top-left',
-						// 	autoClose: 2000,
-						// 	hideProgressBar: false,
-						// 	closeOnClick: true,
-						// 	pauseOnHover: true,
-						// 	draggable: true,
-						// 	progress: undefined,
-						// 	theme: 'colored'
-						// });
-						
-						success(`${msg}`);
+						success(msg);
 					} else {
-						// toast.error(`${msg}`, {
-						// 	position: 'top-right',
-						// 	autoClose: 2000,
-						// 	hideProgressBar: false,
-						// 	closeOnClick: true,
-						// 	pauseOnHover: true,
-						// 	draggable: true,
-						// 	progress: undefined,
-						// 	theme: 'colored'
-						// });
-						// console.log(`${msg}`);
-						error(`${msg}`)
+						Error(msg)
 					}
 				})
 				.catch((e) => {
@@ -95,37 +73,14 @@ function GetRequest() {
 			CancelRequest(canceldata)
 				.then(async (response) => {
 					const message = await response.json().then((data) => {
-						// console.log(data);
-						
 						return data.message;
 					});
 					if (response.status === 201) {
-						
-						// toast.success(`${message}`, {
-						// 	position: 'top-left',
-						// 	autoClose: 2000,
-						// 	hideProgressBar: false,
-						// 	closeOnClick: true,
-						// 	pauseOnHover: true,
-						// 	draggable: true,
-						// 	progress: undefined,
-						// 	theme: 'colored'
-						// });
-                        success(`${message}`);
+                        success(message);
 						setIsCalled((prev)=>!prev);
 						
 					} else {
-						// toast.error(`${message}`, {
-						// 	position: 'top-right',
-						// 	autoClose: 2000,
-						// 	hideProgressBar: false,
-						// 	closeOnClick: true,
-						// 	pauseOnHover: true,
-						// 	draggable: true,
-						// 	progress: undefined,
-						// 	theme: 'colored'
-						// });
-						error(`${message}`);
+						Error(message);
 					}
 				})
 				.catch((e) => {

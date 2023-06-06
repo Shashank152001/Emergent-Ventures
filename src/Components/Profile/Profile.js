@@ -42,30 +42,10 @@ function Profile() {
 				userUpdate(formData)
 					.then((data) => {
 						navigate('/dashboard/getProfile');
-
-						// toast.success('Profile Updated Successfull', {
-						// 	position: 'top-left',
-						// 	autoClose: 2000,
-						// 	hideProgressBar: false,
-						// 	closeOnClick: true,
-						// 	pauseOnHover: true,
-						// 	draggable: true,
-						// 	progress: undefined,
-						// 	theme: 'colored'
-						// });
 						success('Profile Updated Successfull');
 					})
 					.catch((e) => {
-						// toast.error('Could not Connect with Server', {
-						// 	position: 'top-right',
-						// 	autoClose: 2000,
-						// 	hideProgressBar: false,
-						// 	closeOnClick: true,
-						// 	pauseOnHover: true,
-						// 	draggable: true,
-						// 	progress: undefined,
-						// 	theme: 'colored'
-						// });
+						
 						Error('Could not Connect with Server');
 					});
 			});
@@ -78,29 +58,9 @@ function Profile() {
 				updateSkills(skillData)
 					.then((data) => {
 						navigate('/dashboard/getProfile');
-						// toast.success('Skills Updated Successfully', {
-						// 	position: 'top-left',
-						// 	autoClose: 2000,
-						// 	hideProgressBar: false,
-						// 	closeOnClick: true,
-						// 	pauseOnHover: true,
-						// 	draggable: true,
-						// 	progress: undefined,
-						// 	theme: 'colored'
-						// });
 						success('Skills Updated Successfully');
 					})
 					.catch((e) => {
-						// toast.error('Could not Connect with Server', {
-						// 	position: 'top-right',
-						// 	autoClose: 2000,
-						// 	hideProgressBar: false,
-						// 	closeOnClick: true,
-						// 	pauseOnHover: true,
-						// 	draggable: true,
-						// 	progress: undefined,
-						// 	theme: 'colored'
-						// });
 						Error('Could not Connect with Server');
 					});
 			});

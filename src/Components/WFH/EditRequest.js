@@ -6,7 +6,7 @@ import { EditUpdate, ReportingGetdata } from '../../Service/LeavesService';
 import { success } from '../../Utils/SuccessToast';
 // import { serverError } from '../../Utils/ServerToast';
 import 'react-toastify/dist/ReactToastify.css';
-import { Error } from '../../Utils/ServerToast';
+import { serverError } from '../../Utils/ServerToast';
 
 function EditRequest() {
 	//get data
@@ -35,33 +35,15 @@ function EditRequest() {
 		if (putData) {
 			EditUpdate(formData)
 				.then((data) => {
-					// console.log(data);
+					
 					socket.emit('sendNotifications');
 					navigate('/dashboard/viewRequest');
-					// toast.success('Status Updated Successfull', {
-					// 	position: 'top-left',
-					// 	autoClose: 2000,
-					// 	hideProgressBar: false,
-		 			// 	closeOnClick: true,
-					// 	pauseOnHover: true,
-					// 	draggable: true,
-					// 	progress: undefined,
-					// 	theme: 'colored'
-					// });
+					
 					success('Status Updated Successfull');
 				})
 				.catch((e) => {
-					// toast.error('Could not Connect with Server', {
-					// 	position: 'top-right',
-					// 	autoClose: 2000,
-					// 	hideProgressBar: false,
-					// 	closeOnClick: true,
-					// 	pauseOnHover: true,
-					// 	draggable: true,
-					// 	progress: undefined,
-					// 	theme: 'colored'
-					// });
-					Error();
+					
+					serverError();
 				});
 		}
 	}, [putData]);

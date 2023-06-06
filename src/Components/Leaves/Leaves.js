@@ -11,7 +11,7 @@ const Leaves = () => {
   useEffect(() => {
     availableRequest()
       .then((data) => {
-        console.log(data);
+        
         setAvailableLeaveData(data);
       })
       .catch((err) => {

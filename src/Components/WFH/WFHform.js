@@ -3,7 +3,7 @@ import { leaveRequest, leaveUser } from '../../Service/LeavesService';
 import './WFH.css';
 // import { toast } from 'react-toastify';
 import { success } from '../../Utils/SuccessToast';
-import { error } from '../../Utils/ErrorToast';
+import { Error } from '../../Utils/ErrorToast';
 import { useNavigate } from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.css';
 import RequestTabs from './RequestTabs';
@@ -41,30 +41,12 @@ const WFHform = () => {
 				.then((data) => {
 					socket.emit('sendNotifications');
 					navigate('/dashboard/getRequest');
-					// toast.success('Request Submitted Successfull', {
-					// 	position: 'top-left',
-					// 	autoClose: 2000,
-					// 	hideProgressBar: false,
-					// 	closeOnClick: true,
-					// 	pauseOnHover: true,
-					// 	draggable: true,
-					// 	progress: undefined,
-					// 	theme: 'colored'
-					// });
+					
 					success('Request submitted Succesfully');
 				})
 				.catch((e) => {
-					// toast.error('', {
-					// 	position: 'top-left',
-					// 	autoClose: 2000,
-					// 	hideProgressBar: false,
-					// 	closeOnClick: true,
-					// 	pauseOnHover: true,
-					// 	draggable: true,
-					// 	progress: undefined,
-					// 	theme: 'colored'
-			   		// });
-					error('Connection  Server Lost');
+					
+					Error('Connection  Server Lost');
 				});
 		}
 
