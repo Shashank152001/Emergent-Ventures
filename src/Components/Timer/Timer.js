@@ -3,7 +3,8 @@ import { socket } from '../../socket';
 import { useState, useEffect } from 'react';
 import './Timer.css';
 import svg from '../../Assest/Vector.svg';
-import { toast } from 'react-toastify';
+// import { toast } from 'react-toastify';
+import { success } from '../../Utils/SuccessToast';
 import 'react-toastify/dist/ReactToastify.css';
 import { fetchLocation } from '../../Service/locationService';
 import { UserCheckIn, UserCheckOut } from '../../Service/TimerService';
@@ -69,7 +70,7 @@ function Timer() {
 	const FetchOutLocation = async () => {
 		fetchLocation().then((data) => {
 			setcheckOutData({
-				checkOutLocation: data
+				checkOutLocation: data   
 			});
 		});
 	};
@@ -84,16 +85,17 @@ function Timer() {
 					});
 					socket.emit('checkedIn');
 					socket.emit('checkin');
-					toast.info('Checkin Successfull', {
-						position: 'top-left',
-						autoClose: 2000,
-						hideProgressBar: false,
-						closeOnClick: true,
-						pauseOnHover: true,
-						draggable: true,
-						progress: undefined,
-						theme: 'colored'
-					});
+					// toast.info('Checkin Successfull', {
+					// 	position: 'top-left',
+					// 	autoClose: 2000,
+					// 	hideProgressBar: false,
+					// 	closeOnClick: true,
+					// 	pauseOnHover: true,
+					// 	draggable: true,
+					// 	progress: undefined,
+					// 	theme: 'colored'
+					// });
+					success('Checkin Successfull');
 				})
 				.catch((err) => {
 					console.log(err);
@@ -110,16 +112,17 @@ function Timer() {
 						return false;
 					});
 					socket.emit('checkout');
-					toast.info('CheckOut Successfull', {
-						position: 'top-left',
-						autoClose: 2000,
-						hideProgressBar: false,
-						closeOnClick: true,
-						pauseOnHover: true,
-						draggable: true,
-						progress: undefined,
-						theme: 'colored'
-					});
+					// toast.info('CheckOut Successfull', {
+					// 	position: 'top-left',
+					// 	autoClose: 2000,
+					// 	hideProgressBar: false,
+					// 	closeOnClick: true,
+					// 	pauseOnHover: true,
+					// 	draggable: true,
+					// 	progress: undefined,
+					// 	theme: 'colored'
+					// });
+					success('CheckOut Successfull');
 					setTimer('00:00:00');
 				})
 				.catch((err) => {

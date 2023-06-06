@@ -4,11 +4,11 @@ import './sign.css';
 import celebal from '../../Assest/celebal.png';
 import signin from '../../Assest/singin.png';
 import { userLogin } from '../../Service/LoginService';
-import { toast } from 'react-toastify';
+// import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import bgSvg from '../Spheres.svg';
 import {success} from '../../Utils/SuccessToast'
-import { error } from '../../Utils/ErrorToast';
+import { Error } from '../../Utils/ErrorToast';
 import { serverError } from '../../Utils/ServerToast';
 // import {url} from '../../Constant/Url'
 
@@ -36,7 +36,7 @@ function SignIn() {
 						setFilled(false);
 					} else {
 						navigate('/');
-						error(msg)
+						Error(msg)
 					}
 				})
 				.catch((e) => {
