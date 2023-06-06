@@ -11,7 +11,7 @@ import { ProfileFormData, userUpdate } from '../../Service/ProfileService';
 import { fetchSkills, updateSkills } from '../../Service/SkillService';
 import 'react-toastify/dist/ReactToastify.css';
 import { success } from '../../Utils/SuccessToast';
-import { serverError} from '../../Utils/ErrorToast';
+import {Error} from '../../Utils/ErrorToast';
 
 function Profile() {
 	const navigate = useNavigate();
@@ -66,7 +66,7 @@ function Profile() {
 						// 	progress: undefined,
 						// 	theme: 'colored'
 						// });
-						error('Could not Connect with Server');
+						Error('Could not Connect with Server');
 					});
 			});
 		}
@@ -101,7 +101,7 @@ function Profile() {
 						// 	progress: undefined,
 						// 	theme: 'colored'
 						// });
-						error('Could not Connect with Server');
+						Error('Could not Connect with Server');
 					});
 			});
 		}

@@ -4,9 +4,9 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { EditUpdate, ReportingGetdata } from '../../Service/LeavesService';
 // import { toast } from 'react-toastify';
 import { success } from '../../Utils/SuccessToast';
-import { serverError } from '../../Utils/ServerToast';
+// import { serverError } from '../../Utils/ServerToast';
 import 'react-toastify/dist/ReactToastify.css';
-import { serverError } from '../../Utils/ServerToast';
+import { Error } from '../../Utils/ServerToast';
 
 function EditRequest() {
 	//get data
@@ -61,7 +61,7 @@ function EditRequest() {
 					// 	progress: undefined,
 					// 	theme: 'colored'
 					// });
-					serverError();
+					Error();
 				});
 		}
 	}, [putData]);

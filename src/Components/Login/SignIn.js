@@ -9,7 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import bgSvg from '../Spheres.svg';
 import {success} from '../../Utils/SuccessToast'
 import { error } from '../../Utils/ErrorToast';
-import { serverError } from '../../Utils/ServerToast';
+import { Error } from '../../Utils/ServerToast';
 // import {url} from '../../Constant/Url'
 
 function SignIn() {
