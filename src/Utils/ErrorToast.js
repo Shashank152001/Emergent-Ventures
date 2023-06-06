@@ -10,4 +10,4 @@ export const error=(msg)=>toast.error(msg, {
     draggable: true,
     progress: undefined,
     theme: 'colored'
-});
+}); 

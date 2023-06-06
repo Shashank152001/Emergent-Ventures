@@ -12,7 +12,23 @@
 	background-color: #ffffff;
 	border-left: 1px solid rgb(222, 222, 222);
 	box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+	transition: all 0.2s linear;
+	animation: animate 0.5s ease;
 }
+
+
+
+@keyframes animate{
+	from{
+         transform: translateX(700px);
+	}
+	to{
+        transform: translateX(0);
+	}
+}
+
+
+
 .notification-messages-heading {
 	width: 100%;
 	display: flex;
@@ -98,3 +114,7 @@
 .no-notification-icon {
 	font-size: 5rem;
 }
+
+/* cross-animation */
+
+

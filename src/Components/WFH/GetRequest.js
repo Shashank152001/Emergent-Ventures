@@ -1,11 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useContext } from 'react';
 import { YourRequestGetdata, ResendRequest, CancelRequest } from '../../Service/LeavesService';
 import './WFH.css';
 import RequestTabs from './RequestTabs';
 import NoRecord from '../Project/norecord';
-import { toast } from 'react-toastify';
+// import { toast } from 'react-toastify';
+import { success } from '../../Utils/SuccessToast';
+import { error } from '../../Utils/ErrorToast';
 import 'react-toastify/dist/ReactToastify.css';
 import { FcCancel } from 'react-icons/fc';
+import { RealDataContext } from '../../Context/LoginContext';
+
 function GetRequest() {
 	const [GetRequestData, SetGetRequestData] = useState(null);
 	const [resendData, setResendData] = useState({
@@ -17,6 +21,11 @@ function GetRequest() {
 	});
 	const [send, setSend] = useState(false);
 	const [cancel, setCancel] = useState(false);
+	const [isCalled, setIsCalled] = useState(false);
+	const {isRealTime} = useContext(RealDataContext);
+	
+
+	
 
 	useEffect(() => {
 		YourRequestGetdata()
@@ -26,7 +35,7 @@ function GetRequest() {
 			.catch((e) => {
 				console.log(e.message);
 			});
-	}, []);
+	}, [isCalled,isRealTime]);
 
 	useEffect(() => {
 		if (send) {
@@ -37,27 +46,31 @@ function GetRequest() {
 					});
 
 					if (response.status === 201) {
-						toast.success(`${msg}`, {
-							position: 'top-left',
-							autoClose: 2000,
-							hideProgressBar: false,
-							closeOnClick: true,
-							pauseOnHover: true,
-							draggable: true,
-							progress: undefined,
-							theme: 'colored'
-						});
+						// toast.success(`${msg}`, {
+						// 	position: 'top-left',
+						// 	autoClose: 2000,
+						// 	hideProgressBar: false,
+						// 	closeOnClick: true,
+						// 	pauseOnHover: true,
+						// 	draggable: true,
+						// 	progress: undefined,
+						// 	theme: 'colored'
+						// });
+						
+						success(`${msg}`);
 					} else {
-						toast.error(`${msg}`, {
-							position: 'top-right',
-							autoClose: 2000,
-							hideProgressBar: false,
-							closeOnClick: true,
-							pauseOnHover: true,
-							draggable: true,
-							progress: undefined,
-							theme: 'colored'
-						});
+						// toast.error(`${msg}`, {
+						// 	position: 'top-right',
+						// 	autoClose: 2000,
+						// 	hideProgressBar: false,
+						// 	closeOnClick: true,
+						// 	pauseOnHover: true,
+						// 	draggable: true,
+						// 	progress: undefined,
+						// 	theme: 'colored'
+						// });
+						// console.log(`${msg}`);
+						error(`${msg}`)
 					}
 				})
 				.catch((e) => {
@@ -65,6 +78,7 @@ function GetRequest() {
 				});
 		}
 	}, [send]);
+
 	const resendRequest = (id, userid) => {
 		if (id) {
 			setResendData({
@@ -77,34 +91,41 @@ function GetRequest() {
 
 	useEffect(() => {
 		if (cancel) {
+			
 			CancelRequest(canceldata)
 				.then(async (response) => {
 					const message = await response.json().then((data) => {
-						console.log(data);
+						// console.log(data);
+						
 						return data.message;
 					});
 					if (response.status === 201) {
-						toast.success(`${message}`, {
-							position: 'top-left',
-							autoClose: 2000,
-							hideProgressBar: false,
-							closeOnClick: true,
-							pauseOnHover: true,
-							draggable: true,
-							progress: undefined,
-							theme: 'colored'
-						});
+						
+						// toast.success(`${message}`, {
+						// 	position: 'top-left',
+						// 	autoClose: 2000,
+						// 	hideProgressBar: false,
+						// 	closeOnClick: true,
+						// 	pauseOnHover: true,
+						// 	draggable: true,
+						// 	progress: undefined,
+						// 	theme: 'colored'
+						// });
+                        success(`${message}`);
+						setIsCalled((prev)=>!prev);
+						
 					} else {
-						toast.error(`${message}`, {
-							position: 'top-right',
-							autoClose: 2000,
-							hideProgressBar: false,
-							closeOnClick: true,
-							pauseOnHover: true,
-							draggable: true,
-							progress: undefined,
-							theme: 'colored'
-						});
+						// toast.error(`${message}`, {
+						// 	position: 'top-right',
+						// 	autoClose: 2000,
+						// 	hideProgressBar: false,
+						// 	closeOnClick: true,
+						// 	pauseOnHover: true,
+						// 	draggable: true,
+						// 	progress: undefined,
+						// 	theme: 'colored'
+						// });
+						error(`${message}`);
 					}
 				})
 				.catch((e) => {
@@ -114,12 +135,14 @@ function GetRequest() {
 	}, [cancel]);
 
 	const cancelRequest = (id) => {
+		
 		if (id) {
 			setCancelData({
 				requestId: id
 			});
+			setCancel((prev)=>!prev);
 		}
-		setCancel(true);
+		
 	};
 
 	return (

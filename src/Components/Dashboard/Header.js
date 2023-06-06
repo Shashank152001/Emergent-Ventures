@@ -16,8 +16,8 @@ function Header() {
 	const [openProfile, setOpenProfile] = useState(false);
 	const [notificationData, setNotificationData] = useState([]);
 	const [openNotification, setOpenNotification] = useState(false);
-	const { profileformdata, setProfileFormdata} = useContext(LoginContext);
-	const { isRealTime,setIsRealTime} = useContext(RealDataContext);
+	const {profileformdata, setProfileFormdata} = useContext(LoginContext);
+	const {setIsRealTime} = useContext(RealDataContext);
 
 	// search Field
 
@@ -166,6 +166,7 @@ function Header() {
 							<Notification
 								messages={notificationData?.messages}
 								unread={notificationData?.unread}
+								setOpenNotification={setOpenNotification}
 								closeNotification={() => {
 									setOpenNotification((previousState) => !previousState);
 								}}
@@ -179,12 +180,13 @@ function Header() {
 							<span className='profile-name'>{profileformdata?.name || ''}</span>
 							<BiChevronDown
 								className='cheveron-down'
+								id="down"
 								onClick={() => {
 									setOpenProfile((prev) => !prev);
 								}}
 							/>
 						</div>
-						{openProfile && <DropDown />}
+						{openProfile && <DropDown setOpenProfile={setOpenProfile} />}
 					</div>
 				</div>
 			</div>

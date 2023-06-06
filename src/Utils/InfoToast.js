@@ -9,4 +9,4 @@ export const infoToast=()=>toast.info('File Uploaded Successfully', {
     draggable: true,
     progress: undefined,
     theme: 'colored'
-});
+}); 

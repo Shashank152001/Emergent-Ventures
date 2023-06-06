@@ -6,6 +6,8 @@ import signin from '../../Assest/singin.png'
 import bgSvg from '../Spheres.svg';
 import { userSignUp } from '../../Service/SignUpServeice';
 import { toast } from 'react-toastify';
+import { success } from '../../Utils/SuccessToast'
+import { error } from '../../Utils/ErrorToast';
 import 'react-toastify/dist/ReactToastify.css';
 
 
@@ -60,45 +62,48 @@ function SignUp() {
             
             if(data.message==='User created successfully'){
                 navigate('/')
-                toast.success('SignUp Successfull', {
-                    position: "top-left",
-                    autoClose: 2000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "colored",
-                    });
+                // toast.success('SignUp Successfull', {
+                //     position: "top-left",
+                //     autoClose: 2000,
+                //     hideProgressBar: false,
+                //     closeOnClick: true,
+                //     pauseOnHover: true,
+                //     draggable: true,
+                //     progress: undefined,
+                //     theme: "colored",
+                //     });
+                success('SignUp Successfull');
             }
             else{
                 navigate('/signup')
                 
-                toast.error('User Already Exit!', {
-                    position: "top-right",
-                    autoClose: 2000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "colored",
-                    });
+                // toast.error('User Already Exit!', {
+                //     position: "top-right",
+                //     autoClose: 2000,
+                //     hideProgressBar: false,
+                //     closeOnClick: true,
+                //     pauseOnHover: true,
+                //     draggable: true,
+                //     progress: undefined,
+                //     theme: "colored",
+                //     });
+                error('User Already Exit!');
             }
         })
         .catch((e)=>{
             console.log(e.message)
             navigate('/signup')
-            toast.error('Server Down!', {
-                position: "top-right",
-                autoClose: 2000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "colored",
-                });
+            // toast.error('Server Down!', {
+            //     position: "top-right",
+            //     autoClose: 2000,
+            //     hideProgressBar: false,
+            //     closeOnClick: true,
+            //     pauseOnHover: true,
+            //     draggable: true,
+            //     progress: undefined,
+            //     theme: "colored",
+            //     });
+            error('Server Down!');
         })
     
       };
