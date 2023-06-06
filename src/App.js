@@ -47,6 +47,7 @@ function App() {
       <Router>
         <Routes>
           <Route element={<RedirectRoute />} path="/">
+
             <Route element={<SignIn />} path="/"></Route>
             
           </Route>
@@ -85,9 +86,6 @@ function App() {
           </Route>
 
          
-            
-            
-          
           <Route element={<ProtectRoute />} path="/leaverequest">
             <Route element={<WFHform />} path="/leaverequest"></Route>
           </Route>
