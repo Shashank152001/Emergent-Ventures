@@ -1,8 +1,8 @@
 .main-div {
   width: 100%;
   height: 100%;
-  background: #F5F5F5;
-  position: fixed;
+  /* background: #F5F5F5; */
+  /* position: fixed; */
 }
 
 .theading {
@@ -18,13 +18,13 @@
   line-height: 24px;
   letter-spacing: 0.005em;
 }
-.tabledata {
-  /* border: 1px solid lightgray; */
+/* .tabledata {
+  border: 1px solid lightgray; 
   text-align: center;
-}
+} */
 .tables {
-  width: 80%;
-  background: #ffffff;
+  width: 100%;
+  /* background: #ffffff; */
   margin: auto;
   margin-top: 10vh;
   border-top-right-radius: 10px;

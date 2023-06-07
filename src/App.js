@@ -29,27 +29,15 @@ import DescriptionForm from "./Components/Timesheet/descriptionForm";
 import AdminLogin from "./Components/AdminLogin/AdminLogin";
 import AdminSignUp from "./Components/AdminSignUp/AdminSignUp";
 import AdminDashboard from "./Components/AdminDashboard/AdminDashboard";
+import AdminHome from "./Components/AdminDashboard/adminHome";
 
 function App() {
-  // const [isRealTime,setIsRealTime] = useState(false);
-  // const[profileformdata,setProfileFormdata]=useState({
-  //   name:'',
-  //   profileImage:'',
-  //   userId:''
-  // })
+  
 
   return (
     <>
-      {/* <Router>
-      <Routes>
-        <Route element={<AdminLogin/>} path="/adminlogin"></Route>
-        <Route element={<AdminSignUp/>} path="/adminsignup"></Route>
-        <Route element={<AdminDashboard/>} exact path="/admindashboard"></Route>
-        <Route element={<ErrorPage />} path="*"></Route>
-      </Routes>
-    </Router> */}
-      {/* <LoginContext.Provider value={{profileformdata,setProfileFormdata}}>
-    <RealDataContext.Provider value={{isRealTime,setIsRealTime}}> */}
+      
+      
       <Router>
         
         <Routes>
@@ -63,7 +51,10 @@ function App() {
             <Route
               element={<AdminDashboard />}
               path="/admindashboard"
-            ></Route>
+            >
+              <Route element={<AdminHome />} path="" /> 
+              {/* <Route element={<Home />} path="" /> */}
+            </Route>
           </Route>
 
           {/* <Route element={<ErrorPage />} path="*"></Route> */}
@@ -105,8 +96,7 @@ function App() {
           <Route element={<ErrorPage />} path="*"></Route>
         </Routes>
       </Router>
-      {/* </RealDataContext.Provider>
-      </LoginContext.Provider> */}
+     
       <ToastContainer />
     </>
   );

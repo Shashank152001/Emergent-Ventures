@@ -1,230 +1,45 @@
 import { useEffect, useState } from 'react';
 import './EmployeeTable.css';
-
-const url = 'https://thereof-engines-gamecube-raises.trycloudflare.com/';
-
-let data = [
-    {
-        EmployeeName: "akash15",
-        EmployeeId: "hrm223",
-        Department: "app",
-        JobRole: "dev",
-        Location: "jaipur"
-    }, {
-        EmployeeName: "Harsh16",
-        EmployeeId: "hrm223",
-        Department: "app",
-        JobRole: "dev",
-        Location: "jaipur"
-    }, {
-        EmployeeName: "Harsh17",
-        EmployeeId: "hrm223",
-        Department: "app",
-        JobRole: "dev",
-        Location: "jaipur"
-    }, {
-        EmployeeName: "prajwal",
-        EmployeeId: "hrm223",
-        Department: "node",
-        JobRole: "dev",
-        Location: "Hudacity"
-    }, {
-        EmployeeName: "Harsh19",
-        EmployeeId: "hrm223",
-        Department: "app",
-        JobRole: "dev",
-        Location: "jaipur6"
-    },
-     {
-        EmployeeName: "Harsh9",
-        EmployeeId: "hrm223",
-        Department: "app",
-        JobRole: "dev",
-        Location: "jaipur"
-    }, {
-        EmployeeName: "srivasya10",
-        EmployeeId: "hrm223",
-        Department: "app",
-        JobRole: "dev",
-        Location: "jaipur"
-    }, {
-        EmployeeName: "Rahul11",
-        EmployeeId: "hrm223",
-        Department: "app",
-        JobRole: "dev",
-        Location: "jaipur"
-    }, {
-        EmployeeName: "Harsh12",
-        EmployeeId: "hrm223",
-        Department: "app",
-        JobRole: "dev",
-        Location: "jaipur"
-    }, {
-        EmployeeName: "Harsh13",
-        EmployeeId: "hrm223",
-        Department: "app",
-        JobRole: "dev",
-        Location: "jaipur"
-    }, {
-        EmployeeName: "Harsh14",
-        EmployeeId: "hrm223",
-        Department: "app",
-        JobRole: "dev",
-        Location: "jaipur"
-    }, {
-        EmployeeName: "akash15",
-        EmployeeId: "hrm223",
-        Department: "app",
-        JobRole: "dev",
-        Location: "jaipur"
-    }, {
-        EmployeeName: "Harsh16",
-        EmployeeId: "hrm223",
-        Department: "app",
-        JobRole: "dev",
-        Location: "jaipur"
-    }, {
-        EmployeeName: "Harsh17",
-        EmployeeId: "hrm223",
-        Department: "app",
-        JobRole: "dev",
-        Location: "jaipur"
-    }, {
-        EmployeeName: "Harsh18",
-        EmployeeId: "hrm223",
-        Department: "app",
-        JobRole: "dev",
-        Location: "jaipur"
-    }, {
-        EmployeeName: "Harsh19",
-        EmployeeId: "hrm223",
-        Department: "app",
-        JobRole: "dev",
-        Location: "jaipur6"
-    },
-    {
-        EmployeeName: "shashank",
-        EmployeeId: "hrm0987",
-        Department: "software",
-        JobRole: "dev",
-        Location: "jaipur"
-    }, {
-        EmployeeName: "Ajeet",
-        EmployeeId: "hrm223",
-        Department: "Node",
-        JobRole: "Backend",
-        Location: "jaipur"
-    }, {
-        EmployeeName: "srivasya10",
-        EmployeeId: "hrm223",
-        Department: "app",
-        JobRole: "dev",
-        Location: "jaipur"
-    }, {
-        EmployeeName: "Rahul11",
-        EmployeeId: "hrm223",
-        Department: "app",
-        JobRole: "dev",
-        Location: "jaipur"
-    }, {
-        EmployeeName: "Kruna",
-        EmployeeId: "hrm223",
-        Department: "Intern",
-        JobRole: "dev",
-        Location: " Pune"
-    }, {
-        EmployeeName: "Harsh13",
-        EmployeeId: "hrm223",
-        Department: "app",
-        JobRole: "dev",
-        Location: "jaipur"
-    }, {
-        EmployeeName: "Harsh14",
-        EmployeeId: "hrm223",
-        Department: "app",
-        JobRole: "dev",
-        Location: "jaipur"
-    }, {
-        EmployeeName: "akash15",
-        EmployeeId: "hrm223",
-        Department: "app",
-        JobRole: "dev",
-        Location: "jaipur"
-    }, {
-        EmployeeName: "Harsh16",
-        EmployeeId: "hrm223",
-        Department: "app",
-        JobRole: "dev",
-        Location: "jaipur"
-    }, {
-        EmployeeName: "Harsh17",
-        EmployeeId: "hrm223",
-        Department: "app",
-        JobRole: "dev",
-        Location: "jaipur"
-    }, {
-        EmployeeName: "prajwal",
-        EmployeeId: "hrm223",
-        Department: "node",
-        JobRole: "dev",
-        Location: "Hudacity"
-    }, {
-        EmployeeName: "Harsh19",
-        EmployeeId: "hrm223",
-        Department: "app",
-        JobRole: "dev",
-        Location: "jaipur6"
-    }
-];
-
-
+import {getAllEmployees} from '../../Service/adminService'
 
 function EmployeeTable() {
     
     const[EmployeeData,setEmployeeData] = useState([]);
     const [curentPage, setCurrentPage] = useState(1);
-    const recordPerPage = 2;
+    const recordPerPage = 10;
     const lastIndex = curentPage * recordPerPage;
     const firstIndex = lastIndex - recordPerPage;
     const records = EmployeeData.slice(firstIndex, lastIndex);
     const nPage = Math.ceil(EmployeeData.length/ recordPerPage);
     const numbers = [...Array(nPage + 1).keys()].slice(1);
 
-    async function EmployeeDataFetch(){
-        await fetch(url +'admin/get-all-users',{
-            method:"GET",
-            mode:'cors',
-            headers: { "Content-Type": "application/json" },
-            credentials:'include',
-        
-    }).then((res)=>{
-        console.log(res);
-        return res.json();
-    }).then((data)=>{
-        // console.log(data);
-        setEmployeeData(data);
-    })
-    }
 
 
     useEffect(()=>{
-        EmployeeDataFetch();
+        getAllEmployees().then((data)=>{
+            setEmployeeData(data);
+        }).catch((err)=>{
+            console.log(err);
+        })
     },[])
+
+
 
     return (
         <>
             <div className='main-div'>
-
+                  
                 <div className='tables'>
-
+                <h3 className='my-4'>Employees</h3>
                     <table className='tabledata table' id="table" >
                         <thead className="theading  " >
                             <tr>
-                                <th scope="col-sm-3"  >Employee Name</th>
+                                <th scope="col-sm-3" >Employee Name</th>
                                 <th scope="col-sm-3" >Employee Id</th>
                                 <th scope="col-sm-3" >Departmenrt</th>
-                                <th scope="col-sm-3" > Job Role</th>
+                                <th scope="col-sm-3" >Job Role</th>
                                 <th scope="col-sm-3" >Location</th>
+                                <th scope="col-sm-3" >Status</th>
                             </tr>
                         </thead>
                         <tbody className='table-group-divider'>
@@ -235,6 +50,7 @@ function EmployeeTable() {
                                     <td>{d.department}</td>
                                     <td>{d.role}</td>
                                     <td>{d.location}</td>
+                                    <td>{d.status}</td>
                                 </tr>
 
                             ))}

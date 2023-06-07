@@ -17,7 +17,7 @@ function MyDashBoard() {
     userId:''
   })
 
-	// const { profileformdata, setProfileFormdata } = useContext(LoginContext);
+	
 
 	useEffect(() => {
 		userData()
@@ -29,17 +29,18 @@ function MyDashBoard() {
 			});
 	}, []);
 
+	
 	return (
-		<LoginContext.Provider value={{profileformdata,setProfileFormdata}}>
+	<LoginContext.Provider value={{profileformdata,setProfileFormdata}}>
     <RealDataContext.Provider value={{isRealTime,setIsRealTime}}>
 		<section className=' main-container'>
 			{userDatas ? (
 				<div className='wrapper d-flex'>
 					<Sidebar />
 					<div className='right-sidebar'>
-						{/* <LoginContext.Provider value={{ profileformdata, setProfileFormdata }}> */}
+						
 							<Header />
-						{/* </LoginContext.Provider> */}
+						
 						<div className='right-middle-content'>
 							<Outlet />
 						</div>
