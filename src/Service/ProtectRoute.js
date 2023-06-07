@@ -1,10 +1,15 @@
 import React from 'react'
 import { Outlet,Navigate } from 'react-router-dom'
-const ProtectRoute=()=>{
+export const ProtectRoute=()=>{
     
     const auth = localStorage.getItem('loggedInUser')
     
     return auth? <Outlet/>:<Navigate to={'/'}/>
 
 }
-export default ProtectRoute;
+export const AdminProtect=()=>{
+
+    const auth=localStorage.getItem('loggedInAdmin')
+
+    return auth? <Outlet/>:<Navigate to={'/adminlogin'}/>
+};
