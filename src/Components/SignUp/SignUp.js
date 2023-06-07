@@ -5,7 +5,9 @@ import celebal from '../../Assest/celebal.png'
 import signin from '../../Assest/singin.png'
 import bgSvg from '../Spheres.svg';
 import { userSignUp } from '../../Service/SignUpServeice';
-import { toast } from 'react-toastify';
+// import { toast } from 'react-toastify';
+import { success } from '../../Utils/SuccessToast'
+import { Error } from '../../Utils/ErrorToast';
 import 'react-toastify/dist/ReactToastify.css';
 
 
@@ -60,45 +62,17 @@ function SignUp() {
             
             if(data.message==='User created successfully'){
                 navigate('/')
-                toast.success('SignUp Successfull', {
-                    position: "top-left",
-                    autoClose: 2000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "colored",
-                    });
+                success(data.message);
             }
             else{
                 navigate('/signup')
-                
-                toast.error('User Already Exit!', {
-                    position: "top-right",
-                    autoClose: 2000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "colored",
-                    });
+                Error('User Already Exist!');
             }
         })
         .catch((e)=>{
             console.log(e.message)
             navigate('/signup')
-            toast.error('Server Down!', {
-                position: "top-right",
-                autoClose: 2000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "colored",
-                });
+            Error('Server Down!');
         })
     
       };

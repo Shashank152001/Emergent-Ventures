@@ -5,11 +5,13 @@ import { Dialog } from 'primereact/dialog';
 import { Button } from 'primereact/button';
 import Avatar from 'react-avatar-edit';
 import 'primeicons/primeicons.css';
-import { toast } from 'react-toastify';
+// import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { ProfileFormData, userUpdate } from '../../Service/ProfileService';
 import { fetchSkills, updateSkills } from '../../Service/SkillService';
 import 'react-toastify/dist/ReactToastify.css';
+import { success } from '../../Utils/SuccessToast';
+import {Error} from '../../Utils/ErrorToast';
 
 function Profile() {
 	const navigate = useNavigate();
@@ -40,29 +42,11 @@ function Profile() {
 				userUpdate(formData)
 					.then((data) => {
 						navigate('/dashboard/getProfile');
-
-						toast.success('Profile Updated Successfull', {
-							position: 'top-left',
-							autoClose: 2000,
-							hideProgressBar: false,
-							closeOnClick: true,
-							pauseOnHover: true,
-							draggable: true,
-							progress: undefined,
-							theme: 'colored'
-						});
+						success('Profile Updated Successfull');
 					})
 					.catch((e) => {
-						toast.error('Could not Connect with Server', {
-							position: 'top-right',
-							autoClose: 2000,
-							hideProgressBar: false,
-							closeOnClick: true,
-							pauseOnHover: true,
-							draggable: true,
-							progress: undefined,
-							theme: 'colored'
-						});
+						
+						Error('Could not Connect with Server');
 					});
 			});
 		}
@@ -74,28 +58,10 @@ function Profile() {
 				updateSkills(skillData)
 					.then((data) => {
 						navigate('/dashboard/getProfile');
-						toast.success('Skills Updated Successfully', {
-							position: 'top-left',
-							autoClose: 2000,
-							hideProgressBar: false,
-							closeOnClick: true,
-							pauseOnHover: true,
-							draggable: true,
-							progress: undefined,
-							theme: 'colored'
-						});
+						success('Skills Updated Successfully');
 					})
 					.catch((e) => {
-						toast.error('Could not Connect with Server', {
-							position: 'top-right',
-							autoClose: 2000,
-							hideProgressBar: false,
-							closeOnClick: true,
-							pauseOnHover: true,
-							draggable: true,
-							progress: undefined,
-							theme: 'colored'
-						});
+						Error('Could not Connect with Server');
 					});
 			});
 		}
