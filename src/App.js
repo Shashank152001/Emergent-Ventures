@@ -26,6 +26,9 @@ import GetRmTimesheet from "./Components/Timesheet/GetRmTimesheet";
 import EditReporingTimeSheet from "./Components/Timesheet/EditReportingTimeSheet";
 import SearchProfile from "./Components/Profile/SearchProfile";
 import DescriptionForm from './Components/Timesheet/descriptionForm'
+import AdminLogin from "./Components/AdminLogin/AdminLogin";
+import AdminSignUp from "./Components/AdminSignUp/AdminSignUp";
+import AdminDashboard from "./Components/AdminDashboard/AdminDashboard";
 
 
 
@@ -42,10 +45,22 @@ function App() {
    
   return (
     <>
-    <LoginContext.Provider value={{profileformdata,setProfileFormdata}}>
-    <RealDataContext.Provider value={{isRealTime,setIsRealTime}}>
+    {/* <Router>
+      <Routes>
+        <Route element={<AdminLogin/>} path="/adminlogin"></Route>
+        <Route element={<AdminSignUp/>} path="/adminsignup"></Route>
+        <Route element={<AdminDashboard/>} exact path="/admindashboard"></Route>
+        <Route element={<ErrorPage />} path="*"></Route>
+      </Routes>
+    </Router> */}
+    {/* <LoginContext.Provider value={{profileformdata,setProfileFormdata}}>
+    <RealDataContext.Provider value={{isRealTime,setIsRealTime}}> */}
       <Router>
         <Routes>
+        <Route element={<AdminLogin/>} path="/adminlogin"></Route>
+        <Route element={<AdminSignUp/>} path="/adminsignup"></Route>
+        <Route element={<AdminDashboard/>} exact path="/admindashboard"></Route>
+        {/* <Route element={<ErrorPage />} path="*"></Route> */}
           <Route element={<RedirectRoute />} path="/">
 
             <Route element={<SignIn />} path="/"></Route>
@@ -98,8 +113,8 @@ function App() {
 
         </Routes>
       </Router>
-      </RealDataContext.Provider>
-      </LoginContext.Provider>
+      {/* </RealDataContext.Provider>
+      </LoginContext.Provider> */}
       <ToastContainer />
     </>
   );
