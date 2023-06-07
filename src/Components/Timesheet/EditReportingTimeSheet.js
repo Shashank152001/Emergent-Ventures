@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { fetchReportingTimesheet, UpdateReportingTimesheet } from '../../Service/TimesheetService';
-import { toast } from 'react-toastify';
+// import { toast } from 'react-toastify';
+import { success } from '../../Utils/SuccessToast';
+import { serverError } from '../../Utils/ServerToast';
 import 'react-toastify/dist/ReactToastify.css';
 import { socket } from '../../socket';
 
@@ -31,29 +33,31 @@ function EditReportingTimeSheet() {
 				.then((data) => {
 					socket.emit('sendNotifications');
 					
-					toast.success('Status Updated Successfull', {
-						position: 'top-left',
-						autoClose: 2000,
-						hideProgressBar: false,
-						closeOnClick: true,
-						pauseOnHover: true,
-						draggable: true,
-						progress: undefined,
-						theme: 'colored'
-					});
+					// toast.success('Status Updated Successfull', {
+					// 	position: 'top-left',
+					// 	autoClose: 2000,
+					// 	hideProgressBar: false,
+					// 	closeOnClick: true,
+					// 	pauseOnHover: true,
+					// 	draggable: true,
+					// 	progress: undefined,
+					// 	theme: 'colored'
+					// });
+					success('Status Updated Successfull');
 				})
 				.catch((e) => {
 					console.log(e.meesage);
-					toast.error('Could not Connect with Server', {
-						position: 'top-right',
-						autoClose: 2000,
-						hideProgressBar: false,
-						closeOnClick: true,
-						pauseOnHover: true,
-						draggable: true,
-						progress: undefined,
-						theme: 'colored'
-					});
+					// toast.error('Could not Connect with Server', {
+					// 	position: 'top-right',
+					// 	autoClose: 2000,
+					// 	hideProgressBar: false,
+					// 	closeOnClick: true,
+					// 	pauseOnHover: true,
+					// 	draggable: true,
+					// 	progress: undefined,
+					// 	theme: 'colored'
+					// });
+					serverError();
 				});
 		}
 	}, [putTimesheet]);

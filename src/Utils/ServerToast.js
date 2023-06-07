@@ -10,4 +10,4 @@ export const serverError=()=>toast.error('Could not Connect with Server', {
     draggable: true,
     progress: undefined,
     theme: 'colored'
-});
+}); 

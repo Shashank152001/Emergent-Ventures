@@ -53,6 +53,7 @@ function Header() {
 	}, [notify]);
 
 	const searchBoxRef = useRef(null); //for close outside
+	
 	useEffect(() => {
 		const handleClickOutside = (event) => {
 			if (searchBoxRef.current && !searchBoxRef.current.contains(event.target)) {

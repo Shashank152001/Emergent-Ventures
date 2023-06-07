@@ -17,6 +17,7 @@ function ViewRequest() {
 			.then((data) => {
 				
 				SetReportingData(data);
+				console.log(data);
 			})
 			.catch((e) => {
 				console.log(e.message);
