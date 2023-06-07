@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './EmployeeTable.css';
 
+const url = 'https://thereof-engines-gamecube-raises.trycloudflare.com/';
 
 let data = [
     {
@@ -176,15 +177,39 @@ let data = [
     }
 ];
 
-function EmployeeTable() {
 
+
+function EmployeeTable() {
+    
+    const[EmployeeData,setEmployeeData] = useState([]);
     const [curentPage, setCurrentPage] = useState(1);
-    const recordPerPage = 10;
+    const recordPerPage = 2;
     const lastIndex = curentPage * recordPerPage;
     const firstIndex = lastIndex - recordPerPage;
-    const records = data.slice(firstIndex, lastIndex);
-    const nPage = Math.ceil(data.length/ recordPerPage);
+    const records = EmployeeData.slice(firstIndex, lastIndex);
+    const nPage = Math.ceil(EmployeeData.length/ recordPerPage);
     const numbers = [...Array(nPage + 1).keys()].slice(1);
+
+    async function EmployeeDataFetch(){
+        await fetch(url +'admin/get-all-users',{
+            method:"GET",
+            mode:'cors',
+            headers: { "Content-Type": "application/json" },
+            credentials:'include',
+        
+    }).then((res)=>{
+        console.log(res);
+        return res.json();
+    }).then((data)=>{
+        // console.log(data);
+        setEmployeeData(data);
+    })
+    }
+
+
+    useEffect(()=>{
+        EmployeeDataFetch();
+    },[])
 
     return (
         <>
@@ -202,14 +227,14 @@ function EmployeeTable() {
                                 <th scope="col-sm-3" >Location</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody className='table-group-divider'>
                             {records.map((d, i) => (
                                 <tr key={i}>
-                                    <td>{d.EmployeeName}</td>
-                                    <td>{d.EmployeeId}</td>
-                                    <td>{d.Department}</td>
-                                    <td>{d.JobRole}</td>
-                                    <td>{d.Location}</td>
+                                    <td>{d.name}</td>
+                                    <td>{d.hrmid}</td>
+                                    <td>{d.department}</td>
+                                    <td>{d.role}</td>
+                                    <td>{d.location}</td>
                                 </tr>
 
                             ))}
@@ -219,15 +244,15 @@ function EmployeeTable() {
 
                     </table>
                     <nav className='pagging'>
-                        <div className=" row pag">
-                            <div className='col-sm-4 pagination page-item '>
+                        <div className="row pag justify-content-center align-items-center">
+                            <div className='col-4 pagination page-item'>
 
                                 <a href="#" className='a3' onClick={prePage} > ❮ </a>
                                 < a href="#" className='a3' onClick={prePage} > Previous </a>
                                 
                             </div>
                             
-                            <div className='col-sm-4 pagination m-t-2 p-2 a2'>
+                            <div className='col-4 pagination m-t-2 p-2 a2'>
 
                             {
                                 numbers.map((n, i) => (
@@ -239,7 +264,7 @@ function EmployeeTable() {
                                 ))
                             }
                             </div>
-                            <div className='col-sm-4 pagination '>
+                            <div className='col-4 pagination '>
                                 < a className='Next a1' href="#" onClick={nextPage} >Next</a>
                                 <a href="#"  className='next a1' onClick={nextPage} >❯</a>
                             </div>

@@ -30,25 +30,27 @@ import DescriptionForm from './Components/Timesheet/descriptionForm'
 
 
 function App() {
-  const [isRealTime,setIsRealTime] = useState(false);
-  const[profileformdata,setProfileFormdata]=useState({
-    name:'',
-    profileImage:'',
-    userId:''
-  })
+  // const [isRealTime,setIsRealTime] = useState(false);
+  // const[profileformdata,setProfileFormdata]=useState({
+  //   name:'',
+  //   profileImage:'',
+  //   userId:''
+  // })
 
   
   
    
   return (
     <>
-    <LoginContext.Provider value={{profileformdata,setProfileFormdata}}>
-    <RealDataContext.Provider value={{isRealTime,setIsRealTime}}>
+    {/* <LoginContext.Provider value={{profileformdata,setProfileFormdata}}>
+    <RealDataContext.Provider value={{isRealTime,setIsRealTime}}> */}
       <Router>
+        
         <Routes>
           <Route element={<RedirectRoute />} path="/">
 
             <Route element={<SignIn />} path="/"></Route>
+
             
           </Route>
           <Route element={<SignUp />} path="/signup"></Route>
@@ -61,7 +63,7 @@ function App() {
           
           <Route element={<ProtectRoute />} path="/dashboard">
             
-            
+          
             <Route element={<Dashboard />} path="/dashboard">
               
               <Route element={<Home />} path="" />
@@ -81,7 +83,7 @@ function App() {
               
             </Route>
              
-            
+      
 
           </Route>
 
@@ -98,8 +100,8 @@ function App() {
 
         </Routes>
       </Router>
-      </RealDataContext.Provider>
-      </LoginContext.Provider>
+      {/* </RealDataContext.Provider>
+      </LoginContext.Provider> */}
       <ToastContainer />
     </>
   );

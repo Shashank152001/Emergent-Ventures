@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import './Dashboard.css';
 import Sidebar from './sidebar';
-import { LoginContext } from '../../Context/LoginContext';
+import { LoginContext,RealDataContext } from '../../Context/LoginContext';
 import { userData } from '../../Service/DashboardService';
 import Loader from '../Spinner/Loader';
 import Header from './Header';
@@ -11,7 +11,15 @@ import { ProfileFormData } from '../../Service/ProfileService';
 function MyDashBoard() {
 	const [userDatas, setUserDatas] = useState(null);
 
-	const { profileformdata, setProfileFormdata } = useContext(LoginContext);
+	// const { profileformdata, setProfileFormdata } = useContext(LoginContext);
+	// const { isRealTime,setIsRealTime } = useContext(RealDataContext);
+
+  const [isRealTime,setIsRealTime] = useState(false);
+  const[profileformdata,setProfileFormdata]=useState({
+    name:'',
+    profileImage:'',
+    userId:''
+  })
 
 	useEffect(() => {
 		userData()
@@ -24,14 +32,18 @@ function MyDashBoard() {
 	}, []);
 
 	return (
+		
+<LoginContext.Provider value={{profileformdata,setProfileFormdata}}>
+    <RealDataContext.Provider value={{isRealTime,setIsRealTime}}>
+
 		<section className=' main-container'>
 			{userDatas ? (
 				<div className='wrapper d-flex'>
 					<Sidebar />
 					<div className='right-sidebar'>
-						<LoginContext.Provider value={{ profileformdata, setProfileFormdata }}>
+						{/* <LoginContext.Provider value={{ profileformdata, setProfileFormdata }}> */}
 							<Header />
-						</LoginContext.Provider>
+						{/* </LoginContext.Provider> */}
 						<div className='right-middle-content'>
 							<Outlet />
 						</div>
@@ -43,6 +55,9 @@ function MyDashBoard() {
 				</section>
 			)}
 		</section>
+		</RealDataContext.Provider>
+      </LoginContext.Provider>
+	  
 	);
 }
 
