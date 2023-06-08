@@ -49,9 +49,11 @@ function Timesheet() {
 								</tr>
 							))
 						) : (
-							<div className='dashboard-no-record-div'>
-								<NoRecord />
-							</div>
+							<tr className='dashboard-no-record-div'>
+								<td>
+									<NoRecord />
+								</td>
+							</tr>
 						)}
 					</tbody>
 				</table>

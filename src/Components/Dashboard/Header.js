@@ -3,7 +3,7 @@ import { useRef } from 'react';
 import { BiBell, BiChevronDown, BiSearch, BiPlusCircle } from 'react-icons/bi';
 import './Dashboard.css';
 import { socket } from '../../socket';
-import { LoginContext,RealDataContext } from '../../Context/LoginContext';
+import { LoginContext, RealDataContext } from '../../Context/LoginContext';
 import FileUpload from './fileupload';
 import { DropDown } from '../DropDown/DropDown';
 import { Notification } from '../Notification/Notification';
@@ -16,12 +16,10 @@ function Header() {
 	const [openProfile, setOpenProfile] = useState(false);
 	const [notificationData, setNotificationData] = useState([]);
 	const [openNotification, setOpenNotification] = useState(false);
-	const {profileformdata, setProfileFormdata} = useContext(LoginContext);
-	const {setIsRealTime} = useContext(RealDataContext);
+	const { profileformdata, setProfileFormdata } = useContext(LoginContext);
+	const { setIsRealTime } = useContext(RealDataContext);
 
 	// search Field
-
-	
 
 	const [input, setInput] = useState([]);
 	const [searchResult, setSearchResult] = useState([]);
@@ -30,19 +28,17 @@ function Header() {
 	const navigate = useNavigate();
 
 	useEffect(() => {
-		
 		socket.connect();
 		socket.emit('join', 'Joined Room');
 
 		socket.on('notify', (data) => {
 			setNotify((previousState) => !previousState);
 		});
-		
+
 		socket.on('notifications', (data) => {
 			setNotificationData(data);
-			setIsRealTime((prev)=>!prev);
+			setIsRealTime((prev) => !prev);
 		});
-
 
 		return () => {
 			socket.disconnect();
@@ -53,7 +49,7 @@ function Header() {
 	}, [notify]);
 
 	const searchBoxRef = useRef(null); //for close outside
-	
+
 	useEffect(() => {
 		const handleClickOutside = (event) => {
 			if (searchBoxRef.current && !searchBoxRef.current.contains(event.target)) {
@@ -73,10 +69,9 @@ function Header() {
 			UserSearchBar(input)
 				.then((UserSearch) => {
 					const result = UserSearch.filter((Name) => {
-						return Name && Name.name && Name.name.toLowerCase().includes(input.toLowerCase());
+						return Name && Name.name && Name.name.toString().toLowerCase().includes(input.toString().toLowerCase());
 					});
 					setSearchResult(result);
-					console.log(result);
 				})
 				.catch((e) => {
 					console.log(e.message);
@@ -145,12 +140,12 @@ function Header() {
 					</div>
 				</div>
 
-				<div className='upload-div'>
+				{/* <div className='upload-div'>
 					<button className='upload-button' onClick={handleShowModal}>
 						Upload
 					</button>
 					<FileUpload className='file-upload-dialog' isOpen={showModal} onClose={handleCloseModal} />
-				</div>
+				</div> */}
 
 				<div className='header-profile-div'>
 					<div className='notification-div'>
@@ -181,7 +176,7 @@ function Header() {
 							<span className='profile-name'>{profileformdata?.name || ''}</span>
 							<BiChevronDown
 								className='cheveron-down'
-								id="down"
+								id='down'
 								onClick={() => {
 									setOpenProfile((prev) => !prev);
 								}}

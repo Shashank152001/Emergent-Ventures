@@ -1,9 +1,9 @@
-import { useState, useEffect,useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { socket } from '../../socket';
 import { updateUserNotification, updateUserAllNotifications } from '../../Service/NotificationService';
 import './Notification.css';
 
-export const Notification = ({ messages, unread, closeNotification ,setOpenNotification}) => {
+export const Notification = ({ messages, unread, closeNotification, setOpenNotification }) => {
 	const [notificationId, setNotificationId] = useState({});
 	const [allReadData, setAllReadData] = useState({});
 	const [notificationRead, setNotificationRead] = useState(false);
@@ -22,27 +22,23 @@ export const Notification = ({ messages, unread, closeNotification ,setOpenNotif
 		}
 	};
 
-	 //for close outside
-    useEffect(() => {
-		
-        const handleClickOutside = (event) => {
-            if (notificationRef.current && !notificationRef.current.contains(event.target)) {
-                setOpenNotification(false);
-            }
-        };
-        document.addEventListener('mousedown', handleClickOutside);
-        return () => {
-            document.removeEventListener('mousedown', handleClickOutside);
-        };
-    }, []);
-
-
+	//for close outside
+	useEffect(() => {
+		const handleClickOutside = (event) => {
+			if (notificationRef.current && !notificationRef.current.contains(event.target)) {
+				setOpenNotification(false);
+			}
+		};
+		document.addEventListener('mousedown', handleClickOutside);
+		return () => {
+			document.removeEventListener('mousedown', handleClickOutside);
+		};
+	}, []);
 
 	useEffect(() => {
 		if (notificationRead) {
 			updateUserNotification(notificationId)
 				.then((data) => {
-					// console.log(data);
 					socket.emit('sendNotifications');
 					setNotificationRead(false);
 				})
@@ -50,25 +46,24 @@ export const Notification = ({ messages, unread, closeNotification ,setOpenNotif
 					console.log(e.message);
 				});
 		}
-		return ()=>{
+		return () => {
 			socket.off('sendNotifications');
-		}
+		};
 	}, [notificationRead]);
 
 	useEffect(() => {
 		if (allNotificationRead) {
 			updateUserAllNotifications(allReadData)
 				.then((data) => {
-					// console.log(data);
 					socket.emit('sendNotifications');
 				})
 				.catch((e) => {
 					console.log(e.message);
 				});
 		}
-		return ()=>{
+		return () => {
 			socket.off('sendNotifications');
-		}
+		};
 	}, [allNotificationRead]);
 
 	return (
@@ -99,7 +94,7 @@ export const Notification = ({ messages, unread, closeNotification ,setOpenNotif
 								<div className='notification-content-div unread-bold'>
 									<span>{message.content}</span>
 									<span className='unread-bold'>
-										{new Date(message.date.substr(0,23)).toLocaleString(undefined, {
+										{new Date(message.date.substr(0, 23)).toLocaleString(undefined, {
 											day: 'numeric',
 											month: 'short',
 											year: 'numeric',
@@ -117,7 +112,7 @@ export const Notification = ({ messages, unread, closeNotification ,setOpenNotif
 								<div className='notification-content-div'>
 									<span>{message.content}</span>
 									<span className='notification-message-date'>
-										{new Date(message.date.substr(0,23)).toLocaleString(undefined, {
+										{new Date(message.date.substr(0, 23)).toLocaleString(undefined, {
 											day: 'numeric',
 											month: 'short',
 											year: 'numeric',
