@@ -1,4 +1,4 @@
-import React, { useState, useEffect,useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import './WFH.css';
 import RequestTabs from './RequestTabs';
 
@@ -9,28 +9,24 @@ import { RealDataContext } from '../../Context/LoginContext';
 
 function ViewRequest() {
 	const [ReportingData, SetReportingData] = useState(null);
-	const {isRealTime} = useContext(RealDataContext);
+	const { isRealTime } = useContext(RealDataContext);
 
 	useEffect(() => {
-
 		ReportingGetdata()
 			.then((data) => {
-				
 				SetReportingData(data);
-				console.log(data);
 			})
 			.catch((e) => {
 				console.log(e.message);
 			});
-
-}, [isRealTime]);
+	}, [isRealTime]);
 
 	return (
 		<div className='view-request-container-div'>
 			<div className='tabs-div'>
 				<RequestTabs />
 			</div>
-			<div className='request-content-div' style={{width:'80%'}}>
+			<div className='request-content-div' style={{ width: '80%' }}>
 				<span className='request-content-title'>Approve Requests</span>
 				<table className='table table-hover' style={{ marginTop: '2rem' }}>
 					<thead>
@@ -50,7 +46,7 @@ function ViewRequest() {
 							ReportingData.map((item, index) => (
 								<tr key={index}>
 									<td style={{ textAlign: 'center' }}>{index + 1}</td>
-									<td >
+									<td>
 										<span>
 											<img style={{ width: '2rem', height: '2rem' }} src={item.profileImage} alt='employee' />
 										</span>
@@ -59,11 +55,11 @@ function ViewRequest() {
 										<span> - </span>
 										{item.name}
 									</td>
-									<td >{item.role}</td>
-									<td >{item.leaveType}</td>
-									<td >{item.startDate}</td>
-									<td >{item.endDate}</td>
-									<td >{item.status}</td>
+									<td>{item.role}</td>
+									<td>{item.leaveType}</td>
+									<td>{item.startDate}</td>
+									<td>{item.endDate}</td>
+									<td>{item.status}</td>
 									{item.status === 'Pending' ? (
 										<>
 											<td>

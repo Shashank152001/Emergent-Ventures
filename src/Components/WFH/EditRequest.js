@@ -19,11 +19,9 @@ function EditRequest() {
 		status: ''
 	});
 	const [putData, setPutData] = useState(false);
-	console.log(id);
 	useEffect(() => {
 		ReportingGetdata()
 			.then((ReportingRequestdata) => {
-				
 				SetReportingData(ReportingRequestdata[id]);
 			})
 			.catch((e) => {
@@ -35,14 +33,12 @@ function EditRequest() {
 		if (putData) {
 			EditUpdate(formData)
 				.then((data) => {
-					
 					socket.emit('sendNotifications');
 					navigate('/dashboard/viewRequest');
-					
+
 					success('Status Updated Successfull');
 				})
 				.catch((e) => {
-					
 					serverError();
 				});
 		}

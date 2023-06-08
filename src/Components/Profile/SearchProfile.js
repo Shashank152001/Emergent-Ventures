@@ -6,54 +6,44 @@ import { Link } from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.css';
 import 'primeicons/primeicons.css';
 import './Profile.css';
-import { useParams,useNavigate } from 'react-router-dom';
-import { GetUserId } from "../../Service/UserSearchService";
+import { useParams, useNavigate } from 'react-router-dom';
+import { GetUserId } from '../../Service/UserSearchService';
 function SearchProfile() {
 	const { profileformdata, setProfileFormdata } = useContext(LoginContext);
 	const [profileFormData, setProfileFormData] = useState(null);
-	const [searchdata,setsearchdata]= useState({
-
-	});
+	const [searchdata, setsearchdata] = useState({});
 	const { id } = useParams();
-	console.log(id);
 	// Profile Get Data
 	// userId=userId-10000;
 	// console.log(userId)
 	useEffect(() => {
 		if (id) {
-		  GetUserId(id)
-			.then((data) => {
-			  setsearchdata(data); 
-			  console.log(data);
-			})
-			.catch((e) => {
-			  console.log(e.message);
-			  setsearchdata([]);
-			});
+			GetUserId(id)
+				.then((data) => {
+					setsearchdata(data);
+				})
+				.catch((e) => {
+					console.log(e.message);
+					setsearchdata([]);
+				});
 		}
-	  
+
 		return () => {
-		  setsearchdata([]);
+			setsearchdata([]);
 		};
-	  }, [id]);
+	}, [id]);
 
 	return (
 		<>
 			<div className='profile-container'>
 				<div className='wallpaper-div'>
 					<div className='wallpaper-profile-image-div'>
-						<img
-							className='profile-image'
-							name='image'
-							src={searchdata.profileImage}
-							alt=''
-						/>
+						<img className='profile-image' name='image' src={searchdata.profileImage} alt='' />
 					</div>
 					<div className='wallpaper-profile-info-div'>
 						<ul className='wallpaper-profile-info'>
 							<li>
-								{searchdata.hrmid || ''} -{' '}
-								{searchdata.name || ''}
+								{searchdata.hrmid || ''} - {searchdata.name || ''}
 							</li>
 							<li>{searchdata.role || ''}</li>
 							<li>{searchdata.department || ''}</li>
@@ -82,17 +72,13 @@ function SearchProfile() {
 										<span style={{ padding: '1rem', fontSize: '1.4rem' }}>
 											<i className='bi bi-diagram-3'></i>
 										</span>
-										<span style={{ padding: '1rem' }}>
-											{searchdata.department || ''}
-										</span>
+										<span style={{ padding: '1rem' }}>{searchdata.department || ''}</span>
 									</div>
 									<div className='profile-detail-field-div'>
 										<span style={{ padding: '1rem', fontSize: '1.4rem' }}>
 											<i className='bi bi-people'></i>
 										</span>
-										<span style={{ padding: '1rem' }}>
-											{searchdata.role || ''}
-										</span>
+										<span style={{ padding: '1rem' }}>{searchdata.role || ''}</span>
 									</div>
 								</div>
 								<div className='inner-details-div'>
@@ -100,24 +86,20 @@ function SearchProfile() {
 										<span style={{ padding: '1rem', fontSize: '1.4rem' }}>
 											<i className='bi bi-phone'></i>
 										</span>
-										<span style={{ padding: '1rem' }}>
-											+91 {searchdata.phone || ''}
-										</span>
+										<span style={{ padding: '1rem' }}>+91 {searchdata.phone || ''}</span>
 									</div>
 									<div className='profile-detail-field-div'>
 										<span style={{ padding: '1rem', fontSize: '1.4rem' }}>
 											<i className='bi bi-geo-alt'></i>
 										</span>
-										<span style={{ padding: '1rem' }}>
-											{searchdata.location || ''}
-										</span>
+										<span style={{ padding: '1rem' }}>{searchdata.location || ''}</span>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
 					<div className='second-column'>
-						{searchdata ?.reportingManager ? (
+						{searchdata?.reportingManager ? (
 							<div className='reporting-to-div  profile-details-div-common'>
 								<div className='inner-details-title-div'>
 									<div className='notch'></div>
@@ -126,19 +108,12 @@ function SearchProfile() {
 								<div className='profile-details-content-div'>
 									<div className='profile-details-card-div'>
 										<div className='profile-details-card-image-div'>
-											<img
-												className='profile-image-mini'
-												name='image'
-												src={
-													searchdata ?.reportingManager?.profileImage
-												}
-												alt=''
-											/>
+											<img className='profile-image-mini' name='image' src={searchdata?.reportingManager?.profileImage} alt='' />
 										</div>
 										<div className='profile-details-card-content-div'>
 											<div>
 												<span style={{ fontSize: '0.9rem' }}>
-													{searchdata ?.reportingManager?.hrmid  || ''}
+													{searchdata?.reportingManager?.hrmid || ''}
 													<span> - </span>
 												</span>
 												<span
@@ -147,17 +122,15 @@ function SearchProfile() {
 														fontSize: '0.9rem'
 													}}
 												>
-													{searchdata ?.reportingManager?.name || ''}
+													{searchdata?.reportingManager?.name || ''}
 												</span>
 											</div>
 											<div>
 												<span>
-													{searchdata ?.reportingManager?.role  || ''}
+													{searchdata?.reportingManager?.role || ''}
 													<span> - </span>
 												</span>
-												<span>
-													{searchdata ?.reportingManager?.department || ''}
-												</span>
+												<span>{searchdata?.reportingManager?.department || ''}</span>
 											</div>
 										</div>
 									</div>
@@ -177,12 +150,7 @@ function SearchProfile() {
 										return (
 											<div className='profile-details-card-div'>
 												<div className='profile-details-card-image-div'>
-													<img
-														className='profile-image-mini'
-														name='image'
-														src={subordinate?.profileImage}
-														alt=''
-													/>
+													<img className='profile-image-mini' name='image' src={subordinate?.profileImage} alt='' />
 												</div>
 												<div className='profile-details-card-content-div'>
 													<div>

@@ -3,36 +3,32 @@ import { useRef } from 'react';
 import { BiBell, BiChevronDown, BiSearch, BiPlusCircle } from 'react-icons/bi';
 // import '../Dashboard/Dashboard.css';
 
-import { LoginContext,RealDataContext } from '../../Context/LoginContext';
+import { LoginContext, RealDataContext } from '../../Context/LoginContext';
 import FileUpload from '../Dashboard/fileupload';
-import { DropDown } from '../DropDown/DropDown';
 import { Notification } from '../Notification/Notification';
-import { ProfileFormData } from '../../Service/ProfileService';
-import { UserSearchBar, GetUserId } from '../../Service/UserSearchService';
 import { useNavigate } from 'react-router-dom';
-import {adminData} from '../../Service/adminService';
+import { adminData } from '../../Service/adminService';
+import { AdminDropDown } from '../AdminDropDown/AdminDropDown';
+import { adminSearchBar } from '../../Service/adminServices/searchService';
 
 function AdminHeader() {
 	const [showModal, setShowModal] = useState(false);
 	const [openProfile, setOpenProfile] = useState(false);
 	const [notificationData, setNotificationData] = useState([]);
 	const [openNotification, setOpenNotification] = useState(false);
-	const[Admindata,setAdminData] = useState(null);
-	// const {profileformdata, setProfileFormdata} = useContext(LoginContext);
-	// const {setIsRealTime} = useContext(RealDataContext);
+	const [Admindata, setAdminData] = useState(null);
+	// const { profileformdata, setProfileFormdata } = useContext(LoginContext);
+	// const { setIsRealTime } = useContext(RealDataContext);
 
 	// search Field
-
-	
 
 	const [input, setInput] = useState([]);
 	const [searchResult, setSearchResult] = useState([]);
 	const [showResults, setShowResults] = useState(false);
 	const navigate = useNavigate();
 
-
 	const searchBoxRef = useRef(null); //for close outside
-	
+
 	useEffect(() => {
 		const handleClickOutside = (event) => {
 			if (searchBoxRef.current && !searchBoxRef.current.contains(event.target)) {
@@ -49,13 +45,12 @@ function AdminHeader() {
 	//for search name
 	useEffect(() => {
 		if (input !== '') {
-			UserSearchBar(input)
+			adminSearchBar(input)
 				.then((UserSearch) => {
 					const result = UserSearch.filter((Name) => {
-						return Name && Name.name && Name.name.toLowerCase().includes(input.toLowerCase());
+						return Name && Name.name && Name.name.toString().toLowerCase().includes(input.toString().toLowerCase());
 					});
 					setSearchResult(result);
-					console.log(result);
 				})
 				.catch((e) => {
 					console.log(e.message);
@@ -75,7 +70,7 @@ function AdminHeader() {
 	};
 
 	const handleRowClick = (id) => {
-		navigate(`/dashboard/searchprofile/${id}`);
+		navigate(`/admindashboard/search-user/${id}`);
 		setInput('');
 	};
 
@@ -109,7 +104,7 @@ function AdminHeader() {
 						{showResults && (
 							<div className='search-results' ref={searchBoxRef}>
 								{searchResult.map((Name) => (
-									<div className='search-result-card' onClick={() => handleRowClick(Name.id)}>
+									<div className='search-result-card' key={Name.id} onClick={() => handleRowClick(Name.id)}>
 										<img className='search-result-profile' src={Name.profileImage} alt='profile' />
 										<span className='search-result-hrmid'>{Name.hrmid}</span>
 										<span className='search-result-name'>{Name.name}</span>
@@ -152,28 +147,33 @@ function AdminHeader() {
 
 					<div className='header-user-profile'>
 						{/* <img className='header-profile-image' src={profileformdata?.profileImage || ''} alt='profile' /> */}
-						<div style={{
-							background: '#d5ddda',
-							borderRadius: '50%',
-							width: '40px',
-							height: '40px',
-							display: 'flex',
-							justifyContent: 'center',
-							alignItems: 'center',
-							textTransform:'uppercase'
-						}}>{Admindata?.name.split(' ')[0][0]}{Admindata?.name.split(' ')[1][0]}</div>
+						<div
+							style={{
+								background: '#d5ddda',
+								borderRadius: '50%',
+								width: '40px',
+								height: '40px',
+								display: 'flex',
+								justifyContent: 'center',
+								alignItems: 'center',
+								textTransform: 'uppercase'
+							}}
+						>
+							{Admindata?.name.split(' ')[0][0]}
+							{Admindata?.name.split(' ')[1][0]}
+						</div>
 						<div className='header-profile-name-div'>
 							<span className='profile-name'>{Admindata?.name || ''}</span>
-							
+
 							<BiChevronDown
 								className='cheveron-down'
-								id="down"
+								id='down'
 								onClick={() => {
 									setOpenProfile((prev) => !prev);
 								}}
 							/>
 						</div>
-						{openProfile && <DropDown setOpenProfile={setOpenProfile} />}
+						{openProfile && <AdminDropDown setOpenProfile={setOpenProfile} />}
 					</div>
 				</div>
 			</div>
