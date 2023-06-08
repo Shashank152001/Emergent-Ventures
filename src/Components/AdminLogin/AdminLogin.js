@@ -5,12 +5,12 @@ import celebal from '../../Assest/celebal.png';
 import signin from '../../Assest/singin.png';
 import 'react-toastify/dist/ReactToastify.css';
 import bgSvg from '../Spheres.svg';
-import {success} from '../../Utils/SuccessToast'
+import { success } from '../../Utils/SuccessToast';
 import { Error } from '../../Utils/ErrorToast';
 import { serverError } from '../../Utils/ServerToast';
-import {adminLogin} from '../../Service/AdminLoginService'
+import { adminLogin } from '../../Service/adminServices/loginService';
 function AdminLogin() {
-    const [formData, setFormData] = useState({
+	const [formData, setFormData] = useState({
 		email: '',
 		password: ''
 	});
@@ -28,12 +28,12 @@ function AdminLogin() {
 
 					if (response.status === 201) {
 						navigate('/admindashboard');
-						success(msg)
+						success(msg);
 						localStorage.setItem('loggedInAdmin', '1');
 						setFilled(false);
 					} else {
 						navigate('/adminlogin');
-						Error(msg)
+						Error(msg);
 					}
 				})
 				.catch((e) => {
@@ -78,40 +78,25 @@ function AdminLogin() {
 		const { name, value } = event.target;
 		setFormData((prevState) => ({ ...prevState, [name]: value }));
 	};
-  return (
-    <>
+	return (
+		<>
 			<section className='signIn-container position-relative'>
 				<div className='signin-wrapper'>
 					<div className='left'>
 						<div className='logo-title'>
 							<div style={{ width: '250px', height: '100px' }}>
-								<img
-									src={celebal}
-									alt='celebal'
-									style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-								/>
+								<img src={celebal} alt='celebal' style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
 							</div>
 							<div style={{ width: '80%', margin: 'auto' }}>
-								<p style={{ fontSize: '2rem', color: '#545A78' }}>
-									Welcome Admin!
-								</p>
+								<p style={{ fontSize: '2rem', color: '#545A78' }}>Welcome Admin!</p>
 							</div>
 						</div>
 						<div style={{ height: '370px', width: '460px' }} className='left-image'>
-							<img
-								src={signin}
-								alt='signin'
-								style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-							/>
+							<img src={signin} alt='signin' style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
 						</div>
 					</div>
 					<div className='right d-flex flex-column justify-content-center'>
-						<form
-							id='form'
-							onSubmit={handleSubmit}
-							className='needs-validation'
-							novalidate
-						>
+						<form id='form' onSubmit={handleSubmit} className='needs-validation' noValidate>
 							<div>
 								<h1 className='signin-title'>Sign In</h1>
 							</div>
@@ -133,34 +118,19 @@ function AdminLogin() {
 
 									{/* is-valid,is=invalid  */}
 									{/* <div class="invalid-feedback">enter valid email</div> */}
-									{formErrors.email && (
-										<span className='error-span'>{formErrors.email}</span>
-									)}
+									{formErrors.email && <span className='error-span'>{formErrors.email}</span>}
 								</div>
 								<div className='field position-relative'>
 									<label htmlFor='password' className='label'>
 										Password
 									</label>
-									<input
-										type='password'
-										name='password'
-										id='password'
-										placeholder='enter password'
-										onChange={handleChange}
-										value={formData.password}
-									/>
+									<input type='password' name='password' id='password' placeholder='enter password' onChange={handleChange} value={formData.password} />
 
-									{formErrors.password && (
-										<span className='error-span'>{formErrors.password}</span>
-									)}
+									{formErrors.password && <span className='error-span'>{formErrors.password}</span>}
 								</div>
 								<div className='last'>
 									<div>
-										<input
-											type='checkbox'
-											name='remember'
-											id='remember'
-										></input>
+										<input type='checkbox' name='remember' id='remember'></input>
 										<span style={{ paddingLeft: '0.5rem' }}>Remember me</span>
 									</div>
 									<div>
@@ -206,4 +176,4 @@ function AdminLogin() {
 	);
 }
 
-export default AdminLogin
+export default AdminLogin;

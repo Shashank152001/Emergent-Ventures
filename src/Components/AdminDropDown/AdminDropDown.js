@@ -1,11 +1,11 @@
 import React from 'react';
 import { useEffect, useRef } from 'react';
-import './DropDown.css';
+import './AdminDropDown.css';
 import { useNavigate } from 'react-router-dom';
-import { userLogout } from '../../Service/DashboardService';
 import { success } from '../../Utils/SuccessToast';
+import { adminLogout } from '../../Service/adminServices/loginService';
 
-export const DropDown = ({ setOpenProfile }) => {
+export const AdminDropDown = ({ setOpenProfile }) => {
 	const navigate = useNavigate();
 
 	const dropdownRef = useRef(null); //for close outside
@@ -24,9 +24,9 @@ export const DropDown = ({ setOpenProfile }) => {
 	}, []);
 
 	const handleLogOut = () => {
-		userLogout().then((data) => {
-			localStorage.removeItem('loggedInUser');
-			navigate('/');
+		adminLogout().then((data) => {
+			localStorage.removeItem('loggedInAdmin');
+			navigate('/adminlogin');
 			success(data.message);
 		});
 	};

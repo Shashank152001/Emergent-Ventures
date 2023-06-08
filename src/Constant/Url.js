@@ -1,6 +1,1 @@
-
-
-export const url = 'https://thereof-engines-gamecube-raises.trycloudflare.com/';
-
-
-
+export const url = 'https://fitting-darwin-radar-athens.trycloudflare.com/';

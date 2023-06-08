@@ -7,7 +7,6 @@ function GetUserTimesheet() {
 	useEffect(() => {
 		fetchTimeSheet()
 			.then((data) => {
-				console.log(data);
 				setUserTimesheet(data);
 			})
 			.catch((e) => {
@@ -38,8 +37,8 @@ function GetUserTimesheet() {
 						{userTimesheet ? (
 							userTimesheet.map((item, index) => (
 								<tr key={index}>
-									<td >{index + 1}</td>
-									<td >
+									<td>{index + 1}</td>
+									<td>
 										<span>
 											<img style={{ width: '2rem', height: '2rem' }} src={item.profileImage} alt='employee' />
 										</span>
