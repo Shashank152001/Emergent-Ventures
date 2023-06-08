@@ -1,5 +1,5 @@
-import EmployeeTable from '../EmployeeTable/EmployeeTable';
-import ProjectTable from '../ProjectTable/ProjectTable';
+import AdminEmployeeTable from '../AdminEmployeeTable/AdminEmployeeTable';
+import AdminProjectTable from '../AdminProjectTable/AdminProjectTable';
 
 function AdminHome() {
 	return (
@@ -7,11 +7,11 @@ function AdminHome() {
 			<div className='content-inner'>
 				<div className='row gx-3' style={{ padding: '0 1rem', marginTop: '1rem' }}>
 					<div className='col-12'>
-						<EmployeeTable />
+						<AdminEmployeeTable />
 					</div>
 
 					<div className='col-12'>
-						<ProjectTable />
+						<AdminProjectTable />
 					</div>
 				</div>
 			</div>

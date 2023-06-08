@@ -72,7 +72,7 @@ export const getTimeSheet = async (week) => {
 };
 
 export const getClientAndProject = async (week) => {
-	const response = await fetch(url + `user/get-user-projects-minimal-data`, {
+	const response = await fetch(url + `user/projects/get-user-projects-minimal-data`, {
 		mode: 'cors',
 		headers: { 'Content-Type': 'application/json' },
 		credentials: 'include'

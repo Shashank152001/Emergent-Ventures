@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import myprofile from '../../Assest/myprofile.jpg';
-import './ProjectTable.css';
+import './AdminProjectTable.css';
 import { AiOutlineDown, AiOutlineSwap } from 'react-icons/ai';
 import { IoCalendarNumberOutline } from 'react-icons/io5';
 import NoRecord from './norecord';
-import { fetchProject } from '../../Service/ProjectService';
+import { getProjects } from '../../Service/adminServices/projectService';
 
-function ProjectTable() {
+function AdminProjectTable() {
 	const [projects, setProject] = useState(null);
 
 	useEffect(() => {
-		fetchProject()
+		getProjects()
 			.then((data) => {
 				setProject(data);
 			})
@@ -103,4 +103,4 @@ function ProjectTable() {
 	);
 }
 
-export default ProjectTable;
+export default AdminProjectTable;

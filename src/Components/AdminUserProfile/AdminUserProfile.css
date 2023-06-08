@@ -37,7 +37,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	width: 60vw;
+	width: 100%;
 }
 .wallpaper-profile-info {
 	list-style: none;
@@ -50,7 +50,7 @@
 .wallpaper-profile-info li {
 	color: rgb(220, 220, 220);
 	font-size: 0.9rem;
-	margin: 0 1rem;
+	margin: 0 0.5rem;
 }
 .profile-options-div {
 	height: 2.4rem;

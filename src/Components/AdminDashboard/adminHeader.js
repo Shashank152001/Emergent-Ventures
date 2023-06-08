@@ -7,7 +7,7 @@ import { LoginContext, RealDataContext } from '../../Context/LoginContext';
 import FileUpload from '../Dashboard/fileupload';
 import { Notification } from '../Notification/Notification';
 import { useNavigate } from 'react-router-dom';
-import { adminData } from '../../Service/adminService';
+import { adminData } from '../../Service/adminServices/adminService';
 import { AdminDropDown } from '../AdminDropDown/AdminDropDown';
 import { adminSearchBar } from '../../Service/adminServices/searchService';
 

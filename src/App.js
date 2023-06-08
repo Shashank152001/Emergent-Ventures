@@ -8,7 +8,7 @@ import SignIn from './Components/Login/SignIn';
 import SignUp from './Components/SignUp/SignUp';
 import Profile from './Components/Profile/Profile';
 import GetProfile from './Components/Profile/getProfile';
-import EmployeeTable from './Components/EmployeeTable/EmployeeTable';
+import AdminEmployeeTable from './Components/AdminEmployeeTable/AdminEmployeeTable';
 import Dashboard from './Components/Dashboard/Dashboard';
 import { ProtectRoute, AdminProtect } from './Service/ProtectRoute';
 import TimesheetForm from './Components/Timesheet/TimesheetForm';
@@ -57,7 +57,7 @@ function App() {
 						<Route element={<SignIn />} path='/'></Route>
 					</Route>
 					<Route element={<SignUp />} path='/signup'></Route>
-					<Route element={<EmployeeTable />} path='/table'></Route>
+					<Route element={<AdminEmployeeTable />} path='/table'></Route>
 					{/* <Route element={<GetUserTimesheet/>} path="/getTimesheet"></Route>
           <Route element={<GetRmTimesheet/>} path="/viewTime"></Route>
           <Route element={<EditReporingTimeSheet/>} path="/editTime"></Route> */}
