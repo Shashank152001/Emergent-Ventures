@@ -1,8 +1,8 @@
-import { url } from '../Constant/Url';
+import { url } from '../../Constant/Url';
 
-export const fetchProject = async () => {
-	const response = await fetch(url + 'user/projects/get-user-projects/', {
-		mode: 'cors',
+export const adminData = async () => {
+	const response = await fetch(url + 'admin/get-admin', {
+		method: 'GET',
 		headers: { 'Content-Type': 'application/json' },
 		credentials: 'include'
 	});

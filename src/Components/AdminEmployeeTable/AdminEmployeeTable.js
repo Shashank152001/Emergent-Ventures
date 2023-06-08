@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react';
-import './EmployeeTable.css';
-// import {getAllEmployees} from '../../Service/adminService'
+import './AdminEmployeeTable.css';
 import { getUsers } from '../../Service/adminServices/userService';
 
-function EmployeeTable() {
+function AdminEmployeeTable() {
 	const [EmployeeData, setEmployeeData] = useState([]);
 	const [curentPage, setCurrentPage] = useState(1);
 	const recordPerPage = 10;
@@ -47,7 +46,7 @@ function EmployeeTable() {
 									<td>{d.department}</td>
 									<td>{d.role}</td>
 									<td>{d.location}</td>
-									<td>{d.status}</td>
+									<td>{d.status === null ? 'not checked-in' : d.status}</td>
 								</tr>
 							))}
 						</tbody>
@@ -110,4 +109,4 @@ function EmployeeTable() {
 		}
 	}
 }
-export default EmployeeTable;
+export default AdminEmployeeTable;
