@@ -6,7 +6,7 @@ function EmployeeTable() {
     
     const[EmployeeData,setEmployeeData] = useState([]);
     const [curentPage, setCurrentPage] = useState(1);
-    const recordPerPage = 10;
+    const recordPerPage = 1;
     const lastIndex = curentPage * recordPerPage;
     const firstIndex = lastIndex - recordPerPage;
     const records = EmployeeData.slice(firstIndex, lastIndex);

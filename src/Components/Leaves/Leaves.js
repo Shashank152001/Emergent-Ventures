@@ -66,14 +66,14 @@ const Leaves = () => {
                 <div className="d-flex" style={{ gap: "12px" }}>
                   <div style={{ width: 40, height: 40 }}>
                     <CircularProgressbar
-                      value={15 - availableLeaveData?.leaveWithoutPay || 0}
+                      value={30 - availableLeaveData?.leaveWithoutPay || 0}
                       styles={{ path: { stroke: "#1FC3B7" },
                       text:{
                         fontSize:'34px',
                         transform:'translateY(4px)'
                       } }}
-                      text={`${15 - availableLeaveData?.leaveWithoutPay || 0}`}
-                      maxValue={15}
+                      text={`${30 - availableLeaveData?.leaveWithoutPay || 0}`}
+                      maxValue={30}
                       
                     />
                   </div>
