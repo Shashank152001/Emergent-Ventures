@@ -6,7 +6,7 @@ import bgSvg from '../Spheres.svg';
 import { success } from '../../Utils/SuccessToast';
 import { Error } from '../../Utils/ErrorToast';
 import 'react-toastify/dist/ReactToastify.css';
-import { adminSignUp } from '../../Service/AdminSignUpService';
+import { adminSignUp } from '../../Service/adminServices/signupService';
 function AdminSignUp() {
 	const navigate = useNavigate();
 	const [formData, setFormData] = useState({

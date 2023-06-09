@@ -1,7 +1,7 @@
 import { url } from '../../Constant/Url';
 
 export const getProjects = async () => {
-	const response = await fetch(url + 'admin/get-projects', {
+	const response = await fetch(url + 'admin/projects/get-projects', {
 		mode: 'cors',
 		method: 'GET',
 		headers: { 'Content-Type': 'application/json' },
