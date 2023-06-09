@@ -1,10 +1,17 @@
 import { useEffect, useState } from 'react';
 import './AdminEmployeeTable.css';
 import { getUsers } from '../../Service/adminServices/userService';
+import {AiFillEdit } from "react-icons/ai";
+import { BiPlus } from "react-icons/bi";
+import AdminAddUser from '../ProjectTable/adminUserAdd';
+import AdminUpdateUser from '../ProjectTable/adminUpdateUser';
+ 
 
 function AdminEmployeeTable() {
 	const [EmployeeData, setEmployeeData] = useState([]);
 	const [curentPage, setCurrentPage] = useState(1);
+	const [isOpen,setOpen] = useState(false);
+	const [isEditOpen,setEditOpen] =useState(false);
 	const recordPerPage = 10;
 	const lastIndex = curentPage * recordPerPage;
 	const firstIndex = lastIndex - recordPerPage;
@@ -24,9 +31,34 @@ function AdminEmployeeTable() {
 
 	return (
 		<>
+		{isOpen && <AdminAddUser setOpen={setOpen}/>}
+		{isEditOpen && <AdminUpdateUser setEditOpen={setEditOpen}/>}
 			<div className='main-div'>
 				<div className='tables'>
+					<div style={{
+						display:'flex',
+						justifyContent:'space-between',
+						alignItems:'center'
+					}}>
+                        
 					<h3 className='my-4'>Employees</h3>
+					<button
+					style={{
+						border:'none',
+						outline:'none',
+						backgroundColor:"#2563EB",
+						color:"#fff",
+						padding:"7px 15px",
+						borderRadius:"0.4rem"
+					}}
+					onClick={()=>{
+						document.getElementById('scroll-hidden').style.overflow = 'hidden';
+						setOpen(!isOpen)
+					}}
+					>AddUser<BiPlus/></button>
+                    
+					</div>
+					
 					<table className='tabledata table' id='table'>
 						<thead className='theading  '>
 							<tr>
@@ -36,6 +68,7 @@ function AdminEmployeeTable() {
 								<th scope='col-sm-3'>Job Role</th>
 								<th scope='col-sm-3'>Location</th>
 								<th scope='col-sm-3'>Status</th>
+								<th scope='col-sm-3'>Actions</th>
 							</tr>
 						</thead>
 						<tbody className='table-group-divider'>
@@ -47,6 +80,20 @@ function AdminEmployeeTable() {
 									<td>{d.role}</td>
 									<td>{d.location}</td>
 									<td>{d.status === null ? 'not checked-in' : d.status}</td>
+									<td>
+										
+										<button
+										onClick={()=>{
+											document.getElementById('scroll-hidden').style.overflow = 'hidden';
+											setEditOpen(!isEditOpen)}}
+										 style={{
+											border:'none',
+											outline:"none",
+											backgroundColor:'transparent',
+											marginLeft:"0.7rem"
+										}}><AiFillEdit/></button>
+										
+									</td>
 								</tr>
 							))}
 						</tbody>
@@ -93,6 +140,7 @@ function AdminEmployeeTable() {
 					</nav>
 				</div>
 			</div>
+			
 		</>
 	);
 	function prePage() {

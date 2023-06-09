@@ -1,14 +1,13 @@
 
-
 import "./addproject.css";
 
-const AddProject = ({setAddOpen}) => {
+const EditProject = ({setEditOpen}) => {
   return (
     <section className="section-parent">
     <div className="parent-container-form">
       <div className="form-container">
       <div>
-        <h2 className="form-project-title">Add Project</h2>
+        <h2 className="form-project-title">Edit Project</h2>
       </div>
         <form className="admin-form">
           <div className="row-field" style={{ padding:'10px 0 0 10px'}}>
@@ -24,45 +23,8 @@ const AddProject = ({setAddOpen}) => {
               ProjectName:
             </label>
           </div>
-          <div className="row-field " style={{ padding:'10px 0 0 10px'}}>
-           
-            <input
-              type="text"
-              name="clientName"
-              id="clientName"
-              className="field-size input-form"
-              required
-            />
-             <label htmlFor="clientName" className="text-start label-form">
-              ClientName:
-            </label>
-          </div>
-
-          <div className="row-field date-row-field" style={{ padding:'10px 0 0 10px'}}>
-            <div className="row-field" style={{ padding:'10px 0 0 10px'}}>
-              
-              <input
-                type="text"
-                name="assignedOn"
-                id="assignedOn"
-                className="field-size input-form"
-                onFocus={(event)=>{
-                    event.target.type = "date"
-                }}
-                onBlur={(event)=>{
-                    event.target.type = "type"
-                }}
-
-                required
-                
-              />
-              <label htmlFor="assignedOn"className="label-form" >
-                AssignedOn:
-              </label>
-            </div>
-
-            <div className="row-field" style={{ padding:'10px 0 0 10px'}}>
-            
+         
+          <div className="row-field date-row-field" style={{ padding:'10px 0 0 10px'}}>     
               <input
                 type="text"
                 name="completeBy"
@@ -79,7 +41,7 @@ const AddProject = ({setAddOpen}) => {
               <label htmlFor="completeBy" className="label-form">
                 CompleteBy:
               </label>
-            </div>
+            
           </div>
 
 
@@ -122,7 +84,20 @@ const AddProject = ({setAddOpen}) => {
               Department:
             </label>
           </div>
-          <div className="form-submit-button row-field flex-row justify-content-center">
+          <div className="row-field " style={{ padding:'10px 0 0 10px'}}>
+           
+           <input
+             type="text"
+             name="status"
+             id="status"
+             className="field-size input-form"
+             required
+           />
+            <label htmlFor="status" className="text-start label-form">
+             status:
+           </label>
+         </div>
+         <div className="form-submit-button row-field flex-row justify-content-center">
             <button type="submit" className="form-submit-btn"
              style={{
               width:'45%'
@@ -130,15 +105,14 @@ const AddProject = ({setAddOpen}) => {
               Submit
             </button>
             <button type="submit" className="form-submit-btn bg-danger"
-             style={{
+            onClick={()=>{setEditOpen(false)
+              document.getElementById('scroll-hidden').style.overflow = 'visible';}}
+            style={{
               width:'45%'
-            }}
-            onClick={()=>{setAddOpen(false)
-              document.getElementById('scroll-hidden').style.overflow = 'visible';}}>
+            }}>
               close
             </button>
           </div>
-
         </form>
       </div>
     </div>
@@ -146,4 +120,4 @@ const AddProject = ({setAddOpen}) => {
   );
 };
 
-export default AddProject;
+export default EditProject;

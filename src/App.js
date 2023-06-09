@@ -31,7 +31,8 @@ import AdminSignUp from './Components/AdminSignUp/AdminSignUp';
 import AdminDashboard from './Components/AdminDashboard/AdminDashboard';
 import AdminHome from './Components/AdminDashboard/adminHome';
 import AdminUserProfile from './Components/AdminUserProfile/AdminUserProfile';
-import AddProject from './Components/ProjectTable/addProject';
+import SuccessMessage from './Components/Message/successmessage'
+
 // import UserRoutes from './Routes/userRoutes';
 // import AdminRoutes from './Routes/adminRoutes';
 
@@ -93,8 +94,7 @@ function App() {
 
 					{/* <Route element={<DescriptionForm />} path="/testkaruna"></Route> */}
 
-                
-					<Route element={<AddProject/>} path='/adminProjectAdd'></Route>
+                    <Route element={<SuccessMessage/>} path="/success"></Route>
 					<Route element={<ErrorPage />} path='*'></Route>
 				</Routes>
 			</Router>
