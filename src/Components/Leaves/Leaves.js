@@ -38,7 +38,7 @@ const Leaves = () => {
 							<div className='d-flex' style={{ gap: '12px' }}>
 								<div style={{ width: 40, height: 40 }}>
 									<CircularProgressbar
-										value={availableLeaveData?.casualLeaves - availableLeaveData?.casualLeave || 0}
+										value={availableLeaveData?.totalcasualLeaves - availableLeaveData?.remainingCasualLeaves || 0}
 										styles={{
 											path: { stroke: '#ff6e6e' },
 											text: {
@@ -46,15 +46,15 @@ const Leaves = () => {
 												transform: 'translateY(4px)'
 											}
 										}}
-										text={`${availableLeaveData?.casualLeaves - availableLeaveData?.casualLeave || 0}`}
-										maxValue={availableLeaveData?.casualLeaves}
+										text={`${availableLeaveData?.totalcasualLeaves - availableLeaveData?.remainingCasualLeaves || 0}`}
+										maxValue={availableLeaveData?.totalcasualLeaves}
 									/>
 								</div>
 								<div>
 									<span className='' style={{ fontSize: '14px' }}>
 										Casual Leave
 										<p className=' text-secondary' style={{ fontSize: '12px' }}>
-											Available {availableLeaveData?.casualLeave || 0} days
+											Available {availableLeaveData?.totalcasualLeaves || 0} days
 										</p>
 									</span>
 								</div>
@@ -64,7 +64,7 @@ const Leaves = () => {
 								<div className='d-flex' style={{ gap: '12px' }}>
 									<div style={{ width: 40, height: 40 }}>
 										<CircularProgressbar
-											value={availableLeaveData?.leaveWithoutPays - availableLeaveData?.leaveWithoutPay || 0}
+											value={availableLeaveData?.totalLeaveWithoutPays - availableLeaveData?.remainingLeaveWithoutPays || 0}
 											styles={{
 												path: { stroke: '#1FC3B7' },
 												text: {
@@ -72,15 +72,15 @@ const Leaves = () => {
 													transform: 'translateY(4px)'
 												}
 											}}
-											text={`${availableLeaveData?.leaveWithoutPays - availableLeaveData?.leaveWithoutPay || 0}`}
-											maxValue={availableLeaveData?.leaveWithoutPays}
+											text={`${availableLeaveData?.totalLeaveWithoutPays - availableLeaveData?.remainingLeaveWithoutPays || 0}`}
+											maxValue={availableLeaveData?.totalLeaveWithoutPays}
 										/>
 									</div>
 									<div>
 										<span className='' style={{ fontSize: '14px' }}>
 											Leave Without pay
 											<p className=' text-secondary' style={{ fontSize: '12px' }}>
-												Available {availableLeaveData?.leaveWithoutPay || 0} days
+												Available {availableLeaveData?.totalLeaveWithoutPays || 0} days
 											</p>
 										</span>
 									</div>
@@ -91,7 +91,7 @@ const Leaves = () => {
 								<div className='d-flex' style={{ gap: '12px' }}>
 									<div style={{ width: 40, height: 40 }}>
 										<CircularProgressbar
-											value={availableLeaveData?.restrictedHolidays - availableLeaveData?.restrictedHoliday || 0}
+											value={availableLeaveData?.totalRestrictedHolidays - availableLeaveData?.remainingRestrictedHolidays || 0}
 											styles={{
 												path: { stroke: '#8584e8' },
 												text: {
@@ -99,8 +99,8 @@ const Leaves = () => {
 													transform: 'translateY(4px)'
 												}
 											}}
-											text={`${availableLeaveData?.restrictedHolidays - availableLeaveData?.restrictedHoliday || 0}`}
-											maxValue={availableLeaveData?.restrictedHolidays}
+											text={`${availableLeaveData?.totalRestrictedHolidays - availableLeaveData?.remainingRestrictedHoliday || 0}`}
+											maxValue={availableLeaveData?.totalRestrictedHolidays}
 										/>
 									</div>
 
@@ -108,7 +108,7 @@ const Leaves = () => {
 										<span className='' style={{ fontSize: '14px' }}>
 											Restricted Holidays
 											<p className='text-secondary' style={{ fontSize: '12px' }}>
-												Available {availableLeaveData?.restrictedHoliday || 0} days
+												Available {availableLeaveData?.totalRestrictedHolidays || 0} days
 											</p>
 										</span>
 									</div>
@@ -118,7 +118,7 @@ const Leaves = () => {
 								<div className='d-flex' style={{ gap: '12px' }}>
 									<div style={{ width: 40, height: 40 }}>
 										<CircularProgressbar
-											value={availableLeaveData?.workFromHomes - availableLeaveData?.workFromHome || 0}
+											value={availableLeaveData?.totalWorkFromHomes - availableLeaveData?.remainingWorkFromHomes || 0}
 											styles={{
 												path: { stroke: '#1FC3B7' },
 												text: {
@@ -126,15 +126,15 @@ const Leaves = () => {
 													transform: 'translateY(4px)'
 												}
 											}}
-											text={`${availableLeaveData?.workFromHomes - availableLeaveData?.workFromHome || 0}`}
-											maxValue={availableLeaveData?.workFromHomes}
+											text={`${availableLeaveData?.totalWorkFromHomes - availableLeaveData?.remainingWorkFromHomes || 0}`}
+											maxValue={availableLeaveData?.totalWorkFromHomes}
 										/>
 									</div>
 									<div>
 										<span className='' style={{ fontSize: '14px' }}>
 											workFromHome
 											<p className=' text-secondary' style={{ fontSize: '12px' }}>
-												Available {availableLeaveData?.workFromHome || 0} days
+												Available {availableLeaveData?.totalWorkFromHomes || 0} days
 											</p>
 										</span>
 									</div>

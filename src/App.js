@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './App.css';
-import { LoginContext, RealDataContext } from './Context/LoginContext';
+// import { LoginContext, RealDataContext } from './Context/LoginContext';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
@@ -25,19 +25,22 @@ import GetUserTimesheet from './Components/Timesheet/GetUserTimesheet';
 import GetRmTimesheet from './Components/Timesheet/GetRmTimesheet';
 import EditReporingTimeSheet from './Components/Timesheet/EditReportingTimeSheet';
 import SearchProfile from './Components/Profile/SearchProfile';
-import DescriptionForm from './Components/Timesheet/descriptionForm';
+// import DescriptionForm from './Components/Timesheet/descriptionForm';
 import AdminLogin from './Components/AdminLogin/AdminLogin';
 import AdminSignUp from './Components/AdminSignUp/AdminSignUp';
 import AdminDashboard from './Components/AdminDashboard/AdminDashboard';
 import AdminHome from './Components/AdminDashboard/adminHome';
 import AdminUserProfile from './Components/AdminUserProfile/AdminUserProfile';
+import AddProject from './Components/ProjectTable/addProject';
+// import UserRoutes from './Routes/userRoutes';
+// import AdminRoutes from './Routes/adminRoutes';
 
 function App() {
 	return (
 		<>
 			<Router>
-				<Routes>
-					<Route element={<AdminRedirect />} path='/adminlogin'>
+				<Routes> 
+					 <Route element={<AdminRedirect />} path='/adminlogin'>
 						<Route element={<AdminLogin />} path='/adminlogin'></Route>
 					</Route>
 
@@ -48,11 +51,13 @@ function App() {
 							<Route element={<AdminHome />} path='' />
 							<Route element={<AdminUserProfile />} path='search-user/:id' />
 							{/* <Route element={<Gethierarchy />} path='get-hierarchy/:id' /> */}
-							{/* <Route element={<Home />} path="" /> */}
+							<Route element={<Home />} path="" /> 
 						</Route>
 					</Route>
 
-					{/* <Route element={<ErrorPage />} path="*"></Route> */}
+					
+					
+
 					<Route element={<RedirectRoute />} path='/'>
 						<Route element={<SignIn />} path='/'></Route>
 					</Route>
@@ -83,11 +88,13 @@ function App() {
 					</Route>
 
 					<Route element={<ProtectRoute />} path='/leaverequest'>
-						<Route element={<WFHform />} path='/leaverequest'></Route>
+						 <Route element={<WFHform />} path='/leaverequest'></Route>
 					</Route>
 
 					{/* <Route element={<DescriptionForm />} path="/testkaruna"></Route> */}
 
+                
+					<Route element={<AddProject/>} path='/adminProjectAdd'></Route>
 					<Route element={<ErrorPage />} path='*'></Route>
 				</Routes>
 			</Router>

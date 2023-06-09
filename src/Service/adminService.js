@@ -6,7 +6,7 @@ import { url } from '../Constant/Url';
 export const adminData = async () => {
 	const response = await fetch(url + 'admin/get-admin', {
 		method: 'GET',
-		// mode: "cors",
+		mode: "cors",
 		headers: { 'Content-Type': 'application/json' },
 		credentials: 'include'
 	});
@@ -19,9 +19,9 @@ export const adminData = async () => {
 };
 
 export const getAllEmployees = async () => {
-	const response = await fetch(url + 'admin/get-users', {
+	const response = await fetch(url + 'admin/get-all-users', {
 		method: 'GET',
-		// mode: "cors",
+		mode: "cors",
 		headers: { 'Content-Type': 'application/json' },
 		credentials: 'include'
 	});
