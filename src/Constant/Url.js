@@ -1,1 +1,1 @@
-export const url = 'https://fitting-darwin-radar-athens.trycloudflare.com/';
+export const url = 'https://francis-introduce-proposition-midwest.trycloudflare.com/';
