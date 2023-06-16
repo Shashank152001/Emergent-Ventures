@@ -14,3 +14,58 @@ export const getProjects = async () => {
 		return await response.json();
 	}
 };
+
+// addProject
+// updateProject
+// deleteProject
+
+export const addProject = async (data) => {
+    
+	const response = await fetch(url + 'admin/projects/add-project', {
+		method: 'POST',
+		headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+		credentials: 'include',
+        body: new URLSearchParams(data)
+	});
+
+	if (!response.ok) {
+		throw new Error('Data could not be fetched');
+	} else {
+		return await response.json();
+	}
+};
+
+export const UpdateProjectDetails = async (data) => {
+
+	const response = await fetch(url + 'admin/projects/update-project', {
+		method: 'PUT',
+		headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+		credentials: 'include',
+        body: new URLSearchParams(data)
+	});
+
+	if (!response.ok) {
+		throw new Error('Data could not be fetched');
+	} else {
+		return await response.json();
+	}
+};
+
+
+export const DeleteProject = async (data) => {
+	// admin/projects/delete-project
+	const response = await fetch(url + 'admin/projects/delete-project', {
+		method: 'DELETE',
+		headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+		credentials: 'include',
+        body: new URLSearchParams(data)
+	});
+
+	if (!response.ok) {
+		throw new Error('Data could not be fetched');
+	} else {
+		return await response.json();
+	}
+};
+
+

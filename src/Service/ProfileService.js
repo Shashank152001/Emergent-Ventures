@@ -23,9 +23,10 @@ export async function userUpdate(data) {
     })
     return response.json() 
 }
-
-export const getRequest=async()=>{
-    const response=await fetch(url+'user/get-user-hierarchy',{
+// getHierarchy
+ 
+export const getRequest=async(userId)=>{
+    const response=await fetch(url+`user/get-user-hierarchy?userId=${userId}`,{
         method:"GET",
         headers:{"Content-Type": "application/json" },
         credentials:"include"

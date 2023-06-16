@@ -13,3 +13,6 @@ export const getSkills = async (userId) => {
 		return await response.json();
 	}
 };
+
+
+

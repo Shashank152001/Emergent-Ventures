@@ -3,6 +3,7 @@ import { BsCheckCircleFill } from 'react-icons/bs';
 import './Timesheet.css';
 import NoRecord from '../Project/norecord';
 import { fetchTimeSheet } from '../../Service/TimesheetService';
+import set from 'date-fns/esm/set/index';
 
 function Timesheet() {
 	const [timesheet, setTimesheet] = useState(null);
@@ -11,10 +12,12 @@ function Timesheet() {
 		fetchTimeSheet()
 			.then((data) => {
 				// console.log(data);
+
 				setTimesheet(data);
 			})
 			.catch((e) => {
-				console.log(e.message);
+				// console.log(e.message);
+				
 			});
 	}, []);
 

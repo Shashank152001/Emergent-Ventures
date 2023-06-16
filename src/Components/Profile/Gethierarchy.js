@@ -1,17 +1,25 @@
-import { useRef, useEffect,useState } from "react";
+import { useRef, useEffect,useState} from "react";
 import OrgChart from "@balkangraph/orgchart.js";
 import "./Profile.css";
 import {getRequest} from '../../Service/ProfileService'
+import { useSearchParams } from "react-router-dom";
+
+
+
 const Gethierarchy = (props) => {
   const currentRef = useRef();
-  
+ 
+  const [searchParams] = useSearchParams();
+  const userId = searchParams.get('userId');
   const[hire,setHire]=useState(null)
 
   useEffect(()=>{
-      getRequest().then((data)=>{
+      getRequest(userId).then((data)=>{
         setHire(data)
       })
   },[])
+
+
   useEffect(() => {
     OrgChart.templates.ana.plus = "";
     OrgChart.templates.ana.minus = "";

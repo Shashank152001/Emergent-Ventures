@@ -9,15 +9,28 @@ import {
 } from "react-icons/ai";
 import { IoCalendarNumberOutline } from "react-icons/io5";
 import NoRecord from "./norecord";
-import { getProjects } from "../../Service/adminServices/projectService";
+import { getProjects} from "../../Service/adminServices/projectService";
 import { BiPlus } from "react-icons/bi";
 import AddProject from "../ProjectTable/addProject";
 import EditProject from "../ProjectTable/editProject";
+import DeleteProjectComponentProject from "../ProjectTable/deleteProject";
+
 
 function AdminProjectTable() {
   const [projects, setProject] = useState(null);
   const [isAddOpen, setAddOpen] = useState(false);
   const [isEditOpen, setEditOpen] = useState(false);
+  const [isDelete, setDeleteOpen] = useState(false);
+  const[isRender,setRender] = useState(false);
+  const[currentProject,setcurrentProject] =useState({
+    id:'',
+    projectName:'',
+    completeBy:'',
+    teamHead:'',
+    teamMembers:'',
+    department:'',
+    status:''
+  });
 
   useEffect(() => {
     getProjects()
@@ -26,13 +39,48 @@ function AdminProjectTable() {
       })
       .catch((e) => {
         console.log(e.message);
+        setProject(null)
       });
-  }, []);
+  }, [isRender]);
 
+  const ShowTeamMembers = (teamMembers)=>{
+
+    const team_members = teamMembers.map((item,idx)=>{
+      
+        return (
+
+          <p className={`image-container img-${idx+1} margin-remove`} key={idx} >
+          <img src={item.profileImage} alt="team-member" />
+          </p> 
+        )
+      
+    });
+
+
+     if(team_members.length>2){
+          team_members.splice(2);
+          team_members.push(
+            <p className="image-container img-3 ">
+                    <span className="count-member">2+</span>
+            </p>
+          )
+
+       return team_members;   
+          
+     }
+     else{
+         return team_members;
+     }
+  }
+
+  
+console.log(isRender);
   return (
     <>
-      {isAddOpen && <AddProject setAddOpen={setAddOpen} />}
-      {isEditOpen && <EditProject setEditOpen={setEditOpen} />}
+      {isAddOpen && <AddProject setAddOpen={setAddOpen} setRender={setRender}/>}
+      {isEditOpen && <EditProject setEditOpen={setEditOpen} currentProject={currentProject} setRender={setRender}/>}
+      {isDelete && <DeleteProjectComponentProject setDeleteOpen={setDeleteOpen} currentProjectId={currentProject} setRender={setRender}/>}
+
 
       <section className="project-container">
         <div className="project-heading">
@@ -93,33 +141,38 @@ function AdminProjectTable() {
                       <span className="status">{ele.status}</span>
                     </td>
                     <td className="team-members" id="team">
-                      <p className="image-container">
-                        <img src={myprofile} alt="team-member" />
-                      </p>
-                      <p className="image-container img-2">
-                        <img src={myprofile} alt="team-member" />
-                      </p>
-                      <p className="image-container img-3">
-                        <span className="count-member">2+</span>
-                      </p>
+                    {
+                      ShowTeamMembers(ele.teamMembers)
+                    }
                     </td>
                     <td>
                       <div className="lead">
                         <p className="image-container " id="team-lead">
-                          <img src={myprofile} alt="team-member" />
+                          <img src={ele.teamHead?.profileImage} alt="team-member" />
                         </p>
                         <span
                           className="lead-name"
                           style={{ fontSize: "0.8rem" }}
                         >
-                          {ele.teamHead}
+                          {ele.teamHead?.name}
                         </span>
                       </div>
                     </td>
                     <td>
                       <button
-                        onClick={() =>{ setEditOpen(!isEditOpen)
-                          document.getElementById('scroll-hidden').style.overflow = 'hidden';}}
+                        onClick={() =>{ 
+                          setcurrentProject(
+                            {
+                              projectName:ele.projectName,
+                              completeBy:ele.completeBy,
+                              teamHead:ele.teamHead.email,
+                              teamMembers:ele.teamMembers,
+                              department:ele.department,
+                              status:ele.status
+                            }
+                          )
+                          setEditOpen(!isEditOpen);
+                        document.getElementById('scroll-hidden').style.overflow = 'hidden';}}
                         style={{
                           border: "none",
                           outline: "none",
@@ -137,7 +190,19 @@ function AdminProjectTable() {
                           backgroundColor: "transparent",
                           marginLeft: "0.7rem",
                         }}
+                        onClick={
+                          ()=>{
+                           setDeleteOpen(!isDelete);
+                           setcurrentProject(
+                            {
+                              id:ele.id,
+                            }
+                          )
+                           document.getElementById('scroll-hidden').style.overflow = 'hidden';
+                          }
+                       }
                       >
+                        
                         <AiFillDelete />
                       </button>
                     </td>

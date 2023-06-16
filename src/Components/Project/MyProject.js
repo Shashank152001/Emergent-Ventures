@@ -49,17 +49,17 @@ function MyProject() {
 						{projects ? (
 							projects.map((ele, index) => (
 								<tr key={index}>
-									<td>{ele.projectName}</td>
+									<td>{ele?.projectName}</td>
 									<td>
 										<span className='project-date'>
 											<IoCalendarNumberOutline className='calender' />
-											{ele.assignedOn}
+											{ele?.assignedOn}
 										</span>
 									</td>
 									<td>
 										<span className='project-date'>
 											<IoCalendarNumberOutline className='calender' />
-											{ele.completeBy}
+											{ele?.completeBy}
 										</span>
 									</td>
 									<td>
@@ -83,7 +83,7 @@ function MyProject() {
 												<img src={myprofile} alt='team-member' />
 											</p>
 											<span className='lead-name' style={{ fontSize: '0.8rem' }}>
-												{ele.teamHead}
+												{ele?.teamHead?.name}
 											</span>
 										</div>
 									</td>

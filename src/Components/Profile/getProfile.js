@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { LoginContext } from '../../Context/LoginContext';
 import { ProfileFormData } from '../../Service/ProfileService';
 import { fetchSkills } from '../../Service/SkillService';
-import { Link } from 'react-router-dom';
+import { Link ,useNavigate} from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.css';
 import 'primeicons/primeicons.css';
 import './Profile.css';
@@ -11,6 +11,7 @@ function GetProfile() {
 	const { setProfileFormdata } = useContext(LoginContext);
 	const [profileFormData, setProfileFormData] = useState(null);
 	const [skilldata, setSkillData] = useState([]);
+	const navigate = useNavigate();
 
 	// Profile Get Data
 	useEffect(() => {
@@ -54,16 +55,25 @@ function GetProfile() {
 				</div>
 
 				<div className='profile-options-div'>
-					<Link
-						to='/dashboard/get-hierarchy'
+					<button
+						// to={`/dashboard/get-hierarchy?userId=${profileFormData?.profile?.userId}`}
 						style={{
 							textDecoration: 'none',
 							color: 'rgb(61, 172, 143)',
-							marginRight: '2rem'
+							marginRight: '2rem',
+							outline:'none',
+							border:'none',
+							backgroundColor:'transparent'
+						}}
+						onClick={()=>{
+							navigate({
+								pathname: '/dashboard/get-hierarchy',
+								search: `?userId=${profileFormData?.profile?.userId}`,
+							  });
 						}}
 					>
 						Organization Hierarchy
-					</Link>
+					</button>
 
 					<Link className='profile-options' to='/dashboard/profile'>
 						<h5 className='profile-options-h' style={{ marginRight: '2rem' }}>
