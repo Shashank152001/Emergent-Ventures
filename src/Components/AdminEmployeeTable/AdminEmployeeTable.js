@@ -12,27 +12,35 @@ function AdminEmployeeTable() {
 	const [curentPage, setCurrentPage] = useState(1);
 	const [isOpen,setOpen] = useState(false);
 	const [isEditOpen,setEditOpen] =useState(false);
-	const recordPerPage = 10;
+	const[isRender,setRender] = useState(false);
+	const recordPerPage = 15;
 	const lastIndex = curentPage * recordPerPage;
 	const firstIndex = lastIndex - recordPerPage;
 	const records = EmployeeData.slice(firstIndex, lastIndex);
 	const nPage = Math.ceil(EmployeeData.length / recordPerPage);
 	const numbers = [...Array(nPage + 1).keys()].slice(1);
+	const[currentUserId,setCurrentUserId]=useState({
+		userId:'',
+		role:"",
+		department:"",
+		location:''
+	});
 
 	useEffect(() => {
 		getUsers()
 			.then((data) => {
+				
 				setEmployeeData(data);
 			})
 			.catch((err) => {
 				console.log(err);
 			});
-	}, []);
+	}, [isRender]);
 
 	return (
 		<>
 		{isOpen && <AdminAddUser setOpen={setOpen}/>}
-		{isEditOpen && <AdminUpdateUser setEditOpen={setEditOpen}/>}
+		{isEditOpen && <AdminUpdateUser setEditOpen={setEditOpen} currentUserId={currentUserId} setRender = {setRender}/>}
 			<div className='main-div'>
 				<div className='tables'>
 					<div style={{
@@ -84,8 +92,16 @@ function AdminEmployeeTable() {
 										
 										<button
 										onClick={()=>{
+											
+											setCurrentUserId({
+												userId:d.id,
+												role:d.role,
+												department:d.department,
+												location:d.location
+											});
 											document.getElementById('scroll-hidden').style.overflow = 'hidden';
-											setEditOpen(!isEditOpen)}}
+											setEditOpen(!isEditOpen);
+										}}
 										 style={{
 											border:'none',
 											outline:"none",

@@ -1,6 +1,49 @@
+import { useState,useEffect } from "react";
+import { UpdateUserDetails} from "../../Service/adminServices/userAddandUpdateService";
+import {success} from '../../Utils/SuccessToast';
 import "./addproject.css";
 
-const AdminUpdateUser = ({setEditOpen}) => {
+const AdminUpdateUser = ({setEditOpen,currentUserId,setRender}) => {
+
+  
+
+  const[formData,setFormData] =useState({
+    userId:'',
+    role:'',
+    department:'',
+    location:''
+  });
+
+  const[isFormFilled,setFormFilled]=useState(false);
+  const handleChange = (event)=>{
+    const{value,name} = event.target;
+    setFormData((prevData)=>({...prevData,[name]:value}))
+  }
+
+  const handleSubmit = (event)=>{
+    event.preventDefault();
+    setFormFilled((prev)=>!prev);
+  }
+
+  useEffect(()=>{
+    setFormData((prevData)=>({...prevData,...currentUserId}));
+  },[])
+
+  useEffect(()=>{
+
+    if(isFormFilled){
+           UpdateUserDetails(formData).then((data)=>{
+            success(data.message);
+            setEditOpen(false);
+            document.getElementById("scroll-hidden").style.overflow = "visible";
+            setRender((prev) => !prev);
+            
+           }).catch((err)=>{
+            console.log(err);
+           })
+    }
+
+  },[isFormFilled])
 
   return (
     <section className="section-parent">
@@ -9,7 +52,7 @@ const AdminUpdateUser = ({setEditOpen}) => {
       <div>
         <h2 className="form-project-title">Update User</h2>
       </div>
-        <form className="admin-form">
+        <form className="admin-form" onSubmit={handleSubmit}>
          
           <div className="row-field "  style={{ padding:'10px 0 0 10px'}}>
            
@@ -18,6 +61,8 @@ const AdminUpdateUser = ({setEditOpen}) => {
               name="role"
               id="role"
               className="field-size input-form"
+              value={formData?.role}
+              onChange={handleChange}
               required
             />
              <label htmlFor="role" className="text-start label-form">
@@ -31,7 +76,9 @@ const AdminUpdateUser = ({setEditOpen}) => {
               type="text"
               name="department"
               id="Department"
+              value={formData?.department}
               className="field-size input-form"
+              onChange={handleChange}
               required
             />
              <label htmlFor="Department" className="text-start label-form">
@@ -45,7 +92,9 @@ const AdminUpdateUser = ({setEditOpen}) => {
               type="text"
               name="location"
               id="location"
+              value={formData?.location}
               className="field-size input-form"
+              onChange={handleChange}
               required
             />
              <label htmlFor="location" className="text-start label-form">

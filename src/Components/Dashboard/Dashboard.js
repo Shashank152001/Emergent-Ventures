@@ -22,7 +22,7 @@ function MyDashBoard() {
 	useEffect(() => {
 		userData()
 			.then((data) => {
-				setUserDatas(data);
+				setUserDatas((prev)=>({...prev,...data}));
 			})
 			.catch((e) => {
 				console.log(e.message);

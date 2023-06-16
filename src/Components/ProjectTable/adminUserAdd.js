@@ -1,6 +1,35 @@
+import { useState,useEffect } from "react";
+import { addNewUser} from "../../Service/adminServices/userAddandUpdateService";
+import {success} from '../../Utils/SuccessToast';
 import "./addproject.css";
 
 const AdminAddUser = ({setOpen}) => {
+
+  const[formData,setFormData] =useState(null);
+  const[isFormFilled,setFormFilled]=useState(false);
+
+  const handleChange = (event)=>{
+    const{value,name} = event.target;
+    setFormData((prevData)=>({...prevData,[name]:value}))
+  }
+
+  const handleSubmit = (event)=>{
+    event.preventDefault();
+    setFormFilled((prev)=>!prev);
+  }
+
+  useEffect(()=>{
+
+    if(isFormFilled){
+           addNewUser(formData).then((data)=>{
+            success(data.msg);
+            setOpen(false);
+           }).catch((err)=>{
+            console.log(err);
+           })
+    }
+
+  },[isFormFilled])
 
   return (
     // <section className="section-parent">
@@ -9,7 +38,7 @@ const AdminAddUser = ({setOpen}) => {
       <div>
         <h2 className="form-project-title">Add User</h2>
       </div>
-        <form className="row admin-form">
+        <form className="row admin-form" onSubmit={handleSubmit}>
           <div className="row-field col-6 user-row-field " style={{ paddingTop:'10px'}}>
            
             <input
@@ -17,6 +46,7 @@ const AdminAddUser = ({setOpen}) => {
               name="hrmid"
               id="hrmid"
               className="field-size input-form"
+              onChange={handleChange}
               required
             />
              <label htmlFor="hrmid" className="text-start label-form">
@@ -31,6 +61,7 @@ const AdminAddUser = ({setOpen}) => {
               name="name"
               id="name"
               className="field-size input-form"
+              onChange={handleChange}
               required
             />
              <label htmlFor="name" className="text-start label-form">
@@ -46,6 +77,7 @@ const AdminAddUser = ({setOpen}) => {
               name="email"
               id="name"
               className="field-size input-form"
+              onChange={handleChange}
               required
             />
              <label htmlFor="email" className="text-start label-form">
@@ -61,6 +93,7 @@ const AdminAddUser = ({setOpen}) => {
               name="phone"
               id="phone"
               className="field-size input-form"
+              onChange={handleChange}
               required
             />
              <label htmlFor="phone" className="text-start label-form">
@@ -76,6 +109,7 @@ const AdminAddUser = ({setOpen}) => {
               name="role"
               id="role"
               className="field-size input-form"
+              onChange={handleChange}
               required
             />
              <label htmlFor="role" className="text-start label-form">
@@ -90,6 +124,7 @@ const AdminAddUser = ({setOpen}) => {
               name="department"
               id="Department"
               className="field-size input-form"
+              onChange={handleChange}
               required
             />
              <label htmlFor="Department" className="text-start label-form">
@@ -104,6 +139,7 @@ const AdminAddUser = ({setOpen}) => {
               name="location"
               id="location"
               className="field-size input-form"
+              onChange={handleChange}
               required
             />
              <label htmlFor="location" className="text-start label-form">
@@ -117,6 +153,7 @@ const AdminAddUser = ({setOpen}) => {
                 name="joiningDate"
                 id="joiningDate"
                 className="field-size input-form"
+                onChange={handleChange}
                 onFocus={(event)=>{
                     event.target.type = "date"
                 }}
@@ -138,6 +175,7 @@ const AdminAddUser = ({setOpen}) => {
               name="reportingManager"
               id="reportingManager"
               className="field-size input-form"
+              onChange={handleChange}
               required
             />
              <label htmlFor="reportingManager" className="text-start label-form">
@@ -152,6 +190,7 @@ const AdminAddUser = ({setOpen}) => {
               name="reportsTo"
               id="reportsTo"
               className="field-size input-form"
+              onChange={handleChange}
               required
             />
              <label htmlFor="reportsTo" className="text-start label-form">

@@ -84,7 +84,7 @@ function App() {
 							<Route element={<GetRmTimesheet />} path='viewTime' />
 							<Route element={<EditReporingTimeSheet />} path='editTime/:id' />
 							<Route element={<TimesheetForm />} path='timesheetform'></Route>
-							<Route element={<Gethierarchy />} path='get-hierarchy/:id' />
+							<Route element={<Gethierarchy />} path='get-hierarchy' />
 						</Route>
 					</Route>
 
