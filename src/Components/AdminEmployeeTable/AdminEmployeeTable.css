@@ -86,3 +86,8 @@
   /* font-size:20px; */
 
 }
+.MuiPagination-ul{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

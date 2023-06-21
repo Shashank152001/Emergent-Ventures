@@ -68,4 +68,19 @@ export const DeleteProject = async (data) => {
 	}
 };
 
+export const getProjectDetail =async(projectId)=>{
+	
+    const response=await fetch(url+`admin/projects/get-project?projectId=${projectId}`,{
+        method:"GET",
+        headers:{"Content-Type": "application/json" },
+        credentials:"include"
+    })
+
+    if(!response.ok){
+        throw new Error('Data could not be fetched')
+    }else{
+        return await response.json();
+    }
+}
+
 

@@ -5,8 +5,10 @@ import { AiOutlineDown, AiOutlineSwap } from 'react-icons/ai';
 import { IoCalendarNumberOutline } from 'react-icons/io5';
 import NoRecord from './norecord';
 import { fetchProject } from '../../Service/ProjectService';
+import { useNavigate } from 'react-router-dom/dist';
 
 function ProjectTable() {
+	const navigate = useNavigate();
 	const [projects, setProject] = useState(null);
 
 	useEffect(() => {
@@ -49,7 +51,13 @@ function ProjectTable() {
 						{projects ? (
 							projects.map((ele, index) => (
 								<tr key={index}>
-									<td>{ele.projectName}</td>
+									<td
+									onClick={() => {
+										navigate({
+										  pathname: "project-detail",
+										  search: `?projectId=${ele.id}`,
+										});
+									  }}>{ele.projectName}</td>
 									<td>
 										<span className='project-date'>
 											<IoCalendarNumberOutline className='calender' />
