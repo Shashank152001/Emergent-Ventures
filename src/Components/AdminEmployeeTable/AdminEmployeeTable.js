@@ -5,9 +5,11 @@ import {AiFillEdit } from "react-icons/ai";
 import { BiPlus } from "react-icons/bi";
 import AdminAddUser from '../ProjectTable/adminUserAdd';
 import AdminUpdateUser from '../ProjectTable/adminUpdateUser';
+import { useNavigate} from 'react-router-dom';
  
 
 function AdminEmployeeTable() {
+	const navigate = useNavigate();
 	const [EmployeeData, setEmployeeData] = useState([]);
 	const [curentPage, setCurrentPage] = useState(1);
 	const [isOpen,setOpen] = useState(false);
@@ -29,7 +31,7 @@ function AdminEmployeeTable() {
 	useEffect(() => {
 		getUsers()
 			.then((data) => {
-				
+				console.log(data);
 				setEmployeeData(data);
 			})
 			.catch((err) => {
@@ -82,7 +84,13 @@ function AdminEmployeeTable() {
 						<tbody className='table-group-divider'>
 							{records.map((d, i) => (
 								<tr key={i}>
-									<td>{d.name}</td>
+									<td 
+									  onClick={()=>{
+										navigate({
+											pathname: 'user-profile',
+											search: `?userId=${d.id}`,
+										  });
+									}}>{d.name}</td>
 									<td>{d.hrmid}</td>
 									<td>{d.department}</td>
 									<td>{d.role}</td>
