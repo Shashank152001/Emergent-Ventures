@@ -14,6 +14,7 @@ import { success } from '../../Utils/SuccessToast';
 import {Error} from '../../Utils/ErrorToast';
 
 function Profile() {
+	
 	const navigate = useNavigate();
 	const [imagecrop, setimagecrop] = useState(false);
 	const [pview, setpview] = useState(false);

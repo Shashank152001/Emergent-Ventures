@@ -31,6 +31,8 @@ import AdminSignUp from './Components/AdminSignUp/AdminSignUp';
 import AdminDashboard from './Components/AdminDashboard/AdminDashboard';
 import AdminHome from './Components/AdminDashboard/adminHome';
 import AdminUserProfile from './Components/AdminUserProfile/AdminUserProfile';
+import UserProfile from './Components/AdminUserHierarchy/userProfile';
+import Hierarchy from './Components/AdminUserHierarchy/hierarchy';
 import SuccessMessage from './Components/Message/successmessage'
 
 // import UserRoutes from './Routes/userRoutes';
@@ -51,7 +53,9 @@ function App() {
 						<Route element={<AdminDashboard />} path='/admindashboard'>
 							<Route element={<AdminHome />} path='' />
 							<Route element={<AdminUserProfile />} path='search-user/:id' />
-							{/* <Route element={<Gethierarchy />} path='get-hierarchy/:id' /> */}
+							<Route element={<UserProfile />} path='user-profile' />
+							<Route element={<Hierarchy />} path='get-hierarchy' />
+							
 							<Route element={<Home />} path="" /> 
 						</Route>
 					</Route>
