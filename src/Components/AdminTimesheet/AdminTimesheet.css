@@ -1,0 +1,27 @@
+.timesheets-div {
+	width: 100%;
+	height: 100%;
+}
+
+.timesheets-heading {
+	margin: 1rem 0 1rem 1rem;
+	font-size: 2rem;
+	font-weight: 500;
+}
+
+.month-selector {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+}
+
+.arrow {
+	margin: 0 0.5rem;
+	cursor: pointer;
+}
+
+.months-span {
+	padding: 0.5rem;
+	margin: 1rem 0;
+}

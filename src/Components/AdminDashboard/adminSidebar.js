@@ -24,22 +24,22 @@ function AdminSidebar() {
 						<span>Requests</span>
 					</div>
 				</NavLink>
-				{/* <NavLink to='getProfile' className={(navData) => (navData.isActive ? 'active-tab' : 'inactive-tab')}>
+				<NavLink to='requests' className={(navData) => (navData.isActive ? 'active-tab' : 'inactive-tab')}>
 					<div className='left-sidebar-tab'>
 						<span style={{ marginRight: '1rem' }}>
-							<i className='bi bi-person' style={{ fontSize: '1.2rem' }}></i>
+							<i className='bi bi-calendar-check' style={{ fontSize: '1.2rem' }}></i>
 						</span>
-						<span>Account</span>
+						<span>Requests</span>
 					</div>
-				</NavLink> */}
-				{/* <NavLink to='getTimesheet' className={(navData) => (navData.isActive ? 'active-tab' : 'inactive-tab')}>
+				</NavLink>
+				<NavLink to='timesheets' className={(navData) => (navData.isActive ? 'active-tab' : 'inactive-tab')}>
 					<div className='left-sidebar-tab'>
 						<span style={{ marginRight: '1rem' }}>
 							<i className='bi bi-calendar-check' style={{ fontSize: '1.2rem' }}></i>
 						</span>
 						<span>Timesheets</span>
 					</div>
-				</NavLink> */}
+				</NavLink>
 			</div>
 		</div>
 	);
