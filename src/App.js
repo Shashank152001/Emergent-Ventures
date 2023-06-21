@@ -33,7 +33,9 @@ import AdminHome from './Components/AdminDashboard/adminHome';
 import AdminUserProfile from './Components/AdminUserProfile/AdminUserProfile';
 import UserProfile from './Components/AdminUserHierarchy/userProfile';
 import Hierarchy from './Components/AdminUserHierarchy/hierarchy';
-import SuccessMessage from './Components/Message/successmessage'
+import SuccessMessage from './Components/Message/successmessage';
+import AdminRequest from './Components/AdminRequest/AdminRequest';
+import AdminTimesheet from './Components/AdminTimesheet/AdminTimesheet';
 
 // import UserRoutes from './Routes/userRoutes';
 // import AdminRoutes from './Routes/adminRoutes';
@@ -42,8 +44,8 @@ function App() {
 	return (
 		<>
 			<Router>
-				<Routes> 
-					 <Route element={<AdminRedirect />} path='/adminlogin'>
+				<Routes>
+					<Route element={<AdminRedirect />} path='/adminlogin'>
 						<Route element={<AdminLogin />} path='/adminlogin'></Route>
 					</Route>
 
@@ -54,14 +56,13 @@ function App() {
 							<Route element={<AdminHome />} path='' />
 							<Route element={<AdminUserProfile />} path='search-user/:id' />
 							<Route element={<UserProfile />} path='user-profile' />
+							<Route element={<AdminRequest />} path='requests' />
+							<Route element={<AdminTimesheet />} path='timesheets' />
 							<Route element={<Hierarchy />} path='get-hierarchy' />
-							
-							<Route element={<Home />} path="" /> 
+
+							<Route element={<Home />} path='' />
 						</Route>
 					</Route>
-
-					
-					
 
 					<Route element={<RedirectRoute />} path='/'>
 						<Route element={<SignIn />} path='/'></Route>
@@ -93,12 +94,12 @@ function App() {
 					</Route>
 
 					<Route element={<ProtectRoute />} path='/leaverequest'>
-						 <Route element={<WFHform />} path='/leaverequest'></Route>
+						<Route element={<WFHform />} path='/leaverequest'></Route>
 					</Route>
 
 					{/* <Route element={<DescriptionForm />} path="/testkaruna"></Route> */}
 
-                    <Route element={<SuccessMessage/>} path="/success"></Route>
+					<Route element={<SuccessMessage />} path='/success'></Route>
 					<Route element={<ErrorPage />} path='*'></Route>
 				</Routes>
 			</Router>
