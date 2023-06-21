@@ -36,6 +36,7 @@ import Hierarchy from './Components/AdminUserHierarchy/hierarchy';
 import SuccessMessage from './Components/Message/successmessage';
 import AdminRequest from './Components/AdminRequest/AdminRequest';
 import AdminTimesheet from './Components/AdminTimesheet/AdminTimesheet';
+import AdminProject from './Components/ProjectTable/AdminProject';
 
 // import UserRoutes from './Routes/userRoutes';
 // import AdminRoutes from './Routes/adminRoutes';
@@ -59,6 +60,7 @@ function App() {
 							<Route element={<AdminRequest />} path='requests' />
 							<Route element={<AdminTimesheet />} path='timesheets' />
 							<Route element={<Hierarchy />} path='get-hierarchy' />
+							<Route element={<AdminProject />} path='project-detail' />
 
 							<Route element={<Home />} path='' />
 						</Route>

@@ -14,9 +14,11 @@ import { BiPlus } from "react-icons/bi";
 import AddProject from "../ProjectTable/addProject";
 import EditProject from "../ProjectTable/editProject";
 import DeleteProjectComponentProject from "../ProjectTable/deleteProject";
+import { useNavigate } from "react-router-dom/dist";
 
 
 function AdminProjectTable() {
+  const navigate = useNavigate();
   const [projects, setProject] = useState(null);
   const [isAddOpen, setAddOpen] = useState(false);
   const [isEditOpen, setEditOpen] = useState(false);
@@ -35,6 +37,7 @@ function AdminProjectTable() {
   useEffect(() => {
     getProjects()
       .then((data) => {
+        
         setProject(data);
       })
       .catch((e) => {
@@ -123,7 +126,16 @@ console.log(isRender);
               {projects ? (
                 projects.map((ele, index) => (
                   <tr key={index}>
-                    <td>{ele.projectName}</td>
+                    <td
+                    
+                    onClick={() => {
+                      navigate({
+                        pathname: "project-detail",
+                        search: `?projectId=${ele.id}`,
+                      })
+                    }}
+                    
+                    >{ele.projectName}</td>
                     <td>
                       <span className="project-date">
                         <IoCalendarNumberOutline className="calender" />

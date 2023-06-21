@@ -16,18 +16,11 @@ function AdminSidebar() {
 						<span>Dashboard</span>
 					</div>
 				</NavLink>
-				<NavLink to='getRequest' className={(navData) => (navData.isActive ? 'active-tab' : 'inactive-tab')}>
-					<div className='left-sidebar-tab'>
-						<span style={{ marginRight: '1rem' }}>
-							<i className='bi bi-wallet2' style={{ fontSize: '1.2rem' }}></i>
-						</span>
-						<span>Requests</span>
-					</div>
-				</NavLink>
+				
 				<NavLink to='requests' className={(navData) => (navData.isActive ? 'active-tab' : 'inactive-tab')}>
 					<div className='left-sidebar-tab'>
 						<span style={{ marginRight: '1rem' }}>
-							<i className='bi bi-calendar-check' style={{ fontSize: '1.2rem' }}></i>
+							<i className='bi bi-wallet2' style={{ fontSize: '1.2rem' }}></i>
 						</span>
 						<span>Requests</span>
 					</div>

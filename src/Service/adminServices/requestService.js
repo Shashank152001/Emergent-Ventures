@@ -2,8 +2,8 @@ import { url } from '../../Constant/Url';
 
 // admin/requests/get-monthly-requests?startDate=2023-06-01
 
-export const getRequestData = async(startDate)=>{
-    const response=await fetch(url+`admin/requests/get-monthly-requests?startDate=${startDate}`,{
+export const getRequestData = async(startDate,endDate)=>{
+    const response=await fetch(url+`admin/requests/get-range-requests?startDate=${startDate}&endDate=${endDate}`,{
         method:"GET",
         headers:{"Content-Type": "application/json" },
         credentials:"include"

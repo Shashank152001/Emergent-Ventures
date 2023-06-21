@@ -51,13 +51,13 @@ const LeftRow = ({ row, handlechange, week, start, end }) => {
             
           >
             <option value="">Select Client</option>
-            {/* <option value="Microsoft">Microsoft</option>
-            <option value="Google">Google</option> */}
-            {optionData.map((data, index) => (
+            <option value="Microsoft">Microsoft</option>
+            <option value="Google">Google</option>
+            {/* {optionData.map((data, index) => (
               <option value={data.clientName} key={index}>
                 {data.clientName}
               </option>
-            ))}
+            ))} */}
           </select>
         </td>
         <td>
@@ -72,13 +72,13 @@ const LeftRow = ({ row, handlechange, week, start, end }) => {
             
           >
             <option value="">Select Project</option>
-            {/* <option value="Microsoft">Microsoft</option>
-            <option value="Google">Google</option> */}
-            {optionData.map((data, index) => (
+            <option value="Microsoft">Microsoft</option>
+            <option value="Google">Google</option>
+            {/* {optionData.map((data, index) => (
               <option value={data.projectName} key={index}>
                 {data.projectName}
               </option>
-            ))}
+            ))} */}
           </select>
         </td>
         <td>

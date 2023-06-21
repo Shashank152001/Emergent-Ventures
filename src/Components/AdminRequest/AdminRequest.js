@@ -1,61 +1,47 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { useState, useEffect } from 'react';
-import { startOfMonth, endOfMonth, addMonths, subMonths } from 'date-fns';
+import { startOfMonth, endOfMonth} from 'date-fns';
 import NoRecord from '../Project/norecord';
+import {getRequestData} from '../../Service/adminServices/requestService';
 import './AdminRequest.css';
 
 const AdminRequest = () => {
-	const [date, setDate] = useState(new Date());
-	const [start, setStart] = useState(startOfMonth(date)); // start of the month
-	const [end, setEnd] = useState(endOfMonth(date)); // end of the month
+	const [requestData, setRequestData] = useState(null);
+	const [startDate, setStartDate] = useState(startOfMonth(new Date()).toLocaleDateString('en-GB').split('/').reverse().join('-') ); 
+	const [endDate, setEndDate] = useState(endOfMonth(new Date()).toLocaleDateString('en-GB').split('/').reverse().join('-') ); 
 
-	const startDate = start.toLocaleDateString('en-GB').split('/');
-	const endDate = end.toLocaleDateString('en-GB').split('/');
-
-	const startdate = startDate[2] + '-' + startDate[1] + '-' + startDate[0];
-	const formattedStartDate = startDate[0] + '-' + startDate[1] + '-' + startDate[2];
-	const formattedEndDate = endDate[0] + '-' + endDate[1] + '-' + endDate[2];
-
-	const nextMonth = () => {
-		setDate(() => addMonths(date, 1));
-	};
-
-	const previousMonth = () => {
-		setDate(() => subMonths(date, 1));
-	};
+	const handleChange = (event)=>{
+         const{value,name} = event.target;
+		 if(name === 'startdate'){
+			setStartDate(value);
+		 }
+		 else{
+              setEndDate(value);
+		 }
+		 
+	}
 
 	useEffect(() => {
-		setStart(() => startOfMonth(date));
-		setEnd(() => endOfMonth(date));
-	}, [date]);
+		
+		getRequestData(startDate,endDate)
+			.then((data) => {
+				console.log(data);
+				setRequestData(data);
+			})
+			.catch((e) => {
+				setRequestData(null);
+			});
+	}, [startDate,endDate]);
 
-	const [requestData, setRequestData] = useState([]);
-	// const { date } = useParams();
 
-	// useEffect(() => {
-	// 	getRequests(startdate)
-	// 		.then((data) => {
-	// 			setRequestData(data);
-	// 		})
-	// 		.catch((e) => {
-	// 			console.log(e.message);
-	// 		});
-	// }, [date, start, end]);
-
-	console.log(requestData);
 
 	return (
 		<div className='requests-div'>
-			<div className='requests-heading'>Requests</div>
-			<div className='month-selector'>
-				<FontAwesomeIcon className='arrow' onClick={previousMonth} icon={faArrowLeft} />
-				<span className='months-span'>
-					{formattedStartDate} - {formattedEndDate}
-				</span>
-				<FontAwesomeIcon className='arrow' onClick={nextMonth} icon={faArrowRight} />
+			<div className='requests-heading'>Requests
+			<input type="date" name="startdate"  onChange={handleChange} value={startDate} style={{marginLeft:"0.9rem"}}/>
+			<input type="date" name="enddate"  onChange={handleChange} value={endDate} style={{marginLeft:"0.9rem"}}/>
 			</div>
-			<div className='requests' style={{ width: '80%' }}>
+		
+			<div className='requests' style={{ width: '98%',margin:'auto' }}>
 				<table className='table table-hover' style={{ marginTop: '2rem' }}>
 					<thead>
 						<tr>
@@ -75,26 +61,26 @@ const AdminRequest = () => {
 									<td>{index + 1}</td>
 									<td>
 										<span>
-											<img style={{ width: '2rem', height: '2rem' }} src={item.profileImage} alt='employee' />
+											<img style={{ width: '2rem', height: '2rem' }} src={item?.profileImage} alt='employee' />
 										</span>
 										<span> </span>
-										{item.hrmid}
+										{item?.hrmid}
 										<span> - </span>
-										{item.name}
+										{item?.name}
 									</td>
-									<td>{item.request}</td>
-									<td>{item.leaveType}</td>
-									<td>{item.startDate}</td>
-									<td>{item.endDate}</td>
-									{item.status === 'Approved' ? (
+									<td>{item?.request}</td>
+									<td>{item?.leaveType}</td>
+									<td>{item?.startDate}</td>
+									<td>{item?.endDate}</td>
+									{item?.status === 'Approved' ? (
 										<td>
 											<i className='bi bi-check-circle-fill text-success '></i>
 										</td>
-									) : item.status === 'Rejected' ? (
+									) : item?.status === 'Rejected' ? (
 										<td>
 											<i className='bi bi-x-circle-fill text-danger '></i>
 										</td>
-									) : item.status === 'Cancelled' ? (
+									) : item?.status === 'Cancelled' ? (
 										<td>
 											<i className='bi bi-x-circle-fill text-danger '></i>
 										</td>
