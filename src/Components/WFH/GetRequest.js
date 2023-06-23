@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { YourRequestGetdata, ResendRequest, CancelRequest } from '../../Service/LeavesService';
 import './Wfh.css';
 import RequestTabs from './RequestTabs';
-import NoRecord from '../Project/NoRecord';
+import NoRecord from '../ProjectTable/NoRecord';
 import { success } from '../../Utils/SuccessToast';
 import { Error } from '../../Utils/ErrorToast';
 import 'react-toastify/dist/ReactToastify.css';

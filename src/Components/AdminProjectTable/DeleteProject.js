@@ -4,10 +4,7 @@ import { success } from '../../Utils/SuccessToast';
 import './AddProject.css';
 
 const DeleteProject = ({ setDeleteOpen, currentProjectId, setRender }) => {
-	const [formData, setFormData] = useState({
-		projectId: ''
-	});
-
+	const [formData, setFormData] = useState({ projectId: '' });
 	const [isFormFilled, setFormFilled] = useState(false);
 
 	const handleSubmit = (event) => {
@@ -48,16 +45,15 @@ const DeleteProject = ({ setDeleteOpen, currentProjectId, setRender }) => {
 						<div className='form-submit-button row-field flex-row justify-content-center'>
 							<button
 								type='submit'
-								className='form-submit-btn'
+								className='form-submit-btn bg-danger'
 								style={{
 									width: '45%'
 								}}
 							>
-								Submit
+								Delete
 							</button>
 							<button
-								type='submit'
-								className='form-submit-btn bg-danger'
+								className='form-submit-btn bg-secondary'
 								onClick={() => {
 									setDeleteOpen(false);
 									document.getElementById('scroll-hidden').style.overflow = 'visible';
@@ -66,7 +62,7 @@ const DeleteProject = ({ setDeleteOpen, currentProjectId, setRender }) => {
 									width: '45%'
 								}}
 							>
-								cancel
+								Cancel
 							</button>
 						</div>
 					</form>

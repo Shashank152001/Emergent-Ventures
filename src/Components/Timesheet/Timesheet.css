@@ -1,8 +1,12 @@
 section.timesheet-container {
 	width: 100%;
-	margin: 2rem 0;
+	margin: 1rem auto;
 	border-radius: 0.4rem;
 	background: #f7f9fb;
+}
+
+.timesheets-heading {
+	padding: 0.9rem;
 }
 
 .checked {
@@ -73,10 +77,8 @@ section.timesheet-container {
 	padding: 0.5rem;
 	overflow-x: scroll;
 	max-width: 40rem;
-    scrollbar-width: none;
+	scrollbar-width: none;
 }
-
-
 
 .date-td:focus {
 	outline: none;
@@ -193,11 +195,9 @@ select {
 	background-color: rgb(17, 180, 111);
 	font-weight: 500;
 	width: 6.625rem;
-	
 }
 .inactive-timesheet-tab {
 	background-color: #ffffff;
-	
 }
 .inactive-timesheet-tab:hover {
 	background-color: rgb(240, 240, 240);
@@ -217,6 +217,7 @@ select {
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	padding: 0 1rem;
 }
 .dashboard-timesheet-tbody-div {
 	max-width: inherit;
@@ -235,8 +236,8 @@ select {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	border-bottom: 1px rgb(222, 222, 222) solid;
-	padding: 0.6rem 0;
+	border-bottom: 1px rgb(210, 210, 210) solid;
+	padding: 0.6rem 1rem;
 }
 .dashboard-timesheet-card:last-child {
 	border-bottom: none;
@@ -274,13 +275,13 @@ select {
 }
 .dashboard-week-start,
 .dashboard-week-end {
-	font-size: 0.9rem;
-	width: 7rem;
+	font-size: 0.8rem;
+	width: 6rem;
 }
 .dashboard-submitted-hours-div,
 .dashboard-approved-hours-div {
 	margin-left: 1rem;
-	font-size: 0.9rem;
+	font-size: 0.8rem;
 	display: flex;
 	flex-direction: column;
 }
@@ -290,14 +291,13 @@ select {
 .custom-drop {
 	position: absolute;
 	inset: 0px auto auto 0px;
-	/* transform: translate3d(32px, 0px, 0px); */
 	height: 180px;
 	max-height: 181px;
 	overflow-y: auto;
-  }
+}
 
 .dropdown-menu::before {
-	content: "";
+	content: '';
 	position: absolute;
 	left: -10px;
 	width: 0;
@@ -305,8 +305,8 @@ select {
 	border-top: 10px solid transparent;
 	border-bottom: 10px solid transparent;
 	border-right: 10px solid #333;
-  }
-  
-  .dropdown-toggle::after {
+}
+
+.dropdown-toggle::after {
 	display: none !important;
-  }
+}

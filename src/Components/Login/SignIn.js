@@ -118,24 +118,17 @@ function SignIn() {
 										className='form-control'
 										required
 									/>
-
-									{/* is-valid,is=invalid  */}
-									{/* <div class="invalid-feedback">enter valid email</div> */}
 									{formErrors.email && <span className='error-span'>{formErrors.email}</span>}
 								</div>
 								<div className='field position-relative'>
 									<label htmlFor='password' className='label'>
 										Password
 									</label>
-									<input type='password' name='password' id='password' placeholder='enter password' onChange={handleChange} value={formData.password} />
+									<input type='password' name='password' id='password' placeholder='Enter Password' onChange={handleChange} value={formData.password} />
 
 									{formErrors.password && <span className='error-span'>{formErrors.password}</span>}
 								</div>
 								<div className='last'>
-									<div>
-										<input type='checkbox' name='remember' id='remember'></input>
-										<span style={{ paddingLeft: '0.5rem' }}>Remember me</span>
-									</div>
 									<div>
 										<Link to='/forgotpassword'>Forgot password?</Link>
 									</div>

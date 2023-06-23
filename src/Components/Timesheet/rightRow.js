@@ -39,7 +39,7 @@ const RightRow = ({ row, handlechange, date, week, start, end, slide, userFinalD
 					/>
 				</td>
 				<td style={{ position: 'relative' }}>
-					<SiReadthedocs onClick={() => setDescription(!isDescription)} style={{ position: 'absolute', right: '26px' }} />
+					<i className='bi bi-journal' onClick={() => setDescription(!isDescription)}></i>
 					{isDescription ? <DescriptionForm slide={slide} setDescription={setDescription} userFinalData={userFinalData} setUserFinalData={setUserFinalData} row={row} date={date} /> : ''}
 				</td>
 
