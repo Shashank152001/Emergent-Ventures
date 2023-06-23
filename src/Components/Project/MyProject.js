@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import myprofile from '../../Assest/myprofile.jpg';
-import './project.css';
+import myprofile from '../../Assest/myprofile.png';
+import './Project.css';
 import { AiOutlineDown, AiOutlineSwap } from 'react-icons/ai';
 import { IoCalendarNumberOutline } from 'react-icons/io5';
-import NoRecord from './norecord';
+import NoRecord from './NoRecord';
 import { fetchProject } from '../../Service/ProjectService';
 
 function MyProject() {

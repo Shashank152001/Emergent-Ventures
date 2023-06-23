@@ -1,11 +1,7 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRef } from 'react';
-import { BiBell, BiChevronDown, BiSearch, BiPlusCircle } from 'react-icons/bi';
-// import '../Dashboard/Dashboard.css';
-
-import { LoginContext, RealDataContext } from '../../Context/LoginContext';
-import FileUpload from '../Dashboard/fileupload';
-import { Notification } from '../Notification/Notification';
+import { BiChevronDown, BiSearch } from 'react-icons/bi';
+import FileUpload from '../Dashboard/Fileupload';
 import { useNavigate } from 'react-router-dom';
 import { adminData } from '../../Service/adminServices/adminService';
 import { AdminDropDown } from '../AdminDropDown/AdminDropDown';
@@ -14,14 +10,9 @@ import { adminSearchBar } from '../../Service/adminServices/searchService';
 function AdminHeader() {
 	const [showModal, setShowModal] = useState(false);
 	const [openProfile, setOpenProfile] = useState(false);
-	const [notificationData, setNotificationData] = useState([]);
-	const [openNotification, setOpenNotification] = useState(false);
 	const [Admindata, setAdminData] = useState(null);
-	// const { profileformdata, setProfileFormdata } = useContext(LoginContext);
-	// const { setIsRealTime } = useContext(RealDataContext);
 
-	// search Field
-
+	// search bar
 	const [input, setInput] = useState([]);
 	const [searchResult, setSearchResult] = useState([]);
 	const [showResults, setShowResults] = useState(false);
@@ -123,30 +114,7 @@ function AdminHeader() {
 				</div>
 
 				<div className='header-profile-div'>
-					<div className='notification-div'>
-						<div className='bell-icon-div'>
-							<BiBell
-								className='header-bell-icon'
-								onClick={() => {
-									setOpenNotification((previousState) => !previousState);
-								}}
-							/>
-						</div>
-						{notificationData?.unread === undefined || notificationData?.unread === 0 ? <></> : <div className='notification-unread-count'>{notificationData.unread}</div>}
-						{openNotification && (
-							<Notification
-								messages={notificationData?.messages}
-								unread={notificationData?.unread}
-								setOpenNotification={setOpenNotification}
-								closeNotification={() => {
-									setOpenNotification((previousState) => !previousState);
-								}}
-							/>
-						)}
-					</div>
-
 					<div className='header-user-profile'>
-						{/* <img className='header-profile-image' src={profileformdata?.profileImage || ''} alt='profile' /> */}
 						<div
 							style={{
 								background: '#d5ddda',

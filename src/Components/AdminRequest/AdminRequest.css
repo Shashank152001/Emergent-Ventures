@@ -4,24 +4,61 @@
 }
 
 .requests-heading {
-	margin: 1rem 0 1rem 1rem;
-	font-size: 2rem;
+	margin: 1rem;
+	font-size: 1.5rem;
 	font-weight: 500;
 }
 
-.month-selector {
+.requests-range-input-div {
+	margin: 1rem 1rem 1rem 0;
+}
+
+.requests-range-input-heading {
+	margin: 2rem 0 0 1rem;
+}
+
+.requests-range-input {
+	margin: 1rem;
+}
+
+.admin-requests-div {
 	display: flex;
 	align-items: center;
 	justify-content: center;
+}
+
+.admin-requests-table {
 	width: 100%;
+	margin: 1rem;
 }
 
-.arrow {
-	margin: 0 0.5rem;
-	cursor: pointer;
+.admin-requests-table-row {
+	height: 1.4rem;
+	border-bottom: 1px solid rgb(222, 222, 222);
 }
 
-.months-span {
-	padding: 0.5rem;
-	margin: 1rem 0;
+.employee-profile-image {
+	width: 2rem;
+	height: 2rem;
+}
+
+.table-heading {
+	padding: 1rem;
+	font-weight: 500;
+}
+
+.span-margin {
+	margin-left: 1rem;
+}
+
+.table-data-text {
+	padding: 0.4rem 1rem;
+}
+
+.center-data {
+	text-align: center;
+}
+
+i {
+	font-size: 1.2rem;
 }

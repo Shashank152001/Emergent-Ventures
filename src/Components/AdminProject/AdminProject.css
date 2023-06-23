@@ -1,9 +1,13 @@
-.project-title-div {
-	height: 2.4rem;
+.project-div {
 	display: flex;
-	align-items: center;
-	justify-content: flex-end;
-	border-bottom: 1px solid #eeeeee;
+	flex-direction: column;
+}
+.project-heading-div {
+	margin: 2rem;
+}
+
+.project-heading {
+	font-size: 1.5rem;
 }
 .project-details-div {
 	display: flex;
@@ -12,33 +16,26 @@
 	justify-content: space-evenly;
 	padding: 2rem;
 	background-color: #fcfcfc;
+	gap: 2rem;
 }
-.first-column,
-.second-column {
+.first-column-div,
+.second-column-div {
 	display: flex;
+	flex-direction: column;
 	flex-grow: 1;
 	flex-basis: 0;
-	flex-direction: column;
-}
-.first-column {
-	margin-right: 1rem;
-}
-.second-column {
-	margin-left: 1rem;
+	gap: 1rem;
 }
 .project-details-div-common {
 	box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.12);
 	background-color: #ffffff;
 	border-radius: 8px 4px 4px 4px;
 }
-.project-details-div {
-	margin-bottom: 1rem;
-}
 .team-head-div {
-	margin-bottom: 1rem;
 }
-.team-members-div {
-	margin: 1rem 0;
+.team-members {
+	display: flex;
+	flex-direction: column;
 }
 .project-detail-field-div {
 	display: flex;
@@ -46,6 +43,10 @@
 .inner-details-div {
 	display: flex;
 	flex-wrap: wrap;
+}
+.project-image-mini {
+	width: 2rem;
+	height: 2rem;
 }
 .inner-details-title-div {
 	display: flex;
@@ -64,6 +65,10 @@
 	font-weight: bold;
 }
 .project-details-content-div {
+}
+.project-details-content {
+	display: flex;
+	flex-direction: column;
 	padding: 2rem;
 }
 .project-detail-field-div {

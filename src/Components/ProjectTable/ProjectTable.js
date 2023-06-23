@@ -3,7 +3,7 @@ import myprofile from '../../Assest/myprofile.jpg';
 import './ProjectTable.css';
 import { AiOutlineDown, AiOutlineSwap } from 'react-icons/ai';
 import { IoCalendarNumberOutline } from 'react-icons/io5';
-import NoRecord from './norecord';
+import NoRecord from './NoRecord';
 import { fetchProject } from '../../Service/ProjectService';
 import { useNavigate } from 'react-router-dom/dist';
 
@@ -52,12 +52,15 @@ function ProjectTable() {
 							projects.map((ele, index) => (
 								<tr key={index}>
 									<td
-									onClick={() => {
-										navigate({
-										  pathname: "project-detail",
-										  search: `?projectId=${ele.id}`,
-										});
-									  }}>{ele.projectName}</td>
+										onClick={() => {
+											navigate({
+												pathname: 'project-detail',
+												search: `?projectId=${ele.id}`
+											});
+										}}
+									>
+										{ele.projectName}
+									</td>
 									<td>
 										<span className='project-date'>
 											<IoCalendarNumberOutline className='calender' />

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import 'primeicons/primeicons.css';
-import './project.css';
+import './Project.css';
 
 const Project = () => {
 	const [projectData, setProjectData] = useState({});

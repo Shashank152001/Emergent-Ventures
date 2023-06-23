@@ -15,17 +15,12 @@ export const getProjects = async () => {
 	}
 };
 
-// addProject
-// updateProject
-// deleteProject
-
 export const addProject = async (data) => {
-    
 	const response = await fetch(url + 'admin/projects/add-project', {
 		method: 'POST',
 		headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 		credentials: 'include',
-        body: new URLSearchParams(data)
+		body: new URLSearchParams(data)
 	});
 
 	if (!response.ok) {
@@ -36,12 +31,11 @@ export const addProject = async (data) => {
 };
 
 export const UpdateProjectDetails = async (data) => {
-
 	const response = await fetch(url + 'admin/projects/update-project', {
 		method: 'PUT',
 		headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 		credentials: 'include',
-        body: new URLSearchParams(data)
+		body: new URLSearchParams(data)
 	});
 
 	if (!response.ok) {
@@ -51,14 +45,12 @@ export const UpdateProjectDetails = async (data) => {
 	}
 };
 
-
-export const DeleteProject = async (data) => {
-	// admin/projects/delete-project
+export const DeleteProjectData = async (data) => {
 	const response = await fetch(url + 'admin/projects/delete-project', {
 		method: 'DELETE',
 		headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 		credentials: 'include',
-        body: new URLSearchParams(data)
+		body: new URLSearchParams(data)
 	});
 
 	if (!response.ok) {
@@ -68,19 +60,16 @@ export const DeleteProject = async (data) => {
 	}
 };
 
-export const getProjectDetail =async(projectId)=>{
-	
-    const response=await fetch(url+`admin/projects/get-project?projectId=${projectId}`,{
-        method:"GET",
-        headers:{"Content-Type": "application/json" },
-        credentials:"include"
-    })
+export const getProjectDetail = async (projectId) => {
+	const response = await fetch(url + `admin/projects/get-project?projectId=${projectId}`, {
+		method: 'GET',
+		headers: { 'Content-Type': 'application/json' },
+		credentials: 'include'
+	});
 
-    if(!response.ok){
-        throw new Error('Data could not be fetched')
-    }else{
-        return await response.json();
-    }
-}
-
-
+	if (!response.ok) {
+		throw new Error('Data could not be fetched');
+	} else {
+		return await response.json();
+	}
+};

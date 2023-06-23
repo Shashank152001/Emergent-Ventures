@@ -1,9 +1,8 @@
-import React, { useState, useEffect,useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { YourRequestGetdata, ResendRequest, CancelRequest } from '../../Service/LeavesService';
-import './WFH.css';
+import './Wfh.css';
 import RequestTabs from './RequestTabs';
-import NoRecord from '../Project/norecord';
-// import { toast } from 'react-toastify';
+import NoRecord from '../Project/NoRecord';
 import { success } from '../../Utils/SuccessToast';
 import { Error } from '../../Utils/ErrorToast';
 import 'react-toastify/dist/ReactToastify.css';
@@ -22,10 +21,7 @@ function GetRequest() {
 	const [send, setSend] = useState(false);
 	const [cancel, setCancel] = useState(false);
 	const [isCalled, setIsCalled] = useState(false);
-	const {isRealTime} = useContext(RealDataContext);
-	
-
-	
+	const { isRealTime } = useContext(RealDataContext);
 
 	useEffect(() => {
 		YourRequestGetdata()
@@ -35,7 +31,7 @@ function GetRequest() {
 			.catch((e) => {
 				console.log(e.message);
 			});
-	}, [isCalled,isRealTime]);
+	}, [isCalled, isRealTime]);
 
 	useEffect(() => {
 		if (send) {
@@ -48,7 +44,7 @@ function GetRequest() {
 					if (response.status === 201) {
 						success(msg);
 					} else {
-						Error(msg)
+						Error(msg);
 					}
 				})
 				.catch((e) => {
@@ -69,16 +65,14 @@ function GetRequest() {
 
 	useEffect(() => {
 		if (cancel) {
-			
 			CancelRequest(canceldata)
 				.then(async (response) => {
 					const message = await response.json().then((data) => {
 						return data.message;
 					});
 					if (response.status === 201) {
-                        success(message);
-						setIsCalled((prev)=>!prev);
-						
+						success(message);
+						setIsCalled((prev) => !prev);
 					} else {
 						Error(message);
 					}
@@ -90,14 +84,12 @@ function GetRequest() {
 	}, [cancel]);
 
 	const cancelRequest = (id) => {
-		
 		if (id) {
 			setCancelData({
 				requestId: id
 			});
-			setCancel((prev)=>!prev);
+			setCancel((prev) => !prev);
 		}
-		
 	};
 
 	return (
@@ -105,7 +97,7 @@ function GetRequest() {
 			<div className='tabs-div'>
 				<RequestTabs />
 			</div>
-			<div className='request-content-div' style={{width:'80%'}}>
+			<div className='request-content-div' style={{ width: '80%' }}>
 				<span className='request-content-title'>My Requests</span>
 				<table className='table table-hover' style={{ marginTop: '2rem' }}>
 					<thead>
@@ -134,10 +126,10 @@ function GetRequest() {
 										<span> - </span>
 										{item.name}
 									</td>
-									<td >{item.request}</td>
-									<td >{item.leaveType}</td>
-									<td >{item.startDate}</td>
-									<td >{item.endDate}</td>
+									<td>{item.request}</td>
+									<td>{item.leaveType}</td>
+									<td>{item.startDate}</td>
+									<td>{item.endDate}</td>
 									{item.status === 'Approved' ? (
 										<td>
 											<i className='bi bi-check-circle-fill text-success '></i>

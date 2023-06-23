@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { BsCheckCircleFill } from 'react-icons/bs';
 import './Timesheet.css';
-import NoRecord from '../Project/norecord';
+import NoRecord from '../Project/NoRecord';
 import { fetchTimeSheet } from '../../Service/TimesheetService';
-import set from 'date-fns/esm/set/index';
 
 function Timesheet() {
 	const [timesheet, setTimesheet] = useState(null);
@@ -17,7 +16,6 @@ function Timesheet() {
 			})
 			.catch((e) => {
 				// console.log(e.message);
-				
 			});
 	}, []);
 

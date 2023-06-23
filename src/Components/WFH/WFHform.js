@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { leaveRequest, leaveUser } from '../../Service/LeavesService';
-import './WFH.css';
-// import { toast } from 'react-toastify';
+import './Wfh.css';
 import { success } from '../../Utils/SuccessToast';
 import { Error } from '../../Utils/ErrorToast';
 import { useNavigate } from 'react-router-dom';
@@ -27,7 +26,6 @@ const WFHform = () => {
 	useEffect(() => {
 		leaveUser()
 			.then((data) => {
-				
 				setUserDatas(data);
 			})
 			.catch((e) => {
@@ -41,11 +39,10 @@ const WFHform = () => {
 				.then((data) => {
 					socket.emit('sendNotifications');
 					navigate('/dashboard/getRequest');
-					
+
 					success('Request submitted Succesfully');
 				})
 				.catch((e) => {
-					
 					Error('Connection  Server Lost');
 				});
 		}
