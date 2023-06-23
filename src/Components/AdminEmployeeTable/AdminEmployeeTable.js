@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react';
-import './AdminEmployeeTable.css';
 import { getUsers } from '../../Service/adminServices/userService';
-import { AiFillEdit } from 'react-icons/ai';
 import { BiPlus } from 'react-icons/bi';
-import AdminAddUser from './AdminUserAdd';
-import AdminUpdateUser from './AdminUpdateUser';
 import { useNavigate } from 'react-router-dom';
 import { Pagination } from '@mui/material';
+import AdminAddUser from './AdminUserAdd';
+import AdminUpdateUser from './AdminUpdateUser';
+import './AdminEmployeeTable.css';
 
 function AdminEmployeeTable() {
 	const navigate = useNavigate();
@@ -57,15 +56,18 @@ function AdminEmployeeTable() {
 								backgroundColor: '#2563EB',
 								color: '#fff',
 								padding: '7px 15px',
-								borderRadius: '0.4rem'
+								borderRadius: '0.4rem',
+								justifyContent: 'center',
+								alignItems: 'center',
+								display: 'flex'
 							}}
 							onClick={() => {
 								document.getElementById('scroll-hidden').style.overflow = 'hidden';
 								setOpen(!isOpen);
 							}}
 						>
-							AddUser
-							<BiPlus />
+							Add User
+							<BiPlus style={{ fontSize: '1.4rem' }} />
 						</button>
 					</div>
 
@@ -78,7 +80,9 @@ function AdminEmployeeTable() {
 								<th scope='col-sm-3'>Job Role</th>
 								<th scope='col-sm-3'>Location</th>
 								<th scope='col-sm-3'>Status</th>
-								<th scope='col-sm-3'>Actions</th>
+								<th scope='col-sm-3' style={{ textAlign: 'center' }}>
+									Actions
+								</th>
 							</tr>
 						</thead>
 						<tbody className='table-group-divider'>
@@ -100,7 +104,7 @@ function AdminEmployeeTable() {
 									<td>{d.role}</td>
 									<td>{d.location}</td>
 									<td>{d.status === null ? 'not checked-in' : d.status}</td>
-									<td>
+									<td className='actions-table-data'>
 										<button
 											onClick={() => {
 												setCurrentUserId({
@@ -119,7 +123,7 @@ function AdminEmployeeTable() {
 												marginLeft: '0.7rem'
 											}}
 										>
-											<AiFillEdit />
+											<i class='bi bi-pencil'></i>
 										</button>
 									</td>
 								</tr>

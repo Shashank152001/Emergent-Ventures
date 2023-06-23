@@ -47,13 +47,12 @@ const LeftRow = ({ row, handlechange, week, start, end }) => {
 						value={userTimeSheetData[row - 1]?.clientName}
 					>
 						<option value=''>Select Client</option>
-						<option value='Microsoft'>Microsoft</option>
-						<option value='Google'>Google</option>
-						{/* {optionData.map((data, index) => (
-              <option value={data.clientName} key={index}>
-                {data.clientName}
-              </option>
-            ))} */}
+						<option value='Celebat Tech'>Celebat Tech</option>
+						{optionData.map((data, index) => (
+							<option value={data.clientName} key={index}>
+								{data.clientName}
+							</option>
+						))}
 					</select>
 				</td>
 				<td>
@@ -67,17 +66,17 @@ const LeftRow = ({ row, handlechange, week, start, end }) => {
 						value={userTimeSheetData[row - 1]?.projectName}
 					>
 						<option value=''>Select Project</option>
-						<option value='Microsoft'>Microsoft</option>
-						<option value='Google'>Google</option>
-						{/* {optionData.map((data, index) => (
-              <option value={data.projectName} key={index}>
-                {data.projectName}
-              </option>
-            ))} */}
+						<option value='CT L&D'>CT L&D</option>
+						<option value='CT LMS'>CT LMS</option>
+						{optionData.map((data, index) => (
+							<option value={data.projectName} key={index}>
+								{data.projectName}
+							</option>
+						))}
 					</select>
 				</td>
 				<td>
-					<select
+					<input
 						className='left-table-td'
 						onChange={handlechange}
 						name='jobName'
@@ -85,11 +84,7 @@ const LeftRow = ({ row, handlechange, week, start, end }) => {
 						defaultValue={userTimeSheetData[row - 1]?.jobName}
 						disabled={userTimeSheetData[row - 1]?.clientName ? true : false}
 						value={userTimeSheetData[row - 1]?.jobName}
-					>
-						<option value=''>Select Job</option>
-						<option value='Frontend'>Frontend</option>
-						<option value='Backend'>Backend</option>
-					</select>
+					/>
 				</td>
 			</tr>
 		</>

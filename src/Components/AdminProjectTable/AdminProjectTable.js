@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import './AdminProjectTable.css';
-import { AiFillDelete, AiFillEdit } from 'react-icons/ai';
 import { IoCalendarNumberOutline } from 'react-icons/io5';
-import NoRecord from './NoRecord';
 import { getProjects } from '../../Service/adminServices/projectService';
 import { BiPlus } from 'react-icons/bi';
 import { useNavigate } from 'react-router-dom/dist';
 import AddProject from './AddProject';
 import EditProject from './EditProject';
 import DeleteProject from './DeleteProject';
+import myprofile from '../../Assest/myprofile.png';
+import NoRecord from './NoRecord';
+import './AdminProjectTable.css';
 
-function AdminProjectTable() {
+const AdminProjectTable = () => {
 	const navigate = useNavigate();
 	const [projects, setProject] = useState(null);
 	const [isAddOpen, setAddOpen] = useState(false);
@@ -38,40 +38,15 @@ function AdminProjectTable() {
 			});
 	}, [isRender]);
 
-	const ShowTeamMembers = (teamMembers) => {
-		const team_members = teamMembers.map((item, idx) => {
-			return (
-				<p className={`image-container img-${idx + 1} margin-remove`} key={idx}>
-					<img src={item.profileImage} alt='team-member' />
-				</p>
-			);
-		});
-
-		if (team_members.length > 2) {
-			team_members.splice(2);
-			team_members.push(
-				<p className='image-container img-3 '>
-					<span className='count-member'>2+</span>
-				</p>
-			);
-
-			return team_members;
-		} else {
-			return team_members;
-		}
-	};
-
-	console.log(isRender);
 	return (
 		<>
 			{isAddOpen && <AddProject setAddOpen={setAddOpen} setRender={setRender} />}
 			{isEditOpen && <EditProject setEditOpen={setEditOpen} currentProject={currentProject} setRender={setRender} />}
 			{isDelete && <DeleteProject setDeleteOpen={setDeleteOpen} currentProjectId={currentProject} setRender={setRender} />}
-
-			<section className='project-container'>
-				<div className='project-heading'>
+			<section className='project-table-container'>
+				<div className='project-table-head'>
 					<div>
-						<h1 style={{ fontSize: '1.5rem' }}>My Projects</h1>
+						<h1 className='project-table-title'>Projects</h1>
 					</div>
 					<div style={{ display: 'flex' }}>
 						<button
@@ -83,85 +58,144 @@ function AdminProjectTable() {
 								outline: 'none',
 								padding: '0.5rem',
 								color: '#fff',
-								fontSize: '1rem'
+								fontSize: '1rem',
+								justifyContent: 'center',
+								alignItems: 'center',
+								display: 'flex'
 							}}
 							onClick={() => {
 								setAddOpen(!isAddOpen);
 								document.getElementById('scroll-hidden').style.overflow = 'hidden';
 							}}
 						>
-							AddProject
-							<BiPlus />
+							Add Project
+							<BiPlus style={{ fontSize: '1.4rem' }} />
 						</button>
 					</div>
 				</div>
-				<div className='project-content'>
-					<table>
-						<thead>
-							<tr id='table-heading'>
-								<th>Project Name</th>
-								<th>Assigned on</th>
-								<th>To be submitted on</th>
-								<th>Status</th>
-								<th>Team</th>
-								<th>Team Head</th>
-								<th>Actions</th>
+				<div className='project-table-content'>
+					<table className='project-table-content-table'>
+						<thead className='project-table-content-head'>
+							<tr className='table-head-row'>
+								<th className='table-head'>Project Name</th>
+								<th className='table-head'>Assigned on</th>
+								<th className='table-head'>Complete By</th>
+								<th className='table-head'>Status</th>
+								<th className='table-head'>Team</th>
+								<th className='table-head'>Team Head</th>
+								<th className='table-head' style={{ textAlign: 'center' }}>
+									Actions
+								</th>
 							</tr>
 						</thead>
 						<tbody>
 							{projects ? (
-								projects.map((ele, index) => (
+								projects.map((project, index) => (
 									<tr key={index}>
 										<td
+											className='table-data'
 											style={{ cursor: 'pointer' }}
 											onClick={() => {
 												navigate({
 													pathname: 'project-detail',
-													search: `?projectId=${ele.id}`
+													search: `?projectId=${project.id}`
 												});
 											}}
 										>
-											{ele.projectName}
+											{project.projectName}
 										</td>
-										<td>
-											<span className='project-date'>
-												<IoCalendarNumberOutline className='calender' />
-												{ele.assignedOn}
+										<td className='table-data'>
+											<span className='date'>
+												<IoCalendarNumberOutline className='calendar-logo' />
+												{project?.assignedOn}
 											</span>
 										</td>
-										<td>
-											<span className='project-date'>
-												<IoCalendarNumberOutline className='calender' />
-												{ele.completeBy}
+										<td className='table-data'>
+											<span className='date'>
+												<IoCalendarNumberOutline className='calendar-logo' />
+												{project?.completeBy}
 											</span>
 										</td>
-										<td>
-											<span className='dot'></span>
-											<span className='status'>{ele.status}</span>
+										<td className='table-data color-blue status'>
+											<div className='status-progress-dot'></div>
+											<span>{project.status}</span>
 										</td>
-										<td className='team-members' id='team'>
-											{ShowTeamMembers(ele.teamMembers)}
+										<td className='table-data'>
+											{project?.teamMembers.length === 1 ? (
+												<div className='image-overlap'>
+													<span>
+														<img className='img-1' src={project?.teamMembers[0]?.profileImage ? project?.teamMembers[0]?.profileImage : myprofile} alt='team-member' />
+													</span>
+												</div>
+											) : (
+												<>
+													{project?.teamMembers.length === 2 ? (
+														<div className='image-overlap'>
+															<span>
+																<img
+																	className='img-1'
+																	src={project?.teamMembers[0]?.profileImage ? project?.teamMembers[0]?.profileImage : myprofile}
+																	alt='team-member'
+																/>
+															</span>
+															<span>
+																<img
+																	className='img-2'
+																	src={project?.teamMembers[1]?.profileImage ? project?.teamMembers[1]?.profileImage : myprofile}
+																	alt='team-member'
+																/>
+															</span>
+														</div>
+													) : (
+														<>
+															{project?.teamMembers.length > 2 ? (
+																<div className='image-overlap'>
+																	<span>
+																		<img
+																			className='img-1'
+																			src={project?.teamMembers[0]?.profileImage ? project?.teamMembers[0]?.profileImage : myprofile}
+																			alt='team-member'
+																		/>
+																	</span>
+																	<span>
+																		<img
+																			className='img-2'
+																			src={project?.teamMembers[1]?.profileImage ? project?.teamMembers[1]?.profileImage : myprofile}
+																			alt='team-member'
+																		/>
+																	</span>
+																	<span>
+																		<div className='img-3'>
+																			<span className='img-3-number'>+{project?.teamMembers.length - 2}</span>
+																		</div>
+																	</span>
+																</div>
+															) : (
+																<></>
+															)}
+														</>
+													)}
+												</>
+											)}
 										</td>
-										<td>
-											<div className='lead'>
-												<p className='image-container ' id='team-lead'>
-													<img src={ele.teamHead?.profileImage} alt='team-member' />
-												</p>
-												<span className='lead-name' style={{ fontSize: '0.8rem' }}>
-													{ele.teamHead?.name}
+										<td className='table-data'>
+											<div>
+												<span>
+													<img className='team-head-img' src={project?.teamHead?.profileImage ? project?.teamHead?.profileImage : myprofile} alt='team-head' />
 												</span>
+												<span className='team-head-name'>{project?.teamHead?.name}</span>
 											</div>
 										</td>
-										<td>
+										<td className='actions-table-data'>
 											<button
 												onClick={() => {
 													setcurrentProject({
-														projectName: ele.projectName,
-														completeBy: ele.completeBy,
-														teamHead: ele.teamHead.email,
-														teamMembers: ele.teamMembers,
-														department: ele.department,
-														status: ele.status
+														projectName: project.projectName,
+														completeBy: project.completeBy,
+														teamHead: project.teamHead.email,
+														teamMembers: project.teamMembers,
+														department: project.department,
+														status: project.status
 													});
 													setEditOpen(!isEditOpen);
 													document.getElementById('scroll-hidden').style.overflow = 'hidden';
@@ -169,29 +203,27 @@ function AdminProjectTable() {
 												style={{
 													border: 'none',
 													outline: 'none',
-													backgroundColor: 'transparent',
-													marginLeft: '0.7rem'
+													backgroundColor: 'transparent'
 												}}
 											>
-												<AiFillEdit />
+												<i class='bi bi-pencil'></i>
 											</button>
 
 											<button
 												style={{
 													border: 'none',
 													outline: 'none',
-													backgroundColor: 'transparent',
-													marginLeft: '0.7rem'
+													backgroundColor: 'transparent'
 												}}
 												onClick={() => {
 													setDeleteOpen(!isDelete);
 													setcurrentProject({
-														id: ele.id
+														id: project.id
 													});
 													document.getElementById('scroll-hidden').style.overflow = 'hidden';
 												}}
 											>
-												<AiFillDelete />
+												<i class='bi bi-trash'></i>
 											</button>
 										</td>
 									</tr>
@@ -209,6 +241,6 @@ function AdminProjectTable() {
 			</section>
 		</>
 	);
-}
+};
 
 export default AdminProjectTable;

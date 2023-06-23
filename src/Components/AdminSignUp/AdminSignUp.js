@@ -94,16 +94,16 @@ function AdminSignUp() {
 							<div>
 								<div className='field position-relative'>
 									<label htmlFor='fullname' className='label' style={{ padding: '0.3rem 0' }}>
-										Fullname
+										Full Name
 									</label>
-									<input type='text' name='name' id='fullname' onChange={handleChange} value={formData.name} />
+									<input type='text' name='name' id='fullname' placeholder='Full Name' onChange={handleChange} value={formData.name} />
 									{formErrors.name && <span className='error-span'>{formErrors.name}</span>}
 								</div>
 								<div className='field position-relative'>
 									<label htmlFor='email' className='label' style={{ padding: '0.3rem 0' }}>
-										Email address
+										Email
 									</label>
-									<input type='email' name='email' id='email' onChange={handleChange} value={formData.email} />
+									<input type='email' name='email' id='email' placeholder='Email' onChange={handleChange} value={formData.email} />
 									{formErrors.email && <span className='error-span'>{formErrors.email}</span>}
 								</div>
 
@@ -111,19 +111,9 @@ function AdminSignUp() {
 									<label htmlFor='password' className='label' style={{ padding: '0.3rem 0' }}>
 										Password
 									</label>
-									<input type='password' name='password' id='password' onChange={handleChange} value={formData.password} />
+									<input type='password' name='password' id='password' placeholder='Password' onChange={handleChange} value={formData.password} />
 									{formErrors.password && <span className='error-span'>{formErrors.password}</span>}
 								</div>
-
-								{/*  <div className='last position-relative'>
-
-                            <div>
-                                <input type='checkbox' name="agreement" id="agreement" onChange={handleChange} checked={formData.agreement}></input>
-                                <span style={{paddingLeft:'0.5rem'}}>Agree terms & conditions</span>
-                                {formErrors.agreement && <p className='error-span agreement-error'>{formErrors.agreement}</p>}
-                            </div>
-                        </div> */}
-
 								<div></div>
 								<div style={{ margin: '1rem 0' }}>
 									<button type='submit' style={{ padding: '0.6rem 2.6rem', color: '#fff', backgroundColor: '#2563EB', border: 'none', outline: 'none', borderRadius: '6px' }}>
@@ -132,7 +122,7 @@ function AdminSignUp() {
 								</div>
 								<div>
 									<p>
-										already have an account?<Link to='/admin/adminlogin'>Sign in</Link>
+										already have an account?<Link to='/adminlogin'>Sign in</Link>
 									</p>
 								</div>
 							</div>

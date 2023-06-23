@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import myprofile from '../../Assest/myprofile.jpg';
-import './ProjectTable.css';
+import myprofile from '../../Assest/myprofile.png';
 import { AiOutlineDown, AiOutlineSwap } from 'react-icons/ai';
 import { IoCalendarNumberOutline } from 'react-icons/io5';
-import NoRecord from './NoRecord';
-import { fetchProject } from '../../Service/ProjectService';
+import { fetchProjects } from '../../Service/ProjectService';
 import { useNavigate } from 'react-router-dom/dist';
+import NoRecord from './NoRecord';
+import './ProjectTable.css';
 
-function ProjectTable() {
+const ProjectTable = () => {
 	const navigate = useNavigate();
 	const [projects, setProject] = useState(null);
 
 	useEffect(() => {
-		fetchProject()
+		fetchProjects()
 			.then((data) => {
 				setProject(data);
 			})
@@ -22,10 +22,10 @@ function ProjectTable() {
 	}, []);
 
 	return (
-		<section className='project-container'>
-			<div className='project-heading'>
+		<section className='project-table-container'>
+			<div className='project-table-head'>
 				<div>
-					<h1 style={{ fontSize: '1.5rem' }}>My Projects</h1>
+					<h1 className='project-table-title'>My Projects</h1>
 				</div>
 				<div style={{ display: 'flex' }}>
 					<AiOutlineSwap className='rotate-90' />
@@ -35,67 +35,106 @@ function ProjectTable() {
 					</button>
 				</div>
 			</div>
-			<div className='project-content'>
-				<table>
-					<thead>
-						<tr id='table-heading'>
-							<th>Project Name</th>
-							<th>Assigned on</th>
-							<th>To be submitted on</th>
-							<th>Status</th>
-							<th>Team</th>
-							<th>Team Head</th>
+			<div className='project-table-content'>
+				<table className='project-table-content-table'>
+					<thead className='project-table-content-head'>
+						<tr className='table-head-row'>
+							<th className='table-head'>Project Name</th>
+							<th className='table-head'>Assigned on</th>
+							<th className='table-head'>Complete By</th>
+							<th className='table-head'>Status</th>
+							<th className='table-head'>Team</th>
+							<th className='table-head'>Team Head</th>
 						</tr>
 					</thead>
 					<tbody>
 						{projects ? (
-							projects.map((ele, index) => (
+							projects.map((project, index) => (
 								<tr key={index}>
 									<td
+										className='table-data'
+										style={{ cursor: 'pointer' }}
 										onClick={() => {
 											navigate({
 												pathname: 'project-detail',
-												search: `?projectId=${ele.id}`
+												search: `?projectId=${project.id}`
 											});
 										}}
 									>
-										{ele.projectName}
+										{project.projectName}
 									</td>
-									<td>
-										<span className='project-date'>
-											<IoCalendarNumberOutline className='calender' />
-											{ele.assignedOn}
+									<td className='table-data'>
+										<span className='date'>
+											<IoCalendarNumberOutline className='calendar-logo' />
+											{project?.assignedOn}
 										</span>
 									</td>
-									<td>
-										<span className='project-date'>
-											<IoCalendarNumberOutline className='calender' />
-											{ele.completeBy}
+									<td className='table-data'>
+										<span className='date'>
+											<IoCalendarNumberOutline className='calendar-logo' />
+											{project?.completeBy}
 										</span>
 									</td>
-									<td>
-										<span className='dot'></span>
-										<span className='status'>{ele.status}</span>
+									<td className='table-data color-blue status'>
+										<div className='status-progress-dot'></div>
+										<span>{project.status}</span>
 									</td>
-									<td className='team-members' id='team'>
-										<p className='image-container'>
-											<img src={myprofile} alt='team-member' />
-										</p>
-										<p className='image-container img-2'>
-											<img src={myprofile} alt='team-member' />
-										</p>
-										<p className='image-container img-3'>
-											<span className='count-member'>2+</span>
-										</p>
+									<td className='table-data'>
+										{project?.teamMembers.length === 1 ? (
+											<div className='image-overlap'>
+												<span>
+													<img className='img-1' src={project?.teamMembers[0]?.profileImage ? project?.teamMembers[0]?.profileImage : myprofile} alt='team-member' />
+												</span>
+											</div>
+										) : (
+											<>
+												{project?.teamMembers.length === 2 ? (
+													<div className='image-overlap'>
+														<span>
+															<img className='img-1' src={project?.teamMembers[0]?.profileImage ? project?.teamMembers[0]?.profileImage : myprofile} alt='team-member' />
+														</span>
+														<span>
+															<img className='img-2' src={project?.teamMembers[1]?.profileImage ? project?.teamMembers[1]?.profileImage : myprofile} alt='team-member' />
+														</span>
+													</div>
+												) : (
+													<>
+														{project?.teamMembers.length > 2 ? (
+															<div className='image-overlap'>
+																<span>
+																	<img
+																		className='img-1'
+																		src={project?.teamMembers[0]?.profileImage ? project?.teamMembers[0]?.profileImage : myprofile}
+																		alt='team-member'
+																	/>
+																</span>
+																<span>
+																	<img
+																		className='img-2'
+																		src={project?.teamMembers[1]?.profileImage ? project?.teamMembers[1]?.profileImage : myprofile}
+																		alt='team-member'
+																	/>
+																</span>
+																<span>
+																	<div className='img-3'>
+																		<span className='img-3-number'>+{project?.teamMembers.length - 2}</span>
+																	</div>
+																</span>
+															</div>
+														) : (
+															<></>
+														)}
+													</>
+												)}
+											</>
+										)}
 									</td>
-									<td>
-										<div className='lead'>
-											<p className='image-container ' id='team-lead'>
-												<img src={myprofile} alt='team-member' />
-											</p>
-											<span className='lead-name' style={{ fontSize: '0.8rem' }}>
-												{ele.teamHead}
+									<td className='table-data'>
+										<div>
+											<span>
+												<img className='team-head-img' src={project?.teamHead?.profileImage ? project?.teamHead?.profileImage : myprofile} alt='team-head' />
 											</span>
+											<span className='team-head-name'>{project?.teamHead?.name}</span>
 										</div>
 									</td>
 								</tr>
@@ -112,6 +151,6 @@ function ProjectTable() {
 			</div>
 		</section>
 	);
-}
+};
 
 export default ProjectTable;
