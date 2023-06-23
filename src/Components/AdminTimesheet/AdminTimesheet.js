@@ -1,133 +1,103 @@
-import { useState, useEffect } from "react";
-import { startOfMonth, endOfMonth } from "date-fns";
-// import "./AdminTimesheet.css";
-import NoRecord from "../Project/norecord";
-import { getTimesheetData } from "../../Service/adminServices/timesheetService";
+import { useState, useEffect } from 'react';
+import { startOfMonth, endOfMonth } from 'date-fns';
+import './AdminTimesheet.css';
+import NoRecord from '../Project/NoRecord';
+import { getTimesheetData } from '../../Service/adminServices/timesheetService';
 
 const AdminTimesheet = () => {
-  const [requestData, setRequestData] = useState(null);
-  const [startDate, setStartDate] = useState(
-    startOfMonth(new Date())
-      .toLocaleDateString("en-GB")
-      .split("/")
-      .reverse()
-      .join("-")
-  );
-  const [endDate, setEndDate] = useState(
-    endOfMonth(new Date())
-      .toLocaleDateString("en-GB")
-      .split("/")
-      .reverse()
-      .join("-")
-  );
+	const [timesheetData, setTimesheetData] = useState(null);
+	const [startDate, setStartDate] = useState(startOfMonth(new Date()).toLocaleDateString('en-GB').split('/').reverse().join('-'));
+	const [endDate, setEndDate] = useState(endOfMonth(new Date()).toLocaleDateString('en-GB').split('/').reverse().join('-'));
 
-  const handleChange = (event) => {
-    const { value, name } = event.target;
-    if (name === "startdate") {
-      setStartDate(value);
-    } else {
-      setEndDate(value);
-    }
-  };
+	const handleChange = (event) => {
+		const { value, name } = event.target;
+		if (name === 'startdate') {
+			setStartDate(value);
+		} else {
+			setEndDate(value);
+		}
+	};
 
-  useEffect(() => {
-    getTimesheetData(startDate,endDate)
-      .then((data) => {
-        console.log(data);
-        setRequestData(data);
-      })
-      .catch((e) => {
-        setRequestData(null);
-      });
-  }, [startDate, endDate]);
+	useEffect(() => {
+		getTimesheetData(startDate, endDate)
+			.then((data) => {
+				console.log(data);
+				setTimesheetData(data);
+			})
+			.catch((e) => {
+				setTimesheetData(null);
+			});
+	}, [startDate, endDate]);
 
-  return (
-    <div className="requests-div">
-      <div className="requests-heading">
-        TimeSheets
-        <input
-          type="date"
-          name="startdate"
-          onChange={handleChange}
-          value={startDate}
-          style={{ marginLeft: "0.9rem" }}
-        />
-        <input
-          type="date"
-          name="enddate"
-          onChange={handleChange}
-          value={endDate}
-          style={{ marginLeft: "0.9rem" }}
-        />
-      </div>
+	return (
+		<div className='timesheets-div'>
+			<div className='timesheets-heading'>Timesheets</div>
+			<div className='timesheets-range-input-div'>
+				<h6 className='timesheets-range-input-heading'>Select Range</h6>
+				<input className='timesheets-range-input' type='date' name='startdate' onChange={handleChange} value={startDate} />
+				<input className='timesheets-range-input' type='date' name='enddate' onChange={handleChange} value={endDate} />
+			</div>
 
-      <div className="requests" style={{ width: "98%",margin:'auto' }}>
-        <table className="table table-hover" style={{ marginTop: "2rem" }}>
-          <thead>
-            <tr>
-              <td>Sr.No</td>
-              <td>Employee</td>
-              <td>TimeSheet Name</td>
-              <td>Submitted Hours</td>
-              <td>Approved Hours</td>
-              <td>Status</td>
-            </tr>
-          </thead>
-          <tbody>
-            {requestData ? (
-              requestData.map((item, index) => (
-                <tr key={index}>
-                  <td>{index + 1}</td>
-                  <td>
-                    <span>
-                      <img
-                        style={{ width: "2rem", height: "2rem" }}
-                        src={item?.profileImage}
-                        alt="employee"
-                      />
-                    </span>
-                    <span> </span>
-                    {item?.hrmid}
-                    <span> - </span>
-                    {item?.name}
-                  </td>
-                  <td>{item?.timesheetName}</td>
-                  <td>{item?.submittedHours}</td>
-                  <td>{item?.approvedHours}</td>
-                  {/* <td>{item?.endDate}</td> */}
-                  {item?.status === "Approved" ? (
-                    <td>
-                      <i className="bi bi-check-circle-fill text-success "></i>
-                    </td>
-                  ) : item?.status === "Rejected" ? (
-                    <td>
-                      <i className="bi bi-x-circle-fill text-danger "></i>
-                    </td>
-                  ) : item?.status === "Cancelled" ? (
-                    <td>
-                      <i className="bi bi-x-circle-fill text-danger "></i>
-                    </td>
-                  ) : (
-                    <td>
-                      <i className="bi bi-hourglass text-warning"></i>
-                    </td>
-                  )}
-                </tr>
-              ))
-            ) : (
-              <>
-                <tr>
-                  <td colSpan="8">
-                    <NoRecord />
-                  </td>
-                </tr>
-              </>
-            )}
-          </tbody>
-        </table>
-      </div>
-    </div>
-  );
+			<div className='admin-timesheets-div'>
+				<table className='admin-timesheets-table'>
+					<thead>
+						<tr className='admin-timesheets-table-row'>
+							<td className='table-heading'>Sr.No</td>
+							<td className='table-heading'>Employee</td>
+							<td className='table-heading'>TimeSheet Name</td>
+							<td className='table-heading center-data'>Submitted Hours</td>
+							<td className='table-heading center-data'>Approved Hours</td>
+							<td className='table-heading center-data'>Status</td>
+						</tr>
+					</thead>
+					<tbody>
+						{timesheetData ? (
+							timesheetData.map((item, index) => (
+								<tr key={index} className='admin-timesheets-table-row'>
+									<td className='table-data-text'>{index + 1}</td>
+									<td className='table-data-text'>
+										<img className='employee-profile-image' src={item?.profileImage} alt='employee' />
+										<span className='span-margin'></span>
+										{item?.hrmid}
+										<span className='span-margin'></span>
+										{item?.name}
+									</td>
+									<td className='table-data-text'>{item?.timesheetName}</td>
+									<td className='table-data-text center-data'>{item?.submittedHours}</td>
+									<td className='table-data-text center-data'>{item?.approvedHours}</td>
+									{item?.status === 'Approved' ? (
+										<td className='table-data-text center-data'>
+											<i className='bi bi-check-circle-fill text-success '></i>
+										</td>
+									) : item?.status === 'Rejected' ? (
+										<td className='table-data-text center-data'>
+											<i className='bi bi-x-circle-fill text-danger '></i>
+										</td>
+									) : item?.status === 'Cancelled' ? (
+										<td className='table-data-text center-data'>
+											<i className='bi bi-x-circle-fill text-danger '></i>
+										</td>
+									) : (
+										<td className='table-data-text center-data'>
+											<i className='bi bi-hourglass text-warning'></i>
+										</td>
+									)}
+								</tr>
+							))
+						) : (
+							<>
+								<tr className='admin-timesheets-table-row'>
+									<td colSpan='8'>
+										<NoRecord />
+									</td>
+								</tr>
+							</>
+						)}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	);
 };
 
 export default AdminTimesheet;

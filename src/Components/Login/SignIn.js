@@ -1,16 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import './sign.css';
 import celebal from '../../Assest/celebal.png';
 import signin from '../../Assest/singin.png';
 import { userLogin } from '../../Service/LoginService';
-// import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import bgSvg from '../Spheres.svg';
 import { success } from '../../Utils/SuccessToast';
 import { Error } from '../../Utils/ErrorToast';
 import { serverError } from '../../Utils/ServerToast';
-// import {url} from '../../Constant/Url'
+import 'react-toastify/dist/ReactToastify.css';
+import './SignIn.css';
 
 function SignIn() {
 	const [formData, setFormData] = useState({

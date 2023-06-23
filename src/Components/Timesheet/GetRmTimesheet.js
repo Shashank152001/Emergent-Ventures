@@ -1,21 +1,18 @@
-import React, { useState, useEffect,useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { fetchReportingTimesheet } from '../../Service/TimesheetService';
 import { Link } from 'react-router-dom';
-import NoRecord from '../Project/norecord';
-import {RealDataContext } from '../../Context/LoginContext';
+import NoRecord from '../Project/NoRecord';
+import { RealDataContext } from '../../Context/LoginContext';
 import Tabs from './Tabs';
 
 function GetRmTimesheet() {
 	const [rmTimesheet, setRmTimesheet] = useState(null);
-	const {isRealTime} = useContext(RealDataContext);
-
-
+	const { isRealTime } = useContext(RealDataContext);
 
 	useEffect(() => {
 		fetchReportingTimesheet()
 			.then((data) => {
 				setRmTimesheet(data);
-				
 			})
 			.catch((e) => {
 				console.log(e.message);
@@ -45,7 +42,7 @@ function GetRmTimesheet() {
 							rmTimesheet.map((item, index) => (
 								<tr key={index}>
 									<td style={{ textAlign: 'center' }}>{index + 1}</td>
-									<td >
+									<td>
 										<span>
 											<img style={{ width: '2rem', height: '2rem' }} src={item.profileImage} alt='employee' />
 										</span>
@@ -54,10 +51,10 @@ function GetRmTimesheet() {
 										<span> - </span>
 										{item.name}
 									</td>
-									<td >{item.timesheetName}</td>
-									<td >{item.submittedHours}</td>
-									<td >{item.approvedHours}</td>
-									<td >{item.status}</td>
+									<td>{item.timesheetName}</td>
+									<td>{item.submittedHours}</td>
+									<td>{item.approvedHours}</td>
+									<td>{item.status}</td>
 
 									{item.status === 'Pending' ? (
 										<>

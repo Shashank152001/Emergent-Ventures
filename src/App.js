@@ -1,22 +1,21 @@
 import React from 'react';
 import './App.css';
-// import { LoginContext, RealDataContext } from './Context/LoginContext';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import SignIn from './Components/Login/SignIn';
 import SignUp from './Components/SignUp/SignUp';
 import Profile from './Components/Profile/Profile';
-import GetProfile from './Components/Profile/getProfile';
+import GetProfile from './Components/Profile/GetProfile';
 import AdminEmployeeTable from './Components/AdminEmployeeTable/AdminEmployeeTable';
 import Dashboard from './Components/Dashboard/Dashboard';
 import { ProtectRoute, AdminProtect } from './Service/ProtectRoute';
 import TimesheetForm from './Components/Timesheet/TimesheetForm';
 import { RedirectRoute, AdminRedirect } from './Service/RedirectRoute';
 import ErrorPage from './Components/ErrorComponet/ErrorPage';
-import LeaveForm from './Components/Leaves/leaveform';
-import Home from './Components/Dashboard/home';
-import Gethierarchy from './Components/Profile/Gethierarchy';
+import LeaveForm from './Components/Leaves/LeaveForm';
+import Home from './Components/Dashboard/Home';
+import Gethierarchy from './Components/Profile/GetHierarchy';
 import GetRequest from './Components/WFH/GetRequest';
 import ViewRequest from './Components/WFH/ViewRequest';
 import WFHform from './Components/WFH/WFHform';
@@ -25,21 +24,17 @@ import GetUserTimesheet from './Components/Timesheet/GetUserTimesheet';
 import GetRmTimesheet from './Components/Timesheet/GetRmTimesheet';
 import EditReporingTimeSheet from './Components/Timesheet/EditReportingTimeSheet';
 import SearchProfile from './Components/Profile/SearchProfile';
-// import DescriptionForm from './Components/Timesheet/descriptionForm';
 import AdminLogin from './Components/AdminLogin/AdminLogin';
 import AdminSignUp from './Components/AdminSignUp/AdminSignUp';
 import AdminDashboard from './Components/AdminDashboard/AdminDashboard';
-import AdminHome from './Components/AdminDashboard/adminHome';
+import AdminHome from './Components/AdminDashboard/AdminHome';
 import AdminUserProfile from './Components/AdminUserProfile/AdminUserProfile';
-import UserProfile from './Components/AdminUserHierarchy/userProfile';
-import Hierarchy from './Components/AdminUserHierarchy/hierarchy';
-import SuccessMessage from './Components/Message/successmessage';
+import UserProfile from './Components/AdminUserHierarchy/UserProfile';
+import Hierarchy from './Components/AdminUserHierarchy/Hierarchy';
+import SuccessMessage from './Components/Message/SuccessMessage';
 import AdminRequest from './Components/AdminRequest/AdminRequest';
 import AdminTimesheet from './Components/AdminTimesheet/AdminTimesheet';
-import AdminProject from './Components/ProjectTable/AdminProject';
-
-// import UserRoutes from './Routes/userRoutes';
-// import AdminRoutes from './Routes/adminRoutes';
+import AdminProject from './Components/AdminProject/AdminProject';
 
 function App() {
 	return (

@@ -1,19 +1,16 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import {getProjectDetail } from '../../Service/adminServices/projectService';
+import { getProjectDetail } from '../../Service/adminServices/projectService';
 import 'primeicons/primeicons.css';
 import './AdminProject.css';
 
 const AdminProject = () => {
 	const [searchParams] = useSearchParams();
-    const projectId = searchParams.get('projectId');
+	const projectId = searchParams.get('projectId');
 	const [projectData, setProjectData] = useState({});
-	
 
 	useEffect(() => {
-		
-			getProjectDetail(projectId)
-
+		getProjectDetail(projectId)
 			.then((data) => {
 				console.log(data);
 				setProjectData(data);
@@ -22,76 +19,24 @@ const AdminProject = () => {
 				console.log(e.message);
 				setProjectData({});
 			});
-		
-
-		
 	}, [projectId]);
 
 	return (
 		<>
-			<div className='project-container'>
-				<div className='project-title-div'>Project</div>
+			<div className='project-div'>
+				<div className='project-heading-div'>
+					<span className='project-heading'>{projectData?.projectName || ''}</span>
+				</div>
+
 				<div className='project-details-div'>
-					<div className='first-column'>
-						<div className='project-details-div project-details-div-common'>
-							<div className='inner-details-title-div'>
-								<div className='notch'></div>
-								<span className='inner-details-title'>Project Details</span>
-							</div>
-							<div className='project-details-content-div'>
-								<div className='inner-details-div'>
-									<div className='project-detail-field-div'>
-										<span style={{ padding: '1rem', fontSize: '1.4rem' }}>
-											<i className='bi bi-diagram-3'></i>
-										</span>
-										<span style={{ padding: '1rem' }}>{projectData?.projectName || ''}</span>
-									</div>
-									<div className='project-detail-field-div'>
-										<span style={{ padding: '1rem', fontSize: '1.4rem' }}>
-											<i className='bi bi-people'></i>
-										</span>
-										<span style={{ padding: '1rem' }}>{projectData?.clientName || ''}</span>
-									</div>
-								</div>
-								<div className='inner-details-div'>
-									<div className='project-detail-field-div'>
-										<span style={{ padding: '1rem', fontSize: '1.4rem' }}>
-											<i className='bi bi-phone'></i>
-										</span>
-										<span style={{ padding: '1rem' }}>{projectData?.assignedOn || ''}</span>
-									</div>
-									<div className='project-detail-field-div'>
-										<span style={{ padding: '1rem', fontSize: '1.4rem' }}>
-											<i className='bi bi-geo-alt'></i>
-										</span>
-										<span style={{ padding: '1rem' }}>{projectData?.completeBy || ''}</span>
-									</div>
-								</div>
-								<div className='inner-details-div'>
-									<div className='project-detail-field-div'>
-										<span style={{ padding: '1rem', fontSize: '1.4rem' }}>
-											<i className='bi bi-phone'></i>
-										</span>
-										<span style={{ padding: '1rem' }}>{projectData?.department || ''}</span>
-									</div>
-									<div className='project-detail-field-div'>
-										<span style={{ padding: '1rem', fontSize: '1.4rem' }}>
-											<i className='bi bi-geo-alt'></i>
-										</span>
-										<span style={{ padding: '1rem' }}>{projectData?.status || ''}</span>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div className='second-column'>
+					<div className='first-column-div'>
 						{projectData?.teamHead ? (
 							<div className='team-head-div  project-details-div-common'>
 								<div className='inner-details-title-div'>
 									<div className='notch'></div>
 									<span className='inner-details-title'>Team Head</span>
 								</div>
-								<div className='project-details-content-div'>
+								<div className='project-details-content'>
 									<div className='project-details-card-div'>
 										<div className='project-details-card-image-div'>
 											<img className='project-image-mini' name='image' src={projectData?.teamHead?.profileImage} alt='' />
@@ -126,14 +71,67 @@ const AdminProject = () => {
 						) : (
 							<></>
 						)}
-
+						<div className='project-content-div project-details-div-common'>
+							<div className='inner-details-title-div'>
+								<div className='notch'></div>
+								<span className='inner-details-title'>Project Details</span>
+							</div>
+							<div className='project-details-content'>
+								<div className='inner-details-div'>
+									<div className='project-detail-field-div'>
+										<span style={{ padding: '1rem', fontSize: '1.4rem' }}>
+											<i class='bi bi-database'></i>
+										</span>
+										<span style={{ padding: '1rem' }}>{projectData?.projectName || ''}</span>
+									</div>
+									<div className='project-detail-field-div'>
+										<span style={{ padding: '1rem', fontSize: '1.4rem' }}>
+											<i class='bi bi-building'></i>
+										</span>
+										<span style={{ padding: '1rem' }}>{projectData?.clientName || ''}</span>
+									</div>
+								</div>
+								<div className='inner-details-div'>
+									<div className='project-detail-field-div'>
+										<span style={{ padding: '1rem', fontSize: '1.4rem' }}>
+											<i class='bi bi-diagram-3'></i>
+										</span>
+										<span style={{ padding: '1rem' }}>{projectData?.department || ''}</span>
+									</div>
+									<div className='project-detail-field-div'>
+										<span style={{ padding: '1rem', fontSize: '1.4rem' }}>
+											<i class='bi bi-clipboard-data'></i>
+										</span>
+										<span style={{ padding: '1rem' }}>{projectData?.status || ''}</span>
+									</div>
+								</div>
+								<div className='inner-details-div'>
+									<div className='project-detail-field-div'>
+										<span style={{ padding: '1rem', fontSize: '1.4rem' }}>
+											<i class='bi bi-calendar-event'></i>
+										</span>
+										<span style={{ padding: '1rem' }}>Assigned On: {projectData?.assignedOn || ''}</span>
+									</div>
+								</div>
+								<div className='inner-details-div'>
+									<div className='project-detail-field-div'>
+										<span style={{ padding: '1rem', fontSize: '1.4rem' }}>
+											<i class='bi bi-calendar-event'></i>
+										</span>
+										<span style={{ padding: '1rem' }}>Complete By: {projectData?.completeBy || ''}</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div className='second-column-div'>
 						{projectData?.teamMembers ? (
-							<div className='team-members-div project-details-div-common'>
+							<div className='team-members project-details-div-common'>
 								<div className='inner-details-title-div'>
 									<div className='notch'></div>
 									<span className='inner-details-title'>Team Members</span>
 								</div>
-								<div className='project-details-content-div'>
+								<div className='project-details-content'>
 									{projectData?.teamMembers.map((teamMember) => {
 										return (
 											<div className='project-details-card-div' key={teamMember.hrmid}>

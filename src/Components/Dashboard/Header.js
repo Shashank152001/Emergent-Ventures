@@ -4,7 +4,7 @@ import { BiBell, BiChevronDown, BiSearch, BiPlusCircle } from 'react-icons/bi';
 import './Dashboard.css';
 import { socket } from '../../socket';
 import { LoginContext, RealDataContext } from '../../Context/LoginContext';
-import FileUpload from './fileupload';
+import FileUpload from './Fileupload';
 import { DropDown } from '../DropDown/DropDown';
 import { Notification } from '../Notification/Notification';
 import { ProfileFormData } from '../../Service/ProfileService';

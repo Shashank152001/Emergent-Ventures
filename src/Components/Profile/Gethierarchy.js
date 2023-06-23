@@ -1,74 +1,62 @@
-import { useRef, useEffect,useState} from "react";
-import OrgChart from "@balkangraph/orgchart.js";
-import "./Profile.css";
-import {getRequest} from '../../Service/ProfileService'
-import { useSearchParams } from "react-router-dom";
+import { useRef, useEffect, useState } from 'react';
+import OrgChart from '@balkangraph/orgchart.js';
+import './Profile.css';
+import { getRequest } from '../../Service/ProfileService';
+import { useSearchParams } from 'react-router-dom';
 
+const GetHierarchy = (props) => {
+	const currentRef = useRef();
 
+	const [searchParams] = useSearchParams();
+	const userId = searchParams.get('userId');
+	const [hire, setHire] = useState(null);
 
-const Gethierarchy = (props) => {
-  const currentRef = useRef();
- 
-  const [searchParams] = useSearchParams();
-  const userId = searchParams.get('userId');
-  const[hire,setHire]=useState(null)
+	useEffect(() => {
+		getRequest(userId).then((data) => {
+			setHire(data);
+		});
+	}, []);
 
-  useEffect(()=>{
-      getRequest(userId).then((data)=>{
-        setHire(data)
-      })
-  },[])
+	useEffect(() => {
+		OrgChart.templates.ana.plus = '';
+		OrgChart.templates.ana.minus = '';
 
+		if (hire) {
+			new OrgChart(currentRef.current, {
+				nodes: hire,
+				enableSearch: false,
+				mouseScrool: OrgChart.action.none,
+				nodeMouseClick: OrgChart.action.none,
+				template: 'ula',
 
-  useEffect(() => {
-    OrgChart.templates.ana.plus = "";
-    OrgChart.templates.ana.minus = "";
-    
+				toolbar: {
+					zoom: true,
+					fit: true
+				},
+				tags: {
+					'node-with-subtrees': {
+						template: 'group',
+						subTreeConfig: {
+							siblingSeparation: 10,
+							columns: 3
+						}
+					}
+				},
 
-    if(hire){
+				nodeBinding: {
+					field_0: 'name',
+					field_1: 'role',
+					img_0: 'profileImage'
+				}
+			});
+		}
+	}, [hire]);
 
-    new OrgChart(currentRef.current, {
-      nodes: hire,
-      enableSearch: false,
-      mouseScrool: OrgChart.action.none,
-      nodeMouseClick: OrgChart.action.none,
-      template: "ula",
-
-      toolbar: {
-        zoom: true,
-        fit: true,
-      },
-      tags: {
-        "node-with-subtrees": {
-          template: "group",
-          subTreeConfig: {
-            siblingSeparation: 10,
-            columns: 3,
-          },
-        },
-      },
-
-      nodeBinding: {
-        field_0: "name",
-        field_1: "role",
-        img_0:"profileImage"
-      },
-    });
-  }
-  }, [hire]);
-
-  return (
-    <>
-    
-    <div
-      id="tree"
-      ref={currentRef}
-      style={{marginBottom:'0.9rem'}}
-    ></div>
-   
-    
-    </>
-  );
+	return (
+		<>
+			<div id='tree' ref={currentRef} style={{ marginBottom: '0.9rem' }}></div>
+		</>
+	);
 };
 
-export default Gethierarchy;
+export default GetHierarchy;

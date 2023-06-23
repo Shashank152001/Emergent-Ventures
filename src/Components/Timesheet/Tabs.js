@@ -8,12 +8,8 @@ function Tabs() {
 			<NavLink
 				className={(navData) => (navData.isActive ? 'active-timesheet-tab text-white' : 'inactive-timesheet-tab text-black')}
 				to='/dashboard/getTimesheet'
-				style={{ textDecoration: 'none', marginBottom: '0.8rem', fontSize: '0.9rem', 
-				padding: '0.3rem', borderRadius: '2px'
-			 }}
-
+				style={{ textDecoration: 'none', marginBottom: '0.8rem', fontSize: '0.9rem', padding: '0.3rem', borderRadius: '2px' }}
 			>
-				{/* <span style={{color:'#000'}}>View</span> */}
 				View
 			</NavLink>
 			<NavLink
@@ -21,7 +17,6 @@ function Tabs() {
 				to='/dashboard/viewTime'
 				style={{ textDecoration: 'none', marginBottom: '0.8rem', fontSize: '0.9rem', padding: '0.3rem', borderRadius: '2px' }}
 			>
-				{/* <span>Approve</span> */}
 				Approve
 			</NavLink>
 			<NavLink
@@ -29,7 +24,6 @@ function Tabs() {
 				to='/dashboard/timesheetform'
 				style={{ textDecoration: 'none', fontSize: '0.9rem', padding: '0.3rem', borderRadius: '2px' }}
 			>
-				{/* <span>Add</span> */}
 				Add
 			</NavLink>
 		</nav>

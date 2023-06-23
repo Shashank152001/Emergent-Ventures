@@ -1,28 +1,25 @@
 import { useState, useEffect } from 'react';
-import { startOfMonth, endOfMonth} from 'date-fns';
-import NoRecord from '../Project/norecord';
-import {getRequestData} from '../../Service/adminServices/requestService';
+import { startOfMonth, endOfMonth } from 'date-fns';
+import NoRecord from '../Project/NoRecord';
+import { getRequestData } from '../../Service/adminServices/requestService';
 import './AdminRequest.css';
 
 const AdminRequest = () => {
 	const [requestData, setRequestData] = useState(null);
-	const [startDate, setStartDate] = useState(startOfMonth(new Date()).toLocaleDateString('en-GB').split('/').reverse().join('-') ); 
-	const [endDate, setEndDate] = useState(endOfMonth(new Date()).toLocaleDateString('en-GB').split('/').reverse().join('-') ); 
+	const [startDate, setStartDate] = useState(startOfMonth(new Date()).toLocaleDateString('en-GB').split('/').reverse().join('-'));
+	const [endDate, setEndDate] = useState(endOfMonth(new Date()).toLocaleDateString('en-GB').split('/').reverse().join('-'));
 
-	const handleChange = (event)=>{
-         const{value,name} = event.target;
-		 if(name === 'startdate'){
+	const handleChange = (event) => {
+		const { value, name } = event.target;
+		if (name === 'startdate') {
 			setStartDate(value);
-		 }
-		 else{
-              setEndDate(value);
-		 }
-		 
-	}
+		} else {
+			setEndDate(value);
+		}
+	};
 
 	useEffect(() => {
-		
-		getRequestData(startDate,endDate)
+		getRequestData(startDate, endDate)
 			.then((data) => {
 				console.log(data);
 				setRequestData(data);
@@ -30,62 +27,59 @@ const AdminRequest = () => {
 			.catch((e) => {
 				setRequestData(null);
 			});
-	}, [startDate,endDate]);
-
-
+	}, [startDate, endDate]);
 
 	return (
 		<div className='requests-div'>
-			<div className='requests-heading'>Requests
-			<input type="date" name="startdate"  onChange={handleChange} value={startDate} style={{marginLeft:"0.9rem"}}/>
-			<input type="date" name="enddate"  onChange={handleChange} value={endDate} style={{marginLeft:"0.9rem"}}/>
+			<div className='requests-heading'>Requests</div>
+			<div className='requests-range-input-div'>
+				<h6 className='requests-range-input-heading'>Select Range</h6>
+				<input className='requests-range-input' type='date' name='startdate' onChange={handleChange} value={startDate} />
+				<input className='requests-range-input' type='date' name='enddate' onChange={handleChange} value={endDate} />
 			</div>
-		
-			<div className='requests' style={{ width: '98%',margin:'auto' }}>
-				<table className='table table-hover' style={{ marginTop: '2rem' }}>
+			<div className='admin-requests-div'>
+				<table className='admin-requests-table'>
 					<thead>
-						<tr>
-							<td>Sr.No</td>
-							<td>Employee</td>
-							<td>Request Type</td>
-							<td>Leave Type</td>
-							<td>Start Date</td>
-							<td>End Date</td>
-							<td>Status</td>
+						<tr className='admin-requests-table-row'>
+							<td className='table-heading'>Sr.No</td>
+							<td className='table-heading'>Employee</td>
+							<td className='table-heading center-data'>Request Type</td>
+							<td className='table-heading center-data'>Leave Type</td>
+							<td className='table-heading center-data'>Start Date</td>
+							<td className='table-heading center-data'>End Date</td>
+							<td className='table-heading center-data'>Status</td>
 						</tr>
 					</thead>
 					<tbody>
 						{requestData ? (
 							requestData.map((item, index) => (
-								<tr key={index}>
-									<td>{index + 1}</td>
-									<td>
-										<span>
-											<img style={{ width: '2rem', height: '2rem' }} src={item?.profileImage} alt='employee' />
-										</span>
-										<span> </span>
+								<tr key={index} className='admin-requests-table-row'>
+									<td className='table-data-text'>{index + 1}</td>
+									<td className='table-data-text'>
+										<img className='employee-profile-image' src={item?.profileImage} alt='employee' />
+										<span className='span-margin'></span>
 										{item?.hrmid}
-										<span> - </span>
+										<span className='span-margin'></span>
 										{item?.name}
 									</td>
-									<td>{item?.request}</td>
-									<td>{item?.leaveType}</td>
-									<td>{item?.startDate}</td>
-									<td>{item?.endDate}</td>
+									<td className='table-data-text center-data'>{item?.request}</td>
+									<td className='table-data-text center-data'>{item?.leaveType}</td>
+									<td className='table-data-text center-data'>{item?.startDate}</td>
+									<td className='table-data-text center-data'>{item?.endDate}</td>
 									{item?.status === 'Approved' ? (
-										<td>
-											<i className='bi bi-check-circle-fill text-success '></i>
+										<td className='table-data-text center-data'>
+											<i className='bi bi-check-circle-fill text-success'></i>
 										</td>
 									) : item?.status === 'Rejected' ? (
-										<td>
+										<td className='table-data-text center-data'>
 											<i className='bi bi-x-circle-fill text-danger '></i>
 										</td>
 									) : item?.status === 'Cancelled' ? (
-										<td>
+										<td className='table-data-text center-data'>
 											<i className='bi bi-x-circle-fill text-danger '></i>
 										</td>
 									) : (
-										<td>
+										<td className='table-data-text center-data'>
 											<i className='bi bi-hourglass text-warning'></i>
 										</td>
 									)}
@@ -93,7 +87,7 @@ const AdminRequest = () => {
 							))
 						) : (
 							<>
-								<tr>
+								<tr className='admin-requests-table-row'>
 									<td colSpan='8'>
 										<NoRecord />
 									</td>
