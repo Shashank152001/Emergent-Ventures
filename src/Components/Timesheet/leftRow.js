@@ -10,6 +10,7 @@ const LeftRow = ({ row, handlechange, week, start, end }) => {
 	useEffect(() => {
 		getClientAndProject()
 			.then((data) => {
+				console.log(data);
 				setOptionData(data);
 			})
 			.catch((err) => {

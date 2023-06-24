@@ -67,20 +67,25 @@ export const getTimeSheet = async (week) => {
 	if (!response.ok) {
 		throw new Error('Data could not be fetched');
 	} else {
-		return await response.json();
+		return response.json();
 	}
 };
 
-export const getClientAndProject = async (week) => {
+// user/projects/get-user-projects-minimal-data
+
+export const getClientAndProject = async () => {
+
 	const response = await fetch(url + `user/projects/get-user-projects-minimal-data`, {
 		mode: 'cors',
 		headers: { 'Content-Type': 'application/json' },
 		credentials: 'include'
 	});
 
+	console.log(response);
+
 	if (!response.ok) {
 		throw new Error('Data could not be fetched');
 	} else {
-		return await response.json();
+		return response.json();
 	}
 };
