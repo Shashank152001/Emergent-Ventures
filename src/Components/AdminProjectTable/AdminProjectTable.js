@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './AdminProjectTable.css';
 import { AiFillDelete, AiFillEdit } from 'react-icons/ai';
 import { IoCalendarNumberOutline } from 'react-icons/io5';
-import NoRecord from './NoRecord';
+import NoRecord from './norecord';
 import { getProjects } from '../../Service/adminServices/projectService';
 import { BiPlus } from 'react-icons/bi';
 import { useNavigate } from 'react-router-dom/dist';

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { leaveRequest, leaveUser } from '../../Service/LeavesService';
-import './Wfh.css';
+import './WFH.css';
 import { success } from '../../Utils/SuccessToast';
 import { Error } from '../../Utils/ErrorToast';
 import { useNavigate } from 'react-router-dom';

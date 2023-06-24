@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useRef } from 'react';
 import { BiChevronDown, BiSearch } from 'react-icons/bi';
-import FileUpload from '../Dashboard/Fileupload';
+import FileUpload from '../Dashboard/fileupload';
 import { useNavigate } from 'react-router-dom';
 import { adminData } from '../../Service/adminServices/adminService';
 import { AdminDropDown } from '../AdminDropDown/AdminDropDown';

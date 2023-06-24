@@ -1,4 +1,4 @@
-import { timesheetTemplate } from './GetTemplate';
+import { timesheetTemplate } from './getTemplate';
 
 const getFinalTotalTimesheet = (totalTimesheet, timesheetData) => {
 	const localTimeSheetData = totalTimesheet;

@@ -1,5 +1,5 @@
 import React from 'react';
-import './Wfh.css';
+import './WFH.css';
 import wfh from '../../Assest/wfh.svg';
 import { useNavigate, Link } from 'react-router-dom';
 

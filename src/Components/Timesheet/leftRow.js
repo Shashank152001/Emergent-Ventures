@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './Timesheet.css';
 import { getTimeSheet, getClientAndProject } from '../../Service/TimesheetService';
-import { reduceFetchedTimeSheetData } from '../../Utils/GetTemplate';
+import { reduceFetchedTimeSheetData } from '../../Utils/getTemplate';
 
 const LeftRow = ({ row, handlechange, week, start, end }) => {
 	const [userTimeSheetData, setuserTimeSheetData] = useState([]);

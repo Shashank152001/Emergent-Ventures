@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react';
-import './Wfh.css';
+import './WFH.css';
 import RequestTabs from './RequestTabs';
 import { ReportingGetdata } from '../../Service/LeavesService';
 import { Link } from 'react-router-dom';
-import NoRecord from '../Project/NoRecord';
+import NoRecord from '../Project/norecord';
 import { RealDataContext } from '../../Context/LoginContext';
 
 function ViewRequest() {
