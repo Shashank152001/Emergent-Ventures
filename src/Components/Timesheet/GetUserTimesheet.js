@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import NoRecord from '../ProjectTable/NoRecord';
+import NoRecord from '../ProjectTable/norecord';
+
 import { fetchTimeSheet } from '../../Service/TimesheetService';
 import Tabs from '../Timesheet/Tabs';
 function GetUserTimesheet() {

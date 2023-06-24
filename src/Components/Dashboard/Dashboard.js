@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './Dashboard.css';
-import Sidebar from './Sidebar';
+import Sidebar from './sidebar';
 import { LoginContext, RealDataContext } from '../../Context/LoginContext';
 import { userData } from '../../Service/DashboardService';
 import Loader from '../Spinner/Loader';

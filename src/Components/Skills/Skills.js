@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './Skills.css';
-import NoRecord from '../ProjectTable/NoRecord';
+import NoRecord from '../ProjectTable/norecord';
 import { fetchSkills } from '../../Service/SkillService';
 
 function Skill() {

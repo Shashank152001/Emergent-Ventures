@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { BsCheckCircleFill } from 'react-icons/bs';
 import './Timesheet.css';
-import NoRecord from '../ProjectTable/NoRecord';
+import NoRecord from '../ProjectTable/norecord';
 import { fetchTimeSheet } from '../../Service/TimesheetService';
 
 function Timesheet() {

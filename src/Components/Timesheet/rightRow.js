@@ -1,9 +1,9 @@
 import React, { useEffect, useState, useRef } from 'react';
 import './Timesheet.css';
 import { getTimeSheet } from '../../Service/TimesheetService';
-import DescriptionForm from './DescriptionForm';
+import DescriptionForm from './descriptionForm';
 import { SiReadthedocs } from 'react-icons/si';
-import { formatTotalTime, reduceFetchedTimeSheetData } from '../../Utils/GetTemplate';
+import { formatTotalTime, reduceFetchedTimeSheetData } from '../../Utils/getTemplate';
 
 const RightRow = ({ row, handlechange, date, week, start, end, slide, userFinalData, setUserFinalData }) => {
 	const [userTimeSheetData, setuserTimeSheetData] = useState([]);

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { startOfMonth, endOfMonth } from 'date-fns';
 import './AdminTimesheet.css';
-import NoRecord from '../ProjectTable/NoRecord';
+import NoRecord from '../ProjectTable/norecord';
 import { getTimesheetData } from '../../Service/adminServices/timesheetService';
 
 const AdminTimesheet = () => {

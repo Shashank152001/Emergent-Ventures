@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { YourRequestGetdata, ResendRequest, CancelRequest } from '../../Service/LeavesService';
-import './Wfh.css';
+import './WFH.css';
 import RequestTabs from './RequestTabs';
-import NoRecord from '../ProjectTable/NoRecord';
+import NoRecord from '../ProjectTable/norecord';
 import { success } from '../../Utils/SuccessToast';
 import { Error } from '../../Utils/ErrorToast';
 import 'react-toastify/dist/ReactToastify.css';

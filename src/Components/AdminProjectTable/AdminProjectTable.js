@@ -7,7 +7,7 @@ import AddProject from './AddProject';
 import EditProject from './EditProject';
 import DeleteProject from './DeleteProject';
 import myprofile from '../../Assest/myprofile.png';
-import NoRecord from './NoRecord';
+import NoRecord from './norecord';
 import './AdminProjectTable.css';
 
 const AdminProjectTable = () => {
