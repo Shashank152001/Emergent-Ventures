@@ -1,7 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { fetchReportingTimesheet } from '../../Service/TimesheetService';
 import { Link } from 'react-router-dom';
+<<<<<<< HEAD
 import NoRecord from '../Project/norecord';
+=======
+import NoRecord from '../ProjectTable/NoRecord';
+>>>>>>> ce987915ede69be90f64a2a8df249171a08cbd3a
 import { RealDataContext } from '../../Context/LoginContext';
 import Tabs from './Tabs';
 

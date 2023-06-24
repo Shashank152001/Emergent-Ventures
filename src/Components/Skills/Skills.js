@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from 'react';
+<<<<<<< HEAD
 import './skill.css';
 import NoRecord from '../Project/norecord';
+=======
+import './Skills.css';
+import NoRecord from '../ProjectTable/NoRecord';
+>>>>>>> ce987915ede69be90f64a2a8df249171a08cbd3a
 import { fetchSkills } from '../../Service/SkillService';
 
 function Skill() {
@@ -18,31 +23,29 @@ function Skill() {
 
 	return (
 		<section className='skills-container'>
-			<div className='skills-heading'>
-				<h1 style={{ fontSize: '1.5rem' }}>My Skills</h1>
+			<div className='skills-heading-div'>
+				<h5 className='skills-heading'>My Skills</h5>
 			</div>
 
-			<div className='skill-content'>
+			<div className='skills-content'>
 				{userData ? (
 					<>
-						<div className='primary-skills'>
-							<h6 className='skill-title h6'>Primary Skills</h6>
-							<div className='content-wrapper'>
-								<p className='skill-content p'>{userData?.primarySkills || ''}</p>
+						<div className='skill-container'>
+							<h5 className='skill-title'>Primary Skills</h5>
+							<div className='skill-content-div'>
+								<span className='skill-content'>{userData?.primarySkills || ''}</span>
 							</div>
 						</div>
-
-						<div className='primary-skills'>
-							<h6 className='skill-title h6'>Secondary Skills</h6>
-							<div className='content-wrapper'>
-								<p className='skill-content p'>{userData?.secondarySkills || ''}</p>
+						<div className='skill-container'>
+							<h5 className='skill-title'>Secondary Skills</h5>
+							<div className='skill-content-div'>
+								<span className='skill-content'>{userData?.secondarySkills || ''}</span>
 							</div>
 						</div>
-
-						<div className='primary-skills'>
-							<h6 className='skill-title h6'>Certifications</h6>
-							<div className='content-wrapper'>
-								<p className='skill-content border-none p'>{userData?.certifications || ''}</p>
+						<div className='skill-container'>
+							<h5 className='skill-title'>Certifications</h5>
+							<div className='skill-content-div no-border'>
+								<span className='skill-content'>{userData?.certifications || ''}</span>
 							</div>
 						</div>
 					</>

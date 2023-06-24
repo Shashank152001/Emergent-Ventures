@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { startOfMonth, endOfMonth } from 'date-fns';
-import NoRecord from '../Project/norecord';
+import NoRecord from '../ProjectTable/NoRecord';
 import { getRequestData } from '../../Service/adminServices/requestService';
 import './AdminRequest.css';
 

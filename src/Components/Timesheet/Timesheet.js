@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { BsCheckCircleFill } from 'react-icons/bs';
 import './Timesheet.css';
+<<<<<<< HEAD
 import NoRecord from '../Project/norecord';
+=======
+import NoRecord from '../ProjectTable/NoRecord';
+>>>>>>> ce987915ede69be90f64a2a8df249171a08cbd3a
 import { fetchTimeSheet } from '../../Service/TimesheetService';
 
 function Timesheet() {
@@ -21,9 +25,9 @@ function Timesheet() {
 
 	return (
 		<section className='timesheet-container'>
-			<div id='timesheet' style={{ padding: '0.6rem' }}>
-				<div className='skills-heading'>
-					<h1 style={{ fontSize: '1.5rem' }}>My Timesheets</h1>
+			<div id='timesheet' style={{ padding: '0.1rem' }}>
+				<div className='timesheets-heading'>
+					<h5 style={{ fontSize: '1.5rem', marginBottom: '0' }}>My Timesheets</h5>
 				</div>
 				<table className='dashboard-timesheet-content-div'>
 					<tbody className='dashboard-timesheet-tbody-div'>

@@ -25,7 +25,7 @@ const Wfh = () => {
 								type='submit'
 								style={{
 									padding: '0.2rem 2.1rem',
-									marginTop: '0.6rem'
+									marginTop: '1.9rem'
 								}}
 							>
 								<Link to='leave' style={{ textDecoration: 'none', color: '#fff' }}>

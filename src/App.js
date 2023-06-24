@@ -35,6 +35,7 @@ import SuccessMessage from './Components/Message/successmessage';
 import AdminRequest from './Components/AdminRequest/AdminRequest';
 import AdminTimesheet from './Components/AdminTimesheet/AdminTimesheet';
 import AdminProject from './Components/AdminProject/AdminProject';
+import Project from './Components/Project/Project';
 
 function App() {
 	return (
@@ -66,11 +67,6 @@ function App() {
 					</Route>
 					<Route element={<SignUp />} path='/signup'></Route>
 					<Route element={<AdminEmployeeTable />} path='/table'></Route>
-					{/* <Route element={<GetUserTimesheet/>} path="/getTimesheet"></Route>
-          <Route element={<GetRmTimesheet/>} path="/viewTime"></Route>
-          <Route element={<EditReporingTimeSheet/>} path="/editTime"></Route> */}
-
-					{/* for hierarchy testing */}
 
 					<Route element={<ProtectRoute />} path='/dashboard'>
 						<Route element={<Dashboard />} path='/dashboard'>
@@ -80,6 +76,7 @@ function App() {
 							<Route element={<EditRequest />} path='editrequest/:id' />
 							<Route element={<ViewRequest />} path='viewRequest' />
 							<Route element={<GetProfile />} path='getProfile/' />
+							<Route element={<Project />} path='project-detail' />
 							<Route element={<SearchProfile />} path='searchprofile/:id' />
 							<Route element={<Profile />} path='profile' />
 							<Route element={<GetUserTimesheet />} path='getTimesheet' />
@@ -93,8 +90,6 @@ function App() {
 					<Route element={<ProtectRoute />} path='/leaverequest'>
 						<Route element={<WFHform />} path='/leaverequest'></Route>
 					</Route>
-
-					{/* <Route element={<DescriptionForm />} path="/testkaruna"></Route> */}
 
 					<Route element={<SuccessMessage />} path='/success'></Route>
 					<Route element={<ErrorPage />} path='*'></Route>

@@ -5,6 +5,7 @@ import { AiOutlinePlus } from 'react-icons/ai';
 import { socket } from '../../socket';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
+<<<<<<< HEAD
 import LeftRow from './leftRow';
 import RightRow from './rightRow';
 import { LoginContext } from '../../Context/LoginContext';
@@ -13,6 +14,15 @@ import Tabs from '../Timesheet/Tabs';
 // ../../Utils/GetTemplate
 import { timesheetTemplate, reduceFetchedTimeSheetData, finalWorkingHours, formatTotalTime } from '../../Utils/getTemplate';
 import { totalTimesheetRecords, finalTimesheetData } from '../../Utils/templateRecords';
+=======
+import { LoginContext } from '../../Context/LoginContext';
+import { CreateTimeSheet, getTimeSheet } from '../../Service/TimesheetService';
+import { timesheetTemplate, reduceFetchedTimeSheetData, finalWorkingHours, formatTotalTime } from '../../Utils/GetTemplate';
+import { totalTimesheetRecords, finalTimesheetData } from '../../Utils/TemplateRecords';
+import LeftRow from './LeftRow';
+import RightRow from './RightRow';
+import Tabs from '../Timesheet/Tabs';
+>>>>>>> ce987915ede69be90f64a2a8df249171a08cbd3a
 
 const Timesheetform = () => {
 	const navigate = useNavigate();
