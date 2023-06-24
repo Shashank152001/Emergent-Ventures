@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { LoginContext } from '../../Context/LoginContext';
 import { ProfileFormData } from '../../Service/ProfileService';
 import { fetchSkills } from '../../Service/SkillService';
-import { Link ,useNavigate} from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.css';
 import 'primeicons/primeicons.css';
 import './Profile.css';
@@ -61,15 +61,15 @@ function GetProfile() {
 							textDecoration: 'none',
 							color: 'rgb(61, 172, 143)',
 							marginRight: '2rem',
-							outline:'none',
-							border:'none',
-							backgroundColor:'transparent'
+							outline: 'none',
+							border: 'none',
+							backgroundColor: 'transparent'
 						}}
-						onClick={()=>{
+						onClick={() => {
 							navigate({
 								pathname: '/dashboard/get-hierarchy',
-								search: `?userId=${profileFormData?.profile?.userId}`,
-							  });
+								search: `?userId=${profileFormData?.profile?.userId}`
+							});
 						}}
 					>
 						Organization Hierarchy
