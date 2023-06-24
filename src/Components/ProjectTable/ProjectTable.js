@@ -4,7 +4,7 @@ import { AiOutlineDown, AiOutlineSwap } from 'react-icons/ai';
 import { IoCalendarNumberOutline } from 'react-icons/io5';
 import { fetchProjects } from '../../Service/ProjectService';
 import { useNavigate } from 'react-router-dom/dist';
-import NoRecord from './NoRecord';
+import NoRecord from './norecord';
 import './ProjectTable.css';
 
 const ProjectTable = () => {

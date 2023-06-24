@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { getProjectDetail } from '../../Service/ProjectService';
 import 'primeicons/primeicons.css';
-import './Project.css';
+import './project.css';
 
 const Project = () => {
 	const [searchParams] = useSearchParams();

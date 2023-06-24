@@ -3,7 +3,7 @@ import './WFH.css';
 import RequestTabs from './RequestTabs';
 import { ReportingGetdata } from '../../Service/LeavesService';
 import { Link } from 'react-router-dom';
-import NoRecord from '../ProjectTable/NoRecord';
+import NoRecord from '../ProjectTable/norecord';
 import { RealDataContext } from '../../Context/LoginContext';
 
 function ViewRequest() {

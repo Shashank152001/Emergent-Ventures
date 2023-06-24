@@ -1,9 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { IoCalendarNumberOutline } from 'react-icons/io5';
-<<<<<<< HEAD
-import NoRecord from './norecord';
-=======
->>>>>>> ce987915ede69be90f64a2a8df249171a08cbd3a
 import { getProjects } from '../../Service/adminServices/projectService';
 import { BiPlus } from 'react-icons/bi';
 import { useNavigate } from 'react-router-dom/dist';
@@ -11,7 +7,7 @@ import AddProject from './AddProject';
 import EditProject from './EditProject';
 import DeleteProject from './DeleteProject';
 import myprofile from '../../Assest/myprofile.png';
-import NoRecord from './NoRecord';
+import NoRecord from './norecord';
 import './AdminProjectTable.css';
 
 const AdminProjectTable = () => {
