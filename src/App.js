@@ -29,7 +29,7 @@ import AdminSignUp from './Components/AdminSignUp/AdminSignUp';
 import AdminDashboard from './Components/AdminDashboard/AdminDashboard';
 import AdminHome from './Components/AdminDashboard/adminHome';
 import AdminUserProfile from './Components/AdminUserProfile/AdminUserProfile';
-import UserProfile from './Components/AdminUserHierarchy/userProfile';
+import UserProfile from './Components/AdminUserHierarchy/userProfile.js';
 import Hierarchy from './Components/AdminUserHierarchy/hierarchy';
 import SuccessMessage from './Components/Message/successmessage';
 import AdminRequest from './Components/AdminRequest/AdminRequest';
