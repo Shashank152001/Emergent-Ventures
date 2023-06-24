@@ -49,7 +49,6 @@ export const CreateTimeSheet = async (formData) => {
 		headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 		body: new URLSearchParams({ data: timesheetData })
 	});
-
 	if (!response.ok) {
 		throw new Error('there is some error..');
 	} else {

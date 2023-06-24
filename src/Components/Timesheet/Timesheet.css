@@ -255,6 +255,8 @@ select {
 }
 .dashboard-timesheet-profile-img {
 	width: 2rem;
+	border-radius: 50%;
+	height: 2rem;
 }
 .dashboard-timesheet-name {
 	font-weight: bold;

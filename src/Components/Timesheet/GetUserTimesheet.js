@@ -41,7 +41,7 @@ function GetUserTimesheet() {
 									<td>{index + 1}</td>
 									<td>
 										<span>
-											<img style={{ width: '2rem', height: '2rem' }} src={item.profileImage} alt='employee' />
+											<img style={{ width: '2rem', height: '2rem' , borderRadius:'50%' }} src={item.profileImage} alt='employee' />
 										</span>
 										<span> </span>
 										{item.hrmid}

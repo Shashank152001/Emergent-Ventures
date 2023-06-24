@@ -13,6 +13,8 @@ import Tabs from '../Timesheet/Tabs';
 // ../../Utils/GetTemplate
 import { timesheetTemplate, reduceFetchedTimeSheetData, finalWorkingHours, formatTotalTime } from '../../Utils/getTemplate';
 import { totalTimesheetRecords, finalTimesheetData } from '../../Utils/templateRecords';
+import { success } from '../../Utils/SuccessToast';
+import { Error } from '../../Utils/ErrorToast';
 
 const Timesheetform = () => {
 	const navigate = useNavigate();
@@ -90,10 +92,12 @@ const Timesheetform = () => {
 			const finalTimesheetRecord = finalTimesheetData(userFinalData, userTimeSheetData);
 			CreateTimeSheet(finalTimesheetRecord)
 				.then((data) => {
+					success(data.message);
 					socket.emit('sendNotifications', 'hello timesheet');
 					navigate('/dashboard/getTimesheet');
 				})
 				.catch((err) => {
+					Error(err.message)
 					console.log(err);
 				});
 		}
