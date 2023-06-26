@@ -91,7 +91,7 @@ function SignIn() {
 								<img src={celebal} alt='celebal' style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
 							</div>
 							<div style={{ width: '80%', margin: 'auto' }}>
-								<p style={{ fontSize: '2rem', color: '#545A78' }}>Welcome Interns!</p>
+								<p style={{ fontSize: '2rem', color: '#545A78' }}>Welcome Employees!</p>
 							</div>
 						</div>
 						<div style={{ height: '370px', width: '460px' }} className='left-image'>

@@ -38,7 +38,7 @@ const Leaves = () => {
 							<div className='d-flex' style={{ gap: '12px' }}>
 								<div style={{ width: 40, height: 40 }}>
 									<CircularProgressbar
-										value={availableLeaveData?.totalcasualLeaves - availableLeaveData?.remainingCasualLeaves || 0}
+										value={availableLeaveData?.totalCasualLeaves - availableLeaveData?.remainingCasualLeaves || 0}
 										styles={{
 											path: { stroke: '#ff6e6e' },
 											text: {
@@ -46,15 +46,15 @@ const Leaves = () => {
 												transform: 'translateY(4px)'
 											}
 										}}
-										text={`${availableLeaveData?.totalcasualLeaves - availableLeaveData?.remainingCasualLeaves || 0}`}
-										maxValue={availableLeaveData?.totalcasualLeaves}
+										text={`${availableLeaveData?.totalCasualLeaves - availableLeaveData?.remainingCasualLeaves || 0}`}
+										maxValue={availableLeaveData?.totalCasualLeaves}
 									/>
 								</div>
 								<div>
 									<span className='' style={{ fontSize: '14px' }}>
 										Casual Leave
 										<p className=' text-secondary' style={{ fontSize: '12px' }}>
-											Available {availableLeaveData?.totalcasualLeaves || 0} days
+											Available {availableLeaveData?.remainingCasualLeaves || 0} days
 										</p>
 									</span>
 								</div>
@@ -80,7 +80,7 @@ const Leaves = () => {
 										<span className='' style={{ fontSize: '14px' }}>
 											Leave Without pay
 											<p className=' text-secondary' style={{ fontSize: '12px' }}>
-												Available {availableLeaveData?.totalLeaveWithoutPays || 0} days
+												Available {availableLeaveData?.remainingLeaveWithoutPays || 0} days
 											</p>
 										</span>
 									</div>
@@ -108,7 +108,7 @@ const Leaves = () => {
 										<span className='' style={{ fontSize: '14px' }}>
 											Restricted Holidays
 											<p className='text-secondary' style={{ fontSize: '12px' }}>
-												Available {availableLeaveData?.totalRestrictedHolidays || 0} days
+												Available {availableLeaveData?.remainingRestrictedHolidays || 0} days
 											</p>
 										</span>
 									</div>
@@ -134,7 +134,7 @@ const Leaves = () => {
 										<span className='' style={{ fontSize: '14px' }}>
 											workFromHome
 											<p className=' text-secondary' style={{ fontSize: '12px' }}>
-												Available {availableLeaveData?.totalWorkFromHomes || 0} days
+												Available {availableLeaveData?.remainingWorkFromHomes || 0} days
 											</p>
 										</span>
 									</div>
