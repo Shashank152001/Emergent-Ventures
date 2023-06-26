@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/static/css/main.b2129158.css",
+    "main.js": "/static/js/main.abc511aa.js",
+    "static/media/primeicons.svg": "/static/media/primeicons.e1441b135b3ca9ad643c.svg",
+    "static/media/wallpaper-pattern.png": "/static/media/wallpaper-pattern.7b4301077ee87a8496ef.png",
+    "static/media/Loader.gif": "/static/media/Loader.a6935ee1480c4bff5534.gif",
+    "static/media/singin.png": "/static/media/singin.059c0a591bc8635b5668.png",
+    "static/media/primeicons.eot": "/static/media/primeicons.d44157bdfa026dc877af.eot",
+    "static/media/primeicons.woff": "/static/media/primeicons.10d3152104f2208ac82a.woff",
+    "static/media/primeicons.ttf": "/static/media/primeicons.ea5358601d0a3fd6670b.ttf",
+    "static/media/primeicons.woff2": "/static/media/primeicons.78172950b335ccdb94e2.woff2",
+    "static/media/myprofile.png": "/static/media/myprofile.fa7a741548c411016d1b.png",
+    "static/media/wfh.svg": "/static/media/wfh.7fb281157759e0958669e54346c6af2f.svg",
+    "static/media/Vector.svg": "/static/media/Vector.4216d2fdfc370e6d79bf78fe8fa3c654.svg",
+    "static/media/Spheres.svg": "/static/media/Spheres.123a0f2669b8ef7a8595980dc0b7b8e2.svg",
+    "index.html": "/index.html",
+    "main.b2129158.css.map": "/static/css/main.b2129158.css.map",
+    "main.abc511aa.js.map": "/static/js/main.abc511aa.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.b2129158.css",
+    "static/js/main.abc511aa.js"
+  ]
+}
