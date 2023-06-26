@@ -99,7 +99,7 @@ const Leaves = () => {
 													transform: 'translateY(4px)'
 												}
 											}}
-											text={`${availableLeaveData?.totalRestrictedHolidays - availableLeaveData?.remainingRestrictedHoliday || 0}`}
+											text={`${availableLeaveData?.totalRestrictedHolidays - availableLeaveData?.remainingRestrictedHolidays || 0}`}
 											maxValue={availableLeaveData?.totalRestrictedHolidays}
 										/>
 									</div>
