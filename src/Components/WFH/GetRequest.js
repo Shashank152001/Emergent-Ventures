@@ -40,9 +40,9 @@ function GetRequest() {
 					const msg = await response.json().then((data) => {
 						return data.message;
 					});
-					setIsCalled((prev) => !prev);
 					if (response.status === 201) {
 						success(msg);
+						setIsCalled((prev) => !prev);
 					} else {
 						Error(msg);
 					}
