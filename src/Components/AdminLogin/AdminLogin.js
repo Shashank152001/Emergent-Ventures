@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import './AdminLogin.css';
+// import './AdminLogin.css';
 import celebal from '../../Assest/celebal.png';
 import signin from '../../Assest/singin.png';
 import 'react-toastify/dist/ReactToastify.css';

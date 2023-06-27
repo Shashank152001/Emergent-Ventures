@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Pagination } from "@mui/material";
 import { startOfMonth, endOfMonth } from 'date-fns';
 import './AdminTimesheet.css';
 import NoRecord from '../ProjectTable/norecord';
@@ -8,6 +9,11 @@ const AdminTimesheet = () => {
 	const [timesheetData, setTimesheetData] = useState(null);
 	const [startDate, setStartDate] = useState(startOfMonth(new Date()).toLocaleDateString('en-GB').split('/').reverse().join('-'));
 	const [endDate, setEndDate] = useState(endOfMonth(new Date()).toLocaleDateString('en-GB').split('/').reverse().join('-'));
+	const [curentPage, setCurrentPage] = useState(1);
+	const recordPerPage = 8;
+	const lastIndex = curentPage * recordPerPage;
+	const firstIndex = lastIndex - recordPerPage;
+	const records = timesheetData && timesheetData.slice(firstIndex, lastIndex);
 
 	const handleChange = (event) => {
 		const { value, name } = event.target;
@@ -51,8 +57,8 @@ const AdminTimesheet = () => {
 						</tr>
 					</thead>
 					<tbody>
-						{timesheetData ? (
-							timesheetData.map((item, index) => (
+						{records ? (
+							records.map((item, index) => (
 								<tr key={index} className='admin-timesheets-table-row'>
 									<td className='table-data-text'>{index + 1}</td>
 									<td className='table-data-text'>
@@ -96,6 +102,22 @@ const AdminTimesheet = () => {
 					</tbody>
 				</table>
 			</div>
+			{records && (
+          <div className="  d-flex justify-content-center align-items-center py-3">
+            <Pagination
+              count={Math.ceil(timesheetData.length / recordPerPage)}
+              style={{
+                width: "100%",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+              onChange={(event, value) => {
+                setCurrentPage(value);
+              }}
+            />
+          </div>
+        )}
 		</div>
 	);
 };

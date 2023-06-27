@@ -33,7 +33,7 @@ function MyDashBoard() {
 					{userDatas ? (
 						<div className='wrapper d-flex'>
 							<Sidebar />
-							<div className='right-sidebar'>
+							<div className='right-sidebar '>
 								<Header />
 
 								<div className='right-middle-content'>

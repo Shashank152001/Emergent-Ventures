@@ -10,6 +10,8 @@ export const Notification = ({ messages, unread, closeNotification, setOpenNotif
 	const [allNotificationRead, setAllNotificationRead] = useState(false);
 	const notificationRef = useRef(null);
 
+	
+
 	const handleNotificationClick = (data) => {
 		setNotificationId(data);
 		setNotificationRead(true);

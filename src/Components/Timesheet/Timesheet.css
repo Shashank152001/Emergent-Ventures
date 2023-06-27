@@ -77,7 +77,7 @@ section.timesheet-container {
 	padding: 0.5rem;
 	overflow-x: scroll;
 	max-width: 40rem;
-	scrollbar-width: none;
+	/* scrollbar-width: none; */
 }
 
 .date-td:focus {

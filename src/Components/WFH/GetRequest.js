@@ -8,9 +8,11 @@ import { Error } from '../../Utils/ErrorToast';
 import 'react-toastify/dist/ReactToastify.css';
 import { FcCancel } from 'react-icons/fc';
 import { RealDataContext } from '../../Context/LoginContext';
+import { Pagination } from '@mui/material';
 
 function GetRequest() {
 	const [GetRequestData, SetGetRequestData] = useState(null);
+	const [curentPage, setCurrentPage] = useState(1);
 	const [resendData, setResendData] = useState({
 		userId: '',
 		requestId: ''
@@ -22,10 +24,15 @@ function GetRequest() {
 	const [cancel, setCancel] = useState(false);
 	const [isCalled, setIsCalled] = useState(false);
 	const { isRealTime } = useContext(RealDataContext);
+	const recordPerPage = 8;
+	const lastIndex = curentPage * recordPerPage;
+	const firstIndex = lastIndex - recordPerPage;
+	const records = GetRequestData && GetRequestData.slice(firstIndex, lastIndex);
 
 	useEffect(() => {
 		YourRequestGetdata()
 			.then((yourgetrequest) => {
+				
 				SetGetRequestData(yourgetrequest);
 				setSend(false)
 			})
@@ -114,8 +121,8 @@ function GetRequest() {
 						</tr>
 					</thead>
 					<tbody>
-						{GetRequestData ? (
-							GetRequestData.map((item, index) => (
+						{records ? (
+							records.map((item, index) => (
 								<tr key={index}>
 									<td>{index + 1}</td>
 									<td>
@@ -183,7 +190,23 @@ function GetRequest() {
 						)}
 					</tbody>
 				</table>
+
+               {
+				records && 
+				<div className='  d-flex justify-content-center align-items-center py-3'>
+						<Pagination
+							count={Math.ceil(GetRequestData.length / recordPerPage)}
+							style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+							onChange={(event, value) => {
+								setCurrentPage(value);
+				 }}
+				/>
 			</div>
+
+			}
+
+			</div>
+			
 		</div>
 	);
 }
