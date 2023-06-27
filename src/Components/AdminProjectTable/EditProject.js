@@ -67,7 +67,7 @@ const EditProject = ({ setEditOpen, currentProject, setRender }) => {
 					</div>
 					<form className='admin-form' onSubmit={handleSubmit}>
 						<div className='row-field' style={{ padding: '10px 0 0 10px' }}>
-							<input type='text' name='projectName' id='projectName' onChange={handleChange} value={formData?.projectName} className='field-size input-form' required />
+							<input type='text' name='projectName' id='projectName' onChange={handleChange} value={formData?.projectName} className='field-size input-form' disabled />
 							<label htmlFor='projectName' className='text-start label-form'>
 								ProjectName:
 							</label>

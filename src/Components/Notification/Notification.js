@@ -85,7 +85,7 @@ export const Notification = ({ messages, unread, closeNotification, setOpenNotif
 								className='notification-message-card unread-card'
 								key={message.id}
 								onClick={() => {
-									handleNotificationClick({ notificationId: message.notification_id });
+									handleNotificationClick({ notificationId: message.notificationId });
 								}}
 							>
 								<span className='notification-logo-span'>
