@@ -27,6 +27,7 @@ function GetRequest() {
 		YourRequestGetdata()
 			.then((yourgetrequest) => {
 				SetGetRequestData(yourgetrequest);
+				setSend(false)
 			})
 			.catch((e) => {
 				console.log(e.message);
