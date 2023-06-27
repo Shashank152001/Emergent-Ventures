@@ -40,7 +40,7 @@ function GetRequest() {
 					const msg = await response.json().then((data) => {
 						return data.message;
 					});
-
+					setIsCalled((prev) => !prev);
 					if (response.status === 201) {
 						success(msg);
 					} else {
@@ -119,7 +119,7 @@ function GetRequest() {
 									<td>{index + 1}</td>
 									<td>
 										<span>
-											<img style={{ width: '2rem', height: '2rem' }} src={item.profileImage} alt='employee' />
+											<img style={{ width: '2rem', height: '2rem', borderRadius:'50%' }} src={item.profileImage} alt='employee' />
 										</span>
 										<span> </span>
 										{item.hrmid}
@@ -148,7 +148,7 @@ function GetRequest() {
 										</td>
 									)}
 									{item.status === 'Pending' ? (
-										<td>
+										<td style={{cursor:'pointer'}}>
 											<i
 												className='bi bi-x-lg text-danger'
 												onClick={() => {
@@ -157,7 +157,7 @@ function GetRequest() {
 											></i>
 										</td>
 									) : item.status === 'Rejected' ? (
-										<td>
+										<td style={{cursor:'pointer'}}>
 											<i className='bi bi-send text-primary' onClick={() => resendRequest(item.id, item.userId)}></i>
 										</td>
 									) : item.status === 'Cancelled' ? (
