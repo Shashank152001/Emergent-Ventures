@@ -1,9 +1,13 @@
 import celebalLogo from '../../Assest/celebal.png';
 import { NavLink } from 'react-router-dom';
+import { AiOutlineRight,AiOutlineLeft } from "react-icons/ai";
 
 function Sidebar() {
 	return (
 		<div className='left-sidebar'>
+			<div className='toggle d-none'>
+				<AiOutlineRight/>
+			</div>
 			<div className='left-sidebar-logo-div'>
 				<img className='left-sidebar-logo' src={celebalLogo} alt='celebal' />
 			</div>

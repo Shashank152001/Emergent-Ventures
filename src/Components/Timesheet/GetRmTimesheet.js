@@ -4,10 +4,16 @@ import { Link } from 'react-router-dom';
 import NoRecord from '../ProjectTable/norecord';
 import { RealDataContext } from '../../Context/LoginContext';
 import Tabs from './Tabs';
+import { Pagination } from '@mui/material';
 
 function GetRmTimesheet() {
 	const [rmTimesheet, setRmTimesheet] = useState(null);
 	const { isRealTime } = useContext(RealDataContext);
+	const [curentPage, setCurrentPage] = useState(1);
+	const recordPerPage = 8;
+	const lastIndex = curentPage * recordPerPage;
+	const firstIndex = lastIndex - recordPerPage;
+	const records = rmTimesheet && rmTimesheet.slice(firstIndex, lastIndex);
 
 	useEffect(() => {
 		fetchReportingTimesheet()
@@ -38,8 +44,8 @@ function GetRmTimesheet() {
 						</tr>
 					</thead>
 					<tbody>
-						{rmTimesheet ? (
-							rmTimesheet.map((item, index) => (
+						{records ? (
+							records.map((item, index) => (
 								<tr key={index}>
 									<td style={{ textAlign: 'center' }}>{index + 1}</td>
 									<td>
@@ -86,6 +92,19 @@ function GetRmTimesheet() {
 						)}
 					</tbody>
 				</table>
+				{
+				records && 
+				<div className='  d-flex justify-content-center align-items-center py-3'>
+						<Pagination
+							count={Math.ceil(rmTimesheet.length / recordPerPage)}
+							style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+							onChange={(event, value) => {
+								setCurrentPage(value);
+				 }}
+				/>
+			</div>
+
+			}
 			</div>
 		</div>
 	);

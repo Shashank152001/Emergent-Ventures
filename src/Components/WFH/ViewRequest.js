@@ -5,10 +5,16 @@ import { ReportingGetdata } from '../../Service/LeavesService';
 import { Link } from 'react-router-dom';
 import NoRecord from '../ProjectTable/norecord';
 import { RealDataContext } from '../../Context/LoginContext';
+import { Pagination } from '@mui/material';
 
 function ViewRequest() {
 	const [ReportingData, SetReportingData] = useState(null);
 	const { isRealTime } = useContext(RealDataContext);
+	const [curentPage, setCurrentPage] = useState(1);
+	const recordPerPage = 8;
+	const lastIndex = curentPage * recordPerPage;
+	const firstIndex = lastIndex - recordPerPage;
+	const records = ReportingData && ReportingData.slice(firstIndex, lastIndex);
 
 	useEffect(() => {
 		ReportingGetdata()
@@ -41,8 +47,8 @@ function ViewRequest() {
 						</tr>
 					</thead>
 					<tbody>
-						{ReportingData ? (
-							ReportingData.map((item, index) => (
+						{records ? (
+							records.map((item, index) => (
 								<tr key={index}>
 									<td style={{ textAlign: 'center' }}>{index + 1}</td>
 									<td>
@@ -89,6 +95,19 @@ function ViewRequest() {
 						)}
 					</tbody>
 				</table>
+				{
+				records && 
+				<div className='  d-flex justify-content-center align-items-center py-3'>
+						<Pagination
+							count={Math.ceil(ReportingData.length / recordPerPage)}
+							style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+							onChange={(event, value) => {
+						 setCurrentPage(value);
+				 }}
+				/>
+			</div>
+
+			}
 			</div>
 		</div>
 	);

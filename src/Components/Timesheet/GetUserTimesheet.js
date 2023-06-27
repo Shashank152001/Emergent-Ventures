@@ -1,10 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import NoRecord from '../ProjectTable/norecord';
-
 import { fetchTimeSheet } from '../../Service/TimesheetService';
 import Tabs from '../Timesheet/Tabs';
+import { Pagination } from '@mui/material';
+
 function GetUserTimesheet() {
 	const [userTimesheet, setUserTimesheet] = useState(null);
+	const [curentPage, setCurrentPage] = useState(1);
+	const recordPerPage = 8;
+	const lastIndex = curentPage * recordPerPage;
+	const firstIndex = lastIndex - recordPerPage;
+	const records = userTimesheet && userTimesheet.slice(firstIndex, lastIndex);
+
 	useEffect(() => {
 		fetchTimeSheet()
 			.then((data) => {
@@ -35,8 +42,8 @@ function GetUserTimesheet() {
 						</tr>
 					</thead>
 					<tbody>
-						{userTimesheet ? (
-							userTimesheet.map((item, index) => (
+						{records ? (
+							records .map((item, index) => (
 								<tr key={index}>
 									<td>{index + 1}</td>
 									<td>
@@ -78,6 +85,19 @@ function GetUserTimesheet() {
 						)}
 					</tbody>
 				</table>
+				{
+				records && 
+				<div className='  d-flex justify-content-center align-items-center py-3'>
+						<Pagination
+							count={Math.ceil(userTimesheet && (userTimesheet.length / recordPerPage))}
+							style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+							onChange={(event, value) => {
+								setCurrentPage(value);
+				 }}
+				/>
+			</div>
+
+			}
 			</div>
 		</div>
 	);
