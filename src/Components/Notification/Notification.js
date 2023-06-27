@@ -10,7 +10,7 @@ export const Notification = ({ messages, unread, closeNotification, setOpenNotif
 	const [allNotificationRead, setAllNotificationRead] = useState(false);
 	const notificationRef = useRef(null);
 
-	
+	console.log(messages);
 
 	const handleNotificationClick = (data) => {
 		setNotificationId(data);
@@ -96,7 +96,7 @@ export const Notification = ({ messages, unread, closeNotification, setOpenNotif
 								<div className='notification-content-div unread-bold'>
 									<span>{message.content}</span>
 									<span className='unread-bold'>
-										{new Date(message.date.substr(0, 23)).toLocaleString(undefined, {
+										{new Date(message.date.substr(0, 23)+'Z').toLocaleString(undefined, {
 											day: 'numeric',
 											month: 'short',
 											year: 'numeric',
@@ -114,7 +114,7 @@ export const Notification = ({ messages, unread, closeNotification, setOpenNotif
 								<div className='notification-content-div'>
 									<span>{message.content}</span>
 									<span className='notification-message-date'>
-										{new Date(message.date.substr(0, 23)).toLocaleString(undefined, {
+										{new Date(message.date.substr(0, 23)+'Z').toLocaleString(undefined, {
 											day: 'numeric',
 											month: 'short',
 											year: 'numeric',
