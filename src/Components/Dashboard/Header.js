@@ -21,7 +21,7 @@ function Header() {
 
 	// search Field
 
-	const [input, setInput] = useState([]);
+	const [input, setInput] = useState('');
 	const [searchResult, setSearchResult] = useState([]);
 	const [showResults, setShowResults] = useState(false);
 	const [notify, setNotify] = useState(false);
