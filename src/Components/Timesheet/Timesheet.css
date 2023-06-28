@@ -77,8 +77,23 @@ section.timesheet-container {
 	padding: 0.5rem;
 	overflow-x: scroll;
 	max-width: 40rem;
-	/* scrollbar-width: none; */
+	/* scrollbar-width: 10px; */
 }
+
+.right-table-div::-webkit-scrollbar {
+	width:5px;
+	height: 5px;
+  }
+   
+.right-table-div::-webkit-scrollbar-track {
+	background: #f2f0f0;
+  }
+   
+.right-table-div::-webkit-scrollbar-thumb {
+	background: #aaa; 
+  }
+
+
 
 .date-td:focus {
 	outline: none;
@@ -234,7 +249,7 @@ select {
 }
 .dashboard-timesheet-tbody-div::-webkit-scrollbar {
 	display: none;
-  }
+}
 
 .dashboard-timesheet-card {
 	width: 100%;

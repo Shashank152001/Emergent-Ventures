@@ -9,6 +9,7 @@ import { success } from '../../Utils/SuccessToast';
 import { Error } from '../../Utils/ErrorToast';
 import { serverError } from '../../Utils/ServerToast';
 import { adminLogin } from '../../Service/adminServices/loginService';
+
 function AdminLogin() {
 	const [formData, setFormData] = useState({
 		email: '',
@@ -84,7 +85,7 @@ function AdminLogin() {
 				<div className='signin-wrapper'>
 					<div className='left'>
 						<div className='logo-title'>
-							<div style={{ width: '250px', height: '100px' }}>
+							<div style={{ width: '250px', height: '100px',marginLeft:'0.5rem' }}>
 								<img src={celebal} alt='celebal' style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
 							</div>
 							<div style={{ width: '80%', margin: 'auto' }}>
