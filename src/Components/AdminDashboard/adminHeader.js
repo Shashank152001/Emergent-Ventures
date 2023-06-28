@@ -13,7 +13,7 @@ function AdminHeader() {
 	const [Admindata, setAdminData] = useState(null);
 
 	// search bar
-	const [input, setInput] = useState([]);
+	const [input, setInput] = useState('');
 	const [searchResult, setSearchResult] = useState([]);
 	const [showResults, setShowResults] = useState(false);
 	const navigate = useNavigate();
