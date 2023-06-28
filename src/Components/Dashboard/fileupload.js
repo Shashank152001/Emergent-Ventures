@@ -37,7 +37,6 @@ function FileUpload({ isOpen, onClose }) {
 
 	const handleOnSubmit = (e) => {
 		e.preventDefault();
-		console.log(e);
 		setFilled(true);
 	};
 

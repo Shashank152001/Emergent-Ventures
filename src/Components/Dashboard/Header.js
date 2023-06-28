@@ -96,12 +96,12 @@ function Header() {
 	};
 
 	const handleCloseModal = () => {
-		document.getElementById('scroll-hidden').style.overflow = 'visible';
+		document.body.style.overflow = 'visible';
 		setShowModal(false);
 	};
 
 	const handleShowModal = () => {
-		document.getElementById('scroll-hidden').style.overflow = 'hidden';
+		document.body.style.overflow = 'hidden';
 		setShowModal(true);
 	};
 

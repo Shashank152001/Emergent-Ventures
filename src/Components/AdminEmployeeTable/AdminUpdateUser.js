@@ -32,7 +32,7 @@ const AdminUpdateUser = ({ setEditOpen, currentUserId, setRender }) => {
 				.then((data) => {
 					success(data.message);
 					setEditOpen(false);
-					document.getElementById('scroll-hidden').style.overflow = 'visible';
+					document.body.style.overflow = 'visible';
 					setRender((prev) => !prev);
 				})
 				.catch((err) => {
@@ -88,7 +88,7 @@ const AdminUpdateUser = ({ setEditOpen, currentUserId, setRender }) => {
 								}}
 								onClick={() => {
 									setEditOpen(false);
-									document.getElementById('scroll-hidden').style.overflow = 'visible';
+									document.body.style.overflow = 'visible';
 								}}
 							>
 								close

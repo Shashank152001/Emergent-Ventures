@@ -48,6 +48,12 @@
 	overflow-y: scroll;
 	z-index: 1;
 }
+
+.notification-messages::-webkit-scrollbar {
+         display: none;
+}
+
+
 .notification-message-card {
 	display: flex;
 	align-items: center;
