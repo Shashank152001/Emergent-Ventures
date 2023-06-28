@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, {useState, useEffect, useContext } from 'react';
 import { LoginContext } from '../../Context/LoginContext';
 import { ProfileFormData } from '../../Service/ProfileService';
 import { fetchSkills } from '../../Service/SkillService';
@@ -13,7 +13,7 @@ function GetProfile() {
 	const [skilldata, setSkillData] = useState([]);
 	const navigate = useNavigate();
 
-	// Profile Get Data
+	
 	useEffect(() => {
 		ProfileFormData()
 			.then((data) => {
@@ -27,14 +27,15 @@ function GetProfile() {
 			.catch((e) => {
 				console.log(e.message);
 			});
-	}, []);
 
-	useEffect(() => {
 		fetchSkills().then((data) => {
-			setSkillData(data);
-		});
+				setSkillData(data);
+			});
 	}, []);
 
+
+	
+	  
 	return (
 		<>
 			<div className='profile-container'>

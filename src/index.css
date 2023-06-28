@@ -15,9 +15,11 @@ body{
   font-family: 'Poppins', sans-serif;
   position: relative;
 }
-::-webkit-scrollbar {
+
+
+/* ::-webkit-scrollbar {
   display: none;
-}
+} */
 
 #root {
   position: relative;
