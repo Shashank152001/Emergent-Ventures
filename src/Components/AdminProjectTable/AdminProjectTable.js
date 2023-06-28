@@ -65,7 +65,7 @@ const AdminProjectTable = () => {
 							}}
 							onClick={() => {
 								setAddOpen(!isAddOpen);
-								document.getElementById('scroll-hidden').style.overflow = 'hidden';
+								document.body.style.overflow = 'hidden';
 							}}
 						>
 							Add Project
@@ -198,7 +198,7 @@ const AdminProjectTable = () => {
 														status: project.status
 													});
 													setEditOpen(!isEditOpen);
-													document.getElementById('scroll-hidden').style.overflow = 'hidden';
+													document.body.style.overflow = 'hidden';
 												}}
 												style={{
 													border: 'none',
@@ -220,7 +220,7 @@ const AdminProjectTable = () => {
 													setcurrentProject({
 														id: project.id
 													});
-													document.getElementById('scroll-hidden').style.overflow = 'hidden';
+													document.body.style.overflow = 'hidden';
 												}}
 											>
 												<i class='bi bi-trash'></i>

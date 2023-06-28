@@ -24,7 +24,7 @@ const DeleteProject = ({ setDeleteOpen, currentProjectId, setRender }) => {
 				.then((data) => {
 					success(data.message);
 					setDeleteOpen(false);
-					document.getElementById('scroll-hidden').style.overflow = 'visible';
+					document.body.style.overflow = 'visible';
 
 					setRender((prev) => !prev);
 				})
@@ -56,7 +56,7 @@ const DeleteProject = ({ setDeleteOpen, currentProjectId, setRender }) => {
 								className='form-submit-btn bg-secondary'
 								onClick={() => {
 									setDeleteOpen(false);
-									document.getElementById('scroll-hidden').style.overflow = 'visible';
+									document.body.style.overflow = 'visible';
 								}}
 								style={{
 									width: '45%'

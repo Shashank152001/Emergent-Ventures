@@ -24,7 +24,7 @@ const AddProject = ({ setAddOpen, setRender }) => {
 					// console.log(data);
 					success(data.message);
 					setAddOpen(false);
-					document.getElementById('scroll-hidden').style.overflow = 'visible';
+					document.body.style.overflow = 'visible';
 
 					setRender((prev) => !prev);
 				})
@@ -133,7 +133,7 @@ const AddProject = ({ setAddOpen, setRender }) => {
 								}}
 								onClick={() => {
 									setAddOpen(false);
-									document.getElementById('scroll-hidden').style.overflow = 'visible';
+									document.body.style.overflow = 'visible';
 								}}
 							>
 								close

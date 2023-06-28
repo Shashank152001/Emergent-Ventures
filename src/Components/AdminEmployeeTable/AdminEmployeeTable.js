@@ -62,7 +62,7 @@ function AdminEmployeeTable() {
 								display: 'flex'
 							}}
 							onClick={() => {
-								document.getElementById('scroll-hidden').style.overflow = 'hidden';
+								document.body.style.overflow = 'hidden';
 								setOpen(!isOpen);
 							}}
 						>
@@ -113,7 +113,7 @@ function AdminEmployeeTable() {
 													department: d.department,
 													location: d.location
 												});
-												document.getElementById('scroll-hidden').style.overflow = 'hidden';
+												document.body.style.overflow = 'hidden';
 												setEditOpen(!isEditOpen);
 											}}
 											style={{

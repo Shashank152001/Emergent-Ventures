@@ -130,7 +130,7 @@ const AdminAddUser = ({ setOpen }) => {
 							className='form-submit-btn bg-danger'
 							onClick={() => {
 								setOpen(false);
-								document.getElementById('scroll-hidden').style.overflow = 'visible';
+								document.body.style.overflow = 'visible';
 							}}
 						>
 							close

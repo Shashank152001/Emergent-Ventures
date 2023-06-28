@@ -49,7 +49,7 @@ const EditProject = ({ setEditOpen, currentProject, setRender }) => {
 				.then((data) => {
 					success(data.message);
 					setEditOpen(false);
-					document.getElementById('scroll-hidden').style.overflow = 'visible';
+					document.body.style.overflow = 'visible';
 					setRender((prev) => !prev);
 				})
 				.catch((err) => {
@@ -133,7 +133,7 @@ const EditProject = ({ setEditOpen, currentProject, setRender }) => {
 								className='form-submit-btn bg-danger'
 								onClick={() => {
 									setEditOpen(false);
-									document.getElementById('scroll-hidden').style.overflow = 'visible';
+									document.body.style.overflow = 'visible';
 								}}
 								style={{
 									width: '45%'
