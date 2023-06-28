@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { useRef } from 'react';
+import React, { useState, useEffect,useRef} from 'react';
 import { BiChevronDown, BiSearch } from 'react-icons/bi';
 import FileUpload from '../Dashboard/fileupload';
 import { useNavigate } from 'react-router-dom';
@@ -33,9 +32,11 @@ function AdminHeader() {
 		};
 	}, []);
 
+
 	//for search name
 	useEffect(() => {
 		if (input !== '') {
+			
 			adminSearchBar(input)
 				.then((UserSearch) => {
 					const result = UserSearch.filter((Name) => {
@@ -48,17 +49,19 @@ function AdminHeader() {
 				});
 		} else {
 			setSearchResult([]);
+			console.log("hello");
+			setShowResults(false);
 		}
 	}, [input]);
+
+	
 
 	const handleChange = (value) => {
 		setInput(value);
 		setShowResults(true);
 	};
 
-	const handleSearchBoxClick = () => {
-		setShowResults(true);
-	};
+	
 
 	const handleRowClick = (id) => {
 		navigate(`/admindashboard/search-user/${id}`);
@@ -89,7 +92,8 @@ function AdminHeader() {
 						<div className='icon-div'>
 							<BiSearch className='search-bar-icon' />
 						</div>
-						<input className='search-bar-input' type='text' placeholder='search' value={input} onChange={(e) => handleChange(e.target.value)} onClick={handleSearchBoxClick} />
+						
+						<input  className='search-bar-input' type='text' placeholder='search' value={input} onChange={(e) => handleChange(e.target.value)}  />
 					</div>
 					<div className='search-results-div'>
 						{showResults && (

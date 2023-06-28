@@ -78,6 +78,7 @@ function Header() {
 				});
 		} else {
 			setSearchResult([]);
+			setShowResults(false);
 		}
 	}, [input]);
 
@@ -86,9 +87,7 @@ function Header() {
 		setShowResults(true);
 	};
 
-	const handleSearchBoxClick = () => {
-		setShowResults(true);
-	};
+	
 
 	const handleRowClick = (id) => {
 		navigate(`/dashboard/searchprofile/${id}`);
@@ -123,7 +122,7 @@ function Header() {
 						<div className='icon-div'>
 							<BiSearch className='search-bar-icon' />
 						</div>
-						<input className='search-bar-input' type='text' placeholder='search' value={input} onChange={(e) => handleChange(e.target.value)} onClick={handleSearchBoxClick} />
+						<input className='search-bar-input' type='text' placeholder='search' value={input} onChange={(e) => handleChange(e.target.value)}  />
 					</div>
 					<div className='search-results-div'>
 						{showResults && (
