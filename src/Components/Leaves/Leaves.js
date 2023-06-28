@@ -34,7 +34,7 @@ const Leaves = () => {
 								My Leaves{' '}
 							</h6>
 						</div>
-						<div className='' style={{ height: '100%', maxHeight: '180px', overflowY: 'auto', scrollbarWidth: 'none' }}>
+						<div className='' style={{ height: '100%', maxHeight: '180px', overflowY: 'auto', scrollbarWidth: 'none' }} id="leavesInner">
 							<div className='d-flex' style={{ gap: '12px' }}>
 								<div style={{ width: 40, height: 40 }}>
 									<CircularProgressbar

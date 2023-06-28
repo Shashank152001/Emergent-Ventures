@@ -229,8 +229,13 @@ select {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	scrollbar-width: none;
 	justify-content: flex-start;
 }
+.dashboard-timesheet-tbody-div::-webkit-scrollbar {
+	display: none;
+  }
+
 .dashboard-timesheet-card {
 	width: 100%;
 	display: flex;

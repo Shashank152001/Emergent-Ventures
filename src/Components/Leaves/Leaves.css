@@ -13,6 +13,10 @@
   padding: 1.3rem;
 }
 
+#leavesInner::-webkit-scrollbar {
+  display: none;
+}
+
 .h-100 {
   height: 100%;
 }

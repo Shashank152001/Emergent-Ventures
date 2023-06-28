@@ -16,6 +16,7 @@ function SearchProfile() {
 	// Profile Get Data
 	// userId=userId-10000;
 	// console.log(userId)
+	
 	useEffect(() => {
 		if (id) {
 			GetUserId(id)
