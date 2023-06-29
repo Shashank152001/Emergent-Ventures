@@ -129,6 +129,7 @@
 	display: flex;
 	position: relative;
 	height: 2rem;
+	z-index: 1;
 }
 
 .team-head-img {
