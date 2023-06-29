@@ -85,16 +85,7 @@ function Timer() {
 					});
 					socket.emit('checkedIn');
 					socket.emit('checkin');
-					// toast.info('Checkin Successfull', {
-					// 	position: 'top-left',
-					// 	autoClose: 2000,
-					// 	hideProgressBar: false,
-					// 	closeOnClick: true,
-					// 	pauseOnHover: true,
-					// 	draggable: true,
-					// 	progress: undefined,
-					// 	theme: 'colored'
-					// });
+					
 					success('Checkin Successfull');
 				})
 				.catch((err) => {
@@ -112,16 +103,7 @@ function Timer() {
 						return false;
 					});
 					socket.emit('checkout');
-					// toast.info('CheckOut Successfull', {
-					// 	position: 'top-left',
-					// 	autoClose: 2000,
-					// 	hideProgressBar: false,
-					// 	closeOnClick: true,
-					// 	pauseOnHover: true,
-					// 	draggable: true,
-					// 	progress: undefined,
-					// 	theme: 'colored'
-					// });
+					
 					success('CheckOut Successfull');
 					setTimer('00:00:00');
 				})

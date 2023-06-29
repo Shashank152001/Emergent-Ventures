@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React,{ useState, useEffect} from "react";
 import { startOfMonth, endOfMonth } from "date-fns";
 import NoRecord from "../ProjectTable/norecord";
 import { getRequestData } from "../../Service/adminServices/requestService";
@@ -6,6 +6,8 @@ import "./AdminRequest.css";
 import { Pagination } from "@mui/material";
 
 const AdminRequest = () => {
+
+
   const [requestData, setRequestData] = useState(null);
   const [startDate, setStartDate] = useState(
     startOfMonth(new Date())
@@ -21,11 +23,14 @@ const AdminRequest = () => {
       .reverse()
       .join("-")
   );
-  const [curentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(1);
   const recordPerPage = 8;
-  const lastIndex = curentPage * recordPerPage;
+  const lastIndex = currentPage * recordPerPage;
   const firstIndex = lastIndex - recordPerPage;
   const records = requestData && requestData.slice(firstIndex, lastIndex);
+  
+
+
 
   const handleChange = (event) => {
     const { value, name } = event.target;
@@ -39,7 +44,6 @@ const AdminRequest = () => {
   useEffect(() => {
     getRequestData(startDate, endDate)
       .then((data) => {
-        console.log(data);
         setRequestData(data);
       })
       .catch((e) => {

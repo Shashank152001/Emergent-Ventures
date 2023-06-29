@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { addNewUser } from '../../Service/adminServices/userAddandUpdateService';
 import { success } from '../../Utils/SuccessToast';
-import './AddUser.css';
+
 
 const AdminAddUser = ({ setOpen }) => {
 	const [formData, setFormData] = useState(null);

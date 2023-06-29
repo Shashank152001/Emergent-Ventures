@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { UpdateUserDetails } from '../../Service/adminServices/userAddandUpdateService';
 import { success } from '../../Utils/SuccessToast';
-import './AddUser.css';
+
 
 const AdminUpdateUser = ({ setEditOpen, currentUserId, setRender }) => {
 	const [formData, setFormData] = useState({

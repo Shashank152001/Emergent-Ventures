@@ -332,3 +332,9 @@ select {
 .dropdown-toggle::after {
 	display: none !important;
 }
+
+.MuiPagination-ul {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}

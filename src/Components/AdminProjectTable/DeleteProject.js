@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { DeleteProjectData } from '../../Service/adminServices/projectService';
 import { success } from '../../Utils/SuccessToast';
-import './AddProject.css';
+// import './AddProject.css';
 
 const DeleteProject = ({ setDeleteOpen, currentProjectId, setRender }) => {
 	const [formData, setFormData] = useState({ projectId: '' });

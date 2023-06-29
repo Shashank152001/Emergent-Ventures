@@ -1,46 +1,52 @@
-import React from 'react';
+import React,{Suspense,lazy} from 'react';
 import './App.css';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import SignIn from './Components/Login/SignIn';
-import SignUp from './Components/SignUp/SignUp';
-import Profile from './Components/Profile/Profile';
-import GetProfile from './Components/Profile/getProfile';
-import AdminEmployeeTable from './Components/AdminEmployeeTable/AdminEmployeeTable';
-import Dashboard from './Components/Dashboard/Dashboard';
 import { ProtectRoute, AdminProtect } from './Service/ProtectRoute';
-import TimesheetForm from './Components/Timesheet/TimesheetForm';
 import { RedirectRoute, AdminRedirect } from './Service/RedirectRoute';
-import ErrorPage from './Components/ErrorComponet/ErrorPage';
-import LeaveForm from './Components/Leaves/leaveform';
-import Home from './Components/Dashboard/home';
-import Gethierarchy from './Components/Profile/Gethierarchy';
-import GetRequest from './Components/WFH/GetRequest';
-import ViewRequest from './Components/WFH/ViewRequest';
-import WFHform from './Components/WFH/WFHform';
-import EditRequest from './Components/WFH/EditRequest';
-import GetUserTimesheet from './Components/Timesheet/GetUserTimesheet';
-import GetRmTimesheet from './Components/Timesheet/GetRmTimesheet';
-import EditReporingTimeSheet from './Components/Timesheet/EditReportingTimeSheet';
-import SearchProfile from './Components/Profile/SearchProfile';
-import AdminLogin from './Components/AdminLogin/AdminLogin';
-import AdminSignUp from './Components/AdminSignUp/AdminSignUp';
-import AdminDashboard from './Components/AdminDashboard/AdminDashboard';
-import AdminHome from './Components/AdminDashboard/adminHome';
-import AdminUserProfile from './Components/AdminUserProfile/AdminUserProfile';
-import UserProfile from './Components/AdminUserHierarchy/userProfile.js';
-import Hierarchy from './Components/AdminUserHierarchy/hierarchy';
-import SuccessMessage from './Components/Message/successmessage';
-import AdminRequest from './Components/AdminRequest/AdminRequest';
-import AdminTimesheet from './Components/AdminTimesheet/AdminTimesheet';
-import AdminProject from './Components/AdminProject/AdminProject';
-import Project from './Components/Project/Project';
+import Loader from './Components/Spinner/Loader';
+const SignIn = lazy(()=>import('./Components/Login/SignIn'));
+const SignUp = lazy(()=>import('./Components/SignUp/SignUp'));
+const Profile = lazy(()=>import('./Components/Profile/Profile'));
+const GetProfile = lazy(()=>import('./Components/Profile/getProfile'));
+const AdminEmployeeTable = lazy(()=>import('./Components/AdminEmployeeTable/AdminEmployeeTable'));
+const Dashboard = lazy(()=>import('./Components/Dashboard/Dashboard'));
+const TimesheetForm = lazy(()=>import('./Components/Timesheet/TimesheetForm'));
+const ErrorPage = lazy(()=>import('./Components/ErrorComponet/ErrorPage'));
+const LeaveForm = lazy(()=>import('./Components/Leaves/leaveform'));
+const Home = lazy(() => import('./Components/Dashboard/home'));
+const Gethierarchy = lazy(() => import('./Components/Profile/Gethierarchy'));
+const GetRequest = lazy(() => import('./Components/WFH/GetRequest'));
+const ViewRequest = lazy(() => import('./Components/WFH/ViewRequest'));
+const WFHform = lazy(() => import('./Components/WFH/WFHform'));
+const EditRequest = lazy(() => import('./Components/WFH/EditRequest'));
+const GetUserTimesheet = lazy(() => import('./Components/Timesheet/GetUserTimesheet'));
+const GetRmTimesheet = lazy(() => import('./Components/Timesheet/GetRmTimesheet'));
+const EditReporingTimeSheet = lazy(() => import('./Components/Timesheet/EditReportingTimeSheet'));
+const SearchProfile = lazy(() => import('./Components/Profile/SearchProfile'));
+const AdminLogin = lazy(() => import('./Components/AdminLogin/AdminLogin'));
+const AdminSignUp = lazy(() => import('./Components/AdminSignUp/AdminSignUp'));
+const AdminDashboard = lazy(() => import('./Components/AdminDashboard/AdminDashboard'));
+const AdminHome = lazy(() => import('./Components/AdminDashboard/adminHome'));
+const AdminUserProfile = lazy(() => import('./Components/AdminUserProfile/AdminUserProfile'));
+const UserProfile = lazy(() => import('./Components/AdminUserHierarchy/userProfile.js'));
+const Hierarchy = lazy(() => import('./Components/AdminUserHierarchy/hierarchy'));
+const SuccessMessage = lazy(() => import('./Components/Message/successmessage'));
+const AdminRequest = lazy(() => import('./Components/AdminRequest/AdminRequest'));
+const AdminTimesheet = lazy(() => import('./Components/AdminTimesheet/AdminTimesheet'));
+const AdminProject = lazy(() => import('./Components/AdminProject/AdminProject'));
+const Project = lazy(() => import('./Components/Project/Project'));
+
+
+
+
 
 function App() {
 	return (
 		<>
 			<Router>
+			<Suspense fallback={<Loader/>}>
 				<Routes>
 					<Route element={<AdminRedirect />} path='/adminlogin'>
 						<Route element={<AdminLogin />} path='/adminlogin'></Route>
@@ -57,7 +63,6 @@ function App() {
 							<Route element={<AdminTimesheet />} path='timesheets' />
 							<Route element={<Hierarchy />} path='get-hierarchy' />
 							<Route element={<AdminProject />} path='project-detail' />
-
 							<Route element={<Home />} path='' />
 						</Route>
 					</Route>
@@ -94,6 +99,7 @@ function App() {
 					<Route element={<SuccessMessage />} path='/success'></Route>
 					<Route element={<ErrorPage />} path='*'></Route>
 				</Routes>
+				</Suspense>
 			</Router>
 
 			<ToastContainer />
