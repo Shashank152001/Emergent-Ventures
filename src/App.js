@@ -8,6 +8,8 @@ import { RedirectRoute, AdminRedirect } from './Service/RedirectRoute';
 import Loader from './Components/Spinner/Loader';
 const SignIn = lazy(()=>import('./Components/Login/SignIn'));
 const SignUp = lazy(()=>import('./Components/SignUp/SignUp'));
+const AdminLogin = lazy(() => import('./Components/AdminLogin/AdminLogin'));
+const AdminSignUp = lazy(() => import('./Components/AdminSignUp/AdminSignUp'));
 const Profile = lazy(()=>import('./Components/Profile/Profile'));
 const GetProfile = lazy(()=>import('./Components/Profile/getProfile'));
 const AdminEmployeeTable = lazy(()=>import('./Components/AdminEmployeeTable/AdminEmployeeTable'));
@@ -25,8 +27,6 @@ const GetUserTimesheet = lazy(() => import('./Components/Timesheet/GetUserTimesh
 const GetRmTimesheet = lazy(() => import('./Components/Timesheet/GetRmTimesheet'));
 const EditReporingTimeSheet = lazy(() => import('./Components/Timesheet/EditReportingTimeSheet'));
 const SearchProfile = lazy(() => import('./Components/Profile/SearchProfile'));
-const AdminLogin = lazy(() => import('./Components/AdminLogin/AdminLogin'));
-const AdminSignUp = lazy(() => import('./Components/AdminSignUp/AdminSignUp'));
 const AdminDashboard = lazy(() => import('./Components/AdminDashboard/AdminDashboard'));
 const AdminHome = lazy(() => import('./Components/AdminDashboard/adminHome'));
 const AdminUserProfile = lazy(() => import('./Components/AdminUserProfile/AdminUserProfile'));

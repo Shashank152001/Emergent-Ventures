@@ -33,7 +33,7 @@ const AdminAddUser = ({ setOpen }) => {
 	return (
 		// <section className="section-parent">
 		<div className='parent-container-form'>
-			<div className='form-container'>
+			<div className='form-container-project'>
 				<div>
 					<h2 className='form-project-title'>Add User</h2>
 				</div>

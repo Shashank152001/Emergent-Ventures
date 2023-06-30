@@ -123,7 +123,7 @@ function AdminEmployeeTable() {
 												marginLeft: '0.7rem'
 											}}
 										>
-											<i class='bi bi-pencil'></i>
+											<i className='bi bi-pencil'></i>
 										</button>
 									</td>
 								</tr>

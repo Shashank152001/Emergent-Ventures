@@ -26,10 +26,11 @@ export const DropDown = ({ setOpenProfile }) => {
 	const handleLogOut = () => {
 		userLogout().then((data) => {
 			localStorage.removeItem('loggedInUser');
-			navigate('/');
+			navigate('/',{replace:true});
 			success(data.message);
 		});
 	};
+
 	return (
 		<div className='dropdown-div' ref={dropdownRef}>
 			<button className='logout-btn' onClick={handleLogOut}>

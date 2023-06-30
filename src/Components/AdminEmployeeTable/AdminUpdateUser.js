@@ -44,7 +44,7 @@ const AdminUpdateUser = ({ setEditOpen, currentUserId, setRender }) => {
 	return (
 		<section className='section-parent'>
 			<div className='parent-container-form'>
-				<div className='form-container'>
+				<div className='form-container-project'>
 					<div>
 						<h2 className='form-project-title'>Update User</h2>
 					</div>

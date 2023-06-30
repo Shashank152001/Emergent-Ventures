@@ -26,7 +26,7 @@ export const AdminDropDown = ({ setOpenProfile }) => {
 	const handleLogOut = () => {
 		adminLogout().then((data) => {
 			localStorage.removeItem('loggedInAdmin');
-			navigate('/adminlogin');
+			navigate('/adminlogin',{replace:true});
 			success(data.message);
 		});
 	};
