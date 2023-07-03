@@ -2,14 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { socket } from '../../socket';
 import { useParams, useNavigate } from 'react-router-dom';
 import { EditUpdate, ReportingGetdata } from '../../Service/LeavesService';
-// import { toast } from 'react-toastify';
 import { success } from '../../Utils/SuccessToast';
-// import { serverError } from '../../Utils/ServerToast';
 import 'react-toastify/dist/ReactToastify.css';
 import { serverError } from '../../Utils/ServerToast';
 
 function EditRequest() {
-	//get data
+	
 	const navigate = useNavigate();
 	const [ReportingData, SetReportingData] = useState([]);
 	const { id } = useParams();
@@ -19,6 +17,7 @@ function EditRequest() {
 		status: ''
 	});
 	const [putData, setPutData] = useState(false);
+
 	useEffect(() => {
 		ReportingGetdata()
 			.then((ReportingRequestdata) => {
@@ -35,7 +34,6 @@ function EditRequest() {
 				.then((data) => {
 					socket.emit('sendNotifications');
 					navigate('/dashboard/viewRequest');
-
 					success('Status Updated Successfull');
 				})
 				.catch((e) => {
@@ -44,7 +42,6 @@ function EditRequest() {
 		}
 	}, [putData]);
 
-	//put method
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
@@ -57,6 +54,8 @@ function EditRequest() {
 
 		setPutData(true);
 	};
+
+
 	return (
 		<>
 			<div className='container'>

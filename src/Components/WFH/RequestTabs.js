@@ -1,5 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+
+
 function RequestTabs() {
 	return (
 		<nav className='request-tabs-nav-div'>
@@ -9,7 +11,7 @@ function RequestTabs() {
 				to='/dashboard/getRequest'
 				style={{ textDecoration: 'none', marginBottom: '0.8rem', fontSize: '0.9rem', padding: '0.3rem', borderRadius: '2px', color: 'black' }}
 			>
-				{/* <span>View</span> */}
+				
 				View
 			</NavLink>
 			<NavLink
@@ -17,7 +19,7 @@ function RequestTabs() {
 				to='/dashboard/viewRequest'
 				style={{ textDecoration: 'none', marginBottom: '0.8rem', fontSize: '0.9rem', padding: '0.3rem', borderRadius: '2px', color: 'black' }}
 			>
-				{/* <span>Approve</span> */}
+				
 				Approve
 			</NavLink>
 			<NavLink
@@ -25,7 +27,7 @@ function RequestTabs() {
 				to='/dashboard/leave'
 				style={{ textDecoration: 'none', fontSize: '0.9rem', padding: '0.3rem', borderRadius: '2px', color: 'black' }}
 			>
-				{/* <span>Add</span> */}
+				
 				Add
 			</NavLink>
 		</nav>
