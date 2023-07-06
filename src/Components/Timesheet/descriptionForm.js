@@ -44,7 +44,6 @@ function DescriptionForm({ slide, setDescription, userFinalData, setUserFinalDat
 			<header className='App-header'></header>
 			<Dropdown drop='end'>
 				<Dropdown.Menu
-					// variant="dark"
 					style={{ transform: 'translate3d(0,0,0)' }}
 					show={true}
 				>

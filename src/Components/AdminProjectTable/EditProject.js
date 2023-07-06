@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { UpdateProjectDetails } from '../../Service/adminServices/projectService';
 import { success } from '../../Utils/SuccessToast';
-import './AddProject.css';
+// import './AddProject.css';
 
 const EditProject = ({ setEditOpen, currentProject, setRender }) => {
 	const [formData, setFormData] = useState({
@@ -61,13 +61,13 @@ const EditProject = ({ setEditOpen, currentProject, setRender }) => {
 	return (
 		<section className='section-parent'>
 			<div className='parent-container-form'>
-				<div className='form-container'>
+				<div className='form-container-project'>
 					<div>
 						<h2 className='form-project-title'>Edit Project</h2>
 					</div>
 					<form className='admin-form' onSubmit={handleSubmit}>
 						<div className='row-field' style={{ padding: '10px 0 0 10px' }}>
-							<input type='text' name='projectName' id='projectName' onChange={handleChange} value={formData?.projectName} className='field-size input-form' disabled />
+							<input type='text' name='projectName' id='projectName' onChange={handleChange} value={formData?.projectName} className='field-size input-form' disabled={false} />
 							<label htmlFor='projectName' className='text-start label-form'>
 								ProjectName:
 							</label>

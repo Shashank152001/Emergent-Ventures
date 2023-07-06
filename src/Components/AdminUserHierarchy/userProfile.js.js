@@ -2,7 +2,7 @@ import React, { useState, useEffect} from 'react';
 import {Link, useSearchParams,useNavigate } from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.css';
 import 'primeicons/primeicons.css';
-// import './AdminUserProfile.css';
+import '../AdminUserProfile/AdminUserProfile.css';
 import { adminGetUserId } from '../../Service/adminServices/searchService';
 import { getSkills } from '../../Service/adminServices/profileService';
 

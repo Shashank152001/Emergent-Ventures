@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { UpdateUserDetails } from '../../Service/adminServices/userAddandUpdateService';
 import { success } from '../../Utils/SuccessToast';
-import './AddUser.css';
+
 
 const AdminUpdateUser = ({ setEditOpen, currentUserId, setRender }) => {
 	const [formData, setFormData] = useState({
@@ -44,7 +44,7 @@ const AdminUpdateUser = ({ setEditOpen, currentUserId, setRender }) => {
 	return (
 		<section className='section-parent'>
 			<div className='parent-container-form'>
-				<div className='form-container'>
+				<div className='form-container-project'>
 					<div>
 						<h2 className='form-project-title'>Update User</h2>
 					</div>

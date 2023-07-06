@@ -1,6 +1,6 @@
-.signIn-container {
-	/* background-color: #2563EB; */
-	/* background-image: url('../Spheres.svg'); */
+
+
+.form-container {
 	height: 100vh;
 	padding: 4rem 0;
 	display: flex;
@@ -9,26 +9,25 @@
 	overflow: hidden;
 	width: 100%;
 }
-.signin-wrapper {
+
+.form-wrapper {
 	background-color: #ffffff;
 	width: 90%;
 	border-radius: 8px;
 	height: 692px;
 }
 
-
-
 #form {
 	padding: 1rem;
 }
 
-.signin-title {
+.form-title {
 	padding: 1.3rem 0;
 	font-size: 2.4rem;
 	color: #090a0a;
 }
 
-div.field {
+.field {
 	display: flex;
 	flex-direction: column;
 }
@@ -39,10 +38,7 @@ div.field {
 
 #fullname,
 #email,
-#password,
-#designation,
-#department,
-#confirmpassword {
+#password{
 	border: none;
 	outline: none;
 	border-radius: 5px;
@@ -64,13 +60,13 @@ div.field {
 }
 
 @media screen and (min-width: 480px) and (max-width: 911px) {
-	.signin-wrapper {
+	.form-wrapper {
 		width: 420px;
 	}
 }
 
 @media screen and (min-width: 912px) {
-	.signin-wrapper {
+	.form-wrapper {
 		display: flex;
 		width: 1024px;
 		height: 540px;
@@ -92,10 +88,11 @@ div.field {
 	}
 }
 
-/* 
-input:invalid{
-    background-color: #ff6363;
-} */
+
+.error-span{
+	color:#ff0000;
+	display: inline-block;
+}
 
 .nameError {
 	color: #ff0000;
@@ -103,5 +100,6 @@ input:invalid{
 	padding-top: 0.3rem;
 }
 
-/* right -<flex:1 */
-/* form -> padding 0 1rem */
+
+
+

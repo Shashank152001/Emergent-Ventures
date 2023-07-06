@@ -37,7 +37,7 @@ const AddProject = ({ setAddOpen, setRender }) => {
 	return (
 		<section className='section-parent'>
 			<div className='parent-container-form'>
-				<div className='form-container'>
+				<div className='form-container-project'>
 					<div>
 						<h2 className='form-project-title'>Add Project</h2>
 					</div>

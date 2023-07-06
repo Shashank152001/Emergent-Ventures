@@ -1,9 +1,9 @@
 import React from 'react';
 import { useEffect, useRef } from 'react';
-import './AdminDropDown.css';
 import { useNavigate } from 'react-router-dom';
 import { success } from '../../Utils/SuccessToast';
 import { adminLogout } from '../../Service/adminServices/loginService';
+import './AdminDropDown.css';
 
 export const AdminDropDown = ({ setOpenProfile }) => {
 	const navigate = useNavigate();
@@ -26,7 +26,7 @@ export const AdminDropDown = ({ setOpenProfile }) => {
 	const handleLogOut = () => {
 		adminLogout().then((data) => {
 			localStorage.removeItem('loggedInAdmin');
-			navigate('/adminlogin');
+			navigate('/adminlogin',{replace:true});
 			success(data.message);
 		});
 	};

@@ -295,12 +295,12 @@ function Profile() {
 						</div>
 						<div className='row name-form'>
 							
-							<div class='col'>
+							<div className='col'>
 								<label className='labels'>Emergency Phone</label>
 								<input
 									type='text'
 									name='emergencyPhone'
-									class='form-control'
+									className='form-control'
 									value={formData.emergencyPhone || ''}
 									placeholder='EmergencyPhone'
 									style={{ backgroundColor: '#EAEAEA' }}

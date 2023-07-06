@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { DeleteProjectData } from '../../Service/adminServices/projectService';
 import { success } from '../../Utils/SuccessToast';
-import './AddProject.css';
+// import './AddProject.css';
 
 const DeleteProject = ({ setDeleteOpen, currentProjectId, setRender }) => {
 	const [formData, setFormData] = useState({ projectId: '' });
@@ -37,7 +37,7 @@ const DeleteProject = ({ setDeleteOpen, currentProjectId, setRender }) => {
 	return (
 		<section className='section-parent'>
 			<div className='parent-container-form'>
-				<div className='form-container'>
+				<div className='form-container-project'>
 					<div>
 						<h2 className='form-project-title'>Delete Project</h2>
 					</div>

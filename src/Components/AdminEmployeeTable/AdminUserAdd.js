@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { addNewUser } from '../../Service/adminServices/userAddandUpdateService';
 import { success } from '../../Utils/SuccessToast';
-import './AddUser.css';
+
 
 const AdminAddUser = ({ setOpen }) => {
 	const [formData, setFormData] = useState(null);
@@ -33,7 +33,7 @@ const AdminAddUser = ({ setOpen }) => {
 	return (
 		// <section className="section-parent">
 		<div className='parent-container-form'>
-			<div className='form-container'>
+			<div className='form-container-project'>
 				<div>
 					<h2 className='form-project-title'>Add User</h2>
 				</div>

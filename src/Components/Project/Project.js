@@ -80,13 +80,13 @@ const Project = () => {
 								<div className='inner-details-div'>
 									<div className='project-detail-field-div'>
 										<span style={{ padding: '1rem', fontSize: '1.4rem' }}>
-											<i class='bi bi-database'></i>
+											<i className='bi bi-database'></i>
 										</span>
 										<span style={{ padding: '1rem' }}>{projectData?.projectName || ''}</span>
 									</div>
 									<div className='project-detail-field-div'>
 										<span style={{ padding: '1rem', fontSize: '1.4rem' }}>
-											<i class='bi bi-building'></i>
+											<i className='bi bi-building'></i>
 										</span>
 										<span style={{ padding: '1rem' }}>{projectData?.clientName || ''}</span>
 									</div>
@@ -94,13 +94,13 @@ const Project = () => {
 								<div className='inner-details-div'>
 									<div className='project-detail-field-div'>
 										<span style={{ padding: '1rem', fontSize: '1.4rem' }}>
-											<i class='bi bi-diagram-3'></i>
+											<i className='bi bi-diagram-3'></i>
 										</span>
 										<span style={{ padding: '1rem' }}>{projectData?.department || ''}</span>
 									</div>
 									<div className='project-detail-field-div'>
 										<span style={{ padding: '1rem', fontSize: '1.4rem' }}>
-											<i class='bi bi-clipboard-data'></i>
+											<i className='bi bi-clipboard-data'></i>
 										</span>
 										<span style={{ padding: '1rem' }}>{projectData?.status || ''}</span>
 									</div>
@@ -108,7 +108,7 @@ const Project = () => {
 								<div className='inner-details-div'>
 									<div className='project-detail-field-div'>
 										<span style={{ padding: '1rem', fontSize: '1.4rem' }}>
-											<i class='bi bi-calendar-event'></i>
+											<i className='bi bi-calendar-event'></i>
 										</span>
 										<span style={{ padding: '1rem' }}>Assigned On: {projectData?.assignedOn || ''}</span>
 									</div>
@@ -116,7 +116,7 @@ const Project = () => {
 								<div className='inner-details-div'>
 									<div className='project-detail-field-div'>
 										<span style={{ padding: '1rem', fontSize: '1.4rem' }}>
-											<i class='bi bi-calendar-event'></i>
+											<i className='bi bi-calendar-event'></i>
 										</span>
 										<span style={{ padding: '1rem' }}>Complete By: {projectData?.completeBy || ''}</span>
 									</div>

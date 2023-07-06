@@ -206,7 +206,7 @@ const AdminProjectTable = () => {
 													backgroundColor: 'transparent'
 												}}
 											>
-												<i class='bi bi-pencil'></i>
+												<i className='bi bi-pencil'></i>
 											</button>
 
 											<button
@@ -223,7 +223,7 @@ const AdminProjectTable = () => {
 													document.body.style.overflow = 'hidden';
 												}}
 											>
-												<i class='bi bi-trash'></i>
+												<i className='bi bi-trash'></i>
 											</button>
 										</td>
 									</tr>
