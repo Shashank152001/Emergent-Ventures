@@ -1,14 +1,17 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState} from 'react';
 import './Timesheet.css';
 import { getTimeSheet } from '../../Service/TimesheetService';
 import DescriptionForm from './descriptionForm';
-import { SiReadthedocs } from 'react-icons/si';
-import { formatTotalTime, reduceFetchedTimeSheetData } from '../../Utils/getTemplate';
+// import { SiReadthedocs } from 'react-icons/si';
+import { formatTotalTime, reduceFetchedTimeSheetData} from '../../Utils/getTemplate';
 
-const RightRow = ({ row, handlechange, date, week, start, end, slide, userFinalData, setUserFinalData }) => {
+
+const RightRow = ({ row, handlechange, week, start, end,slide,userFinalData,setUserFinalData,date}) => {
+	
 	const [userTimeSheetData, setuserTimeSheetData] = useState([]);
 	const [isDescription, setDescription] = useState(false);
-
+    
+	
 	useEffect(() => {
 		getTimeSheet(week)
 			.then((data) => {
@@ -16,6 +19,7 @@ const RightRow = ({ row, handlechange, date, week, start, end, slide, userFinalD
 				setuserTimeSheetData(() => [...newPreparedData]);
 			})
 			.catch((e) => {
+				
 				setuserTimeSheetData([]);
 			});
 
@@ -24,6 +28,7 @@ const RightRow = ({ row, handlechange, date, week, start, end, slide, userFinalD
 		};
 	}, [start, end]);
 
+	
 	return (
 		<>
 			<tr>
@@ -53,7 +58,7 @@ const RightRow = ({ row, handlechange, date, week, start, end, slide, userFinalD
 						disabled={userTimeSheetData[row - 1]?.billableStatus ? true : false}
 						value={userTimeSheetData[row - 1]?.billableStatus}
 					>
-						<option value=''>Select status</option>
+						<option value='' selected={userTimeSheetData.length === 0}>Select status</option>
 						<option value='Billable'>Billable</option>
 						<option value='Non-Billable'>Non-Billable</option>
 					</select>
@@ -70,7 +75,7 @@ const RightRow = ({ row, handlechange, date, week, start, end, slide, userFinalD
 							onBlur={(e) => {
 								e.target.value = formatTotalTime(e.target.value);
 							}}
-							defaultValue={userTimeSheetData.length > 0 ? userTimeSheetData[row - 1]?.dates[day] : ''}
+							defaultValue={userTimeSheetData.length > 0 && userTimeSheetData[row - 1]?.dates[day] ? userTimeSheetData[row - 1]?.dates[day] : ''}
 							disabled={userTimeSheetData.length > 0 && userTimeSheetData[row - 1]?.dates[day] ? true : false}
 							data-date={day}
 							data-row={row}
